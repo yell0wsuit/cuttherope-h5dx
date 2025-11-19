@@ -88,7 +88,7 @@ To test the game locally during the development process, follow these steps:
 During the development process, all boxes and levels are unlocked by default, so you don't need to play through the game to test specific levels.
 
 
-
+==================================================
 HƯỚNG DẪN TRIỂN KHAI DỰ ÁN VITE/TYPESCRIPT
 
 Tên Repository (Giả định): cuttherope

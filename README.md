@@ -89,10 +89,12 @@ During the development process, all boxes and levels are unlocked by default, so
 
 
 ==================================================
+
 HƯỚNG DẪN TRIỂN KHAI DỰ ÁN VITE/TYPESCRIPT
 
 Tên Repository (Giả định): cuttherope
 Vấn đề cốt lõi: Sửa Base Path trong vite.config.js để tránh lỗi màn hình trắng (404 Not Found).
+
 
 ==================================================
 PHẦN CHUẨN BỊ: SỬA FILE VITE.CONFIG.JS

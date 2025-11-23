@@ -55,9 +55,12 @@ class GhostBouncer extends Bouncer {
         (this as any).passTransformationsToChilds = true;
     }
 
-    override playTimeline(): void {
-        // Block all timeline playback for GhostBouncer
-        // Prevents bounce animation from playing after morphIn completes
+    override playTimeline(index?: number): void {
+        // Allow bounce animation (timeline 0) to play
+        // Block automatic timeline playback after morphIn completes (no index)
+        if (index === 0) {
+            super.playTimeline(0);
+        }
     }
 
     override draw(): void {

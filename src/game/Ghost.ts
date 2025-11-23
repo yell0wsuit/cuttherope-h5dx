@@ -85,8 +85,8 @@ class Ghost extends BaseElement {
         this.ghostImageBody.x = this.x;
         this.ghostImageBody.y = this.y;
 
-        this.ghostImage.addChild(this.ghostImageFace);
         this.ghostImage.addChild(this.ghostImageBody);
+        this.ghostImage.addChild(this.ghostImageFace);
 
         this.addFloatTimeline(this.ghostImageFace, 2);
         this.addFloatTimeline(this.ghostImageBody, 3);

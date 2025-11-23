@@ -30,8 +30,6 @@ class GhostBubble extends Bubble {
         this.anchor = Alignment.CENTER;
         this.popped = false;
 
-        this.addSupportingClouds();
-
         const bubble = ImageElement.create(
             ResourceId.IMG_OBJ_BUBBLE_ATTACHED,
             GameSceneConstants.IMG_OBJ_BUBBLE_ATTACHED_bubble
@@ -40,6 +38,8 @@ class GhostBubble extends Bubble {
         bubble.parentAnchor = bubble.anchor = Alignment.CENTER;
         this.addChild(bubble);
         this.bubbleOutlineIndex = this.children.indexOf(bubble);
+
+        this.addSupportingClouds();
 
         return this;
     }

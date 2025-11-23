@@ -328,7 +328,7 @@ class Ghost extends BaseElement {
                 );
                 this.scene.bouncers.push(bouncer);
                 bouncer.addTimelineWithID(morphIn, 10);
-                bouncer.playTimeline();
+                bouncer.playTimeline(10);
                 this.bouncer = bouncer;
                 break;
             }

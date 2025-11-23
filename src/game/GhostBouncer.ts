@@ -5,17 +5,18 @@ import ImageElement from "@/visual/ImageElement";
 import KeyFrame from "@/visual/KeyFrame";
 import Timeline from "@/visual/Timeline";
 import ResourceId from "@/resources/ResourceId";
+import type Ghost from "@/game/Ghost";
 
 const CLOUD_RADIUS = Math.sqrt(9000);
 
 class GhostBouncer extends Bouncer {
     backCloud: ImageElement;
     backCloud2: ImageElement;
-    ghost?: any;
+    ghost: Ghost | undefined;
     backCloudOffset: { x: number; y: number };
     backCloud2Offset: { x: number; y: number };
 
-    constructor(x: number, y: number, width: number, angle: number, ghost?: any) {
+    constructor(x: number, y: number, width: number, angle: number, ghost?: Ghost) {
         super(x, y, width, angle);
         this.ghost = ghost;
 
@@ -56,7 +57,7 @@ class GhostBouncer extends Bouncer {
         this.addFloatTimeline(leftCloud, 0.5, 1.1, 1, 0.9);
 
         // Child clouds inherit parent color and transformations
-        (this as any).passTransformationsToChilds = true;
+        this.passTransformationsToChilds = true;
     }
 
     override playTimeline(index?: number): void {

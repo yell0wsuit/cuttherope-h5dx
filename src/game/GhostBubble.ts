@@ -10,7 +10,7 @@ import * as GameSceneConstants from "@/gameScene/constants";
 
 class GhostBubble extends Bubble {
     private readonly clouds: ImageElement[];
-    private bubbleOutlineIndex: number = -1;
+    private bubbleOutlineIndex = -1;
 
     constructor() {
         super();
@@ -57,7 +57,7 @@ class GhostBubble extends Bubble {
         this.addBackCloud(-20, 75, 2, 0.93, 0.965, 1, 0.47, 1, -1, 350);
 
         // Child clouds inherit parent color and transformations
-        (this as any).passTransformationsToChilds = true;
+        this.passTransformationsToChilds = true;
         this.passColorToChilds = true;
     }
 

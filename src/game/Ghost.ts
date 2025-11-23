@@ -194,7 +194,7 @@ class Ghost extends BaseElement {
             } else {
                 this.bubble.addTimelineWithID(morphOut, 11);
                 this.bubble.playTimeline(11);
-                (this.bubble as any).popped = true;
+                this.bubble.popped = true;
             }
         }
 

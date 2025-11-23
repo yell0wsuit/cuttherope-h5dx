@@ -41,7 +41,7 @@ class GhostGrab extends Grab {
         this.addFloatTimeline(centerCloud, 0.5, 1.1, 1, 0.9, -1, 1);
 
         // Child clouds inherit parent color and transformations
-        (this as any).passTransformationsToChilds = true;
+        this.passTransformationsToChilds = true;
 
         return this;
     }

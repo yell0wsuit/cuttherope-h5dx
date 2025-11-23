@@ -12,28 +12,35 @@ class GhostBouncer extends Bouncer {
     backCloud: ImageElement;
     backCloud2: ImageElement;
     ghost?: any;
+    backCloudOffset: { x: number; y: number };
+    backCloud2Offset: { x: number; y: number };
 
     constructor(x: number, y: number, width: number, angle: number, ghost?: any) {
         super(x, y, width, angle);
         this.ghost = ghost;
 
         // Cloud quad 4 (index 4) - back cloud 2 at angle + 170°
-        this.backCloud2 = this.createCloud(angle + 170, 4);
+        const angle2 = angle + 170;
+        this.backCloud2Offset = {
+            x: CLOUD_RADIUS * Math.cos(Radians.fromDegrees(angle2)),
+            y: CLOUD_RADIUS * Math.sin(Radians.fromDegrees(angle2)),
+        };
+        this.backCloud2 = this.createCloud(0, 4);
         this.backCloud2.visible = false;
-        this.addChild(this.backCloud2);
         this.addFloatTimeline(this.backCloud2, 0.35, 0.7, 0.55, 0.4);
 
         // Cloud quad 4 (index 4) - back cloud at angle + 10°
-        this.backCloud = this.createCloud(angle + 10, 4);
+        const angle1 = angle + 10;
+        this.backCloudOffset = {
+            x: CLOUD_RADIUS * Math.cos(Radians.fromDegrees(angle1)),
+            y: CLOUD_RADIUS * Math.sin(Radians.fromDegrees(angle1)),
+        };
+        this.backCloud = this.createCloud(0, 4);
         this.backCloud.visible = false;
-        this.addChild(this.backCloud);
         this.addFloatTimeline(this.backCloud, 0.39, 0.9, 0.8, 0.7);
 
         // Cloud quad 3 (index 3) - right cloud
-        const rightCloud = ImageElement.create(
-            ResourceId.IMG_OBJ_GHOST,
-            3
-        );
+        const rightCloud = ImageElement.create(ResourceId.IMG_OBJ_GHOST, 3);
         rightCloud.anchor = rightCloud.parentAnchor = Alignment.CENTER;
         rightCloud.x = 60;
         rightCloud.y = 55;
@@ -41,10 +48,7 @@ class GhostBouncer extends Bouncer {
         this.addFloatTimeline(rightCloud, 0.45, 1.1, 1, 0.9);
 
         // Cloud quad 2 (index 2) - left cloud
-        const leftCloud = ImageElement.create(
-            ResourceId.IMG_OBJ_GHOST,
-            2
-        );
+        const leftCloud = ImageElement.create(ResourceId.IMG_OBJ_GHOST, 2);
         leftCloud.anchor = leftCloud.parentAnchor = Alignment.CENTER;
         leftCloud.x = -50;
         leftCloud.y = 55;
@@ -63,9 +67,25 @@ class GhostBouncer extends Bouncer {
         }
     }
 
+    override update(delta: number): void {
+        super.update(delta);
+
+        // Update back clouds manually since they're not children
+        this.backCloud.update(delta);
+        this.backCloud2.update(delta);
+
+        // Position back clouds relative to bouncer's current position
+        this.backCloud.x = this.x + this.backCloudOffset.x;
+        this.backCloud.y = this.y + this.backCloudOffset.y;
+        this.backCloud2.x = this.x + this.backCloud2Offset.x;
+        this.backCloud2.y = this.y + this.backCloud2Offset.y;
+    }
+
     override draw(): void {
+        // Draw back clouds independently (they're not children)
         this.backCloud.draw();
         this.backCloud2.draw();
+
         super.draw();
 
         // Draw morphing effects on top of the bouncer

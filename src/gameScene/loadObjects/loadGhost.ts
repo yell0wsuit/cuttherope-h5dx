@@ -16,13 +16,7 @@ export function loadGhost(this: GameSceneLoaders, item: GhostItem): void {
 
     const possibleStatesMask = (useBouncer ? 8 : 0) | (useBubble ? 2 : 0) | (useGrab ? 4 : 0);
 
-    const ghost = new Ghost(
-        new Vector(px, py),
-        possibleStatesMask,
-        grabRadius,
-        bouncerAngle,
-        this
-    );
+    const ghost = new Ghost(new Vector(px, py), possibleStatesMask, grabRadius, bouncerAngle, this);
 
     this.ghosts.push(ghost);
 }

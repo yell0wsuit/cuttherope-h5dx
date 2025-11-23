@@ -97,7 +97,11 @@ class Ghost extends BaseElement {
             KeyFrame.makeColor(RGBAColor.transparent.copy(), KeyFrame.TransitionType.IMMEDIATE, 0)
         );
         appearTimeline.addKeyFrame(
-            KeyFrame.makeColor(RGBAColor.solidOpaque.copy(), KeyFrame.TransitionType.LINEAR, GHOST_MORPHING_APPEAR_TIME)
+            KeyFrame.makeColor(
+                RGBAColor.solidOpaque.copy(),
+                KeyFrame.TransitionType.LINEAR,
+                GHOST_MORPHING_APPEAR_TIME
+            )
         );
         this.ghostImage.addTimelineWithID(appearTimeline, 10);
 
@@ -106,7 +110,11 @@ class Ghost extends BaseElement {
             KeyFrame.makeColor(RGBAColor.solidOpaque.copy(), KeyFrame.TransitionType.IMMEDIATE, 0)
         );
         disappearTimeline.addKeyFrame(
-            KeyFrame.makeColor(RGBAColor.transparent.copy(), KeyFrame.TransitionType.LINEAR, GHOST_MORPHING_DISAPPEAR_TIME)
+            KeyFrame.makeColor(
+                RGBAColor.transparent.copy(),
+                KeyFrame.TransitionType.LINEAR,
+                GHOST_MORPHING_DISAPPEAR_TIME
+            )
         );
         this.ghostImage.addTimelineWithID(disappearTimeline, 11);
         this.ghostImage.playTimeline(10);
@@ -129,31 +137,46 @@ class Ghost extends BaseElement {
     }
 
     updateGhost(delta: number): void {
-
         // Check for bubble fade-out completion
-        if (this.bubble && this.bubble.currentTimelineIndex === 11 && this.bubble.currentTimeline?.state === Timeline.StateType.STOPPED) {
+        if (
+            this.bubble &&
+            this.bubble.currentTimelineIndex === 11 &&
+            this.bubble.currentTimeline?.state === Timeline.StateType.STOPPED
+        ) {
             this.removeFromSceneArray(this.scene.bubbles, this.bubble);
             this.bubble = null;
         }
 
         // Check for bouncer fade-out completion
-        if (this.bouncer && this.bouncer.currentTimelineIndex === 11 && this.bouncer.currentTimeline?.state === Timeline.StateType.STOPPED) {
+        if (
+            this.bouncer &&
+            this.bouncer.currentTimelineIndex === 11 &&
+            this.bouncer.currentTimeline?.state === Timeline.StateType.STOPPED
+        ) {
             this.removeFromSceneArray(this.scene.bouncers, this.bouncer);
             this.bouncer = null;
         }
 
         // Check for grab fade-out completion
-        if (this.grab && this.grab.currentTimelineIndex === 11 && this.grab.currentTimeline?.state === Timeline.StateType.STOPPED) {
+        if (
+            this.grab &&
+            this.grab.currentTimelineIndex === 11 &&
+            this.grab.currentTimeline?.state === Timeline.StateType.STOPPED
+        ) {
             this.grab.destroyRope();
             this.removeFromSceneArray(this.scene.bungees, this.grab);
             this.grab = null;
         }
 
-
         super.update(delta);
 
         // Monitor rope cut while grab is on timeline 10 (visible/active)
-        if (this.grab && this.grab.rope && this.grab.rope.cut !== Constants.UNDEFINED && this.grab.currentTimelineIndex === 10) {
+        if (
+            this.grab &&
+            this.grab.rope &&
+            this.grab.rope.cut !== Constants.UNDEFINED &&
+            this.grab.currentTimelineIndex === 10
+        ) {
             this.cyclingEnabled = true;
             this.resetToState(DEFAULT_GHOST_STATE);
         }
@@ -183,7 +206,11 @@ class Ghost extends BaseElement {
             KeyFrame.makeColor(RGBAColor.solidOpaque.copy(), KeyFrame.TransitionType.IMMEDIATE, 0)
         );
         morphOut.addKeyFrame(
-            KeyFrame.makeColor(RGBAColor.transparent.copy(), KeyFrame.TransitionType.LINEAR, GHOST_MORPHING_DISAPPEAR_TIME)
+            KeyFrame.makeColor(
+                RGBAColor.transparent.copy(),
+                KeyFrame.TransitionType.LINEAR,
+                GHOST_MORPHING_DISAPPEAR_TIME
+            )
         );
 
         // Handle bubble fade-out
@@ -239,7 +266,11 @@ class Ghost extends BaseElement {
             KeyFrame.makeColor(RGBAColor.transparent.copy(), KeyFrame.TransitionType.IMMEDIATE, 0)
         );
         morphIn.addKeyFrame(
-            KeyFrame.makeColor(RGBAColor.solidOpaque.copy(), KeyFrame.TransitionType.LINEAR, GHOST_MORPHING_APPEAR_TIME)
+            KeyFrame.makeColor(
+                RGBAColor.solidOpaque.copy(),
+                KeyFrame.TransitionType.LINEAR,
+                GHOST_MORPHING_APPEAR_TIME
+            )
         );
 
         switch (newState) {
@@ -335,44 +366,19 @@ class Ghost extends BaseElement {
         const float = new Timeline();
         float.loopType = Timeline.LoopType.REPLAY;
         float.addKeyFrame(
-            KeyFrame.makePos(
-                element.x,
-                element.y - offset,
-                KeyFrame.TransitionType.IMMEDIATE,
-                0
-            )
+            KeyFrame.makePos(element.x, element.y - offset, KeyFrame.TransitionType.IMMEDIATE, 0)
         );
         float.addKeyFrame(
-            KeyFrame.makePos(
-                element.x,
-                element.y,
-                KeyFrame.TransitionType.EASE_IN,
-                0.38
-            )
+            KeyFrame.makePos(element.x, element.y, KeyFrame.TransitionType.EASE_IN, 0.38)
         );
         float.addKeyFrame(
-            KeyFrame.makePos(
-                element.x,
-                element.y + offset,
-                KeyFrame.TransitionType.EASE_OUT,
-                0.38
-            )
+            KeyFrame.makePos(element.x, element.y + offset, KeyFrame.TransitionType.EASE_OUT, 0.38)
         );
         float.addKeyFrame(
-            KeyFrame.makePos(
-                element.x,
-                element.y,
-                KeyFrame.TransitionType.EASE_IN,
-                0.38
-            )
+            KeyFrame.makePos(element.x, element.y, KeyFrame.TransitionType.EASE_IN, 0.38)
         );
         float.addKeyFrame(
-            KeyFrame.makePos(
-                element.x,
-                element.y - offset,
-                KeyFrame.TransitionType.EASE_OUT,
-                0.38
-            )
+            KeyFrame.makePos(element.x, element.y - offset, KeyFrame.TransitionType.EASE_OUT, 0.38)
         );
         element.addTimeline(float);
         element.playTimeline(0);

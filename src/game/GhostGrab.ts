@@ -65,8 +65,7 @@ class GhostGrab extends Grab {
         // Draw radius circle if auto-rope
         if (this.radius !== undefined || this.hideRadius) {
             const color = new RGBAColor(0.2, 0.5, 0.9, this.radiusAlpha);
-            const drawRadius =
-                this.radius !== undefined ? this.radius : this.previousRadius;
+            const drawRadius = this.radius !== undefined ? this.radius : this.previousRadius;
             this.drawGrabCircle(this.x, this.y, drawRadius, color);
         }
 

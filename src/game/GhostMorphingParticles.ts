@@ -11,8 +11,8 @@ class GhostMorphingParticles extends RotateableMultiParticles {
     constructor(texture: Texture2D, totalParticles = DEFAULT_PARTICLE_COUNT) {
         super(totalParticles, texture);
 
-        this.size = 0.8;
-        this.sizeVar = 0.4;
+        this.size = 0.6;
+        this.sizeVar = 0.2;
         this.angle = MathHelper.randomRange(0, 360);
         this.angleVar = 15;
         this.rotateSpeedVar = 30;
@@ -28,8 +28,7 @@ class GhostMorphingParticles extends RotateableMultiParticles {
     override initParticle(particle: Particle) {
         super.initParticle(particle);
 
-        // pick between the different puff quads (2-4)
-        const randomIndex = MathHelper.randomRange(2, 4);
+        const randomIndex = MathHelper.randomRange(4, 6);
         const quad = this.imageGrid.rects[randomIndex];
         if (!quad) return;
 

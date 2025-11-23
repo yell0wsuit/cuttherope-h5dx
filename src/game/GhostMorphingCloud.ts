@@ -3,6 +3,7 @@ import RGBAColor from "@/core/RGBAColor";
 import Rectangle from "@/core/Rectangle";
 import type Texture2D from "@/core/Texture2D";
 import type { Particle } from "@/visual/Particles";
+import MathHelper from "@/utils/MathHelper";
 
 const DEFAULT_PARTICLE_COUNT = 5;
 
@@ -11,7 +12,7 @@ class GhostMorphingCloud extends MultiParticles {
         super(totalParticles, texture);
 
         this.angle = Math.random() * 360;
-        this.size = 1.6;
+        this.size = 1.2;
         this.angleVar = 360;
         this.life = 0.5;
         this.duration = 1.5;
@@ -21,10 +22,10 @@ class GhostMorphingCloud extends MultiParticles {
     }
 
     override initParticle(particle: Particle) {
-        this.angle += 360 / this.totalParticles;
+        //this.angle += 360 / this.totalParticles;
         super.initParticle(particle);
 
-        const randomIndex = Math.floor(Math.random() * 3) + 2; // 2..4
+        const randomIndex = MathHelper.randomRange(4, 6);
         const quad = this.imageGrid.rects[randomIndex];
         if (!quad) return;
 

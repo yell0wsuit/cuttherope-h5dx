@@ -327,6 +327,8 @@ class Ghost extends BaseElement {
                     this
                 );
                 this.scene.bouncers.push(bouncer);
+                // Ensure bouncer starts transparent before fading in
+                bouncer.color = RGBAColor.transparent.copy();
                 bouncer.addTimelineWithID(morphIn, 10);
                 bouncer.playTimeline(10);
                 this.bouncer = bouncer;

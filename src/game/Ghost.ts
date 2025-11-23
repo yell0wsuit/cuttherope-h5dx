@@ -252,6 +252,8 @@ class Ghost extends BaseElement {
                 this.bouncer.addTimelineWithID(morphOut, 11);
                 this.bouncer.playTimeline(11);
             }
+            this.removeFromSceneArray(this.scene.bouncers, this.bouncer);
+            this.bouncer = null;
         }
 
         // Handle ghost image fade

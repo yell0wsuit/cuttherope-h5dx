@@ -333,8 +333,8 @@
         "unlockStars": 600,
         "support": 11,
         "showEarth": false,
-        "levelBackgroundId": "IMG_BGR_11_P1",
-        "levelOverlayId": "IMG_BGR_11_P2",
+        "levelBackgroundId": "IMG_BGR_12_P1",
+        "levelOverlayId": "IMG_BGR_12_P1",
         "levelCount": 25
     },
     {

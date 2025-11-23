@@ -1,3 +1,5 @@
+import { IMG_BGR_01_bgr } from "@/gameScene/constants";
+
 /**
  * The resource id corresponds to the index of the entry in the RES_DATA array
  * @enum {number}
@@ -198,9 +200,10 @@ const ResourceId = {
 
     IMG_OBJ_GHOST: 199,
     SND_GHOST_PUFF: 200,
+    IMG_BGR_12_P1: 201,
 
     // Total number of resources
-    RESOURCES_COUNT: 200,
+    RESOURCES_COUNT: 202,
 } as const;
 
 export default ResourceId;

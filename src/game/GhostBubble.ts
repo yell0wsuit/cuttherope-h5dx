@@ -149,6 +149,7 @@ class GhostBubble extends Bubble {
         // (which is the last child added, not the first)
         if (id === 0 && this.bubbleOutlineIndex !== -1) {
             super.removeChildWithID(this.bubbleOutlineIndex);
+            this.bubbleOutlineIndex = -1;
             return;
         }
         super.removeChildWithID(id);

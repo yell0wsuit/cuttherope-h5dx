@@ -27,7 +27,7 @@ class CandyInGhostBubbleAnimation extends Animation {
 
     addSupportingCloudsTimelines(): void {
         // Cloud quad 6 - right
-        this.createPulsingCloud(6, this.x + 85, this.y + 25, [
+        this.createPulsingCloud(6, this.x + 63.75, this.y + 18.75, [
             {
                 scale: 0.8,
                 dx: 1,
@@ -66,7 +66,7 @@ class CandyInGhostBubbleAnimation extends Animation {
         ]);
 
         // Cloud quad 5 - right bottom
-        this.createPulsingCloud(5, this.x + 65, this.y + 55, [
+        this.createPulsingCloud(5, this.x + 48.75, this.y + 41.25, [
             {
                 scale: 0.93,
                 dx: 1,
@@ -105,7 +105,7 @@ class CandyInGhostBubbleAnimation extends Animation {
         ]);
 
         // Cloud quad 5 - left
-        this.createPulsingCloud(5, this.x - 90, this.y + 15, [
+        this.createPulsingCloud(5, this.x - 67.5, this.y + 11.25, [
             {
                 scale: 0.33,
                 dx: 1,
@@ -144,7 +144,7 @@ class CandyInGhostBubbleAnimation extends Animation {
         ]);
 
         // Cloud quad 6 - left bottom
-        this.createPulsingCloud(6, this.x - 75, this.y + 45, [
+        this.createPulsingCloud(6, this.x - 56.25, this.y + 33.75, [
             {
                 scale: 0.6,
                 dx: -1,
@@ -183,7 +183,7 @@ class CandyInGhostBubbleAnimation extends Animation {
         ]);
 
         // Cloud quad 2 - bottom center (with rotation)
-        const front = this.createPulsingCloud(2, this.x - 20, this.y + 75, [
+        const front = this.createPulsingCloud(2, this.x - 15, this.y + 56.25, [
             {
                 scale: 0.93,
                 dx: 1,

@@ -16,8 +16,8 @@ class GhostGrab extends Grab {
         // Cloud quad 5 (index 5) - left
         const leftCloud = ImageElement.create(ResourceId.IMG_OBJ_GHOST, 5);
         leftCloud.anchor = leftCloud.parentAnchor = Alignment.CENTER;
-        leftCloud.x = -60;
-        leftCloud.y = 2;
+        leftCloud.x = -45;
+        leftCloud.y = 1.5;
         this.addChild(leftCloud);
         this.backClouds.push(leftCloud);
         this.addFloatTimeline(leftCloud, 0.65, 0.43, 0.465, 0.5, -1, 1);
@@ -25,8 +25,8 @@ class GhostGrab extends Grab {
         // Cloud quad 4 (index 4) - right
         const rightCloud = ImageElement.create(ResourceId.IMG_OBJ_GHOST, 4);
         rightCloud.anchor = rightCloud.parentAnchor = Alignment.CENTER;
-        rightCloud.x = 58;
-        rightCloud.y = 18;
+        rightCloud.x = 43.5;
+        rightCloud.y = 13.5;
         this.addChild(rightCloud);
         this.backClouds.push(rightCloud);
         this.addFloatTimeline(rightCloud, 0.45, 0.9, 0.8, 0.7, 1, 1);
@@ -34,8 +34,8 @@ class GhostGrab extends Grab {
         // Cloud quad 2 (index 2) - center
         const centerCloud = ImageElement.create(ResourceId.IMG_OBJ_GHOST, 2);
         centerCloud.anchor = centerCloud.parentAnchor = Alignment.CENTER;
-        centerCloud.x = -15;
-        centerCloud.y = 45;
+        centerCloud.x = -11.25;
+        centerCloud.y = 33.75;
         this.addChild(centerCloud);
         this.backClouds.push(centerCloud);
         this.addFloatTimeline(centerCloud, 0.5, 1.1, 1, 0.9, -1, 1);

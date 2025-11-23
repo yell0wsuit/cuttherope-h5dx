@@ -46,15 +46,19 @@ class GhostBubble extends Bubble {
 
     private addSupportingClouds() {
         // Cloud quad 6 (index 6) - right
-        this.addBackCloud(85, 25, 6, 0.8, 0.78, 0.76, 0.48);
+        this.addBackCloud(63.75, 18.75, 6, 0.8, 0.78, 0.76, 0.48);
+
         // Cloud quad 5 (index 5) - right bottom
-        this.addBackCloud(65, 55, 5, 0.93, 0.965, 1, 0.4);
+        this.addBackCloud(48.75, 41.25, 5, 0.93, 0.965, 1, 0.4);
+
         // Cloud quad 5 (index 5) - left
-        this.addBackCloud(-90, 15, 5, 0.33, 0.365, 0.4, 0.43);
+        this.addBackCloud(-67.5, 11.25, 5, 0.33, 0.365, 0.4, 0.43);
+
         // Cloud quad 6 (index 6) - left bottom
-        this.addBackCloud(-75, 45, 6, 0.6, 0.565, 0.53, 0.42, -1, 1);
-        // Cloud quad 2 (index 2) - bottom center (with rotation)
-        this.addBackCloud(-20, 75, 2, 0.93, 0.965, 1, 0.47, 1, -1, 350);
+        this.addBackCloud(-56.25, 33.75, 6, 0.6, 0.565, 0.53, 0.42, -1, 1);
+
+        // Cloud quad 2 (index 2) - bottom center
+        this.addBackCloud(-15, 56.25, 2, 0.93, 0.965, 1, 0.47, 1, -1, 350);
 
         // Child clouds inherit parent color and transformations
         this.passTransformationsToChilds = true;

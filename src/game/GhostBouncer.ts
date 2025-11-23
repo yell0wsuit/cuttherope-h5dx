@@ -7,7 +7,7 @@ import Timeline from "@/visual/Timeline";
 import ResourceId from "@/resources/ResourceId";
 import type Ghost from "@/game/Ghost";
 
-const CLOUD_RADIUS = Math.sqrt(9000);
+const CLOUD_RADIUS = Math.sqrt(5060);
 
 class GhostBouncer extends Bouncer {
     backCloud: ImageElement;
@@ -20,7 +20,7 @@ class GhostBouncer extends Bouncer {
         super(x, y, width, angle);
         this.ghost = ghost;
 
-        // Cloud quad 4 (index 4) - back cloud 2 at angle + 170°
+        // Cloud quad 4 - back cloud 2 at angle + 170°
         const angle2 = angle + 170;
         this.backCloud2Offset = {
             x: CLOUD_RADIUS * Math.cos(Radians.fromDegrees(angle2)),
@@ -30,7 +30,7 @@ class GhostBouncer extends Bouncer {
         this.backCloud2.visible = false;
         this.addFloatTimeline(this.backCloud2, 0.35, 0.7, 0.55, 0.4);
 
-        // Cloud quad 4 (index 4) - back cloud at angle + 10°
+        // Cloud quad 4 - back cloud at angle + 10°
         const angle1 = angle + 10;
         this.backCloudOffset = {
             x: CLOUD_RADIUS * Math.cos(Radians.fromDegrees(angle1)),
@@ -40,19 +40,19 @@ class GhostBouncer extends Bouncer {
         this.backCloud.visible = false;
         this.addFloatTimeline(this.backCloud, 0.39, 0.9, 0.8, 0.7);
 
-        // Cloud quad 3 (index 3) - right cloud
+        // Cloud quad 3 - right cloud
         const rightCloud = ImageElement.create(ResourceId.IMG_OBJ_GHOST, 3);
         rightCloud.anchor = rightCloud.parentAnchor = Alignment.CENTER;
-        rightCloud.x = 60;
-        rightCloud.y = 55;
+        rightCloud.x = 45;
+        rightCloud.y = 41.25;
         this.addChild(rightCloud);
         this.addFloatTimeline(rightCloud, 0.45, 1.1, 1, 0.9);
 
-        // Cloud quad 2 (index 2) - left cloud
+        // Cloud quad 2 - left cloud
         const leftCloud = ImageElement.create(ResourceId.IMG_OBJ_GHOST, 2);
         leftCloud.anchor = leftCloud.parentAnchor = Alignment.CENTER;
-        leftCloud.x = -50;
-        leftCloud.y = 55;
+        leftCloud.x = -37.5;
+        leftCloud.y = 41.25;
         this.addChild(leftCloud);
         this.addFloatTimeline(leftCloud, 0.5, 1.1, 1, 0.9);
 

@@ -61,7 +61,21 @@ export function updateCollectibles(this: CollectiblesScene, delta: number): bool
 
                 if (this.candyBubbleL || this.candyBubbleR) {
                     this.candyBubble = this.candyBubbleL ? this.candyBubbleL : this.candyBubbleR;
-                    this.candyBubbleAnimation.visible = !isGhostBubble(this, this.candyBubble);
+                    const isGhost = isGhostBubble(this, this.candyBubble);
+                    this.candyBubbleAnimation.visible = !isGhost;
+                    if (isGhost) {
+                        // Reparent ghost bubble animation from half candy to merged candy
+                        const ghostBubbleAni = this.candyBubbleL
+                            ? this.candyGhostBubbleAnimationL
+                            : this.candyGhostBubbleAnimationR;
+                        if (ghostBubbleAni) {
+                            const oldParent = this.candyBubbleL ? this.candyL : this.candyR;
+                            oldParent.removeChild(ghostBubbleAni);
+                            this.candy.addChild(ghostBubbleAni);
+                            this.candyGhostBubbleAnimation = ghostBubbleAni;
+                            ghostBubbleAni.visible = true;
+                        }
+                    }
                 }
 
                 this.lastCandyRotateDelta = 0;

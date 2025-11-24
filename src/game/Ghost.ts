@@ -88,7 +88,7 @@ class Ghost extends BaseElement {
         this.ghostImage.addChild(this.ghostImageBody);
         this.ghostImage.addChild(this.ghostImageFace);
 
-        this.addFloatTimeline(this.ghostImageFace, 2);
+        this.addFloatTimeline(this.ghostImageFace, 2, 0.005);
         this.addFloatTimeline(this.ghostImageBody, 3);
 
         // Set up appear/disappear timelines for ghost image
@@ -121,7 +121,7 @@ class Ghost extends BaseElement {
 
         const ghostTexture = RES_DATA[ResourceId.IMG_OBJ_GHOST]?.texture ?? null;
         this.morphingBubbles = ghostTexture ? new GhostMorphingParticles(ghostTexture) : null;
-        this.morphingCloud = ghostTexture ? new GhostMorphingCloud(ghostTexture) : null;
+        this.morphingCloud = null;
 
         if (this.morphingBubbles) {
             this.morphingBubbles.x = position.x;
@@ -129,11 +129,6 @@ class Ghost extends BaseElement {
             this.addChild(this.morphingBubbles);
         }
 
-        if (this.morphingCloud) {
-            this.morphingCloud.x = position.x;
-            this.morphingCloud.y = position.y;
-            this.addChild(this.morphingCloud);
-        }
     }
 
     updateGhost(delta: number): void {
@@ -342,7 +337,6 @@ class Ghost extends BaseElement {
         SoundMgr.playSound(ResourceId.SND_GHOST_PUFF);
 
         this.morphingBubbles?.startSystem(GHOST_MORPHING_BUBBLES_COUNT);
-        this.morphingCloud?.startSystem();
     }
 
     override onTouchDown(tx: number, ty: number): boolean {
@@ -365,26 +359,75 @@ class Ghost extends BaseElement {
         }
     }
 
-    private addFloatTimeline(element: BaseElement, offset: number) {
-        const float = new Timeline();
-        float.loopType = Timeline.LoopType.REPLAY;
-        float.addKeyFrame(
-            KeyFrame.makePos(element.x, element.y - offset, KeyFrame.TransitionType.IMMEDIATE, 0)
+    destroy(): void {
+        this.removeFromSceneArray(this.scene.bubbles, this.bubble);
+        this.removeFromSceneArray(this.scene.bouncers, this.bouncer);
+
+        if (this.grab) {
+            this.grab.destroyRope();
+        }
+        this.removeFromSceneArray(this.scene.bungees, this.grab);
+
+        this.bubble = null;
+        this.grab = null;
+        this.bouncer = null;
+    }
+
+    private addFloatTimeline(element: BaseElement, offset: number, extraDuration = 0) {
+        const initialFloat = new Timeline();
+        const random = Math.random();
+
+        initialFloat.addKeyFrame(
+            KeyFrame.makePos(element.x, element.y, KeyFrame.TransitionType.IMMEDIATE, 0)
         );
-        float.addKeyFrame(
-            KeyFrame.makePos(element.x, element.y, KeyFrame.TransitionType.EASE_IN, 0.38)
+        initialFloat.addKeyFrame(
+            KeyFrame.makePos(
+                element.x,
+                element.y - offset,
+                KeyFrame.TransitionType.EASE_OUT,
+                random + extraDuration
+            )
         );
-        float.addKeyFrame(
-            KeyFrame.makePos(element.x, element.y + offset, KeyFrame.TransitionType.EASE_OUT, 0.38)
-        );
-        float.addKeyFrame(
-            KeyFrame.makePos(element.x, element.y, KeyFrame.TransitionType.EASE_IN, 0.38)
-        );
-        float.addKeyFrame(
-            KeyFrame.makePos(element.x, element.y - offset, KeyFrame.TransitionType.EASE_OUT, 0.38)
-        );
-        element.addTimeline(float);
-        element.playTimeline(0);
+
+        initialFloat.onFinished = () => {
+            const floatLoop = new Timeline();
+            floatLoop.loopType = Timeline.LoopType.REPLAY;
+            floatLoop.addKeyFrame(
+                KeyFrame.makePos(
+                    element.x,
+                    element.y - offset,
+                    KeyFrame.TransitionType.IMMEDIATE,
+                    0
+                )
+            );
+            floatLoop.addKeyFrame(
+                KeyFrame.makePos(element.x, element.y, KeyFrame.TransitionType.EASE_IN, 0.38)
+            );
+            floatLoop.addKeyFrame(
+                KeyFrame.makePos(
+                    element.x,
+                    element.y + offset,
+                    KeyFrame.TransitionType.EASE_OUT,
+                    0.38
+                )
+            );
+            floatLoop.addKeyFrame(
+                KeyFrame.makePos(element.x, element.y, KeyFrame.TransitionType.EASE_IN, 0.38)
+            );
+            floatLoop.addKeyFrame(
+                KeyFrame.makePos(
+                    element.x,
+                    element.y - offset,
+                    KeyFrame.TransitionType.EASE_OUT,
+                    0.38
+                )
+            );
+            element.addTimelineWithID(floatLoop, 12);
+            element.playTimeline(12);
+        };
+
+        element.addTimelineWithID(initialFloat, 13);
+        element.playTimeline(13);
     }
 
     private getGhostRopeAnchor(): ConstrainedPoint | null {

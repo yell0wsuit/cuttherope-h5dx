@@ -16,6 +16,10 @@ export function resetGameState(this: GameSceneInit): void {
 
     SoundMgr.stopSound(ResourceId.SND_ELECTRIC);
 
+    for (const ghost of this.ghosts) {
+        ghost?.destroy();
+    }
+
     this.bungees = [];
     this.razors = [];
     this.spikes = [];

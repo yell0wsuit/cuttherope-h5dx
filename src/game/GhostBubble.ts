@@ -20,7 +20,7 @@ class GhostBubble extends Bubble {
     initAt(x: number, y: number): this {
         this.initTextureWithId(ResourceId.IMG_OBJ_BUBBLE_ATTACHED);
         // Set random texture quad for bubble variation (like regular bubbles)
-        const randomQuad = Math.floor(Math.random() * 2) + 1; // Random 1-2
+        const randomQuad = Math.floor(Math.random() * 3) + 1; // Random 1-3
         this.setTextureQuad(randomQuad);
         this.doRestoreCutTransparency();
 

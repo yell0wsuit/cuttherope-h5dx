@@ -13,14 +13,14 @@ class GhostMorphingParticles extends RotateableMultiParticles {
 
         this.size = 0.6;
         this.sizeVar = 0.2;
-        this.angle = MathHelper.randomRange(0, 360);
-        this.angleVar = 15;
+        this.angle = 0;
+        this.angleVar = 360;
         this.rotateSpeedVar = 30;
         this.life = 0.6;
         this.lifeVar = 0.15;
         this.duration = 1.5;
-        this.speed = 60;
-        this.speedVar = 15;
+        this.speed = 200;
+        this.speedVar = 60;
         this.startColor = RGBAColor.solidOpaque.copy();
         this.endColor = RGBAColor.transparent.copy();
     }
@@ -59,7 +59,7 @@ class GhostMorphingParticles extends RotateableMultiParticles {
             particle.deltaColor.a = (this.endColor.a - this.startColor.a) / fadeThreshold;
         }
 
-        particle.dir.multiply(0.83);
+        particle.dir.multiply(0.92);
         particle.width *= 1.015;
         particle.height *= 1.015;
     }

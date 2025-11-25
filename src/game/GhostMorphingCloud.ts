@@ -11,12 +11,13 @@ class GhostMorphingCloud extends MultiParticles {
     constructor(texture: Texture2D, totalParticles = DEFAULT_PARTICLE_COUNT) {
         super(totalParticles, texture);
 
-        this.angle = Math.random() * 360;
+        this.angle = 0;
         this.size = 1.2;
         this.angleVar = 360;
         this.life = 0.5;
         this.duration = 1.5;
-        this.speed = 30;
+        this.speed = 120;
+        this.speedVar = 40;
         this.startColor = RGBAColor.solidOpaque.copy();
         this.endColor = RGBAColor.transparent.copy();
     }

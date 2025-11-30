@@ -89,7 +89,7 @@ class Ghost extends BaseElement {
         this.ghostImage.addChild(this.ghostImageFace);
 
         this.addFloatTimeline(this.ghostImageFace, 2);
-        this.addFloatTimeline(this.ghostImageBody, 3);
+        this.addFloatTimeline(this.ghostImageBody, 3, 0.005);
 
         // Set up appear/disappear timelines for ghost image
         const appearTimeline = new Timeline();

@@ -5,6 +5,7 @@ import KeyFrame from "@/visual/KeyFrame";
 import Timeline from "@/visual/Timeline";
 import ResourceId from "@/resources/ResourceId";
 import RGBAColor from "@/core/RGBAColor";
+import Constants from "@/utils/Constants";
 
 class GhostGrab extends Grab {
     private backClouds: ImageElement[] = [];
@@ -63,9 +64,10 @@ class GhostGrab extends Grab {
         }
 
         // Draw radius circle if auto-rope
-        if (this.radius !== undefined || this.hideRadius) {
+        if (this.radius !== Constants.UNDEFINED || this.hideRadius) {
             const color = new RGBAColor(0.2, 0.5, 0.9, this.radiusAlpha);
-            const drawRadius = this.radius !== undefined ? this.radius : this.previousRadius;
+            const drawRadius =
+                this.radius !== Constants.UNDEFINED ? this.radius : this.previousRadius;
             this.drawGrabCircle(this.x, this.y, drawRadius, color);
         }
 

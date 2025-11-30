@@ -19,7 +19,6 @@ class CandyInGhostBubbleAnimation extends Animation {
             GameSceneConstants.IMG_OBJ_BUBBLE_FLIGHT_Frame_13
         );
         this.visible = false;
-        (this as Animation & { drawPosIncrement?: number }).drawPosIncrement = 6;
         this.addSupportingCloudsTimelines();
         this.playTimeline(0);
         return this;

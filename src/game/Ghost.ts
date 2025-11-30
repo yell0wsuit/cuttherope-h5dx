@@ -246,6 +246,7 @@ class Ghost extends BaseElement {
                 this.removeFromSceneArray(this.scene.bouncers, this.bouncer);
                 this.bouncer = null;
             } else {
+                this.bouncer.skip = 1; // Block bounce handling during fade-out
                 this.bouncer.addTimelineWithID(morphOut, 11);
                 this.bouncer.playTimeline(11);
             }
@@ -324,6 +325,7 @@ class Ghost extends BaseElement {
                 this.scene.bouncers.push(bouncer);
                 // Ensure bouncer starts transparent before fading in
                 bouncer.color = RGBAColor.transparent.copy();
+                bouncer.skip = 1; // Block bounce handling during fade-in
                 bouncer.addTimelineWithID(morphIn, 10);
                 bouncer.playTimeline(10);
                 this.bouncer = bouncer;

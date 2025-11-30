@@ -84,6 +84,10 @@ class GhostBouncer extends Bouncer {
     }
 
     override draw(): void {
+        // Sync back clouds color with bouncer (they're not children so don't auto-inherit)
+        this.backCloud.color = this.color;
+        this.backCloud2.color = this.color;
+
         // Draw back clouds independently (they're not children)
         this.backCloud.draw();
         this.backCloud2.draw();

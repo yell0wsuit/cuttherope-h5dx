@@ -7,7 +7,7 @@ import settings from "@/game/CTRSettings";
 import SoundMgr from "@/game/CTRSoundMgr";
 import PubSub from "@/utils/PubSub";
 import ScoreManager from "@/ui/ScoreManager";
-import { IS_XMAS } from "@/resources/ResData";
+import { IS_XMAS } from "@/utils/SpecialEvents";
 import { fadeIn, fadeOut } from "@/utils/domHelpers";
 
 // Helper function to get the default box index based on holiday period

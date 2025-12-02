@@ -1,7 +1,7 @@
 import Sock from "@/game/Sock";
 import ResourceId from "@/resources/ResourceId";
 import Alignment from "@/core/Alignment";
-import { IS_XMAS } from "@/resources/ResData";
+import { IS_XMAS } from "@/utils/SpecialEvents";
 import * as GameSceneConstants from "@/gameScene/constants";
 import type GameSceneLoaders from "../loaders";
 import type { SockItem } from "../MapLayerItem";

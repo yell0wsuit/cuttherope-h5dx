@@ -8,7 +8,7 @@ import Vector from "@/core/Vector";
 import Mover from "@/utils/Mover";
 import Radians from "@/utils/Radians";
 import Canvas from "@/utils/Canvas";
-import { IS_XMAS } from "@/resources/ResData";
+import { IS_XMAS } from "@/utils/SpecialEvents";
 
 const hatOrSock = IS_XMAS ? ResourceId.IMG_OBJ_SOCKS_XMAS : ResourceId.IMG_OBJ_SOCKS;
 

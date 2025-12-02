@@ -2,10 +2,6 @@ import ResEntry from "@/resources/ResEntry";
 import ResourceType from "@/resources/ResourceType";
 import ResourceId from "@/resources/ResourceId";
 
-const currentMonth = new Date().getMonth();
-export const IS_XMAS = currentMonth === 11 || currentMonth === 0;
-export const IS_JANUARY = currentMonth === 0;
-
 const RES_DATA: ResEntry[] = [];
 
 RES_DATA[ResourceId.IMG_DEFAULT] = new ResEntry("zeptolab.png", ResourceType.IMAGE);

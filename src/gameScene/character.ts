@@ -1,6 +1,6 @@
 import MathHelper from "@/utils/MathHelper";
 import * as GameSceneConstants from "@/gameScene/constants";
-import { IS_XMAS, IS_JANUARY } from "@/resources/ResData";
+import { IS_XMAS, IS_JANUARY } from "@/utils/SpecialEvents";
 import type Timeline from "@/visual/Timeline";
 import GameSceneLoaders from "./loaders";
 

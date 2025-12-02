@@ -9,7 +9,7 @@ import LangId from "@/resources/LangId";
 import MenuStringId from "@/resources/MenuStringId";
 import RoamSettings from "@/game/RoamSettings";
 import BoxType from "@/ui/BoxType";
-import { IS_XMAS } from "@/resources/ResData";
+import { IS_XMAS } from "@/utils/SpecialEvents";
 
 // Helper to add prefix for Holiday Gift box
 const getBoxPrefix = (box: number) => {

@@ -9,7 +9,7 @@ import Alignment from "@/core/Alignment";
 import Timeline from "@/visual/Timeline";
 import LevelState from "@/game/LevelState";
 import edition from "@/config/editions/net-edition";
-import { IS_XMAS, IS_JANUARY } from "@/resources/ResData";
+import { IS_XMAS, IS_JANUARY } from "@/utils/SpecialEvents";
 import MathHelper from "@/utils/MathHelper";
 import settings from "@/game/CTRSettings";
 import ActionType from "@/visual/ActionType";

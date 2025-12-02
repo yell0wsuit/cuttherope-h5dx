@@ -6,7 +6,7 @@ import edition from "@/config/editions/net-edition";
 import MoreComingBox from "@/ui/MoreComingBox";
 import TimeBox from "@/ui/TimeBox";
 import { UIRegistry } from "@/ui/types";
-import { IS_XMAS } from "@/resources/ResData";
+import { IS_XMAS } from "@/utils/SpecialEvents";
 
 /**
  * Manages all game boxes — creation, visibility, locks, and events.

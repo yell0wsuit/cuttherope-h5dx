@@ -1,7 +1,7 @@
 import settings from "@/game/CTRSettings";
 import Sounds from "@/resources/Sounds";
 import ResourceId from "@/resources/ResourceId";
-import { IS_XMAS } from "@/resources/ResData";
+import { IS_XMAS } from "@/utils/SpecialEvents";
 
 class SoundManager {
     audioPaused: boolean;

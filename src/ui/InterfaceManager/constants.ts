@@ -1,7 +1,7 @@
 import edition from "@/config/editions/net-edition";
 import ResourceId from "@/resources/ResourceId";
 import SnowfallOverlay from "@/ui/SnowfallOverlay";
-import { IS_XMAS } from "@/resources/ResData";
+import { IS_XMAS } from "@/utils/SpecialEvents";
 
 const customMenuMusic = edition.menuMusicId;
 const resolvedMenuMusicId =

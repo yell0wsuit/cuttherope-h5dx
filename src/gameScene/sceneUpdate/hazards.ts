@@ -9,7 +9,7 @@ import SoundMgr from "@/game/CTRSoundMgr";
 import Vector from "@/core/Vector";
 import resolution from "@/resolution";
 import * as GameSceneConstants from "@/gameScene/constants";
-import { IS_XMAS } from "@/resources/ResData";
+import { IS_XMAS } from "@/utils/SpecialEvents";
 import { applyStarImpulse, isCandyHit } from "./collisionHelpers";
 import type BaseElement from "@/visual/BaseElement";
 import type Bubble from "@/game/Bubble";

@@ -3,7 +3,10 @@ import ResourceId from "@/resources/ResourceId";
 import MathHelper from "@/utils/MathHelper";
 import type Texture2D from "@/core/Texture2D";
 
-interface ParticleFrameRange { start: number; end: number }
+interface ParticleFrameRange {
+    start: number;
+    end: number;
+}
 
 // Frame ranges for different confetti particle types
 const PARTICLE_TYPES: ParticleFrameRange[] = [

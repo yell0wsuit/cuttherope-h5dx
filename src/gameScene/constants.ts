@@ -151,6 +151,14 @@ export const IMG_OBJ_BUBBLE_ATTACHED_stain_01 = 1;
 export const IMG_OBJ_BUBBLE_ATTACHED_stain_02 = 2;
 export const IMG_OBJ_BUBBLE_ATTACHED_stain_03 = 3;
 
+export const IMG_OBJ_GHOST_body = 0;
+export const IMG_OBJ_GHOST_face = 1;
+export const IMG_OBJ_GHOST_bubble_1 = 2;
+export const IMG_OBJ_GHOST_bubble_2 = 3;
+export const IMG_OBJ_GHOST_bubble_3 = 4;
+export const IMG_OBJ_GHOST_bubble_4 = 5;
+export const IMG_OBJ_GHOST_bubble_5 = 6;
+
 export const IMG_HUD_STAR_Frame_1 = 0;
 export const IMG_HUD_STAR_Frame_2 = 1;
 export const IMG_HUD_STAR_Frame_3 = 2;

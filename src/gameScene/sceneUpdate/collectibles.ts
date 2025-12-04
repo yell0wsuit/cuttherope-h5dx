@@ -10,6 +10,7 @@ import SoundMgr from "@/game/CTRSoundMgr";
 import Timeline from "@/visual/Timeline";
 import Vector from "@/core/Vector";
 import ResourceId from "@/resources/ResourceId";
+import { disableGhostCycleForBubble, enableGhostCycleForBubble, isGhostBubble } from "./bubbles";
 import type AnimationPool from "@/visual/AnimationPool";
 import type Bubble from "@/game/Bubble";
 import type { GameScene } from "@/types/game-scene";
@@ -60,7 +61,21 @@ export function updateCollectibles(this: CollectiblesScene, delta: number): bool
 
                 if (this.candyBubbleL || this.candyBubbleR) {
                     this.candyBubble = this.candyBubbleL ? this.candyBubbleL : this.candyBubbleR;
-                    this.candyBubbleAnimation.visible = true;
+                    const isGhost = isGhostBubble(this, this.candyBubble);
+                    this.candyBubbleAnimation.visible = !isGhost;
+                    if (isGhost) {
+                        // Reparent ghost bubble animation from half candy to merged candy
+                        const ghostBubbleAni = this.candyBubbleL
+                            ? this.candyGhostBubbleAnimationL
+                            : this.candyGhostBubbleAnimationR;
+                        if (ghostBubbleAni) {
+                            const oldParent = this.candyBubbleL ? this.candyL : this.candyR;
+                            oldParent.removeChild(ghostBubbleAni);
+                            this.candy.addChild(ghostBubbleAni);
+                            this.candyGhostBubbleAnimation = ghostBubbleAni;
+                            ghostBubbleAni.visible = true;
+                        }
+                    }
                 }
 
                 this.lastCandyRotateDelta = 0;
@@ -202,7 +217,13 @@ export function updateCollectibles(this: CollectiblesScene, delta: number): bool
                         this.candyBubbleAnimationL
                     )
                 ) {
+                    enableGhostCycleForBubble(this, this.candyBubbleL);
                     this.candyBubbleL = bubble;
+                    const leftHasGhost = disableGhostCycleForBubble(this, bubble);
+                    this.candyBubbleAnimationL.visible = !leftHasGhost;
+                    if (this.candyGhostBubbleAnimationL) {
+                        this.candyGhostBubbleAnimationL.visible = leftHasGhost;
+                    }
                     break;
                 }
 
@@ -215,7 +236,13 @@ export function updateCollectibles(this: CollectiblesScene, delta: number): bool
                         this.candyBubbleAnimationR
                     )
                 ) {
+                    enableGhostCycleForBubble(this, this.candyBubbleR);
                     this.candyBubbleR = bubble;
+                    const rightHasGhost = disableGhostCycleForBubble(this, bubble);
+                    this.candyBubbleAnimationR.visible = !rightHasGhost;
+                    if (this.candyGhostBubbleAnimationR) {
+                        this.candyGhostBubbleAnimationR.visible = rightHasGhost;
+                    }
                     break;
                 }
             } else if (
@@ -227,7 +254,13 @@ export function updateCollectibles(this: CollectiblesScene, delta: number): bool
                     this.candyBubbleAnimation
                 )
             ) {
+                enableGhostCycleForBubble(this, this.candyBubble);
+                const hasGhost = disableGhostCycleForBubble(this, bubble);
                 this.candyBubble = bubble;
+                this.candyBubbleAnimation.visible = !hasGhost;
+                if (this.candyGhostBubbleAnimation) {
+                    this.candyGhostBubbleAnimation.visible = hasGhost;
+                }
                 break;
             }
         }
@@ -242,6 +275,10 @@ export function updateCollectibles(this: CollectiblesScene, delta: number): bool
                 }
             }
         }
+    }
+
+    for (const ghost of this.ghosts) {
+        ghost.updateGhost(delta);
     }
 
     // tutorial text

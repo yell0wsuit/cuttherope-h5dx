@@ -9,7 +9,7 @@ import SoundMgr from "@/game/CTRSoundMgr";
 import Vector from "@/core/Vector";
 import resolution from "@/resolution";
 import * as GameSceneConstants from "@/gameScene/constants";
-import { IS_XMAS } from "@/resources/ResData";
+import { IS_XMAS } from "@/utils/SpecialEvents";
 import { applyStarImpulse, isCandyHit } from "./collisionHelpers";
 import type BaseElement from "@/visual/BaseElement";
 import type Bubble from "@/game/Bubble";
@@ -24,7 +24,9 @@ type SockState = (typeof Sock.StateType)[keyof typeof Sock.StateType];
 
 type SceneSock = Sock & { state: SockState };
 
-interface Rocket { update(delta: number): void }
+interface Rocket {
+    update(delta: number): void;
+}
 
 type RotatedCircleWithContents = RotatedCircle & {
     containedObjects: (Grab | Bubble)[];

@@ -1,0 +1,139 @@
+{
+  "settings": [
+    {
+      "name": 0,
+      "height": 480,
+      "gridSize": 32,
+      "width": 320
+    },
+    {
+      "name": 1,
+      "ropePhysicsSpeed": 1,
+      "special": 1,
+      "twoParts": true
+    }
+  ],
+  "objects": [
+    {
+      "name": 50,
+      "x": 50,
+      "y": 245
+    },
+    {
+      "name": 51,
+      "x": 262,
+      "y": 356
+    },
+    {
+      "name": 54,
+      "x": 48,
+      "y": 240
+    },
+    {
+      "name": 2,
+      "x": 41,
+      "y": 125
+    },
+    {
+      "name": 130,
+      "angle": 0,
+      "bouncer": true,
+      "bubble": true,
+      "x": 160,
+      "y": 415,
+      "grab": false,
+      "radius": 100
+    },
+    {
+      "name": 3,
+      "x": 110,
+      "y": 110,
+      "timeout": -1
+    },
+    {
+      "name": 3,
+      "x": 164,
+      "y": 276,
+      "timeout": -1
+    },
+    {
+      "name": 3,
+      "x": 265,
+      "y": 165,
+      "timeout": -1
+    },
+    {
+      "name": 100,
+      "spider": false,
+      "gun": false,
+      "wheel": false,
+      "part": "R",
+      "hidePath": false,
+      "moveOffset": 0,
+      "moveVertical": false,
+      "length": 80,
+      "x": 260,
+      "y": 230,
+      "moveLength": -1,
+      "radius": -1
+    },
+    {
+      "name": 100,
+      "spider": false,
+      "gun": false,
+      "wheel": false,
+      "part": "L",
+      "hidePath": false,
+      "moveOffset": 0,
+      "moveVertical": false,
+      "length": 80,
+      "x": 48,
+      "y": 351,
+      "moveLength": -1,
+      "radius": -1
+    },
+    {
+      "name": 130,
+      "angle": 45,
+      "bouncer": true,
+      "bubble": false,
+      "x": 46,
+      "y": 419,
+      "grab": true,
+      "radius": 40
+    },
+    {
+      "name": 130,
+      "angle": -135,
+      "bouncer": true,
+      "bubble": false,
+      "x": 275,
+      "y": 101,
+      "grab": true,
+      "radius": 40
+    },
+    {
+      "name": 59,
+      "size": 3,
+      "angle": 0,
+      "x": 21,
+      "y": 190,
+      "toggled": false
+    },
+    {
+      "name": 130,
+      "angle": -30,
+      "bouncer": true,
+      "bubble": false,
+      "x": 169,
+      "y": 177,
+      "grab": true,
+      "radius": 40
+    },
+    {
+      "name": 101,
+      "x": 111,
+      "y": 48
+    }
+  ]
+}

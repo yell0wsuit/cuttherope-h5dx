@@ -190,30 +190,36 @@ class GameSceneTouch extends GameSceneUpdate {
                 )
             );
 
-                const fadeOut = new Timeline();
-                fadeOut.addKeyFrame(
-                    KeyFrame.makeColor(
-                        RGBAColor.solidOpaque.copy(),
-                        KeyFrame.TransitionType.LINEAR,
-                        0.2
-                    )
-                );
-                fadeOut.onFinished = this.onRotatedCircleTimelineFinished.bind(this);
+            const fadeOut = new Timeline();
+            fadeOut.addKeyFrame(
+                KeyFrame.makeColor(
+                    RGBAColor.solidOpaque.copy(),
+                    KeyFrame.TransitionType.LINEAR,
+                    0.2
+                )
+            );
+            fadeOut.onFinished = this.onRotatedCircleTimelineFinished.bind(this);
 
-                const fadingOutCircle = activeCircle.copy();
-                if (fadingOutCircle) {
-                    fadingOutCircle.addTimeline(fadeOut);
-                    fadingOutCircle.playTimeline(0);
+            const fadingOutCircle = activeCircle.copy();
+            if (fadingOutCircle) {
+                fadingOutCircle.addTimeline(fadeOut);
+                fadingOutCircle.playTimeline(0);
 
-                    activeCircle.addTimeline(fadeIn);
-                    activeCircle.playTimeline(0);
+                activeCircle.addTimeline(fadeIn);
+                activeCircle.playTimeline(0);
 
-                    if (activeCircleIndex >= 0) {
-                        this.rotatedCircles[activeCircleIndex] = fadingOutCircle;
-                    }
-                    this.rotatedCircles.push(activeCircle);
+                if (activeCircleIndex >= 0) {
+                    this.rotatedCircles[activeCircleIndex] = fadingOutCircle;
                 }
+                this.rotatedCircles.push(activeCircle);
+            }
             activeCircle = null;
+        }
+
+        for (const ghost of this.ghosts) {
+            if (ghost?.onTouchDown(cameraAdjustedX, cameraAdjustedY)) {
+                return true;
+            }
         }
 
         const GRAB_WHEEL_RADIUS = resolution.GRAB_WHEEL_RADIUS;

@@ -1,6 +1,9 @@
 import RGBAColor from "@/core/RGBAColor";
 
-interface Point { x: number; y: number }
+interface Point {
+    x: number;
+    y: number;
+}
 
 /**
  * Canvas wrapper class for 2D rendering operations

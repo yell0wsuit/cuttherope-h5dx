@@ -19,13 +19,12 @@ import { loadSpike } from "./loadObjects/loadSpike";
 import { loadRotatedCircle } from "./loadObjects/loadRotatedCircle";
 import { loadBouncer } from "./loadObjects/loadBouncer";
 import { loadTarget } from "./loadObjects/loadTarget";
+import { loadGhost } from "./loadObjects/loadGhost";
 
 type MapData = Record<string, MapLayerItem[]>;
 
 abstract class GameSceneLoaders extends GameSceneInit {
-    protected abstract onIdleOmNomKeyFrame(
-        ...args: Parameters<TimelineKeyFrameListener>
-    ): void;
+    protected abstract onIdleOmNomKeyFrame(...args: Parameters<TimelineKeyFrameListener>): void;
 
     protected abstract onPaddingtonIdleKeyFrame(
         ...args: Parameters<TimelineKeyFrameListener>
@@ -50,6 +49,7 @@ abstract class GameSceneLoaders extends GameSceneInit {
     loadRotatedCircle = loadRotatedCircle;
     loadBouncer = loadBouncer;
     loadTarget = loadTarget;
+    loadGhost = loadGhost;
 
     protected override loadMap(map: MapData | null | undefined): void {
         if (!map) {
@@ -65,8 +65,7 @@ abstract class GameSceneLoaders extends GameSceneInit {
             }
         }
 
-        const queue: { item: MapLayerItem; definition: MapItemDefinition; order: number }[] =
-            [];
+        const queue: { item: MapLayerItem; definition: MapItemDefinition; order: number }[] = [];
         let order = 0;
 
         for (const children of layers) {

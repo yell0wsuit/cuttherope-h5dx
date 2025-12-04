@@ -4,7 +4,7 @@ import ResourcePacks from "@/resources/ResourcePacks";
 import ResourceId from "@/resources/ResourceId";
 import BoxType from "@/ui/BoxType";
 import LangId from "@/resources/LangId";
-import { IS_JANUARY } from "@/resources/ResData";
+import { IS_JANUARY } from "@/utils/SpecialEvents";
 
 import type { RawBoxMetadataJson, BoxTextJson } from "@/types/json";
 

@@ -14,7 +14,7 @@ import PubSub from "@/utils/PubSub";
 import EasterEggManager from "@/ui/EasterEggManager";
 import settings from "@/game/CTRSettings";
 import SnowfallOverlay from "@/ui/SnowfallOverlay";
-import { IS_XMAS } from "@/resources/ResData";
+import { IS_XMAS } from "@/utils/SpecialEvents";
 import { MENU_MUSIC_ID, startSnow, stopSnow } from "@/ui/InterfaceManager/constants";
 import { fadeIn, fadeOut, delay, show, hide, text, width } from "@/utils/domHelpers";
 import LevelPanel from "@/ui/LevelPanel";

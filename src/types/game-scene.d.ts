@@ -19,6 +19,7 @@ import type PollenDrawer from "@/game/PollenDrawer";
 import type Pump from "@/game/Pump";
 import type Spikes from "@/game/Spikes";
 import type Star from "@/game/Star";
+import type Ghost from "@/game/Ghost";
 import type DelayedDispatcher from "@/utils/DelayedDispatcher";
 import type CTRGameObject from "@/game/CTRGameObject";
 import type TutorialText from "@/game/TutorialText";
@@ -32,7 +33,9 @@ type PartsTypeValue =
 type RestartStateValue =
     (typeof GameSceneConstants.RestartState)[keyof typeof GameSceneConstants.RestartState];
 type SockStateValue = (typeof Sock.StateType)[keyof typeof Sock.StateType];
-interface Rocket { update(delta: number): void }
+interface Rocket {
+    update(delta: number): void;
+}
 type ResourceIdValue = (typeof ResourceIdValues)[keyof typeof ResourceIdValues];
 
 interface GameSceneController {
@@ -91,6 +94,7 @@ export interface GameScene extends BaseElement {
     spikes: Spikes[];
     bouncers: Bouncer[];
     socks: (Sock & { state: SockStateValue })[];
+    ghosts: Ghost[];
     bungees: Grab[];
     stars: (Star | null)[];
     candy: GameObject;
@@ -117,6 +121,9 @@ export interface GameScene extends BaseElement {
     candyBubbleAnimation: Animation;
     candyBubbleAnimationL: Animation;
     candyBubbleAnimationR: Animation;
+    candyGhostBubbleAnimation?: Animation;
+    candyGhostBubbleAnimationL?: Animation;
+    candyGhostBubbleAnimationR?: Animation;
     bubbleDisappear: Animation;
     candyMain: GameObject;
     candyTop: GameObject;

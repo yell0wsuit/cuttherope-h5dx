@@ -1,5 +1,5 @@
 import PreLoader from "@/resources/PreLoader";
-import { IS_XMAS } from "@/resources/ResData";
+import { IS_XMAS } from "@/utils/SpecialEvents";
 import resolution from "@/resolution";
 import im from "@/ui/InterfaceManager";
 import Canvas from "@/utils/Canvas";

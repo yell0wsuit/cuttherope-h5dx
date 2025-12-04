@@ -14,7 +14,7 @@ import MenuStringId from "@/resources/MenuStringId";
 import { UIRegistry } from "@/ui/types";
 import Alignment from "@/core/Alignment";
 import BoxType from "@/ui/BoxType";
-import { IS_XMAS } from "@/resources/ResData";
+import { IS_XMAS } from "@/utils/SpecialEvents";
 import Box from "@/ui/Box";
 
 interface InterfaceManagerLike {

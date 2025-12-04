@@ -29,7 +29,7 @@ class TargetSystem implements GameSystem {
     update(delta: number, _sharedState: GameSystemSharedState): SystemResult {
         const result = this.dependencies.updateTargetState(this.context.candy, delta);
 
-        if (!result.continue) {
+        if (result.continue === false) {
             return { continue: false, reason: result.reason };
         }
 

@@ -174,6 +174,16 @@ interface BouncerItem extends MapLayerItem {
     angle: number;
 }
 
+interface GhostItem extends MapLayerItem {
+    x: number;
+    y: number;
+    radius: number;
+    angle: number;
+    grab?: boolean;
+    bubble?: boolean;
+    bouncer?: boolean;
+}
+
 interface TargetItem extends MapLayerItem {
     x: number;
     y: number;
@@ -196,5 +206,6 @@ export type {
     SpikeItem,
     RotatedCircleItem,
     BouncerItem,
+    GhostItem,
     TargetItem,
 };

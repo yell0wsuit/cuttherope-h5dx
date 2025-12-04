@@ -150,11 +150,7 @@ class BoxDoors {
         BoxDoors.canvasRight.style.transform = `translateX(${doorWidth + offset}px)`;
     }
 
-    static openDoors(
-        showTape = true,
-        callback?: AnimationCallback,
-        runInReverse = false
-    ): void {
+    static openDoors(showTape = true, callback?: AnimationCallback, runInReverse = false): void {
         const shouldShowTape = showTape;
         const reverse = runInReverse;
 

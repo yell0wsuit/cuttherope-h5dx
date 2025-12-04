@@ -312,6 +312,32 @@
         "levelCount": 25
     },
     {
+        "id": "spookybox",
+        "boxText": {
+            "nl": "Spookachtig",
+            "br": "Fantasma",
+            "it": "Spettrale",
+            "ja": "オバケの箱",
+            "de": "Spukbox",
+            "es": "Espectro",
+            "en": "Spooky Box",
+            "zh_tw": "DJ 盒",
+            "ko": "유령 상자",
+            "fr": "Fantôme",
+            "ru": "С призраками",
+            "zh": "幽灵盒"
+        },
+        "boxImage": "box12_bgd.png",
+        "boxDoor": "levelbg12.webp",
+        "boxType": "NORMAL",
+        "unlockStars": 600,
+        "support": 11,
+        "showEarth": false,
+        "levelBackgroundId": "IMG_BGR_12_P1",
+        "levelOverlayId": "IMG_BGR_12_P1",
+        "levelCount": 25
+    },
+    {
         "id": "morecoming",
         "boxText": {
             "en": "New levels\ncoming soon!",

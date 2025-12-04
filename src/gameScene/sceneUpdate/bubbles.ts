@@ -9,6 +9,43 @@ import type GameObject from "@/game/CTRGameObject";
 import type ConstrainedPoint from "@/physics/ConstrainedPoint";
 import type { GameScene } from "@/types/game-scene";
 
+function isGhostBubble(scene: GameScene, bubble: Bubble | null): boolean {
+    if (!bubble) {
+        return false;
+    }
+
+    return scene.ghosts.some((ghost) => ghost?.bubble === bubble);
+}
+
+function enableGhostCycleForBubble(scene: GameScene, bubble: Bubble | null): void {
+    if (!bubble) {
+        return;
+    }
+
+    for (const ghost of scene.ghosts) {
+        if (ghost?.bubble === bubble) {
+            ghost.cyclingEnabled = true;
+            ghost.resetToState(1);
+        }
+    }
+}
+
+function disableGhostCycleForBubble(scene: GameScene, bubble: Bubble | null): boolean {
+    if (!bubble) {
+        return false;
+    }
+
+    let affected = false;
+    for (const ghost of scene.ghosts) {
+        if (ghost?.bubble === bubble) {
+            ghost.cyclingEnabled = false;
+            affected = true;
+        }
+    }
+
+    return affected;
+}
+
 function isBubbleCapture(
     scene: GameScene,
     b: Bubble,
@@ -39,6 +76,11 @@ function isBubbleCapture(
         b.popped = true;
         b.removeChildWithID(0);
 
+        // For ghost bubbles, disable the ghost's cycling when captured
+        if (isGhostBubble(scene, b)) {
+            disableGhostCycleForBubble(scene, b);
+        }
+
         scene.attachCandy();
 
         return true;
@@ -49,17 +91,29 @@ function isBubbleCapture(
 function popCandyBubble(scene: GameScene, isLeft: boolean): void {
     if (scene.twoParts !== GameSceneConstants.PartsType.NONE) {
         if (isLeft) {
+            enableGhostCycleForBubble(scene, scene.candyBubbleL);
             scene.candyBubbleL = null;
             scene.candyBubbleAnimationL.visible = false;
+            if (scene.candyGhostBubbleAnimationL) {
+                scene.candyGhostBubbleAnimationL.visible = false;
+            }
             scene.popBubble(scene.candyL.x, scene.candyL.y);
         } else {
+            enableGhostCycleForBubble(scene, scene.candyBubbleR);
             scene.candyBubbleR = null;
             scene.candyBubbleAnimationR.visible = false;
+            if (scene.candyGhostBubbleAnimationR) {
+                scene.candyGhostBubbleAnimationR.visible = false;
+            }
             scene.popBubble(scene.candyR.x, scene.candyR.y);
         }
     } else {
+        enableGhostCycleForBubble(scene, scene.candyBubble);
         scene.candyBubble = null;
         scene.candyBubbleAnimation.visible = false;
+        if (scene.candyGhostBubbleAnimation) {
+            scene.candyGhostBubbleAnimation.visible = false;
+        }
         scene.popBubble(scene.candy.x, scene.candy.y);
     }
 }
@@ -126,4 +180,5 @@ class GameSceneBubblesDelegate {
     }
 }
 
+export { enableGhostCycleForBubble, disableGhostCycleForBubble, isGhostBubble };
 export default GameSceneBubblesDelegate;

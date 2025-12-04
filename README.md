@@ -17,7 +17,7 @@ The project is currently led by [yell0wsuit](https://github.com/yell0wsuit).
 
 ### Related project
 
-- [Cut the Rope (PC C#)](https://github.com/yell0wsuit/ctr-pc) (tentative name): A decompiled C# version of the game, currently being developed to match with the HTML version.
+- [Cut the Rope: DX](https://github.com/yell0wsuit/cuttherope-dx): A decompiled C# version of the game, currently being developed to match with the HTML version.
 
 ## Play
 
@@ -27,6 +27,7 @@ You can play the game online at: <https://yell0wsuit.github.io/cuttherope-h5dx/>
 
 - Written in [TypeScript](https://www.typescriptlang.org/), fully typed ([PR #32](https://github.com/yell0wsuit/cuttherope-h5dx/pull/32))
 - New loading system
+- New boxes: Spooky Box
 - Ported *Holiday Gift* levels, assets and animations, and Paddington-themed assets
 - More in-game music, randomized
 - Resolution up to HD 1080p, adapt to current screen's resolution

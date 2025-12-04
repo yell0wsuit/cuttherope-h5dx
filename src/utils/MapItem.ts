@@ -84,6 +84,7 @@ const mapItemDefinitions = {
     ROTATED_CIRCLE: createMapItem({ id: 120, key: "rotatedCircle", loader: "loadRotatedCircle" }),
     TARGET_2: createMapItem({ id: 121, key: "target2", loader: "loadTarget" }),
     CANDY_2: createMapItem({ id: 122, key: "candy2", loader: "loadCandy" }),
+    GHOST: createMapItem({ id: 130, key: "ghost", loader: "loadGhost" }),
 };
 
 const mapItems = Object.values(mapItemDefinitions);

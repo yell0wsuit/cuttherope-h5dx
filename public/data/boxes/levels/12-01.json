@@ -1,0 +1,321 @@
+{
+  "settings": [
+    {
+      "name": 0,
+      "height": 480,
+      "gridSize": 32,
+      "width": 320
+    },
+    {
+      "name": 1,
+      "ropePhysicsSpeed": 1,
+      "special": 1,
+      "twoParts": false
+    }
+  ],
+  "nl": [
+    {
+      "name": 4,
+      "text": "Het spookje heeft allerlei vormen. Tik om van vorm te wisselen.",
+      "x": 20,
+      "y": 280,
+      "height": 60,
+      "locale": "nl",
+      "width": 200
+    },
+    {
+      "name": 8,
+      "angle": -60,
+      "rotateSpeed": 100,
+      "x": 230,
+      "y": 340,
+      "locale": "nl"
+    }
+  ],
+  "br": [
+    {
+      "name": 4,
+      "text": "O fantasma tem várias formas. Toque para mudar entre eles.",
+      "x": 20,
+      "y": 280,
+      "height": 60,
+      "locale": "br",
+      "width": 200
+    },
+    {
+      "name": 8,
+      "angle": -60,
+      "rotateSpeed": 100,
+      "x": 230,
+      "y": 340,
+      "locale": "br"
+    }
+  ],
+  "it": [
+    {
+      "name": 4,
+      "text": "Il fantasma assume svariate forme. Tocca per passare da una all’altra.",
+      "x": 20,
+      "y": 280,
+      "height": 60,
+      "locale": "it",
+      "width": 200
+    },
+    {
+      "name": 8,
+      "angle": -60,
+      "rotateSpeed": 100,
+      "x": 230,
+      "y": 340,
+      "locale": "it"
+    }
+  ],
+  "ja": [
+    {
+      "name": 4,
+      "text": "オバケには *いくつかの *形態が *あります。 *タップすると *これを *変えることが *できます。",
+      "x": 20,
+      "y": 280,
+      "height": 60,
+      "locale": "ja",
+      "width": 200
+    },
+    {
+      "name": 8,
+      "angle": -60,
+      "rotateSpeed": 100,
+      "x": 230,
+      "y": 340,
+      "locale": "ja"
+    }
+  ],
+  "de": [
+    {
+      "name": 4,
+      "text": "Der Geist hat mehrere Formen. Tippe, um sie zu wechseln.",
+      "x": 20,
+      "y": 280,
+      "height": 60,
+      "locale": "de",
+      "width": 200
+    },
+    {
+      "name": 8,
+      "angle": -60,
+      "rotateSpeed": 100,
+      "x": 230,
+      "y": 340,
+      "locale": "de"
+    }
+  ],
+  "es": [
+    {
+      "name": 4,
+      "text": "El fantasma tiene varias formas. Pulsa para alternar entre ellas.",
+      "x": 20,
+      "y": 280,
+      "height": 60,
+      "locale": "es",
+      "width": 200
+    },
+    {
+      "name": 8,
+      "angle": -60,
+      "rotateSpeed": 100,
+      "x": 230,
+      "y": 340,
+      "locale": "es"
+    }
+  ],
+  "en": [
+    {
+      "name": 4,
+      "text": "The ghost has several forms. Tap to switch between them.",
+      "x": 20,
+      "y": 280,
+      "height": 60,
+      "locale": "en",
+      "width": 200
+    },
+    {
+      "name": 8,
+      "angle": -60,
+      "rotateSpeed": 100,
+      "x": 230,
+      "y": 340,
+      "locale": "en"
+    }
+  ],
+  "ko": [
+    {
+      "name": 4,
+      "text": "유령은 여러 모양으로 *나타납니다. 유령을 *터치하여 모양을 바꾸세요.",
+      "x": 20,
+      "y": 280,
+      "height": 60,
+      "locale": "ko",
+      "width": 200
+    },
+    {
+      "name": 8,
+      "angle": -60,
+      "rotateSpeed": 100,
+      "x": 230,
+      "y": 340,
+      "locale": "ko"
+    }
+  ],
+  "fr": [
+    {
+      "name": 4,
+      "text": "Le fantôme possède plusieurs formes. Appuie pour en changer.",
+      "x": 20,
+      "y": 280,
+      "height": 60,
+      "locale": "fr",
+      "width": 200
+    },
+    {
+      "name": 8,
+      "angle": -60,
+      "rotateSpeed": 100,
+      "x": 230,
+      "y": 340,
+      "locale": "fr"
+    }
+  ],
+  "ru": [
+    {
+      "name": 4,
+      "text": "Призрак имеет несколько форм. Нажимайте, чтобы переключать их.",
+      "x": 20,
+      "y": 280,
+      "height": 60,
+      "locale": "ru",
+      "width": 200
+    },
+    {
+      "name": 8,
+      "angle": -60,
+      "rotateSpeed": 100,
+      "x": 230,
+      "y": 340,
+      "locale": "ru"
+    }
+  ],
+  "objects": [
+    {
+      "name": 2,
+      "x": 202,
+      "y": 65
+    },
+    {
+      "name": 3,
+      "x": 202,
+      "y": 125,
+      "timeout": -1
+    },
+    {
+      "name": 100,
+      "spider": false,
+      "gun": false,
+      "wheel": false,
+      "part": "L",
+      "hidePath": false,
+      "moveOffset": 0,
+      "moveVertical": false,
+      "length": 75,
+      "x": 280,
+      "y": 225,
+      "moveLength": -1,
+      "radius": -1
+    },
+    {
+      "name": 52,
+      "x": 280,
+      "y": 330
+    },
+    {
+      "name": 81,
+      "size": 1,
+      "angle": -8,
+      "x": 287,
+      "y": 415
+    },
+    {
+      "name": 81,
+      "size": 1,
+      "angle": 1,
+      "x": 118,
+      "y": 420
+    },
+    {
+      "name": 130,
+      "angle": -1,
+      "bouncer": true,
+      "bubble": true,
+      "x": 202,
+      "y": 420,
+      "grab": false,
+      "radius": 30
+    },
+    {
+      "name": 81,
+      "size": 1,
+      "angle": 8,
+      "x": 36,
+      "y": 415
+    },
+    {
+      "name": 3,
+      "x": 50,
+      "y": 380,
+      "timeout": -1
+    },
+    {
+      "name": 3,
+      "x": 270,
+      "y": 380,
+      "timeout": -1
+    },
+    {
+      "name": 100,
+      "spider": false,
+      "gun": false,
+      "wheel": false,
+      "part": "L",
+      "hidePath": false,
+      "moveOffset": 0,
+      "moveVertical": false,
+      "length": 55,
+      "x": 202,
+      "y": 225,
+      "moveLength": -1,
+      "radius": 55
+    },
+    {
+      "name": 101,
+      "x": 65,
+      "y": 65
+    }
+  ],
+  "zh": [
+    {
+      "name": 4,
+      "text": "幽灵有多种形态。 *触按可以切换形态。",
+      "x": 20,
+      "y": 280,
+      "height": 60,
+      "locale": "zh",
+      "width": 200
+    },
+    {
+      "name": 8,
+      "angle": -60,
+      "rotateSpeed": 100,
+      "x": 230,
+      "y": 340,
+      "locale": "zh"
+    }
+  ]
+}

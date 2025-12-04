@@ -8,7 +8,7 @@ import Canvas from "@/utils/Canvas";
 import RGBAColor from "@/core/RGBAColor";
 import Mover from "@/utils/Mover";
 import satisfyConstraintArray from "@/physics/satisfyConstraintArray";
-import { IS_XMAS } from "@/resources/ResData";
+import { IS_XMAS } from "@/utils/SpecialEvents";
 import ResourceId from "@/resources/ResourceId";
 import ResourceMgr from "@/resources/ResourceMgr";
 

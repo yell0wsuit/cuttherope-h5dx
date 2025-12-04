@@ -51,9 +51,7 @@ class QueryStrings {
 
     static showBoxBackgrounds: boolean = QueryStrings.#getFlag("boxBackgrounds");
 
-    static showFrameRate = Boolean(
-        import.meta.env.DEV || QueryStrings.#getFlag("showFrameRate")
-    );
+    static showFrameRate = Boolean(import.meta.env.DEV || QueryStrings.#getFlag("showFrameRate"));
 
     static forceHtml5Audio: boolean = QueryStrings.#getFlag("html5audio");
 

@@ -1,0 +1,181 @@
+{
+  "settings": [
+    {
+      "name": 0,
+      "height": 480,
+      "gridSize": 32,
+      "width": 320
+    },
+    {
+      "name": 1,
+      "ropePhysicsSpeed": 1,
+      "special": 1,
+      "twoParts": false
+    }
+  ],
+  "objects": [
+    {
+      "name": 82,
+      "size": 2,
+      "moveSpeed": 30,
+      "path": "170,0",
+      "angle": 90,
+      "x": 25,
+      "y": 321
+    },
+    {
+      "name": 82,
+      "size": 2,
+      "moveSpeed": 30,
+      "path": "170,0",
+      "angle": 270,
+      "x": 124,
+      "y": 322
+    },
+    {
+      "name": 3,
+      "x": 82,
+      "y": 320,
+      "timeout": -1
+    },
+    {
+      "name": 3,
+      "x": 263,
+      "y": 169,
+      "timeout": -1
+    },
+    {
+      "name": 130,
+      "angle": 0,
+      "bouncer": true,
+      "bubble": true,
+      "x": 190,
+      "y": 248,
+      "grab": false,
+      "radius": 100
+    },
+    {
+      "name": 130,
+      "angle": 0,
+      "bouncer": true,
+      "bubble": true,
+      "x": 122,
+      "y": 248,
+      "grab": false,
+      "radius": 100
+    },
+    {
+      "name": 130,
+      "angle": 0,
+      "bouncer": true,
+      "bubble": true,
+      "x": 120,
+      "y": 395,
+      "grab": false,
+      "radius": 100
+    },
+    {
+      "name": 81,
+      "size": 1,
+      "angle": 0,
+      "x": 50,
+      "y": 248
+    },
+    {
+      "name": 81,
+      "size": 1,
+      "angle": 0,
+      "x": 272,
+      "y": 249
+    },
+    {
+      "name": 81,
+      "size": 1,
+      "angle": 0,
+      "x": 50,
+      "y": 395
+    },
+    {
+      "name": 81,
+      "size": 1,
+      "angle": 0,
+      "x": 272,
+      "y": 395
+    },
+    {
+      "name": 52,
+      "x": 76,
+      "y": 181
+    },
+    {
+      "name": 2,
+      "x": 207,
+      "y": 81
+    },
+    {
+      "name": 3,
+      "x": 259,
+      "y": 316,
+      "timeout": -1
+    },
+    {
+      "name": 81,
+      "size": 1,
+      "angle": 0,
+      "x": 50,
+      "y": 107
+    },
+    {
+      "name": 82,
+      "size": 2,
+      "moveSpeed": 30,
+      "path": "170,0",
+      "angle": 270,
+      "x": 123,
+      "y": 175
+    },
+    {
+      "name": 82,
+      "size": 2,
+      "moveSpeed": 30,
+      "path": "170,0",
+      "angle": 90,
+      "x": 27,
+      "y": 174
+    },
+    {
+      "name": 81,
+      "size": 1,
+      "angle": 0,
+      "x": 123,
+      "y": 107
+    },
+    {
+      "name": 54,
+      "x": 76,
+      "y": 179
+    },
+    {
+      "name": 130,
+      "angle": 0,
+      "bouncer": true,
+      "bubble": true,
+      "x": 193,
+      "y": 395,
+      "grab": false,
+      "radius": 100
+    },
+    {
+      "name": 81,
+      "size": 1,
+      "angle": 0,
+      "x": 281,
+      "y": 107
+    },
+    {
+      "name": 101,
+      "x": 48,
+      "y": 434
+    }
+  ]
+}

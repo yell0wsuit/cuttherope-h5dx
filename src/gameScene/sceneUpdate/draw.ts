@@ -90,6 +90,10 @@ const drawImpl = function drawImpl(scene: GameScene): void {
         scene.rotatedCircles[i]?.draw();
     }
 
+    for (let i = 0, len = scene.ghosts.length; i < len; i++) {
+        scene.ghosts[i]?.draw();
+    }
+
     for (let i = 0, len = scene.bubbles.length; i < len; i++) {
         scene.bubbles[i]?.draw();
     }

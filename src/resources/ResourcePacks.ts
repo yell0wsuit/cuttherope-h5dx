@@ -49,6 +49,7 @@ class ResourcePacks {
         ResourceId.IMG_OBJ_CANDY_PADDINGTON,
         ResourceId.IMG_SNOWFLAKES,
         ResourceId.IMG_CONFETTI_PARTICLES,
+        ResourceId.IMG_OBJ_GHOST,
     ];
 
     // -- Game resources for Round 5 promo --
@@ -168,6 +169,7 @@ class ResourcePacks {
         ResourceId.SND_TELEPORT,
         ResourceId.SND_XMAS_BELL,
         ResourceId.SND_TELEPORT_XMAS,
+        ResourceId.SND_GHOST_PUFF,
     ];
 
     // --- Game UI ---

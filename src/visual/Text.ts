@@ -8,6 +8,8 @@ import ResourceMgr from "@/resources/ResourceMgr";
 import resolution from "@/resolution";
 import MathHelper from "@/utils/MathHelper";
 import type Font from "@/visual/Font";
+import settings from "@/game/CTRSettings";
+import LangId from "@/resources/LangId";
 
 // Set to true to use the old sprite-based font rendering system
 // Set to false (default) to use webfont-based rendering with stroke and shadow
@@ -647,6 +649,27 @@ const stringToArray = (ctx: CanvasRenderingContext2D, string: string, width: num
     return output;
 };
 
+const getFontFamily = (
+    langId: number
+): { family: string; weight: string; bigFontSize: number; smallFontSize: number } => {
+    switch (langId) {
+        case LangId.RU:
+            return {
+                family: "'Playpen Sans', sans-serif",
+                weight: "normal",
+                bigFontSize: 26,
+                smallFontSize: 18,
+            };
+        default:
+            return {
+                family: "'gooddognew', sans-serif",
+                weight: "normal",
+                bigFontSize: 32,
+                smallFontSize: 22,
+            };
+    }
+};
+
 const setupFont = (ctx: CanvasRenderingContext2D, options: FontOptions) => {
     const color = options.fontId === 5 ? "#000" : "#fff";
     if (options.alignment !== 1) {
@@ -656,14 +679,20 @@ const setupFont = (ctx: CanvasRenderingContext2D, options: FontOptions) => {
     ctx.fillStyle = color;
 
     const scaleFactor = resolution.CANVAS_WIDTH / 1024;
+    const {
+        family: fontFamily,
+        weight: fontWeight,
+        bigFontSize,
+        smallFontSize,
+    } = getFontFamily(settings.getLangId());
 
     // Font ID 4 uses larger font size, Font ID 5 uses 22px
     if (options.fontId === 4) {
-        const fontSize = Math.round(32 * scaleFactor);
-        ctx.font = `${fontSize}px 'gooddognew', sans-serif`;
+        const fontSize = Math.round(bigFontSize * scaleFactor);
+        ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
     } else {
-        const fontSize = Math.round(22 * scaleFactor);
-        ctx.font = `normal ${fontSize}px 'gooddognew', sans-serif`;
+        const fontSize = Math.round(smallFontSize * scaleFactor);
+        ctx.font = `${fontWeight} ${fontSize}px ${fontFamily}`;
     }
 
     // Apply stroke and shadow to all fonts except Font ID 5 (small black font)

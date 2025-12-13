@@ -7,10 +7,11 @@ import ResourceId from "@/resources/ResourceId";
 import ResourceMgr from "@/resources/ResourceMgr";
 import resolution from "@/resolution";
 import MathHelper from "@/utils/MathHelper";
-import settings from "@/game/CTRSettings";
 import type Font from "@/visual/Font";
 
-//settings.getLangId()
+// Set to true to use the old sprite-based font rendering system
+// Set to false (default) to use webfont-based rendering with stroke and shadow
+const useOldFontRenderingSystem = false;
 
 interface XmlElement {
     hasAttribute: (name: string) => boolean;
@@ -328,15 +329,15 @@ class Text extends BaseElement {
         const scaleFactor = resolution.CANVAS_WIDTH / 1024;
 
         // Use different line heights based on font ID, scaled for resolution
-        const baseLineHeight = options.fontId === 4 ? 28 : 22;
+        const baseLineHeight = 28;
         const lineHeight = Math.round(baseLineHeight * scaleFactor);
 
         // Add top padding to prevent text cutoff, more for big font with CJK
-        const baseTopPadding = options.fontId === 4 ? 12 : 8;
+        const baseTopPadding = 12;
         const topPadding = Math.round(baseTopPadding * scaleFactor);
 
         // Add bottom padding for small font to prevent cutoff for descenders like "g", "y", "p"
-        const baseBottomPadding = options.fontId === 4 ? 0 : 6;
+        const baseBottomPadding = 12;
         const bottomPadding = Math.round(baseBottomPadding * scaleFactor);
 
         const cnv = options.canvas
@@ -369,7 +370,8 @@ class Text extends BaseElement {
                 if (!line) continue;
                 const yPos =
                     topPadding + (i + 1) * lineHeight - (lineHeight - Math.round(18 * scaleFactor));
-                if (options.fontId === 4) {
+                // Only stroke for non-Font ID 5
+                if (options.fontId !== 5) {
                     ctx.strokeText(line, x, yPos);
                 }
                 ctx.fillText(line, x, yPos);
@@ -382,7 +384,8 @@ class Text extends BaseElement {
                 if (options.alignment !== 1) x = cnv.width / 2;
             }
             const yPos = topPadding + lineHeight - (lineHeight - Math.round(18 * scaleFactor));
-            if (options.fontId === 4) {
+            // Only stroke for non-Font ID 5
+            if (options.fontId !== 5) {
                 ctx.strokeText(options.text, x, yPos);
             }
             ctx.fillText(options.text, x, yPos);
@@ -436,111 +439,112 @@ class Text extends BaseElement {
             img = new Image() as HTMLImageElement;
         }
 
-        const lang = settings.getLangId();
-        if (lang && lang >= 4 && lang <= 9) {
-            const langElement = document.getElementById("lang");
-            if (langElement) langElement.classList.add("lang-system");
+        if (useOldFontRenderingSystem) {
+            // Use the old sprite-based font rendering system
+            const fontId = options.fontId;
+            const width = options.width;
+            const alignment = options.alignment;
+            const scaleToUI = options.scaleToUI;
+            const alpha = options.alpha != null ? options.alpha : 1;
+            const scale = options.scaleToUI ? resolution.UI_TEXT_SCALE : options.scale || 1;
+            // ensure the text is a string (ex: convert number to string)
+            const text = options.text.toString();
 
-            const systemOptions: DrawSystemOptions = {
-                fontId: options.fontId,
-                canvas: options.canvas,
-                img: img,
-                width: options.width,
-                maxScaleWidth: options.maxScaleWidth,
-                text: options.text.toString(),
-                alignment: options.alignment,
-                alpha: options.alpha ?? undefined,
-            };
-            return Text.drawSystem(systemOptions);
+            // save the existing canvas id and switch to the hidden canvas
+            const existingCanvas = Canvas.element;
+
+            // create a temporary canvas to use
+            const targetCanvas =
+                options.canvas && img instanceof HTMLCanvasElement
+                    ? img
+                    : document.createElement("canvas");
+            Canvas.setTarget(targetCanvas);
+
+            const font = ResourceMgr.getFont(fontId);
+            if (!font) {
+                throw new Error(`Font resource ${fontId} not found`);
+            }
+            const t = new Text(font);
+            const padding = 24 * resolution.CANVAS_SCALE; // add padding to each side
+
+            // set the text parameters
+            t.x = Math.ceil(padding / 2);
+            t.y = 0;
+            t.align = alignment || Alignment.LEFT;
+            t.setString(text, width ?? null);
+
+            // set the canvas width and height
+            const canvas = Canvas.element;
+            const ctx = Canvas.context;
+            if (!canvas || !ctx) return img;
+            const imgWidth = (width || Math.ceil(t.width)) + Math.ceil(t.x * 2);
+            const imgHeight = Math.ceil(t.height);
+            canvas.width = imgWidth;
+            canvas.height = imgHeight;
+
+            const previousAlpha = ctx.globalAlpha;
+            if (alpha !== previousAlpha) {
+                ctx.globalAlpha = alpha;
+            }
+
+            // draw the text and get the image data
+            t.draw();
+            if (!options.canvas && img instanceof HTMLImageElement) {
+                img.src = canvas.toDataURL("image/png");
+            }
+
+            if (alpha !== previousAlpha) {
+                ctx.globalAlpha = previousAlpha;
+            }
+
+            // restore the original canvas for the App
+            if (existingCanvas) {
+                Canvas.setTarget(existingCanvas);
+            }
+
+            let finalWidth = imgWidth * scale,
+                finalHeight = imgHeight * scale,
+                topPadding,
+                widthScale;
+            const maxScaleWidth = options.maxScaleWidth;
+
+            // do additional scaling if a max scale width was specified and exceeded
+            if (maxScaleWidth && finalWidth > maxScaleWidth) {
+                widthScale = maxScaleWidth / finalWidth;
+                topPadding = Math.round(((1 - widthScale) * finalHeight) / 2);
+                finalWidth *= widthScale;
+                finalHeight *= widthScale;
+            }
+
+            // When the src is set using image data, the height and width are
+            // not immediately available so we'll explicitly set them
+            img.style.width = `${finalWidth}px`;
+            img.style.height = `${finalHeight}px`;
+            img.style.paddingTop = "0px";
+
+            // adjust the top padding if we scaled the image for width
+            if (topPadding) {
+                img.style.paddingTop = `${topPadding}px`;
+            }
+
+            return img;
         }
 
-        const fontId = options.fontId;
-        const width = options.width;
-        const alignment = options.alignment;
-        const scaleToUI = options.scaleToUI;
-        const alpha = options.alpha != null ? options.alpha : 1;
-        const scale = options.scaleToUI ? resolution.UI_TEXT_SCALE : options.scale || 1;
-        // ensure the text is a string (ex: convert number to string)
-        const text = options.text.toString();
+        // Use webfont-based rendering for all languages
+        const langElement = document.getElementById("lang");
+        if (langElement) langElement.classList.add("lang-system");
 
-        // save the existing canvas id and switch to the hidden canvas
-        const existingCanvas = Canvas.element;
-
-        // create a temporary canvas to use
-        const targetCanvas =
-            options.canvas && img instanceof HTMLCanvasElement
-                ? img
-                : document.createElement("canvas");
-        Canvas.setTarget(targetCanvas);
-
-        const font = ResourceMgr.getFont(fontId);
-        if (!font) {
-            throw new Error(`Font resource ${fontId} not found`);
-        }
-        const t = new Text(font);
-        const padding = 24 * resolution.CANVAS_SCALE; // add padding to each side
-
-        // set the text parameters
-        t.x = Math.ceil(padding / 2);
-        t.y = 0;
-        t.align = alignment || Alignment.LEFT;
-        t.setString(text, width ?? null);
-
-        // set the canvas width and height
-        const canvas = Canvas.element;
-        const ctx = Canvas.context;
-        if (!canvas || !ctx) return img;
-        const imgWidth = (width || Math.ceil(t.width)) + Math.ceil(t.x * 2);
-        const imgHeight = Math.ceil(t.height);
-        canvas.width = imgWidth;
-        canvas.height = imgHeight;
-
-        const previousAlpha = ctx.globalAlpha;
-        if (alpha !== previousAlpha) {
-            ctx.globalAlpha = alpha;
-        }
-
-        // draw the text and get the image data
-        t.draw();
-        if (!options.canvas && img instanceof HTMLImageElement) {
-            img.src = canvas.toDataURL("image/png");
-        }
-
-        if (alpha !== previousAlpha) {
-            ctx.globalAlpha = previousAlpha;
-        }
-
-        // restore the original canvas for the App
-        if (existingCanvas) {
-            Canvas.setTarget(existingCanvas);
-        }
-
-        let finalWidth = imgWidth * scale,
-            finalHeight = imgHeight * scale,
-            topPadding,
-            widthScale;
-        const maxScaleWidth = options.maxScaleWidth;
-
-        // do additional scaling if a max scale width was specified and exceeded
-        if (maxScaleWidth && finalWidth > maxScaleWidth) {
-            widthScale = maxScaleWidth / finalWidth;
-            topPadding = Math.round(((1 - widthScale) * finalHeight) / 2);
-            finalWidth *= widthScale;
-            finalHeight *= widthScale;
-        }
-
-        // When the src is set using image data, the height and width are
-        // not immediately available so we'll explicitly set them
-        img.style.width = `${finalWidth}px`;
-        img.style.height = `${finalHeight}px`;
-        img.style.paddingTop = "0px";
-
-        // adjust the top padding if we scaled the image for width
-        if (topPadding) {
-            img.style.paddingTop = `${topPadding}px`;
-        }
-
-        return img;
+        const systemOptions: DrawSystemOptions = {
+            fontId: options.fontId,
+            canvas: options.canvas,
+            img: img,
+            width: options.width,
+            maxScaleWidth: options.maxScaleWidth,
+            text: options.text.toString(),
+            alignment: options.alignment,
+            alpha: options.alpha ?? undefined,
+        };
+        return Text.drawSystem(systemOptions);
     }
 
     static drawSmall(options: DrawSmallOptions): HTMLImageElement | HTMLCanvasElement {
@@ -638,15 +642,25 @@ const setupFont = (ctx: CanvasRenderingContext2D, options: FontOptions) => {
     const scaleFactor = resolution.CANVAS_WIDTH / 1024;
 
     // Font ID 4 uses larger font size, Font ID 5 uses 22px
-    // Base sizes are for 1024x576, scale them for higher resolutions
     if (options.fontId === 4) {
         const fontSize = Math.round(32 * scaleFactor);
-        ctx.font = `bold ${fontSize}px 'gooddognew', sans-serif`;
-        ctx.strokeStyle = "rgba(0,0,0,1)";
-        ctx.lineWidth = Math.round(3 * scaleFactor);
+        ctx.font = `${fontSize}px 'gooddognew', sans-serif`;
     } else {
         const fontSize = Math.round(22 * scaleFactor);
         ctx.font = `normal ${fontSize}px 'gooddognew', sans-serif`;
+    }
+
+    // Apply stroke and shadow to all fonts except Font ID 5 (small black font)
+    if (options.fontId !== 5) {
+        // Apply stroke (outline) with width 2
+        ctx.strokeStyle = "rgba(0,0,0,1)";
+        ctx.lineWidth = Math.round(2 * scaleFactor);
+
+        // Apply drop shadow
+        ctx.shadowColor = "rgba(0,0,0,1)";
+        ctx.shadowOffsetX = Math.round(1.5 * scaleFactor);
+        ctx.shadowOffsetY = Math.round(1.5 * scaleFactor);
+        ctx.shadowBlur = 0;
     }
 
     if (options.alpha) {

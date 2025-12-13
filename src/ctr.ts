@@ -11,27 +11,46 @@ window.addEventListener("contextmenu", (event) => {
     event.stopPropagation();
 });
 
+interface FontConfig {
+    family: string;
+    url: string;
+    weight?: string;
+}
+
 // Track which fonts have been loaded to avoid duplicate loading
 const loadedFonts = new Set<string>();
 
-const loadLanguageFont = async (langId: number): Promise<void> => {
-    if (langId === LangId.RU && document.fonts) {
-        const fontKey = "Playpen Sans";
-        if (loadedFonts.has(fontKey)) {
-            return; // Font already loaded
-        }
+const loadFontOnce = async (config: FontConfig): Promise<void> => {
+    if (!document.fonts) return;
 
-        // Load Playpen Sans for Russian
-        const font = new FontFace("Playpen Sans", "url(/fonts/PlaypenSans-SemiBold.ttf)", {
-            weight: "600",
-        });
-        try {
-            await font.load();
-            document.fonts.add(font);
-            loadedFonts.add(fontKey);
-        } catch (error) {
-            console.error("Failed to load Playpen Sans font:", error);
-        }
+    const key = `${config.family}:${config.weight ?? "normal"}`;
+    if (loadedFonts.has(key)) return;
+
+    const font = new FontFace(config.family, `url(${config.url})`, {
+        weight: config.weight ?? "normal",
+    });
+
+    try {
+        await font.load();
+        document.fonts.add(font);
+        loadedFonts.add(key);
+    } catch (error) {
+        console.error(`Failed to load font "${config.family}":`, error);
+    }
+};
+
+const languageFonts: Partial<Record<number, FontConfig>> = {
+    [LangId.RU]: {
+        family: "Playpen Sans",
+        url: "/fonts/PlaypenSans-SemiBold.woff2",
+        weight: "normal",
+    },
+};
+
+const loadLanguageFont = async (langId: number): Promise<void> => {
+    const font = languageFonts[langId];
+    if (font) {
+        await loadFontOnce(font);
     }
 };
 

@@ -229,7 +229,7 @@ a:focus {
 
 @font-face {
     font-family: gooddognew;
-    src: url(../fonts/gooddog-new/gooddog_new-webfont.woff) format("woff");
+    src: url(../fonts/gooddog-new/gooddog_new-webfont.woff2) format("woff2");
     font-weight: 400;
     font-style: normal;
 }

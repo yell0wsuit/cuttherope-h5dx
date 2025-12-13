@@ -1376,8 +1376,13 @@ body {
 
 .ui-1024 #dragText,
 .ui-1024 #cutText {
-    margin-top: 115px;
-    margin-left: -23px;
+    margin-top: 100px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    max-height: 60px;
+    overflow: hidden;
 }
 
 .ui-1024 #vid {
@@ -2748,8 +2753,13 @@ body {
 
 .ui-768 #dragText,
 .ui-768 #cutText {
-    margin-top: 86px;
-    margin-left: -17px;
+    margin-top: 75px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    max-height: 45px;
+    overflow: hidden;
 }
 
 .ui-768 #vid {
@@ -4072,8 +4082,13 @@ body {
 
 .ui-1920 #dragText,
 .ui-1920 #cutText {
-    margin-top: 216px;
-    margin-left: -43px;
+    margin-top: 220px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    max-height: 110px;
+    overflow: hidden;
 }
 
 .ui-1920 #vid {

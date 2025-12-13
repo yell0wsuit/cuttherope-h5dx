@@ -113,29 +113,37 @@ class WebPlatform {
         const cutBtn = document.getElementById("cutBtn");
 
         // fonts use game sized assets based on canvas size
-        const textWidth = 400 * resolution.CANVAS_SCALE,
-            // scale need to take UI size into account
-            scale = 0.8 * resolution.UI_TEXT_SCALE,
-            alignment = Alignment.HCENTER;
+        // Restrict width to enable line breaks for longer translations
+        const textWidth = 320 * resolution.CANVAS_SCALE;
+        const scale = 0.5 * resolution.UI_TEXT_SCALE; // scale need to take UI size into account
+        const alignment = Alignment.HCENTER;
 
         // we update the drag text because language changes just
         // reset the current click state
-        Text.drawSmall({
-            text: Lang.menuText(MenuStringId.DRAG_TO_CUT),
-            width: textWidth,
-            imgId: "dragText",
-            scale: scale,
-            alignment: alignment,
-        });
+        const dragImg = document.getElementById("dragText");
+        if (dragImg instanceof HTMLImageElement || dragImg instanceof HTMLCanvasElement) {
+            Text.drawSmall({
+                text: Lang.menuText(MenuStringId.DRAG_TO_CUT),
+                width: textWidth,
+                img: dragImg,
+                canvas: true,
+                scale: scale,
+                alignment: alignment,
+            });
+        }
 
         // now update the click-to-cut text and check mark
-        Text.drawSmall({
-            text: Lang.menuText(MenuStringId.CLICK_TO_CUT),
-            width: textWidth,
-            imgId: "cutText",
-            scale: scale,
-            alignment: alignment,
-        });
+        const cutImg = document.getElementById("cutText");
+        if (cutImg instanceof HTMLImageElement || cutImg instanceof HTMLCanvasElement) {
+            Text.drawSmall({
+                text: Lang.menuText(MenuStringId.CLICK_TO_CUT),
+                width: textWidth,
+                img: cutImg,
+                canvas: true,
+                scale: scale,
+                alignment: alignment,
+            });
+        }
         if (cutBtn) {
             cutBtn.classList.toggle("disabled", !isClickToCut);
         }

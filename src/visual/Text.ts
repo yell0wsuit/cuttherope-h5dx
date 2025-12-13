@@ -359,11 +359,16 @@ class Text extends BaseElement {
 
         // detect overflow by measuring or newline character
         const metric = ctx.measureText(options.text);
-        if (options.text.indexOf("\n") > 0 || (options.width && metric.width > options.width)) {
+        if (options.text.indexOf("\n") >= 0 || (options.width && metric.width > options.width)) {
             const textArray = stringToArray(ctx, options.text, options.width || 0);
             cnv.height = lineHeight * textArray.length + topPadding + bottomPadding;
 
             setupFont(ctx, options);
+
+            // Recalculate x for center alignment based on canvas width
+            if (options.alignment !== 1) {
+                x = cnv.width / 2;
+            }
 
             for (let i = 0; i < textArray.length; ++i) {
                 const line = textArray[i];
@@ -395,10 +400,20 @@ class Text extends BaseElement {
             const imgElement = options.img as HTMLImageElement;
             imgElement.src = cnv.toDataURL("image/png");
             imgElement.style.paddingTop = "18px";
-        }
+            options.img.style.height = "auto";
+            options.img.style.width = "auto";
+        } else {
+            // For canvas mode, don't set auto width/height
+            // The canvas element will display at its natural size
+            options.img.style.paddingTop = "0px";
 
-        options.img.style.height = "auto";
-        options.img.style.width = "auto";
+            // Apply CSS scaling if scale parameter is provided
+            if (options.scale && options.scale !== 1) {
+                const canvasElement = options.img as HTMLCanvasElement;
+                canvasElement.style.width = `${cnv.width * options.scale}px`;
+                canvasElement.style.height = `${cnv.height * options.scale}px`;
+            }
+        }
 
         return options.img;
     }
@@ -570,62 +585,63 @@ class Text extends BaseElement {
 }
 
 const stringToArray = (ctx: CanvasRenderingContext2D, string: string, width: number): string[] => {
-    // convert string to array of lines then words
+    // Handle text wrapping for both space-separated languages and CJK/continuous text
     const lines = string.split("\n");
-    const input: string[][] = [];
-    for (let i = 0; i < lines.length; ++i) {
-        const lineStr = lines[i];
-        if (lineStr) {
-            input[i] = lineStr.split(" ");
-        }
-    }
-
-    let i = 0;
-    let j = 0;
     const output: string[] = [];
-    let runningWidth = 0;
-    let line = 0;
 
-    while (i < input.length) {
-        const currentInput = input[i];
-        if (!currentInput) {
-            i++;
+    for (const lineStr of lines) {
+        if (!lineStr) {
+            output.push("");
             continue;
         }
 
-        while (j < currentInput.length) {
-            if (!output[line]) {
-                output[line] = "";
+        // Check if the line contains spaces (word-based language)
+        const hasSpaces = lineStr.includes(" ");
+
+        if (hasSpaces) {
+            // Word-based wrapping for languages like English, Russian with spaces
+            const words = lineStr.split(" ");
+            let currentLine = "";
+
+            for (const word of words) {
+                if (!word) continue;
+
+                const testText = currentLine ? `${currentLine} ${word}` : word;
+                const testWidth = ctx.measureText(testText).width;
+
+                if (testWidth > width && currentLine) {
+                    // Word doesn't fit, start new line
+                    output.push(currentLine);
+                    currentLine = word;
+                } else {
+                    currentLine = testText;
+                }
             }
 
-            const word = currentInput[j];
-            if (!word) {
-                j++;
-                continue;
+            if (currentLine) {
+                output.push(currentLine);
+            }
+        } else {
+            // Character-based wrapping for CJK and other continuous text
+            let currentLine = "";
+
+            for (const char of lineStr) {
+                const testText = currentLine + char;
+                const testWidth = ctx.measureText(testText).width;
+
+                if (testWidth > width && currentLine) {
+                    // Character doesn't fit, start new line
+                    output.push(currentLine);
+                    currentLine = char;
+                } else {
+                    currentLine = testText;
+                }
             }
 
-            const text = `${word} `;
-            const w = ctx.measureText(text).width;
-
-            // overflow to a newline
-            if (runningWidth + w > width && runningWidth > 0) {
-                line++;
-                runningWidth = 0;
-            } else {
-                output[line] += text;
-                j++;
-                runningWidth += w;
+            if (currentLine) {
+                output.push(currentLine);
             }
         }
-
-        const currentLine = output[line];
-        if (currentLine) {
-            output[line] = currentLine.trim();
-        }
-        i++;
-        line++;
-        j = 0;
-        runningWidth = 0;
     }
 
     return output;

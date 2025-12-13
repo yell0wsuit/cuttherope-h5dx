@@ -4088,6 +4088,7 @@ body {
     transform: translateX(-50%);
     max-height: 110px;
     overflow: hidden;
+    z-index: 2;
 }
 
 .ui-1920 #vid {

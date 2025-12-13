@@ -495,8 +495,8 @@ export default class PanelInitializer {
                     }
                     settings.setLangId(newLangId);
 
-                    // send the notification that language has changed
-                    PubSub.publish(PubSub.ChannelId.LanguageChanged);
+                    // Trigger font loading first, which will then publish LanguageChanged
+                    PubSub.publish(PubSub.ChannelId.LanguageFontLoaded);
                 });
 
                 // click or drag to cut

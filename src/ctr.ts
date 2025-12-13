@@ -64,9 +64,13 @@ const boot = async (): Promise<void> => {
     await loadLanguageFont(currentLang);
 
     // Subscribe to language changes to load fonts dynamically
-    PubSub.subscribe(PubSub.ChannelId.LanguageChanged, async () => {
+    // We use LanguageFontLoaded as an internal event that fires after font loading
+    PubSub.subscribe(PubSub.ChannelId.LanguageFontLoaded, async () => {
         const newLang = settings.getLangId();
         await loadLanguageFont(newLang);
+
+        // Now that font is loaded, notify all UI components to re-render
+        PubSub.publish(PubSub.ChannelId.LanguageChanged);
     });
 
     App.domReady();

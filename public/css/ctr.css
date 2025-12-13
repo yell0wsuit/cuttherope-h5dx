@@ -223,7 +223,8 @@ a:focus {
 @font-face {
     font-family: gooddogplain;
     src: url(../fonts/gooddog-plain/GoodDog-webfont.eot);
-    src: url(../fonts/gooddog-plain/GoodDog-webfont.eot?#iefix) format("embedded-opentype"),
+    src:
+        url(../fonts/gooddog-plain/GoodDog-webfont.eot?#iefix) format("embedded-opentype"),
         url(../fonts/gooddog-plain/GoodDog-webfont.woff) format("woff"),
         url(../fonts/gooddog-plain/GoodDog-webfont.ttf) format("truetype"),
         url(../fonts/gooddog-plain/GoodDog-webfont.svg#GoodDogRegular) format("svg");
@@ -234,7 +235,8 @@ a:focus {
 @font-face {
     font-family: gooddognew;
     src: url(../fonts/gooddog-new/gooddog_new-webfont.eot);
-    src: url(../fonts/gooddog-new/gooddog_new-webfont.eot?#iefix) format("embedded-opentype"),
+    src:
+        url(../fonts/gooddog-new/gooddog_new-webfont.eot?#iefix) format("embedded-opentype"),
         url(../fonts/gooddog-new/gooddog_new-webfont.woff) format("woff"),
         url(../fonts/gooddog-new/gooddog_new-webfont.ttf) format("truetype"),
         url(../fonts/gooddog-new/gooddog_new-webfont.svg#GoodDogNewRegular) format("svg");
@@ -244,7 +246,7 @@ a:focus {
 
 @font-face {
     font-family: "Playpen Sans";
-    src: url(../fonts/PlaypenSans-SemiBold.ttf) format("truetype");
+    src: url(../fonts/PlaypenSans-SemiBold.woff2) format("woff2");
     font-weight: 400;
     font-style: normal;
 }
@@ -261,7 +263,7 @@ body {
     -o-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    -ms-touch-action: none;
+    touch-action: none;
 }
 
 #bg {
@@ -411,7 +413,7 @@ th {
 }
 
 body {
-    -ms-touch-action: pan-y;
+    touch-action: pan-y;
     overflow: hidden;
 }
 

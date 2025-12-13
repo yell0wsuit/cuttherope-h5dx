@@ -222,24 +222,14 @@ a:focus {
 
 @font-face {
     font-family: gooddogplain;
-    src: url(../fonts/gooddog-plain/GoodDog-webfont.eot);
-    src:
-        url(../fonts/gooddog-plain/GoodDog-webfont.eot?#iefix) format("embedded-opentype"),
-        url(../fonts/gooddog-plain/GoodDog-webfont.woff) format("woff"),
-        url(../fonts/gooddog-plain/GoodDog-webfont.ttf) format("truetype"),
-        url(../fonts/gooddog-plain/GoodDog-webfont.svg#GoodDogRegular) format("svg");
+    src: url(../fonts/gooddog-plain/GoodDog-webfont.woff) format("woff");
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
     font-family: gooddognew;
-    src: url(../fonts/gooddog-new/gooddog_new-webfont.eot);
-    src:
-        url(../fonts/gooddog-new/gooddog_new-webfont.eot?#iefix) format("embedded-opentype"),
-        url(../fonts/gooddog-new/gooddog_new-webfont.woff) format("woff"),
-        url(../fonts/gooddog-new/gooddog_new-webfont.ttf) format("truetype"),
-        url(../fonts/gooddog-new/gooddog_new-webfont.svg#GoodDogNewRegular) format("svg");
+    src: url(../fonts/gooddog-new/gooddog_new-webfont.woff) format("woff");
     font-weight: 400;
     font-style: normal;
 }
@@ -3734,7 +3724,7 @@ body {
     height: 848px;
     margin: 113px auto 0;
     text-align: center;
-    font-family: gooddogplain;
+    font-family: gooddognew;
     font-size: 60px;
     color: #3c2110;
     position: relative;

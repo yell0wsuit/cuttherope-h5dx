@@ -351,6 +351,9 @@ class Text extends BaseElement {
 
         const ctx = (options.canvas ? (options.img as HTMLCanvasElement) : cnv).getContext("2d");
         if (!ctx) return options.img;
+
+        // Explicitly clear the canvas to prevent corruption when reusing canvas elements
+        ctx.clearRect(0, 0, cnv.width, cnv.height);
         let x = cnv.width / 2;
 
         if (options.alignment === 1) {
@@ -365,6 +368,8 @@ class Text extends BaseElement {
             const textArray = stringToArray(ctx, options.text, options.width || 0);
             cnv.height = lineHeight * textArray.length + topPadding + bottomPadding;
 
+            // Clear again after resizing for multiline text
+            ctx.clearRect(0, 0, cnv.width, cnv.height);
             setupFont(ctx, options);
 
             // Recalculate x for center alignment based on canvas width
@@ -387,6 +392,8 @@ class Text extends BaseElement {
             // use the measured width
             if (!options.width || !options.maxScaleWidth) {
                 cnv.width = metric.width + Math.round(5 * scaleFactor);
+                // Clear again after resizing for single line text
+                ctx.clearRect(0, 0, cnv.width, cnv.height);
                 setupFont(ctx, options);
                 if (options.alignment !== 1) x = cnv.width / 2;
             }

@@ -654,12 +654,12 @@ const setupFont = (ctx: CanvasRenderingContext2D, options: FontOptions) => {
     if (options.fontId !== 5) {
         // Apply stroke (outline) with width 2
         ctx.strokeStyle = "rgba(0,0,0,1)";
-        ctx.lineWidth = Math.round(2 * scaleFactor);
+        ctx.lineWidth = Math.round(3 * scaleFactor);
 
         // Apply drop shadow
         ctx.shadowColor = "rgba(0,0,0,1)";
-        ctx.shadowOffsetX = Math.round(1.5 * scaleFactor);
-        ctx.shadowOffsetY = Math.round(1.5 * scaleFactor);
+        ctx.shadowOffsetX = Math.round(1 * scaleFactor);
+        ctx.shadowOffsetY = Math.round(1 * scaleFactor);
         ctx.shadowBlur = 0;
     }
 

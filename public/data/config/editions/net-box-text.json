@@ -353,11 +353,11 @@
             "ru": "Паровая",
             "zh": "蒸汽盒"
         },
-        "boxImage": "box12_bgd.png",
+        "boxImage": "box13_bgd.png",
         "boxDoor": "levelbg13.webp",
         "boxType": "NORMAL",
         "unlockStars": 650,
-        "support": 11,
+        "support": 12,
         "showEarth": false,
         "levelBackgroundId": "IMG_BGR_13_P1",
         "levelOverlayId": "IMG_BGR_13_P1",

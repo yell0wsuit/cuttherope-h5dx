@@ -206,6 +206,7 @@ RES_DATA[ResourceId.IMG_BGR_10_P2] = new ResEntry("bgr_10_p2.jpg", ResourceType.
 RES_DATA[ResourceId.IMG_BGR_11_P1] = new ResEntry("bgr_11_p1.jpg", ResourceType.IMAGE);
 RES_DATA[ResourceId.IMG_BGR_11_P2] = new ResEntry("bgr_11_p2.jpg", ResourceType.IMAGE);
 RES_DATA[ResourceId.IMG_BGR_12_P1] = new ResEntry("bgr_12_p1.webp", ResourceType.IMAGE);
+RES_DATA[ResourceId.IMG_BGR_13_P1] = new ResEntry("bgr_13_p1.webp", ResourceType.IMAGE);
 RES_DATA[ResourceId.IMG_BGR_XMAS] = new ResEntry("bgr_xmas.webp", ResourceType.IMAGE);
 RES_DATA[ResourceId.IMG_BGR_PADDINGTON] = new ResEntry("bgr_paddington.webp", ResourceType.IMAGE);
 
@@ -353,6 +354,17 @@ RES_DATA[ResourceId.IMG_OBJ_GHOST] = new ResEntry("obj_ghost.png", ResourceType.
 });
 
 RES_DATA[ResourceId.SND_GHOST_PUFF] = new ResEntry("ghost_puff", ResourceType.SOUND);
+
+RES_DATA[ResourceId.IMG_OBJ_PIPE] = new ResEntry("obj_pipe.png", ResourceType.IMAGE, {
+    atlasPath: "obj_pipe.json",
+    atlasFormat: "texture-packer",
+});
+
+RES_DATA[ResourceId.SND_STEAM_START] = new ResEntry("steam_start", ResourceType.SOUND);
+
+RES_DATA[ResourceId.SND_STEAM_START2] = new ResEntry("steam_start2", ResourceType.SOUND);
+
+RES_DATA[ResourceId.SND_STEAM_END] = new ResEntry("steam_end", ResourceType.SOUND);
 
 RES_DATA[ResourceId.IMG_CHAR_SUPPORTS_XMAS] = new ResEntry(
     "char_supports_xmas.png",

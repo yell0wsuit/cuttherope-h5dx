@@ -202,8 +202,14 @@ const ResourceId = {
     SND_GHOST_PUFF: 200,
     IMG_BGR_12_P1: 201,
 
+    IMG_OBJ_PIPE: 202,
+    SND_STEAM_START: 203,
+    SND_STEAM_START2: 204,
+    SND_STEAM_END: 205,
+    IMG_BGR_13_P1: 206,
+
     // Total number of resources
-    RESOURCES_COUNT: 202,
+    RESOURCES_COUNT: 206,
 } as const;
 
 export default ResourceId;

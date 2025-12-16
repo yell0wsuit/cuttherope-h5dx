@@ -50,6 +50,7 @@ class ResourcePacks {
         ResourceId.IMG_SNOWFLAKES,
         ResourceId.IMG_CONFETTI_PARTICLES,
         ResourceId.IMG_OBJ_GHOST,
+        ResourceId.IMG_OBJ_PIPE,
     ];
 
     // -- Game resources for Round 5 promo --

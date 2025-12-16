@@ -284,7 +284,7 @@
     "meta": {
         "app": "https://www.codeandweb.com/texturepacker",
         "version": "1.0",
-        "image": "obj_pipe_web.png",
+        "image": "obj_pipe.png",
         "format": "RGBA8888",
         "size": { "w": 629, "h": 128 },
         "scale": "0.75",

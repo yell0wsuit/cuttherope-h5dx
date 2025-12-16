@@ -141,6 +141,13 @@ interface PumpItem extends MapLayerItem {
     angle: number;
 }
 
+interface SteamTubeItem extends MapLayerItem {
+    x: number;
+    y: number;
+    angle: number;
+    scale?: number;
+}
+
 interface SockItem extends MapLayerItem {
     x: number;
     y: number;
@@ -202,6 +209,7 @@ export type {
     HiddenItem,
     BubbleItem,
     PumpItem,
+    SteamTubeItem,
     SockItem,
     SpikeItem,
     RotatedCircleItem,

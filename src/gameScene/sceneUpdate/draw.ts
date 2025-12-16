@@ -120,6 +120,10 @@ const drawImpl = function drawImpl(scene: GameScene): void {
         sock.y += GameSceneConstants.SOCK_COLLISION_Y_OFFSET;
     }
 
+    for (let i = 0, len = scene.tubes.length; i < len; i++) {
+        scene.tubes[i]?.drawBack();
+    }
+
     const bungees = scene.bungees;
     for (let i = 0, len = bungees.length; i < len; i++) {
         const bungee = bungees[i];
@@ -157,6 +161,10 @@ const drawImpl = function drawImpl(scene: GameScene): void {
             scene.candyR.y = scene.starR.pos.y;
             scene.candyR.draw();
         }
+    }
+
+    for (let i = 0, len = scene.tubes.length; i < len; i++) {
+        scene.tubes[i]?.drawFront();
     }
 
     for (let i = 0, len = bungees.length; i < len; i++) {

@@ -29,6 +29,10 @@ To report bugs or request features, please [open an issue](https://github.com/ye
 
 - If you are working on your changes and they are not ready yet, consider using a **draft pull request**, and prefix the title with `[WIP]` (Work In Progress). When you feel it is ready, remove it and mark the PR as ready.
 
+- If your pull request is outdated compared to the main branch, we recommend rebasing it to keep the commit history linear. Merging `main` into your branch is discouraged, as it can introduce unnecessary merge commits and make the history harder to review.
+
+  - If any of your changes conflict with the main branch, resolve the conflicts manually and ensure the final result is compatible with the current codebase.
+
 - Use **multiple small commits** with clear messages when possible. This improves readability and makes it easier to review specific changes.
 
 - Before submitting a **large pull request** or major change, open an issue first and select the appropriate category. After a review by our team, you can start your work.

@@ -159,14 +159,14 @@ export const IMG_OBJ_GHOST_bubble_3 = 4;
 export const IMG_OBJ_GHOST_bubble_4 = 5;
 export const IMG_OBJ_GHOST_bubble_5 = 6;
 
-export const IMG_OBJ_PIPE_particle_1_start = 0;
-export const IMG_OBJ_PIPE_particle_1_end = 10;
-export const IMG_OBJ_PIPE_particle_2_start = 11;
-export const IMG_OBJ_PIPE_particle_2_end = 21;
-export const IMG_OBJ_PIPE_particle_3_start = 22;
-export const IMG_OBJ_PIPE_particle_3_end = 32;
-export const IMG_OBJ_PIPE_pipe = 33;
-export const IMG_OBJ_PIPE_valve = 34;
+export const IMG_OBJ_PIPE_pipe = 0;
+export const IMG_OBJ_PIPE_valve = 1;
+export const IMG_OBJ_PIPE_particle_1_start = 2;
+export const IMG_OBJ_PIPE_particle_1_end = 12;
+export const IMG_OBJ_PIPE_particle_2_start = 13;
+export const IMG_OBJ_PIPE_particle_2_end = 23;
+export const IMG_OBJ_PIPE_particle_3_start = 24;
+export const IMG_OBJ_PIPE_particle_3_end = 34;
 
 export const IMG_HUD_STAR_Frame_1 = 0;
 export const IMG_HUD_STAR_Frame_2 = 1;

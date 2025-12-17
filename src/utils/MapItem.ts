@@ -85,6 +85,7 @@ const mapItemDefinitions = {
     TARGET_2: createMapItem({ id: 121, key: "target2", loader: "loadTarget" }),
     CANDY_2: createMapItem({ id: 122, key: "candy2", loader: "loadCandy" }),
     GHOST: createMapItem({ id: 130, key: "ghost", loader: "loadGhost" }),
+    STEAM_TUBE: createMapItem({ id: 131, key: "steamTube", loader: "loadSteamTube" }),
 };
 
 const mapItems = Object.values(mapItemDefinitions);

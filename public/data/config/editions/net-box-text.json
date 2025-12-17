@@ -338,6 +338,32 @@
         "levelCount": 25
     },
     {
+        "id": "steambox",
+        "boxText": {
+            "nl": "Stoomkast",
+            "br": "Caixa de Vapor",
+            "it": "Scatola di vapore",
+            "ja": "スチームの箱",
+            "de": "Dampfkiste",
+            "es": "Caja de vapor",
+            "en": "Steam Box",
+            "zh_tw": "蒸氣盒",
+            "ko": "증기 상자",
+            "fr": "Boîte à vapeur",
+            "ru": "Паровая",
+            "zh": "蒸汽盒"
+        },
+        "boxImage": "box13_bgd.png",
+        "boxDoor": "levelbg13.webp",
+        "boxType": "NORMAL",
+        "unlockStars": 650,
+        "support": 12,
+        "showEarth": false,
+        "levelBackgroundId": "IMG_BGR_13_P1",
+        "levelOverlayId": "IMG_BGR_13_P1",
+        "levelCount": 25
+    },
+    {
         "id": "morecoming",
         "boxText": {
             "en": "New levels\ncoming soon!",

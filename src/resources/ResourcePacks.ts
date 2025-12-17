@@ -50,6 +50,7 @@ class ResourcePacks {
         ResourceId.IMG_SNOWFLAKES,
         ResourceId.IMG_CONFETTI_PARTICLES,
         ResourceId.IMG_OBJ_GHOST,
+        ResourceId.IMG_OBJ_PIPE,
     ];
 
     // -- Game resources for Round 5 promo --
@@ -170,6 +171,9 @@ class ResourcePacks {
         ResourceId.SND_XMAS_BELL,
         ResourceId.SND_TELEPORT_XMAS,
         ResourceId.SND_GHOST_PUFF,
+        ResourceId.SND_STEAM_START,
+        ResourceId.SND_STEAM_START2,
+        ResourceId.SND_STEAM_END,
     ];
 
     // --- Game UI ---

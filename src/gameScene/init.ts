@@ -34,6 +34,7 @@ import type ImageElement from "@/visual/ImageElement";
 import type Star from "@/game/Star";
 import type Spikes from "@/game/Spikes";
 import type Ghost from "@/game/Ghost";
+import type SteamTube from "@/game/SteamTube";
 import { initAnimations } from "./initGameScene/initAnimations";
 import { initBackground } from "./initGameScene/initBackground";
 import { resetGameState } from "./initGameScene/resetGameState";
@@ -110,6 +111,7 @@ abstract class GameSceneInit extends BaseElement {
     stars: (Star | null)[];
     bubbles: Bubble[];
     pumps: Pump[];
+    tubes: SteamTube[];
     rockets: { update(delta: number): void }[];
     socks: Sock[];
     ghosts: Ghost[];

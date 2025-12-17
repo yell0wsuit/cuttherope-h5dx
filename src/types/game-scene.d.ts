@@ -20,6 +20,7 @@ import type Pump from "@/game/Pump";
 import type Spikes from "@/game/Spikes";
 import type Star from "@/game/Star";
 import type Ghost from "@/game/Ghost";
+import type SteamTube from "@/game/SteamTube";
 import type DelayedDispatcher from "@/utils/DelayedDispatcher";
 import type CTRGameObject from "@/game/CTRGameObject";
 import type TutorialText from "@/game/TutorialText";
@@ -91,6 +92,7 @@ export interface GameScene extends BaseElement {
     rotatedCircles: RotatedCircle[];
     bubbles: Bubble[];
     pumps: Pump[];
+    tubes: SteamTube[];
     spikes: Spikes[];
     bouncers: Bouncer[];
     socks: (Sock & { state: SockStateValue })[];

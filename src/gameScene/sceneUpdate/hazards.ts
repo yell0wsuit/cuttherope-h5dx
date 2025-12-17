@@ -17,6 +17,7 @@ import type Bouncer from "@/game/Bouncer";
 import type Grab from "@/game/Grab";
 import type Pump from "@/game/Pump";
 import type RotatedCircle from "@/game/RotatedCircle";
+import type SteamTube from "@/game/SteamTube";
 import type Spikes from "@/game/Spikes";
 import type { GameScene, SceneStar } from "@/types/game-scene";
 
@@ -44,7 +45,101 @@ type HazardScene = GameScene & {
     socks: SceneSock[];
     rotatedCircles: RotatedCircleWithContents[];
     spikes: Spikes[];
+    tubes: SteamTube[];
 };
+
+function operateSteamTube(scene: HazardScene, tube: SteamTube, delta: number): void {
+    const tubeScale = tube.getHeightScale();
+    let damping = 5;
+    const angle = Radians.fromDegrees(tube.rotation);
+    const tubeWidth = 10 * tubeScale;
+    const currentHeight = tube.getCurrentHeightModulated();
+    const verticalOffset = 1 * tubeScale;
+    const collisionRadius = 17.5 * tubeScale;
+
+    const rectLeft = tube.x - tubeWidth / 2;
+    const rectTop = tube.y - currentHeight - verticalOffset;
+    const rectRight = tube.x + tubeWidth / 2;
+    const rectBottom = tube.y - collisionRadius;
+
+    const applyImpulse = (star: SceneStar): boolean => {
+        const position = star.pos.copy();
+        const velocity = star.v.copy();
+
+        position.rotateAround(-angle, tube.x, tube.y);
+        velocity.rotate(-angle);
+
+        const insideTube = Rectangle.rectInRect(
+            position.x - collisionRadius,
+            position.y - collisionRadius / 2,
+            position.x + collisionRadius,
+            position.y + collisionRadius,
+            rectLeft,
+            rectTop,
+            rectRight,
+            rectBottom
+        );
+
+        if (!insideTube) {
+            return false;
+        }
+
+        for (const bouncer of scene.bouncers) {
+            if (bouncer) {
+                bouncer.skip = 0;
+            }
+        }
+
+        let horizontalImpulse = 0;
+        if (tube.rotation === 0) {
+            const deltaX = tube.x - position.x;
+            horizontalImpulse =
+                Math.abs(deltaX) > tubeWidth / 4
+                    ? -velocity.x / damping + 0.25 * deltaX
+                    : Math.abs(velocity.x) < 1
+                      ? -velocity.x
+                      : -velocity.x / damping;
+        }
+
+        let gravityCompensation = (-32 / star.weight) * Math.sqrt(tubeScale);
+        if (tube.rotation !== 0) {
+            damping *= 15;
+            if (tube.rotation === 180) {
+                gravityCompensation /= 2;
+            } else {
+                gravityCompensation /= 4;
+            }
+        }
+
+        const impulse = new Vector(horizontalImpulse, -velocity.y / damping + gravityCompensation);
+
+        const distanceBelowValve = tube.y - position.y;
+        if (distanceBelowValve > currentHeight + collisionRadius) {
+            const attenuation = Math.exp(
+                -2 * (distanceBelowValve - (currentHeight + collisionRadius))
+            );
+            impulse.multiply(attenuation);
+        }
+
+        impulse.rotate(angle);
+        star.applyImpulse(impulse, delta);
+        return true;
+    };
+
+    if (scene.twoParts === GameSceneConstants.PartsType.NONE) {
+        if (!scene.noCandy) {
+            applyImpulse(scene.star);
+        }
+        return;
+    }
+
+    if (!scene.noCandyL) {
+        applyImpulse(scene.starL);
+    }
+    if (!scene.noCandyR) {
+        applyImpulse(scene.starR);
+    }
+}
 
 export function updateHazards(this: HazardScene, delta: number, numGrabs: number): boolean {
     let removeCircleIndex = -1;
@@ -174,6 +269,17 @@ export function updateHazards(this: HazardScene, delta: number, numGrabs: number
         p.touchTimer = moveStatus.value;
         if (moveStatus.reachedZero) {
             this.operatePump(p, delta);
+        }
+    }
+
+    // steam tubes
+    for (const tube of this.tubes) {
+        if (!tube) {
+            continue;
+        }
+        tube.update(delta);
+        if (tube.steamState !== 3) {
+            operateSteamTube(this, tube, delta);
         }
     }
 

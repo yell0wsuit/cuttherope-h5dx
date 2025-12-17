@@ -1,5 +1,5 @@
 import Log from "@/utils/Log";
-import { getMapItemDefinitionById } from "@/utils/MapItem";
+import { getMapItemDefinitionById, getMapItemDefinitionByKey } from "@/utils/MapItem";
 import type { MapItemDefinition } from "@/utils/MapItem";
 import GameSceneInit from "./init";
 import type { TimelineKeyFrameListener } from "@/visual/TimelineTypes";
@@ -18,6 +18,7 @@ import { loadSock } from "./loadObjects/loadSock";
 import { loadSpike } from "./loadObjects/loadSpike";
 import { loadRotatedCircle } from "./loadObjects/loadRotatedCircle";
 import { loadBouncer } from "./loadObjects/loadBouncer";
+import { loadSteamTube } from "./loadObjects/loadSteamTube";
 import { loadTarget } from "./loadObjects/loadTarget";
 import { loadGhost } from "./loadObjects/loadGhost";
 
@@ -44,6 +45,7 @@ abstract class GameSceneLoaders extends GameSceneInit {
     loadHidden = loadHidden;
     loadBubble = loadBubble;
     loadPump = loadPump;
+    loadSteamTube = loadSteamTube;
     loadSock = loadSock;
     loadSpike = loadSpike;
     loadRotatedCircle = loadRotatedCircle;

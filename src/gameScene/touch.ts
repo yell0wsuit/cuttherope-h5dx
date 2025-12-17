@@ -124,6 +124,12 @@ class GameSceneTouch extends GameSceneUpdate {
             }
         }
 
+        for (const tube of this.tubes) {
+            if (tube?.onTouchDown(cameraAdjustedX, cameraAdjustedY)) {
+                return true;
+            }
+        }
+
         let activeCircle: RotatedCircle | null = null;
         let hasCircleInside = false;
         let intersectsAnotherCircle = false;

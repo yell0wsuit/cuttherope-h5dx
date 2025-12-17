@@ -27,7 +27,7 @@ You can play the game online at: <https://yell0wsuit.github.io/cuttherope-h5dx/>
 
 - Written in [TypeScript](https://www.typescriptlang.org/), fully typed ([PR #32](https://github.com/yell0wsuit/cuttherope-h5dx/pull/32))
 - New loading system
-- New boxes: Spooky Box
+- New boxes: Spooky Box, Steam Box
 - Ported *Holiday Gift* levels, assets and animations, and Paddington-themed assets
 - More in-game music, randomized
 - Resolution up to HD 1080p, adapt to current screen's resolution

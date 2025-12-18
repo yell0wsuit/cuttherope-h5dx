@@ -667,6 +667,13 @@ const getFontFamily = (
                 bigFontSize: 26,
                 smallFontSize: 18,
             };
+        case LangId.KO:
+            return {
+                family: "'Cafe24 Dongdong', sans-serif",
+                weight: "normal",
+                bigFontSize: 32,
+                smallFontSize: 18,
+            };
         default:
             return {
                 family: "'gooddognew', sans-serif",

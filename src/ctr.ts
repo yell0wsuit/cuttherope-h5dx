@@ -45,6 +45,11 @@ const languageFonts: Partial<Record<number, FontConfig>> = {
         url: "/fonts/PlaypenSans-SemiBold.woff2",
         weight: "normal",
     },
+    [LangId.KO]: {
+        family: "Cafe24 Dongdong",
+        url: "/fonts/Cafe24Dongdong-v2.0.woff2",
+        weight: "normal",
+    },
 };
 
 const loadLanguageFont = async (langId: number): Promise<void> => {

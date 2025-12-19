@@ -208,8 +208,12 @@ const ResourceId = {
     SND_STEAM_END: 205,
     IMG_BGR_13_P1: 206,
 
+    // Decoupled candy assets
+    IMG_OBJ_CANDY_01_NEW: 207,
+    IMG_OBJ_CANDY_FX: 208,
+
     // Total number of resources
-    RESOURCES_COUNT: 206,
+    RESOURCES_COUNT: 208,
 } as const;
 
 export default ResourceId;

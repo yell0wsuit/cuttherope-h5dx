@@ -152,4 +152,18 @@ export interface GameScene extends BaseElement {
     PMY: number;
     rockets: Rocket[];
     candyResourceId: ResourceIdValue;
+    getCandyResourceId(): number;
+    getCandyFxResourceId(): number;
+    getCandyConstants(): {
+        candy_bottom: number;
+        candy_main: number;
+        candy_top: number;
+        part_1: number;
+        part_2: number;
+        highlight_start: number;
+        highlight_end: number;
+        glow: number;
+        part_fx_start: number;
+        part_fx_end: number;
+    };
 }

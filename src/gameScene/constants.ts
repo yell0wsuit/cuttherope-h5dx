@@ -89,6 +89,26 @@ export const IMG_BGR_01_bgr = 0;
 export const IMG_BGR_01_P2_vert_transition = 0;
 export const IMG_BGR_02_vert_transition = 1;
 
+// Candy sprite frames (obj_candy_01_new.json)
+export const IMG_OBJ_CANDY_01_NEW_candy_bottom = 0;
+export const IMG_OBJ_CANDY_01_NEW_candy_main = 1;
+export const IMG_OBJ_CANDY_01_NEW_candy_top = 2;
+export const IMG_OBJ_CANDY_01_NEW_piece_01 = 3;
+export const IMG_OBJ_CANDY_01_NEW_piece_02 = 4;
+export const IMG_OBJ_CANDY_01_NEW_piece_03 = 5;
+export const IMG_OBJ_CANDY_01_NEW_piece_04 = 6;
+export const IMG_OBJ_CANDY_01_NEW_piece_05 = 7;
+export const IMG_OBJ_CANDY_01_NEW_part_1 = 8;
+export const IMG_OBJ_CANDY_01_NEW_part_2 = 9;
+
+// Candy FX frames (obj_candy_fx_web.json)
+export const IMG_OBJ_CANDY_FX_highlight_start = 0;
+export const IMG_OBJ_CANDY_FX_highlight_end = 9;
+export const IMG_OBJ_CANDY_FX_glow = 10;
+export const IMG_OBJ_CANDY_FX_part_fx_start = 11;
+export const IMG_OBJ_CANDY_FX_part_fx_end = 15;
+
+// Legacy candy constants
 export const IMG_OBJ_CANDY_01_candy_bottom = 0;
 export const IMG_OBJ_CANDY_01_candy_main = 1;
 export const IMG_OBJ_CANDY_01_candy_top = 2;

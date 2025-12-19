@@ -401,7 +401,52 @@ abstract class GameSceneInit extends BaseElement {
         const isHolidayBox = boxType === BoxType.HOLIDAY;
         return IS_JANUARY && isHolidayBox
             ? ResourceId.IMG_OBJ_CANDY_PADDINGTON
-            : ResourceId.IMG_OBJ_CANDY_01;
+            : ResourceId.IMG_OBJ_CANDY_01_NEW;
+    }
+
+    getCandyFxResourceId(): number {
+        const boxType = edition.boxTypes?.[LevelState.pack];
+        const isHolidayBox = boxType === BoxType.HOLIDAY;
+        // Paddington uses combined asset, regular candy uses separate FX asset
+        return IS_JANUARY && isHolidayBox
+            ? ResourceId.IMG_OBJ_CANDY_PADDINGTON
+            : ResourceId.IMG_OBJ_CANDY_FX;
+    }
+
+    getCandyConstants() {
+        const boxType = edition.boxTypes?.[LevelState.pack];
+        const isHolidayBox = boxType === BoxType.HOLIDAY;
+        const isPaddington = IS_JANUARY && isHolidayBox;
+
+        if (isPaddington) {
+            // Paddington uses combined constants
+            return {
+                candy_bottom: GameSceneConstants.IMG_OBJ_CANDY_01_candy_bottom,
+                candy_main: GameSceneConstants.IMG_OBJ_CANDY_01_candy_main,
+                candy_top: GameSceneConstants.IMG_OBJ_CANDY_01_candy_top,
+                part_1: GameSceneConstants.IMG_OBJ_CANDY_01_part_1,
+                part_2: GameSceneConstants.IMG_OBJ_CANDY_01_part_2,
+                highlight_start: GameSceneConstants.IMG_OBJ_CANDY_01_highlight_start,
+                highlight_end: GameSceneConstants.IMG_OBJ_CANDY_01_highlight_end,
+                glow: GameSceneConstants.IMG_OBJ_CANDY_01_glow,
+                part_fx_start: GameSceneConstants.IMG_OBJ_CANDY_01_part_fx_start,
+                part_fx_end: GameSceneConstants.IMG_OBJ_CANDY_01_part_fx_end,
+            };
+        } else {
+            // Regular candy uses separate constants
+            return {
+                candy_bottom: GameSceneConstants.IMG_OBJ_CANDY_01_NEW_candy_bottom,
+                candy_main: GameSceneConstants.IMG_OBJ_CANDY_01_NEW_candy_main,
+                candy_top: GameSceneConstants.IMG_OBJ_CANDY_01_NEW_candy_top,
+                part_1: GameSceneConstants.IMG_OBJ_CANDY_01_NEW_part_1,
+                part_2: GameSceneConstants.IMG_OBJ_CANDY_01_NEW_part_2,
+                highlight_start: GameSceneConstants.IMG_OBJ_CANDY_FX_highlight_start,
+                highlight_end: GameSceneConstants.IMG_OBJ_CANDY_FX_highlight_end,
+                glow: GameSceneConstants.IMG_OBJ_CANDY_FX_glow,
+                part_fx_start: GameSceneConstants.IMG_OBJ_CANDY_FX_part_fx_start,
+                part_fx_end: GameSceneConstants.IMG_OBJ_CANDY_FX_part_fx_end,
+            };
+        }
     }
     pointOutOfScreen(p: ConstrainedPoint): boolean {
         const bottomY = this.mapHeight + resolution.OUT_OF_SCREEN_ADJUSTMENT_BOTTOM;

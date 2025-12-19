@@ -13,10 +13,13 @@ import type GameSceneInit from "../init";
 export function initCandy(this: GameSceneInit): void {
     // candy
     const candyResourceId = this.getCandyResourceId();
+    const candyFxResourceId = this.getCandyFxResourceId();
+    const constants = this.getCandyConstants();
+
     this.candyResourceId = candyResourceId;
     this.candy = new GameObject();
     this.candy.initTextureWithId(candyResourceId);
-    this.candy.setTextureQuad(GameSceneConstants.IMG_OBJ_CANDY_01_candy_bottom);
+    this.candy.setTextureQuad(constants.candy_bottom);
     this.candy.doRestoreCutTransparency();
     this.candy.anchor = Alignment.CENTER;
     this.candy.bb = Rectangle.copy(resolution.CANDY_BB);
@@ -27,7 +30,7 @@ export function initCandy(this: GameSceneInit): void {
     // candy main
     this.candyMain = new GameObject();
     this.candyMain.initTextureWithId(candyResourceId);
-    this.candyMain.setTextureQuad(GameSceneConstants.IMG_OBJ_CANDY_01_candy_main);
+    this.candyMain.setTextureQuad(constants.candy_main);
     this.candyMain.doRestoreCutTransparency();
     this.candyMain.anchor = this.candyMain.parentAnchor = Alignment.CENTER;
     this.candy.addChild(this.candyMain);
@@ -37,7 +40,7 @@ export function initCandy(this: GameSceneInit): void {
     // candy top
     this.candyTop = new GameObject();
     this.candyTop.initTextureWithId(candyResourceId);
-    this.candyTop.setTextureQuad(GameSceneConstants.IMG_OBJ_CANDY_01_candy_top);
+    this.candyTop.setTextureQuad(constants.candy_top);
     this.candyTop.doRestoreCutTransparency();
     this.candyTop.anchor = this.candyTop.parentAnchor = Alignment.CENTER;
     this.candy.addChild(this.candyTop);
@@ -46,21 +49,21 @@ export function initCandy(this: GameSceneInit): void {
 
     // candy blink
     this.candyBlink = new Animation();
-    this.candyBlink.initTextureWithId(ResourceId.IMG_OBJ_CANDY_01);
+    this.candyBlink.initTextureWithId(candyFxResourceId);
     this.candyBlink.doRestoreCutTransparency();
     this.candyBlink.addAnimationEndpoints(
         GameSceneConstants.CandyBlink.INITIAL,
         0.07,
         Timeline.LoopType.NO_LOOP,
-        GameSceneConstants.IMG_OBJ_CANDY_01_highlight_start,
-        GameSceneConstants.IMG_OBJ_CANDY_01_highlight_end
+        constants.highlight_start,
+        constants.highlight_end
     );
     this.candyBlink.addAnimationSequence(
         GameSceneConstants.CandyBlink.STAR,
         0.3, // delay
         Timeline.LoopType.NO_LOOP,
         2, // count
-        [GameSceneConstants.IMG_OBJ_CANDY_01_glow, GameSceneConstants.IMG_OBJ_CANDY_01_glow]
+        [constants.glow, constants.glow]
     );
     const gt = this.candyBlink.getTimeline(GameSceneConstants.CandyBlink.STAR);
     if (gt) {

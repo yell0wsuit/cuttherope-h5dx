@@ -111,8 +111,11 @@ export function updateCollectibles(this: CollectiblesScene, delta: number): bool
                     }
                 }
 
+                const constants = this.getCandyConstants();
+                const candyFxResourceId = this.getCandyFxResourceId();
+
                 const transform = new Animation();
-                transform.initTextureWithId(this.candyResourceId);
+                transform.initTextureWithId(candyFxResourceId);
                 transform.doRestoreCutTransparency();
                 transform.x = this.candy.x;
                 transform.y = this.candy.y;
@@ -120,8 +123,8 @@ export function updateCollectibles(this: CollectiblesScene, delta: number): bool
                 const a = transform.addAnimationDelay(
                     0.05,
                     Timeline.LoopType.NO_LOOP,
-                    GameSceneConstants.IMG_OBJ_CANDY_01_part_fx_start,
-                    GameSceneConstants.IMG_OBJ_CANDY_01_part_fx_end
+                    constants.part_fx_start,
+                    constants.part_fx_end
                 );
                 const transformTimeline = transform.getTimeline(a);
                 if (transformTimeline) {

@@ -422,4 +422,22 @@ RES_DATA[ResourceId.IMG_CHAR_ANIMATION_PADDINGTON] = new ResEntry(
     }
 );
 
+RES_DATA[ResourceId.IMG_OBJ_CANDY_01_NEW] = new ResEntry(
+    "candies/obj_candy_01_new.png",
+    ResourceType.IMAGE,
+    {
+        atlasPath: "candies/obj_candy_01_new.json",
+        atlasFormat: "texture-packer",
+    }
+);
+
+RES_DATA[ResourceId.IMG_OBJ_CANDY_FX] = new ResEntry(
+    "candies/obj_candy_fx_web.png",
+    ResourceType.IMAGE,
+    {
+        atlasPath: "candies/obj_candy_fx_web.json",
+        atlasFormat: "texture-packer",
+    }
+);
+
 export default RES_DATA;

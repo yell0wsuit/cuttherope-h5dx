@@ -28,6 +28,8 @@ class ResourcePacks {
         ResourceId.IMG_OBJ_HOOK_02,
         ResourceId.IMG_OBJ_HOOK_AUTO,
         ResourceId.IMG_OBJ_CANDY_01,
+        ResourceId.IMG_OBJ_CANDY_01_NEW, // Candy sprite
+        ResourceId.IMG_OBJ_CANDY_FX, // Candy FX
         ResourceId.IMG_OBJ_BOUNCER_01,
         ResourceId.IMG_OBJ_BOUNCER_02,
         ResourceId.IMG_OBJ_BUBBLE_ATTACHED,

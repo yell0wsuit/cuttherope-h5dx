@@ -48,6 +48,7 @@ import Rectangle from "@/core/Rectangle";
 import RGBAColor from "@/core/RGBAColor";
 import Vector from "@/core/Vector";
 import SoundMgr from "@/game/CTRSoundMgr";
+import { getSavedCandyIndex } from "@/ui/InterfaceManager/skinSelection";
 import MathHelper from "@/utils/MathHelper";
 import KeyFrame from "@/visual/KeyFrame";
 import Timeline from "@/visual/Timeline";
@@ -399,9 +400,25 @@ abstract class GameSceneInit extends BaseElement {
     getCandyResourceId(): number {
         const boxType = edition.boxTypes?.[LevelState.pack];
         const isHolidayBox = boxType === BoxType.HOLIDAY;
-        return IS_JANUARY && isHolidayBox
-            ? ResourceId.IMG_OBJ_CANDY_PADDINGTON
-            : ResourceId.IMG_OBJ_CANDY_01_NEW;
+
+        // Use Paddington skin for holiday boxes in January
+        if (IS_JANUARY && isHolidayBox) {
+            return ResourceId.IMG_OBJ_CANDY_PADDINGTON;
+        }
+
+        // Get selected candy skin from localStorage (0-50, where 0 is candy_01)
+        const selectedSkin = getSavedCandyIndex();
+
+        // Map candy index to resource ID
+        // candy_01 = IMG_OBJ_CANDY_01_NEW (207)
+        // candy_02 = IMG_OBJ_CANDY_02 (209), candy_03 = IMG_OBJ_CANDY_03 (210), etc.
+        if (selectedSkin === 0) {
+            return ResourceId.IMG_OBJ_CANDY_01_NEW;
+        } else {
+            // ResourceId.IMG_OBJ_CANDY_02 starts at 209, which is selectedSkin 1
+            // So: ResourceId.IMG_OBJ_CANDY_02 + (selectedSkin - 1)
+            return ResourceId.IMG_OBJ_CANDY_02 + (selectedSkin - 1);
+        }
     }
 
     getCandyFxResourceId(): number {

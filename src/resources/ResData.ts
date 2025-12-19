@@ -440,4 +440,256 @@ RES_DATA[ResourceId.IMG_OBJ_CANDY_FX] = new ResEntry(
     }
 );
 
+// Candy skins 02-51
+RES_DATA[ResourceId.IMG_OBJ_CANDY_02] = new ResEntry(
+    "candies/obj_candy_02.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_02.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_03] = new ResEntry(
+    "candies/obj_candy_03.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_03.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_04] = new ResEntry(
+    "candies/obj_candy_04_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_04_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_05] = new ResEntry(
+    "candies/obj_candy_05_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_05_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_06] = new ResEntry(
+    "candies/obj_candy_06_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_06_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_07] = new ResEntry(
+    "candies/obj_candy_07_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_07_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_08] = new ResEntry(
+    "candies/obj_candy_08_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_08_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_09] = new ResEntry(
+    "candies/obj_candy_09_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_09_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_10] = new ResEntry(
+    "candies/obj_candy_10_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_10_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_11] = new ResEntry(
+    "candies/obj_candy_11_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_11_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_12] = new ResEntry(
+    "candies/obj_candy_12_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_12_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_13] = new ResEntry(
+    "candies/obj_candy_13_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_13_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_14] = new ResEntry(
+    "candies/obj_candy_14_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_14_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_15] = new ResEntry(
+    "candies/obj_candy_15_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_15_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_16] = new ResEntry(
+    "candies/obj_candy_16_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_16_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_17] = new ResEntry(
+    "candies/obj_candy_17_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_17_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_18] = new ResEntry(
+    "candies/obj_candy_18_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_18_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_19] = new ResEntry(
+    "candies/obj_candy_19_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_19_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_20] = new ResEntry(
+    "candies/obj_candy_20_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_20_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_21] = new ResEntry(
+    "candies/obj_candy_21_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_21_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_22] = new ResEntry(
+    "candies/obj_candy_22_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_22_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_23] = new ResEntry(
+    "candies/obj_candy_23_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_23_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_24] = new ResEntry(
+    "candies/obj_candy_24_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_24_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_25] = new ResEntry(
+    "candies/obj_candy_25_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_25_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_26] = new ResEntry(
+    "candies/obj_candy_26_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_26_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_27] = new ResEntry(
+    "candies/obj_candy_27_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_27_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_28] = new ResEntry(
+    "candies/obj_candy_28_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_28_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_29] = new ResEntry(
+    "candies/obj_candy_29_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_29_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_30] = new ResEntry(
+    "candies/obj_candy_30_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_30_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_31] = new ResEntry(
+    "candies/obj_candy_31_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_31_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_32] = new ResEntry(
+    "candies/obj_candy_32_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_32_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_33] = new ResEntry(
+    "candies/obj_candy_33_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_33_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_34] = new ResEntry(
+    "candies/obj_candy_34_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_34_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_35] = new ResEntry(
+    "candies/obj_candy_35_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_35_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_36] = new ResEntry(
+    "candies/obj_candy_36_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_36_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_37] = new ResEntry(
+    "candies/obj_candy_37_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_37_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_38] = new ResEntry(
+    "candies/obj_candy_38_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_38_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_39] = new ResEntry(
+    "candies/obj_candy_39_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_39_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_40] = new ResEntry(
+    "candies/obj_candy_40_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_40_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_41] = new ResEntry(
+    "candies/obj_candy_41_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_41_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_42] = new ResEntry(
+    "candies/obj_candy_42_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_42_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_43] = new ResEntry(
+    "candies/obj_candy_43_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_43_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_44] = new ResEntry(
+    "candies/obj_candy_44_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_44_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_45] = new ResEntry(
+    "candies/obj_candy_45_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_45_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_46] = new ResEntry(
+    "candies/obj_candy_46_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_46_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_47] = new ResEntry(
+    "candies/obj_candy_47_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_47_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_48] = new ResEntry(
+    "candies/obj_candy_48_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_48_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_49] = new ResEntry(
+    "candies/obj_candy_49_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_49_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_50] = new ResEntry(
+    "candies/obj_candy_50_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_50_extracted.json", atlasFormat: "texture-packer" }
+);
+RES_DATA[ResourceId.IMG_OBJ_CANDY_51] = new ResEntry(
+    "candies/obj_candy_51_extracted.png",
+    ResourceType.IMAGE,
+    { atlasPath: "candies/obj_candy_51_extracted.json", atlasFormat: "texture-packer" }
+);
+
 export default RES_DATA;

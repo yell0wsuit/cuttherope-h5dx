@@ -8,6 +8,7 @@ type SkinMode = "candy" | "rope";
 
 const TOTAL_CANDIES = 51;
 const TOTAL_ROPES = 9;
+const ITEMS_PER_PAGE = 12;
 
 const SETTING_KEYS = {
     CANDY: "selectedCandySkin",
@@ -26,17 +27,22 @@ const getSavedRopeIndex = (): number => {
 
 class SkinSelectionView {
     private mode: SkinMode = "candy";
+    private currentPage = 0;
     private tabsBuilt = false;
     private tabContainer: HTMLElement | null = null;
     private grid: HTMLElement | null = null;
     private backButton: HTMLElement | null = null;
+    private navBack: HTMLElement | null = null;
+    private navForward: HTMLElement | null = null;
 
     init(): void {
         this.tabContainer = document.getElementById("skinTabs");
         this.grid = document.getElementById("skinGrid");
         this.backButton = document.getElementById("skinBack");
+        this.navBack = document.getElementById("skinNavBack");
+        this.navForward = document.getElementById("skinNavForward");
 
-        if (!this.tabContainer || !this.grid || !this.backButton) {
+        if (!this.tabContainer || !this.grid || !this.backButton || !this.navBack || !this.navForward) {
             return;
         }
 
@@ -46,6 +52,24 @@ class SkinSelectionView {
                 SoundMgr.playSound(ResourceId.SND_TAP);
                 panelManager.showPanel(PanelId.MENU);
             });
+
+            this.navBack.addEventListener("click", () => {
+                if (this.currentPage > 0) {
+                    SoundMgr.playSound(ResourceId.SND_TAP);
+                    this.currentPage--;
+                    this.renderGrid();
+                }
+            });
+
+            this.navForward.addEventListener("click", () => {
+                const totalPages = this.getTotalPages();
+                if (this.currentPage < totalPages - 1) {
+                    SoundMgr.playSound(ResourceId.SND_TAP);
+                    this.currentPage++;
+                    this.renderGrid();
+                }
+            });
+
             this.tabsBuilt = true;
         }
 
@@ -85,6 +109,7 @@ class SkinSelectionView {
             if (this.mode === mode) return;
             SoundMgr.playSound(ResourceId.SND_TAP);
             this.mode = mode;
+            this.currentPage = 0;
             this.updateTabState();
             this.renderGrid();
         });
@@ -101,6 +126,30 @@ class SkinSelectionView {
         });
     }
 
+    private getTotalPages(): number {
+        const isCandyMode = this.mode === "candy";
+        const totalItems = isCandyMode ? TOTAL_CANDIES : TOTAL_ROPES;
+        return Math.ceil(totalItems / ITEMS_PER_PAGE);
+    }
+
+    private updateNavButtons(): void {
+        if (!this.navBack || !this.navForward) return;
+
+        const totalPages = this.getTotalPages();
+
+        if (this.currentPage === 0) {
+            this.navBack.classList.add("disabled");
+        } else {
+            this.navBack.classList.remove("disabled");
+        }
+
+        if (this.currentPage >= totalPages - 1) {
+            this.navForward.classList.add("disabled");
+        } else {
+            this.navForward.classList.remove("disabled");
+        }
+    }
+
     private renderGrid(): void {
         if (!this.grid) return;
         this.grid.innerHTML = "";
@@ -109,10 +158,15 @@ class SkinSelectionView {
         const totalItems = isCandyMode ? TOTAL_CANDIES : TOTAL_ROPES;
         const selectedIndex = isCandyMode ? getSavedCandyIndex() : getSavedRopeIndex();
 
-        for (let i = 0; i < totalItems; i++) {
+        const startIndex = this.currentPage * ITEMS_PER_PAGE;
+        const endIndex = Math.min(startIndex + ITEMS_PER_PAGE, totalItems);
+
+        for (let i = startIndex; i < endIndex; i++) {
             const slot = this.createSlot(i, selectedIndex, isCandyMode);
             this.grid.appendChild(slot);
         }
+
+        this.updateNavButtons();
     }
 
     private createSlot(index: number, selectedIndex: number, isCandyMode: boolean): HTMLDivElement {

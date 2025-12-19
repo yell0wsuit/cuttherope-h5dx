@@ -82,10 +82,16 @@
 /* Skin panel layout */
 #skinPanel {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 
 #skinTabs {
-    margin: 20px 0;
+    margin-top: 60px;
+    margin-bottom: 20px;
 }
 
 .skin-tab {
@@ -95,11 +101,144 @@
 }
 
 #skinGrid {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 203px);
     gap: 15px;
     justify-content: center;
-    padding: 20px;
+    padding: 60px;
+}
+
+/* Skin navigation arrows */
+.ui-1024 #skinNavBack,
+.ui-1024 #skinNavForward {
+    position: absolute;
+    top: 256px;
+    left: 205px;
+    cursor: url(../cursors/handcursor.cur), url(../cursors/handcursor.png), auto;
+}
+
+.ui-1024 #skinNavBack div,
+.ui-1024 #skinNavForward div {
+    width: 59px;
+    height: 71px;
+    background-image: url(../images/1024/ui/box_nav_menu.png);
+    background-repeat: no-repeat;
+}
+
+.ui-1024 #skinNavBack.disabled {
+    cursor: url(../cursors/cursor.cur), url(../cursors/cursor.png), auto;
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+.ui-1024 #skinNavBack.disabled div {
+    background-position: left -71px;
+}
+
+.ui-1024 #skinNavForward {
+    left: 773px;
+}
+
+.ui-1024 #skinNavForward div {
+    background-position: -59px top;
+}
+
+.ui-1024 #skinNavForward.disabled {
+    cursor: url(../cursors/cursor.cur), url(../cursors/cursor.png), auto;
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+.ui-1024 #skinNavForward.disabled div {
+    background-position: -59px -71px;
+}
+
+.ui-768 #skinNavBack,
+.ui-768 #skinNavForward {
+    position: absolute;
+    top: 192px;
+    left: 154px;
+    cursor: url(../cursors/handcursor.cur), url(../cursors/handcursor.png), auto;
+}
+
+.ui-768 #skinNavBack div,
+.ui-768 #skinNavForward div {
+    width: 44px;
+    height: 53px;
+    background-image: url(../images/768/ui/box_nav_menu.png);
+    background-repeat: no-repeat;
+}
+
+.ui-768 #skinNavBack.disabled {
+    cursor: url(../cursors/cursor.cur), url(../cursors/cursor.png), auto;
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+.ui-768 #skinNavBack.disabled div {
+    background-position: left -53px;
+}
+
+.ui-768 #skinNavForward {
+    left: 580px;
+}
+
+.ui-768 #skinNavForward div {
+    background-position: -44px top;
+}
+
+.ui-768 #skinNavForward.disabled {
+    cursor: url(../cursors/cursor.cur), url(../cursors/cursor.png), auto;
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+.ui-768 #skinNavForward.disabled div {
+    background-position: -44px -53px;
+}
+
+.ui-1920 #skinNavBack,
+.ui-1920 #skinNavForward {
+    position: absolute;
+    top: 480px;
+    left: 384px;
+    cursor: url(../cursors/handcursor.cur), url(../cursors/handcursor.png), auto;
+}
+
+.ui-1920 #skinNavBack div,
+.ui-1920 #skinNavForward div {
+    width: 111px;
+    height: 133px;
+    background-image: url(../images/1920/ui/box_nav_menu.png);
+    background-repeat: no-repeat;
+}
+
+.ui-1920 #skinNavBack.disabled {
+    cursor: url(../cursors/cursor.cur), url(../cursors/cursor.png), auto;
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+.ui-1920 #skinNavBack.disabled div {
+    background-position: left -133px;
+}
+
+.ui-1920 #skinNavForward {
+    left: 1449px;
+}
+
+.ui-1920 #skinNavForward div {
+    background-position: -111px top;
+}
+
+.ui-1920 #skinNavForward.disabled {
+    cursor: url(../cursors/cursor.cur), url(../cursors/cursor.png), auto;
+    opacity: 0.25;
+    pointer-events: none;
+}
+
+.ui-1920 #skinNavForward.disabled div {
+    background-position: -111px -133px;
 }
 
 .skin-slot {

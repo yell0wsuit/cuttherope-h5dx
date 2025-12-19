@@ -1404,16 +1404,28 @@ body {
     position: absolute;
     left: 323px;
     top: 40px;
-    width: 339px;
-    height: 301px;
-    background-image: url(../images/1024/ui/ph_logo.png);
+    width: 348px;
+    height: 249px;
+    background-image: url(../images/1920/ui/menu_logo_web.webp);
+    background-position: -1px -1px;
+    background-size: 348px 249px;
     background-repeat: no-repeat;
+}
+
+.ui-1024 #menuCandySkin {
+    position: absolute;
+    left: 50%;
+    top: 289px;
+    transform: translateX(-50%);
+    width: 112px;
+    height: 112px;
+    background-size: 755px 541px;
 }
 
 .ui-1024 #menuBtnVbox {
     position: absolute;
     left: 358px;
-    top: 360px;
+    top: 425px;
 }
 
 .ui-1024 #dmsg {
@@ -2766,16 +2778,28 @@ body {
     position: absolute;
     left: 242px;
     top: 30px;
-    width: 254px;
-    height: 226px;
-    background-image: url(../images/768/ui/ph_logo.png);
+    width: 261px;
+    height: 187px;
+    background-image: url(../images/1920/ui/menu_logo_web.webp);
+    background-position: -1px -1px;
+    background-size: 261px 187px;
     background-repeat: no-repeat;
+}
+
+.ui-768 #menuCandySkin {
+    position: absolute;
+    left: 50%;
+    top: 217px;
+    transform: translateX(-50%);
+    width: 84px;
+    height: 84px;
+    background-size: 566px 406px;
 }
 
 .ui-768 #menuBtnVbox {
     position: absolute;
     left: 269px;
-    top: 270px;
+    top: 320px;
 }
 
 .ui-768 #dmsg {
@@ -4080,10 +4104,19 @@ body {
     position: absolute;
     left: 606px;
     top: 75px;
-    width: 636px;
-    height: 564px;
-    background-image: url(../images/1920/ui/ph_logo.png);
+    width: 653px;
+    height: 468px;
+    background-image: url(../images/1920/ui/menu_logo_web.webp);
+    background-position: -1px -1px;
     background-repeat: no-repeat;
+}
+
+.ui-1920 #menuCandySkin {
+    position: absolute;
+    left: 937px;
+    top: 455px;
+    width: 211px;
+    height: 211px;
 }
 
 .ui-1920 #menuBtnVbox {

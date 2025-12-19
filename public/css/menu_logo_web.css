@@ -1,16 +1,16 @@
 /* -----------------------------------------------------
-   created with https://www.codeandweb.com/texturepacker 
+   created with https://www.codeandweb.com/texturepacker
    -----------------------------------------------------
    $TexturePacker:SmartUpdate:049a6f09b5da53ae8de42178e34e1cd5:fbcba2b485e64b8c9908ebb06ff8a41f:71fd2a75b8874a80bfee9dc6fd22826a$
    -----------------------------------------------------
 
-   usage: <span class="{-spritename-} sprite"></span>
+   usage: <span class="{-spritename-} menu-sprite"></span>
 
    replace {-spritename-} with the sprite you like to use
 
 */
 
-.sprite {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(../images/1920/ui/menu_logo_web.webp);}
+.menu-sprite {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(../images/1920/ui/menu_logo_web.webp);}
 
 .candy_01 {width:211px; height:211px; background-position: -1px -471px}
 .candy_02 {width:211px; height:211px; background-position: -1px -684px}

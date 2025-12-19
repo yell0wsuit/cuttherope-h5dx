@@ -83,7 +83,7 @@ class SkinSelectionView {
         if (!candyElement) return;
 
         const candyClass = `candy_${padIndex(selectedCandy)}`;
-        candyElement.className = `sprite ${candyClass}`;
+        candyElement.className = `menu-sprite ${candyClass}`;
     }
 
     private buildTabs(): void {

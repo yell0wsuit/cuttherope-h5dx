@@ -11,6 +11,7 @@ const PanelId = {
     LEADERBOARDS: 9,
     ACHIEVEMENTS: 10,
     PASSWORD: 11,
+    SKIN_SELECT: 12,
 } as const;
 
 export default PanelId;

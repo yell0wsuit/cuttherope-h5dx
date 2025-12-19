@@ -78,3 +78,55 @@
 .rope07 {width:140px; height:132px; background-position: -528px -694px}
 .rope08 {width:140px; height:132px; background-position: -605px -410px}
 .rope09 {width:140px; height:132px; background-position: -744px -135px}
+
+/* Skin panel layout */
+#skinPanel {
+    text-align: center;
+}
+
+#skinTabs {
+    margin: 20px 0;
+}
+
+.skin-tab {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 10px 20px;
+}
+
+#skinGrid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    padding: 20px;
+}
+
+.skin-slot {
+    position: relative;
+    width: 203px;
+    height: 252px;
+}
+
+.skin-slot-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 203px;
+    height: 252px;
+}
+
+.skin-slot:hover .skin-slot-bg {
+    background-position: -1px -255px !important;
+}
+
+.skin-slot.equipped:hover .skin-slot-bg {
+    background-position: -258px -495px !important;
+}
+
+.skin-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

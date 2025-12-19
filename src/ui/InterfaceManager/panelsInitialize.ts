@@ -34,6 +34,7 @@ import {
     stopAnimations,
 } from "@/utils/domHelpers";
 import type { PanelIdType, PanelWithLifecycle } from "@/ui/types/panelTypes";
+import skinSelectionView from "@/ui/InterfaceManager/skinSelection";
 
 interface GameFlowForPanelInit {
     noMenuStartLevel: (boxIndex: number, levelIndex: number) => void;
@@ -86,9 +87,20 @@ export default class PanelInitializer {
         const resetTextContainer = document.getElementById("resetText");
         const resetHoldYesContainer = document.getElementById("resetHoldYes");
         const langElement = document.getElementById("lang");
+        const menuCandySkin = document.getElementById("menuCandySkin");
 
         switch (panelId) {
             case PanelId.MENU: {
+                skinSelectionView.updateMenuCandySkin();
+
+                if (menuCandySkin) {
+                    menuCandySkin.classList.add("ctrPointer");
+                    menuCandySkin.addEventListener("click", () => {
+                        SoundMgr.playSound(ResourceId.SND_TAP);
+                        panelManager.showPanel(PanelId.SKIN_SELECT);
+                    });
+                }
+
                 // initialize the MENU panel
                 on("#playBtn", "click", () => {
                     SoundMgr.playSound(ResourceId.SND_TAP);
@@ -562,6 +574,11 @@ export default class PanelInitializer {
                 PubSub.subscribe(PubSub.ChannelId.LanguageChanged, refreshOptionsButtons);
                 PubSub.subscribe(PubSub.ChannelId.ShowOptionsPage, refreshOptionsButtons);
 
+                break;
+            }
+
+            case PanelId.SKIN_SELECT: {
+                skinSelectionView.init();
                 break;
             }
 

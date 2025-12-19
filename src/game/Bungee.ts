@@ -11,6 +11,7 @@ import satisfyConstraintArray from "@/physics/satisfyConstraintArray";
 import { IS_XMAS } from "@/utils/SpecialEvents";
 import ResourceId from "@/resources/ResourceId";
 import ResourceMgr from "@/resources/ResourceMgr";
+import { getRopePalette } from "@/utils/ropePalette";
 
 const ROLLBACK_K = 0.5;
 const BUNGEE_RELAXION_TIMES = 25;
@@ -424,21 +425,19 @@ class Bungee extends ConstraintSystem {
         black.g = 0;
         black.b = 0;
         black.a = alpha;
-        c1.r = 95 / 200;
-        c1.g = 61 / 200;
-        c1.b = 37 / 200;
+
+        const palette = getRopePalette();
+
+        c1.copyFrom(palette.primary);
         c1.a = alpha;
-        d1.r = 95 / 500;
-        d1.g = 61 / 500;
-        d1.b = 37 / 500;
+        d1.copyFrom(palette.primary);
+        d1.multiply(0.4);
         d1.a = alpha;
-        c2.r = 152 / 225;
-        c2.g = 99 / 225;
-        c2.b = 62 / 225;
+
+        c2.copyFrom(palette.secondary);
         c2.a = alpha;
-        d2.r = 152 / 500;
-        d2.g = 99 / 500;
-        d2.b = 62 / 500;
+        d2.copyFrom(palette.secondary);
+        d2.multiply(0.45);
         d2.a = alpha;
 
         if (this.highlighted) {

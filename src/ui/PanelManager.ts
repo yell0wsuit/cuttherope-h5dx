@@ -49,6 +49,7 @@ class PanelManager {
             new Panel(PanelId.CREDITS, null, null, false),
             new Panel(PanelId.LEADERBOARDS, "leaderboardPanel", "menuBackground", true),
             new Panel(PanelId.ACHIEVEMENTS, "achievementsPanel", "menuBackground", true),
+            new Panel(PanelId.SKIN_SELECT, "skinPanel", "menuBackground", true),
         ];
 
         // Fade

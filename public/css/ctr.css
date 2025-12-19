@@ -1417,8 +1417,6 @@ body {
     left: 50%;
     top: 289px;
     transform: translateX(-50%);
-    width: 112px;
-    height: 112px;
     background-size: 755px 541px;
 }
 
@@ -2791,8 +2789,6 @@ body {
     left: 50%;
     top: 217px;
     transform: translateX(-50%);
-    width: 84px;
-    height: 84px;
     background-size: 566px 406px;
 }
 
@@ -4115,8 +4111,6 @@ body {
     position: absolute;
     left: 937px;
     top: 455px;
-    width: 211px;
-    height: 211px;
 }
 
 .ui-1920 #menuBtnVbox {

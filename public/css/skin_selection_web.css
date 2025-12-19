@@ -1,0 +1,80 @@
+/* -----------------------------------------------------
+   created with https://www.codeandweb.com/texturepacker 
+   -----------------------------------------------------
+   $TexturePacker:SmartUpdate:c2b130f3075338c0d6d990ac8e976cc7:6fb533208288e61fc218326b44cb0a6e:a67b8966d394ec9678dd6aec2b2a9c89$
+   -----------------------------------------------------
+
+   usage: <span class="{-spritename-} sprite"></span>
+
+   replace {-spritename-} with the sprite you like to use
+
+*/
+
+.sprite {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(../images/1920/ui/skin_selection_web.webp);}
+
+.button_available_idle {width:203px; height:252px; background-position: -1px -1px}
+.button_available_pressed {width:203px; height:252px; background-position: -1px -255px}
+.button_equipped_idle {width:203px; height:252px; background-position: -206px -103px}
+.button_equipped_pressed {width:203px; height:252px; background-position: -258px -495px}
+.button_idle {width:247px; height:100px; background-position: -206px -1px}
+.button_pressed {width:255px; height:105px; background-position: -1px -509px}
+.candy01 {width:145px; height:143px; background-position: -455px -1px}
+.candy02 {width:140px; height:133px; background-position: -257px -749px}
+.candy03 {width:127px; height:148px; background-position: -399px -749px}
+.candy04 {width:137px; height:152px; background-position: -1px -773px}
+.candy05 {width:152px; height:136px; background-position: -206px -357px}
+.candy06 {width:133px; height:137px; background-position: -744px -269px}
+.candy07 {width:140px; height:139px; background-position: -411px -285px}
+.candy08 {width:136px; height:139px; background-position: -602px -1px}
+.candy09 {width:127px; height:138px; background-position: -134px -1071px}
+.candy10 {width:135px; height:142px; background-position: -1px -927px}
+.candy11 {width:134px; height:155px; background-position: -1px -616px}
+.candy12 {width:125px; height:137px; background-position: -533px -828px}
+.candy13 {width:126px; height:148px; background-position: -140px -884px}
+.candy14 {width:145px; height:137px; background-position: -411px -146px}
+.candy15 {width:124px; height:124px; background-position: -636px -1212px}
+.candy16 {width:119px; height:120px; background-position: -876px -408px}
+.candy17 {width:114px; height:131px; background-position: -665px -955px}
+.candy18 {width:113px; height:122px; background-position: -883px -1215px}
+.candy19 {width:116px; height:120px; background-position: -884px -1080px}
+.candy20 {width:125px; height:122px; background-position: -636px -1088px}
+.candy21 {width:119px; height:122px; background-position: -879px -269px}
+.candy22 {width:119px; height:121px; background-position: -762px -1215px}
+.candy23 {width:123px; height:126px; background-position: -511px -1085px}
+.candy24 {width:117px; height:111px; background-position: -376px -1300px}
+.candy25 {width:130px; height:116px; background-position: -533px -967px}
+.candy26 {width:118px; height:137px; background-position: -137px -616px}
+.candy27 {width:120px; height:120px; background-position: -866px -530px}
+.candy28 {width:110px; height:126px; background-position: -140px -755px}
+.candy29 {width:128px; height:125px; background-position: -660px -828px}
+.candy30 {width:123px; height:123px; background-position: -781px -955px}
+.candy31 {width:111px; height:121px; background-position: -906px -921px}
+.candy32 {width:121px; height:139px; background-position: -268px -884px}
+.candy33 {width:131px; height:123px; background-position: -605px -544px}
+.candy_34 {width:120px; height:134px; background-position: -263px -1164px}
+.candy_35 {width:118px; height:132px; background-position: -1px -1214px}
+.candy_36 {width:122px; height:123px; background-position: -797px -671px}
+.candy_37 {width:126px; height:125px; background-position: -738px -544px}
+.candy_38 {width:132px; height:128px; background-position: -882px -1px}
+.candy_39 {width:123px; height:121px; background-position: -790px -798px}
+.candy_40 {width:110px; height:126px; background-position: -385px -1172px}
+.candy_41 {width:116px; height:137px; background-position: -268px -1025px}
+.candy_42 {width:122px; height:124px; background-position: -497px -1213px}
+.candy_43 {width:119px; height:117px; background-position: -255px -1300px}
+.candy_44 {width:119px; height:134px; background-position: -134px -1211px}
+.candy_45 {width:119px; height:125px; background-position: -763px -1088px}
+.candy_46 {width:127px; height:120px; background-position: -747px -408px}
+.candy_47 {width:103px; height:120px; background-position: -915px -796px}
+.candy_48 {width:123px; height:137px; background-position: -386px -1033px}
+.candy_49 {width:125px; height:125px; background-position: -670px -671px}
+.candy_50 {width:131px; height:141px; background-position: -1px -1071px}
+.candy_51 {width:119px; height:122px; background-position: -886px -131px}
+.rope01 {width:140px; height:132px; background-position: -463px -426px}
+.rope02 {width:140px; height:132px; background-position: -602px -142px}
+.rope03 {width:140px; height:132px; background-position: -740px -1px}
+.rope04 {width:140px; height:132px; background-position: -558px -276px}
+.rope05 {width:140px; height:132px; background-position: -463px -560px}
+.rope06 {width:140px; height:132px; background-position: -391px -899px}
+.rope07 {width:140px; height:132px; background-position: -528px -694px}
+.rope08 {width:140px; height:132px; background-position: -605px -410px}
+.rope09 {width:140px; height:132px; background-position: -744px -135px}

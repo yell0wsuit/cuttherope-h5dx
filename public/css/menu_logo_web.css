@@ -1,0 +1,66 @@
+/* -----------------------------------------------------
+   created with https://www.codeandweb.com/texturepacker 
+   -----------------------------------------------------
+   $TexturePacker:SmartUpdate:049a6f09b5da53ae8de42178e34e1cd5:fbcba2b485e64b8c9908ebb06ff8a41f:71fd2a75b8874a80bfee9dc6fd22826a$
+   -----------------------------------------------------
+
+   usage: <span class="{-spritename-} sprite"></span>
+
+   replace {-spritename-} with the sprite you like to use
+
+*/
+
+.sprite {display:inline-block; overflow:hidden; background-repeat: no-repeat;background-image:url(../images/1920/ui/menu_logo_web.webp);}
+
+.candy_01 {width:211px; height:211px; background-position: -1px -471px}
+.candy_02 {width:211px; height:211px; background-position: -1px -684px}
+.candy_03 {width:211px; height:211px; background-position: -214px -471px}
+.candy_04 {width:167px; height:194px; background-position: -400px -684px}
+.candy_05 {width:188px; height:169px; background-position: -1239px -927px}
+.candy_06 {width:177px; height:179px; background-position: -1342px -367px}
+.candy_07 {width:179px; height:187px; background-position: -883px -851px}
+.candy_08 {width:171px; height:172px; background-position: -1772px -711px}
+.candy_09 {width:172px; height:182px; background-position: -1064px -746px}
+.candy_10 {width:176px; height:179px; background-position: -1409px -734px}
+.candy_11 {width:184px; height:205px; background-position: -214px -684px}
+.candy_12 {width:175px; height:172px; background-position: -1388px -1px}
+.candy_13 {width:166px; height:180px; background-position: -1220px -1px}
+.candy_14 {width:183px; height:183px; background-position: -847px -1px}
+.candy_15 {width:168px; height:167px; background-position: -1772px -885px}
+.candy_16 {width:178px; height:177px; background-position: -1592px -910px}
+.candy_17 {width:167px; height:188px; background-position: -763px -661px}
+.candy_18 {width:166px; height:181px; background-position: -1174px -370px}
+.candy_19 {width:164px; height:169px; background-position: -1565px -1px}
+.candy_20 {width:189px; height:184px; background-position: -838px -188px}
+.candy_21 {width:180px; height:185px; background-position: -656px -188px}
+.candy_22 {width:182px; height:183px; background-position: -932px -561px}
+.candy_23 {width:190px; height:194px; background-position: -176px -897px}
+.candy_24 {width:182px; height:172px; background-position: -1772px -1px}
+.candy_25 {width:203px; height:184px; background-position: -785px -375px}
+.candy_26 {width:173px; height:198px; background-position: -1px -897px}
+.candy_27 {width:182px; height:183px; background-position: -990px -374px}
+.candy_28 {width:155px; height:176px; background-position: -1804px -524px}
+.candy_29 {width:192px; height:189px; background-position: -569px -663px}
+.candy_30 {width:187px; height:188px; background-position: -596px -471px}
+.candy_31 {width:167px; height:180px; background-position: -1219px -185px}
+.candy_32 {width:167px; height:190px; background-position: -427px -471px}
+.candy_33 {width:179px; height:169px; background-position: -1772px -175px}
+.candy_34 {width:173px; height:188px; background-position: -708px -854px}
+.candy_35 {width:171px; height:176px; background-position: -1631px -533px}
+.candy_36 {width:176px; height:176px; background-position: -1772px -346px}
+.candy_37 {width:189px; height:185px; background-position: -656px -1px}
+.candy_38 {width:188px; height:182px; background-position: -1029px -186px}
+.candy_39 {width:183px; height:179px; background-position: -1290px -553px}
+.candy_40 {width:161px; height:179px; background-position: -1429px -915px}
+.candy_41 {width:162px; height:190px; background-position: -544px -880px}
+.candy_42 {width:175px; height:177px; background-position: -1388px -175px}
+.candy_43 {width:186px; height:182px; background-position: -1032px -1px}
+.candy_44 {width:145px; height:179px; background-position: -1587px -729px}
+.candy_45 {width:172px; height:182px; background-position: -1116px -559px}
+.candy_46 {width:173px; height:167px; background-position: -1064px -930px}
+.candy_47 {width:154px; height:179px; background-position: -1475px -548px}
+.candy_48 {width:174px; height:194px; background-position: -368px -891px}
+.candy_49 {width:162px; height:169px; background-position: -1565px -172px}
+.candy_50 {width:169px; height:182px; background-position: -1238px -743px}
+.candy_51 {width:172px; height:177px; background-position: -1521px -354px}
+.logo {width:653px; height:468px; background-position: -1px -1px}

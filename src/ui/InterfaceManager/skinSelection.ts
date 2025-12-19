@@ -3,6 +3,7 @@ import SoundMgr from "@/game/CTRSoundMgr";
 import ResourceId from "@/resources/ResourceId";
 import panelManager from "@/ui/PanelManager";
 import PanelId from "@/ui/PanelId";
+import Text from "@/visual/Text";
 
 type SkinMode = "candy" | "rope";
 
@@ -100,10 +101,17 @@ class SkinSelectionView {
     private createTab(label: string, mode: SkinMode): HTMLDivElement {
         const tab = document.createElement("div");
         tab.className = "skin-tab ctrPointer";
-        const text = document.createElement("span");
-        text.textContent = label;
 
-        tab.appendChild(text);
+        const bg = document.createElement("div");
+        bg.className = "skin-tab-bg sprite button_idle";
+
+        const textImg = Text.drawBig({
+            text: label,
+            scaleToUI: true,
+        });
+
+        tab.appendChild(bg);
+        tab.appendChild(textImg);
 
         tab.addEventListener("click", () => {
             if (this.mode === mode) return;

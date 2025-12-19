@@ -98,7 +98,34 @@
 .skin-tab {
     display: inline-block;
     margin: 0 10px;
-    padding: 10px 20px;
+    width: 247px;
+    height: 100px;
+    position: relative;
+    cursor: url(../cursors/handcursor.cur), url(../cursors/handcursor.png), auto;
+}
+
+.skin-tab-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 247px;
+    height: 100px;
+    z-index: 1;
+}
+
+.skin-tab:active .skin-tab-bg {
+    background-position: -1px -509px !important;
+    width: 255px;
+    height: 105px;
+}
+
+.skin-tab img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    z-index: 2;
 }
 
 #skinGrid {
@@ -106,7 +133,6 @@
     grid-template-columns: repeat(4, 203px);
     gap: 15px;
     justify-content: center;
-    padding: 60px;
 }
 
 /* Skin navigation arrows */

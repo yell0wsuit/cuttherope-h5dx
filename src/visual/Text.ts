@@ -681,6 +681,13 @@ const getFontFamily = (
                 bigFontSize: 30,
                 smallFontSize: 18,
             };
+        case LangId.ZH:
+            return {
+                family: "'Huninn-Regular', sans-serif",
+                weight: "normal",
+                bigFontSize: 30,
+                smallFontSize: 18,
+            };
         default:
             return {
                 family: "'gooddognew', sans-serif",

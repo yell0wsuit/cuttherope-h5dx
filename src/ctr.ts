@@ -55,6 +55,11 @@ const languageFonts: Partial<Record<number, FontConfig>> = {
         url: "/fonts/MPLUSRounded1c-Medium.woff2",
         weight: "normal",
     },
+    [LangId.ZH]: {
+        family: "Huninn-Regular",
+        url: "/fonts/Huninn-Regular.woff2",
+        weight: "normal",
+    },
 };
 
 const loadLanguageFont = async (langId: number): Promise<void> => {

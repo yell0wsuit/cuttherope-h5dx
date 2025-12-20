@@ -330,8 +330,10 @@ class Text extends BaseElement {
     static drawSystem(options: DrawSystemOptions) {
         const scaleFactor = resolution.CANVAS_WIDTH / 1024;
 
-        // Use different line heights based on font ID, scaled for resolution
-        const baseLineHeight = 28;
+        // Get font configuration including line height
+        const fontConfig = getFontFamily(settings.getLangId());
+        const baseLineHeight =
+            options.fontId === 4 ? fontConfig.bigLineHeight : fontConfig.smallLineHeight;
         const lineHeight = Math.round(baseLineHeight * scaleFactor);
 
         // Add top padding to prevent text cutoff, more for big font with CJK
@@ -658,7 +660,14 @@ const stringToArray = (ctx: CanvasRenderingContext2D, string: string, width: num
 
 const getFontFamily = (
     langId: number
-): { family: string; weight: string; bigFontSize: number; smallFontSize: number } => {
+): {
+    family: string;
+    weight: string;
+    bigFontSize: number;
+    smallFontSize: number;
+    bigLineHeight: number;
+    smallLineHeight: number;
+} => {
     switch (langId) {
         case LangId.RU:
             return {
@@ -666,6 +675,8 @@ const getFontFamily = (
                 weight: "normal",
                 bigFontSize: 26,
                 smallFontSize: 18,
+                bigLineHeight: 28,
+                smallLineHeight: 24,
             };
         case LangId.KO:
             return {
@@ -673,6 +684,8 @@ const getFontFamily = (
                 weight: "normal",
                 bigFontSize: 32,
                 smallFontSize: 18,
+                bigLineHeight: 38,
+                smallLineHeight: 26,
             };
         case LangId.JA:
             return {
@@ -680,6 +693,8 @@ const getFontFamily = (
                 weight: "normal",
                 bigFontSize: 30,
                 smallFontSize: 18,
+                bigLineHeight: 38,
+                smallLineHeight: 26,
             };
         case LangId.ZH:
             return {
@@ -687,6 +702,8 @@ const getFontFamily = (
                 weight: "normal",
                 bigFontSize: 30,
                 smallFontSize: 18,
+                bigLineHeight: 38,
+                smallLineHeight: 26,
             };
         default:
             return {
@@ -694,6 +711,8 @@ const getFontFamily = (
                 weight: "normal",
                 bigFontSize: 32,
                 smallFontSize: 22,
+                bigLineHeight: 38,
+                smallLineHeight: 28,
             };
     }
 };

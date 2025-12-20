@@ -1854,7 +1854,7 @@ body {
 }
 
 .ui-1024 .lang-system #flag {
-    top: -12px;
+    top: 0px;
 }
 
 .ui-1024 #loaderWindow {
@@ -3199,7 +3199,7 @@ body {
 }
 
 .ui-768 .lang-system #flag {
-    top: -9px;
+    top: 0px;
 }
 
 .ui-768 #loaderWindow {
@@ -4573,7 +4573,7 @@ body {
 }
 
 .ui-1920 .lang-system #flag {
-    top: -23px;
+    top: -40px;
 }
 
 .ui-1920 #loaderWindow {

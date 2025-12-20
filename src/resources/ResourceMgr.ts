@@ -22,7 +22,18 @@ class ResourceMgr {
     /**
      * Handles loaded image resources
      */
-    static onResourceLoaded(resId: number, img: HTMLImageElement) {
+    static onResourceLoaded(
+        resId: number,
+        img:
+            | HTMLImageElement
+            | ImageBitmap
+            | {
+                  drawable: ImageBitmap | HTMLImageElement | HTMLCanvasElement;
+                  width?: number;
+                  height?: number;
+                  sourceUrl?: string;
+              }
+    ) {
         const resource = RES_DATA[resId];
         if (!resource) {
             return;

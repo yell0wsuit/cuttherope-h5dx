@@ -95,6 +95,21 @@ class PreLoader {
         });
     }
 
+    private async loadBitmapFromElement(url: string): Promise<ImageBitmap> {
+        const img = await this.loadImageElement(url);
+        if (typeof img.decode === "function") {
+            try {
+                await img.decode();
+            } catch (error) {
+                window.console?.warn?.(
+                    "Image decode failed, continuing with bitmap creation",
+                    error
+                );
+            }
+        }
+        return createImageBitmap(img);
+    }
+
     private createImageAsset(
         drawable: ImageBitmap | HTMLImageElement,
         sourceUrl: string
@@ -135,10 +150,20 @@ class PreLoader {
             return this.createImageAsset(img, url);
         }
 
-        const blob = await this.fetchImageBlob(url);
-
         if (this.supportsImageBitmap) {
             try {
+                const bitmap = await this.loadBitmapFromElement(url);
+                return this.createImageAsset(bitmap, url);
+            } catch (error) {
+                window.console?.warn?.(
+                    "ImageBitmap from HTMLImageElement failed, falling back to blob",
+                    url,
+                    error
+                );
+            }
+
+            try {
+                const blob = await this.fetchImageBlob(url);
                 const bitmap = await createImageBitmap(blob);
                 return this.createImageAsset(bitmap, url);
             } catch (error) {
@@ -146,6 +171,7 @@ class PreLoader {
             }
         }
 
+        const blob = await this.fetchImageBlob(url);
         const img = await this.loadImageFromBlob(blob, url);
         return this.createImageAsset(img, url);
     }
@@ -273,7 +299,7 @@ class PreLoader {
             this.loadImageAsset(url)
                 .then((asset) => {
                     if ((tag === this.FONT_TAG || tag === this.GAME_TAG) && resId !== null) {
-                        ResourceMgr.onResourceLoaded(resId, asset.drawable as HTMLImageElement);
+                        ResourceMgr.onResourceLoaded(resId, asset);
                     }
                     if (tracked(tag)) menuLoaded++;
                 })

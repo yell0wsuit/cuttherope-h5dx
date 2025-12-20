@@ -33,7 +33,15 @@ class ResEntry {
     texture?: Texture2D; // Added at runtime by ResourceMgr
     font?: Font; // Added at runtime by ResourceMgr
     info?: ParsedAtlasInfo | ExtendedAtlasInfo | ResourceInfo; // Added at runtime by ResourceMgr
-    pendingImage?: HTMLImageElement; // Added at runtime by ResourceMgr
+    pendingImage?:
+        | HTMLImageElement
+        | ImageBitmap
+        | {
+              drawable: ImageBitmap | HTMLImageElement | HTMLCanvasElement;
+              width?: number;
+              height?: number;
+              sourceUrl?: string;
+          }; // Added at runtime by ResourceMgr
     _atlasFailed?: boolean; // Added at runtime by ResourceMgr
 
     constructor(path: string, type: number, options: Partial<ResEntryOptions> = {}) {

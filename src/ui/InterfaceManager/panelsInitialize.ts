@@ -97,6 +97,7 @@ export default class PanelInitializer {
                     menuCandySkin.classList.add("ctrPointer");
                     menuCandySkin.addEventListener("click", () => {
                         SoundMgr.playSound(ResourceId.SND_TAP);
+                        skinSelectionView.markCandyAsChanged();
                         panelManager.showPanel(PanelId.SKIN_SELECT);
                     });
                 }

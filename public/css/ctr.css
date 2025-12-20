@@ -4116,6 +4116,37 @@ body {
     cursor: url(../cursors/handcursor.cur), url(../cursors/handcursor.png), auto;
 }
 
+/* Hand pointing animation */
+@keyframes hand-point {
+    0% {
+        transform: translateX(0px);
+    }
+    50% {
+        transform: translateX(-20px);
+    }
+    100% {
+        transform: translateX(0px);
+    }
+}
+
+.ui-1920 #menuCandyHand {
+    position: absolute;
+    left: 1080px;
+    top: 533px;
+    width: 179px;
+    height: 172px;
+    background-image: url(../images/1920/ui/candy_selection_fx.png);
+    background-repeat: no-repeat;
+    animation: hand-point 1.2s ease-in-out infinite;
+    pointer-events: none;
+    z-index: 10;
+    display: none;
+}
+
+.ui-1920 #menuCandyHand.show {
+    display: block;
+}
+
 .ui-1920 #menuBtnVbox {
     position: absolute;
     left: 671px;

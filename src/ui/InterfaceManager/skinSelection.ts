@@ -16,6 +16,7 @@ const ITEMS_PER_PAGE = 12;
 const SETTING_KEYS = {
     CANDY: "selectedCandySkin",
     ROPE: "selectedRopeSkin",
+    CANDY_WAS_CHANGED: "candyWasChanged",
 } as const;
 
 const padIndex = (index: number): string => String(index + 1).padStart(2, "0");
@@ -87,6 +88,26 @@ class SkinSelectionView {
 
         const candyClass = `candy_${padIndex(selectedCandy)}`;
         candyElement.className = `menu-sprite ${candyClass}`;
+
+        // Show hand pointing animation if candy was never changed
+        this.updateHandVisibility();
+    }
+
+    updateHandVisibility(): void {
+        const handElement = document.getElementById("menuCandyHand");
+        if (!handElement) return;
+
+        const candyWasChanged = SettingStorage.getIntOrDefault(SETTING_KEYS.CANDY_WAS_CHANGED, 0);
+        if (candyWasChanged === 0) {
+            handElement.classList.add("show");
+        } else {
+            handElement.classList.remove("show");
+        }
+    }
+
+    markCandyAsChanged(): void {
+        SettingStorage.set(SETTING_KEYS.CANDY_WAS_CHANGED, 1);
+        this.updateHandVisibility();
     }
 
     private buildTabs(): void {

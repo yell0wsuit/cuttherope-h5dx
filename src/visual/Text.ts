@@ -675,7 +675,7 @@ const getFontFamily = (
                 weight: "normal",
                 bigFontSize: 26,
                 smallFontSize: 18,
-                bigLineHeight: 28,
+                bigLineHeight: 36,
                 smallLineHeight: 24,
             };
         case LangId.KO:

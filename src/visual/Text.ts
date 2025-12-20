@@ -674,6 +674,13 @@ const getFontFamily = (
                 bigFontSize: 32,
                 smallFontSize: 18,
             };
+        case LangId.JA:
+            return {
+                family: "'MPLUSRounded1c-Medium', sans-serif",
+                weight: "normal",
+                bigFontSize: 30,
+                smallFontSize: 18,
+            };
         default:
             return {
                 family: "'gooddognew', sans-serif",

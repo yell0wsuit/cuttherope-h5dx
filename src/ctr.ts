@@ -50,6 +50,11 @@ const languageFonts: Partial<Record<number, FontConfig>> = {
         url: "/fonts/Cafe24Dongdong-v2.0.woff2",
         weight: "normal",
     },
+    [LangId.JA]: {
+        family: "MPLUSRounded1c-Medium",
+        url: "/fonts/MPLUSRounded1c-Medium.woff2",
+        weight: "normal",
+    },
 };
 
 const loadLanguageFont = async (langId: number): Promise<void> => {

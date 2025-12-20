@@ -1861,9 +1861,6 @@ body {
     height: 576px;
 }
 
-.ui-768 {
-}
-
 .ui-768 .useSD {
     display: block;
 }
@@ -4578,4 +4575,40 @@ body {
 
 .ui-1920 #loaderWindow {
     height: 1080px;
+}
+
+#processingOverlay {
+    z-index: 125;
+    background-color: rgba(0, 0, 0, 0.6);
+    pointer-events: none;
+}
+
+#processingIcon {
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.ui-1920 #processingOverlay {
+    width: 1920px;
+    height: 1080px;
+}
+
+.ui-1920 #processingIcon {
+    width: 192px;
+    height: 192px;
+    left: 864px;
+    top: 444px;
+    background-image: url(../images/1920/ui/menu_processing.webp);
 }

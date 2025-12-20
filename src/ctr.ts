@@ -69,6 +69,20 @@ const loadLanguageFont = async (langId: number): Promise<void> => {
     }
 };
 
+const showProcessingOverlay = (): void => {
+    const overlay = document.getElementById("processingOverlay");
+    if (overlay) {
+        overlay.style.display = "block";
+    }
+};
+
+const hideProcessingOverlay = (): void => {
+    const overlay = document.getElementById("processingOverlay");
+    if (overlay) {
+        overlay.style.display = "none";
+    }
+};
+
 const boot = async (): Promise<void> => {
     if (!platform.meetsRequirements()) {
         return;
@@ -81,8 +95,14 @@ const boot = async (): Promise<void> => {
     // Subscribe to language changes to load fonts dynamically
     // We use LanguageFontLoaded as an internal event that fires after font loading
     PubSub.subscribe(PubSub.ChannelId.LanguageFontLoaded, async () => {
+        // Show processing overlay with dimmed background
+        showProcessingOverlay();
+
         const newLang = settings.getLangId();
         await loadLanguageFont(newLang);
+
+        // Hide processing overlay
+        hideProcessingOverlay();
 
         // Now that font is loaded, notify all UI components to re-render
         PubSub.publish(PubSub.ChannelId.LanguageChanged);

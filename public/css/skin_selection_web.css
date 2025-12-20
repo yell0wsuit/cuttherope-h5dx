@@ -90,6 +90,22 @@
     height: 100%;
 }
 
+/* Skin panel backgrounds for different resolutions */
+.ui-1920 #skinPanel {
+    background: url(../images/1920/ui/skin_bg.webp);
+    background-size: cover;
+}
+
+.ui-1024 #skinPanel {
+    background: url(../images/1024/ui/skin_bg.webp);
+    background-size: cover;
+}
+
+.ui-768 #skinPanel {
+    background: url(../images/768/ui/skin_bg.webp);
+    background-size: cover;
+}
+
 #skinTabs {
     margin-top: 60px;
     margin-bottom: 20px;

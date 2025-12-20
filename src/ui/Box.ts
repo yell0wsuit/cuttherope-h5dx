@@ -253,18 +253,14 @@ class Box {
                 ctx.scale(1 / 1.015, 1);
 
                 if (this.purchased && !shouldHideLockDetails) {
-                    ctx.drawImage(
-                        this.reqImg,
-                        labelX,
-                        resolution.uiScaledNumber(220) + yOffset,
-                        textWidth,
-                        textHeight
-                    );
-                    ctx.drawImage(
-                        this.starImg,
-                        labelX + textWidth + starLeftMargin,
-                        resolution.uiScaledNumber(225) + yOffset
-                    );
+                    const starHeight = this.starImg.naturalHeight || this.starImg.height || 0;
+                    const baseY = resolution.uiScaledNumber(225) + yOffset;
+
+                    // Vertically center the number with the star
+                    const textY = 25 + baseY + (starHeight - textHeight) / 2;
+
+                    ctx.drawImage(this.reqImg, labelX, textY, textWidth, textHeight);
+                    ctx.drawImage(this.starImg, labelX + textWidth + starLeftMargin, baseY);
                 }
 
                 /*

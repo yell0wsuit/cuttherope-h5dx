@@ -1418,6 +1418,7 @@ body {
     top: 289px;
     transform: translateX(-50%);
     background-size: 755px 541px;
+    cursor: url(../cursors/handcursor.cur), url(../cursors/handcursor.png), auto;
 }
 
 .ui-1024 #menuBtnVbox {
@@ -2790,6 +2791,7 @@ body {
     top: 217px;
     transform: translateX(-50%);
     background-size: 566px 406px;
+    cursor: url(../cursors/handcursor.cur), url(../cursors/handcursor.png), auto;
 }
 
 .ui-768 #menuBtnVbox {
@@ -4111,6 +4113,7 @@ body {
     position: absolute;
     left: 937px;
     top: 455px;
+    cursor: url(../cursors/handcursor.cur), url(../cursors/handcursor.png), auto;
 }
 
 .ui-1920 #menuBtnVbox {

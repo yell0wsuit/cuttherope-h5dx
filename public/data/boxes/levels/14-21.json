@@ -1,0 +1,113 @@
+{
+  "settings": [
+    {
+      "name": 0,
+      "height": 480,
+      "gridSize": 32,
+      "width": 320
+    },
+    {
+      "name": 1,
+      "ropePhysicsSpeed": 1,
+      "special": 3,
+      "twoParts": false
+    }
+  ],
+  "objects": [
+    {
+      "name": 2,
+      "x": 259,
+      "y": 424
+    },
+    {
+      "name": 132,
+      "candyCaptured": true,
+      "x": 140,
+      "y": 96
+    },
+    {
+      "name": 60,
+      "size": 4,
+      "angle": 40,
+      "x": 80,
+      "y": 95,
+      "toggled": 1
+    },
+    {
+      "name": 60,
+      "size": 4,
+      "angle": -40,
+      "x": 205,
+      "y": 95,
+      "toggled": 1
+    },
+    {
+      "name": 60,
+      "size": 4,
+      "angle": -40,
+      "x": 80,
+      "y": 245,
+      "toggled": 2
+    },
+    {
+      "name": 60,
+      "size": 4,
+      "angle": 40,
+      "x": 205,
+      "y": 245,
+      "toggled": 2
+    },
+    {
+      "name": 3,
+      "x": 141,
+      "y": 170,
+      "timeout": -1
+    },
+    {
+      "name": 132,
+      "candyCaptured": true,
+      "x": 140,
+      "y": 265
+    },
+    {
+      "name": 3,
+      "x": 139,
+      "y": 338,
+      "timeout": -1
+    },
+    {
+      "name": 130,
+      "angle": -38,
+      "bouncer": true,
+      "bubble": true,
+      "x": 160,
+      "y": 430,
+      "grab": false,
+      "radius": 100
+    },
+    {
+      "name": 3,
+      "x": 259,
+      "y": 255,
+      "timeout": -1
+    },
+    {
+      "name": 81,
+      "size": 1,
+      "angle": 40,
+      "x": 42,
+      "y": 431
+    },
+    {
+      "toggleGroup": 0,
+      "name": 61,
+      "x": 290,
+      "y": 161
+    },
+    {
+      "name": 300,
+      "x": 37,
+      "y": 224
+    }
+  ]
+}

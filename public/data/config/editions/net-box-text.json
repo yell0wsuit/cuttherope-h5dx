@@ -364,6 +364,32 @@
         "levelCount": 25
     },
     {
+        "id": "lanternbox",
+        "boxText": {
+            "nl": "Lampionnen",
+            "br": "Caixa de Lanternas",
+            "it": "Scatola delle lanterne",
+            "ja": "ちょうちんの箱",
+            "de": "Laternenkiste",
+            "es": "Caja de linternas",
+            "en": "Lantern Box",
+            "zh_tw": "燈籠盒",
+            "ko": "랜턴 상자",
+            "fr": "Boîte lampion",
+            "ru": "C фонариками",
+            "zh": "灯笼盒"
+        },
+        "boxImage": "box14_bgd.webp",
+        "boxDoor": "levelbg14.webp",
+        "boxType": "NORMAL",
+        "unlockStars": 700,
+        "support": 12,
+        "showEarth": false,
+        "levelBackgroundId": "IMG_BGR_14_P1",
+        "levelOverlayId": "IMG_BGR_14_P1",
+        "levelCount": 25
+    },
+    {
         "id": "morecoming",
         "boxText": {
             "en": "New levels\ncoming soon!",

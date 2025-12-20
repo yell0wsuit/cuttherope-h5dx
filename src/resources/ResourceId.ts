@@ -264,8 +264,13 @@ const ResourceId = {
     IMG_OBJ_CANDY_50: 257,
     IMG_OBJ_CANDY_51: 258,
 
+    IMG_OBJ_LANTERN: 259,
+    SND_LANTERN_TELEPORT_IN: 260,
+    SND_LANTERN_TELEPORT_OUT: 261,
+    IMG_BGR_14_P1: 262,
+
     // Total number of resources
-    RESOURCES_COUNT: 258,
+    RESOURCES_COUNT: 263,
 } as const;
 
 export default ResourceId;

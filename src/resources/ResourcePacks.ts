@@ -104,6 +104,8 @@ class ResourcePacks {
         ResourceId.IMG_OBJ_CANDY_49,
         ResourceId.IMG_OBJ_CANDY_50,
         ResourceId.IMG_OBJ_CANDY_51,
+
+        ResourceId.IMG_OBJ_LANTERN,
     ];
 
     // -- Game resources for Round 5 promo --
@@ -227,6 +229,8 @@ class ResourcePacks {
         ResourceId.SND_STEAM_START,
         ResourceId.SND_STEAM_START2,
         ResourceId.SND_STEAM_END,
+        ResourceId.SND_LANTERN_TELEPORT_IN,
+        ResourceId.SND_LANTERN_TELEPORT_OUT,
     ];
 
     // --- Game UI ---

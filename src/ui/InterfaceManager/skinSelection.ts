@@ -4,6 +4,8 @@ import ResourceId from "@/resources/ResourceId";
 import panelManager from "@/ui/PanelManager";
 import PanelId from "@/ui/PanelId";
 import Text from "@/visual/Text";
+import Lang from "@/resources/Lang";
+import MenuStringId from "@/resources/MenuStringId";
 
 type SkinMode = "candy" | "rope";
 
@@ -91,26 +93,23 @@ class SkinSelectionView {
         if (!this.tabContainer) return;
         this.tabContainer.innerHTML = "";
 
-        const candyTab = this.createTab("Candy", "candy");
-        const ropeTab = this.createTab("Rope", "rope");
+        const candyTab = this.createTab(MenuStringId.CANDIES_BTN, "candy");
+        const ropeTab = this.createTab(MenuStringId.ROPE_SKINS_BTN, "rope");
 
         this.tabContainer.append(candyTab, ropeTab);
         this.updateTabState();
     }
 
-    private createTab(label: string, mode: SkinMode): HTMLDivElement {
+    private createTab(menuStringId: number, mode: SkinMode): HTMLDivElement {
         const tab = document.createElement("div");
-        tab.className = "skin-tab ctrPointer";
-
-        const bg = document.createElement("div");
-        bg.className = "skin-tab-bg sprite button_idle";
+        tab.className = "sBtn ctrPointer";
+        tab.dataset.mode = mode;
 
         const textImg = Text.drawBig({
-            text: label,
+            text: Lang.menuText(menuStringId),
             scaleToUI: true,
         });
 
-        tab.appendChild(bg);
         tab.appendChild(textImg);
 
         tab.addEventListener("click", () => {
@@ -127,10 +126,11 @@ class SkinSelectionView {
 
     private updateTabState(): void {
         if (!this.tabContainer) return;
-        const tabs = Array.from(this.tabContainer.querySelectorAll<HTMLDivElement>(".skin-tab"));
-        tabs.forEach((tab, index) => {
-            const isCandy = index === 0;
-            tab.classList.toggle("is-active", (this.mode === "candy") === isCandy);
+        const tabs = Array.from(this.tabContainer.querySelectorAll<HTMLDivElement>(".sBtn"));
+        tabs.forEach((tab) => {
+            const tabMode = tab.dataset.mode as SkinMode;
+            const isActive = this.mode === tabMode;
+            tab.classList.toggle("active", isActive);
         });
     }
 

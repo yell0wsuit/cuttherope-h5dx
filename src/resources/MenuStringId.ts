@@ -84,6 +84,8 @@ const MenuId = {
     PRIVACY: 201,
     HOLIDAY_LEVELS_UNAVAILABLE_TITLE: 202,
     HOLIDAY_LEVELS_UNAVAILABLE_TEXT: 203,
+    CANDIES_BTN: 204,
+    ROPE_SKINS_BTN: 205,
 } as const;
 
 export default MenuId;

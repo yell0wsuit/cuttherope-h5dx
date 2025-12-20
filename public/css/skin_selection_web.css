@@ -95,6 +95,32 @@
     margin-bottom: 20px;
 }
 
+#skinTabs .sBtn {
+    display: inline-block;
+    margin: 0 10px;
+    vertical-align: top;
+}
+
+#skinTabs .sBtn img {
+    position: relative;
+    pointer-events: none;
+}
+
+/* Active state for tabs - ui-1024 */
+.ui-1024 #skinTabs .sBtn.active {
+    background-position: left -66px;
+}
+
+/* Active state for tabs - ui-768 */
+.ui-768 #skinTabs .sBtn.active {
+    background-position: left -50px;
+}
+
+/* Active state for tabs - ui-1920 */
+.ui-1920 #skinTabs .sBtn.active {
+    background-position: left -124px;
+}
+
 .skin-tab {
     display: inline-block;
     margin: 0 10px;

@@ -1153,5 +1153,35 @@
     "zh": "这些节日关卡将在节日期间回归。请稍后再来！",
     "ja": "これらの祝祭レベルは 休日シーズンに戻ってきます。後でまた来てください！",
     "ko": "이 축제 레벨은 휴가철에 돌아옵니다. 나중에 다시 오세요!"
+  },
+  {
+    "id": 204,
+    "en": "Candies",
+    "ru": "Леденцы",
+    "fr": "Bonbons",
+    "de": "Bonbons",
+    "ko": "사탕",
+    "zh": "糖果",
+    "ja": "キャンディー",
+    "es": "Caramelos",
+    "it": "Caramelle",
+    "nl": "Snoep",
+    "br": "Doces",
+    "ca": "Caramels"
+  },
+  {
+    "id": 205,
+    "en": "Ropes",
+    "ru": "Верёвки",
+    "fr": "Cordes",
+    "de": "Seile",
+    "ko": "로프",
+    "zh": "绳子",
+    "ja": "ロープ",
+    "es": "Cuerdas",
+    "it": "Corde",
+    "nl": "Touwen",
+    "br": "Cordas",
+    "ca": "Cordes"
   }
 ]

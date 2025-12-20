@@ -130,6 +130,18 @@ class GameSceneTouch extends GameSceneUpdate {
             }
         }
 
+        for (const lantern of this.lanterns) {
+            if (lantern?.onTouchDown(cameraAdjustedX, cameraAdjustedY)) {
+                this.dd.callObject(
+                    this,
+                    this.revealCandyFromLantern,
+                    null,
+                    GameSceneConstants.LANTERN_CANDY_REVEAL_TIME
+                );
+                return true;
+            }
+        }
+
         let activeCircle: RotatedCircle | null = null;
         let hasCircleInside = false;
         let intersectsAnotherCircle = false;
@@ -640,6 +652,15 @@ class GameSceneTouch extends GameSceneUpdate {
             }
         }
     };
+
+    revealCandyFromLantern(): void {
+        this.isCandyInLantern = false;
+        this.candy.color = RGBAColor.solidOpaque.copy();
+        this.candy.passTransformationsToChilds = false;
+        this.candy.scaleX = this.candy.scaleY = 0.71;
+        this.candyMain.scaleX = this.candyMain.scaleY = 0.71;
+        this.candyTop.scaleX = this.candyTop.scaleY = 0.71;
+    }
 }
 
 export default GameSceneTouch;

@@ -45,6 +45,8 @@ export const SOCK_SPEED_K = 0.9;
 
 export const SOCK_COLLISION_Y_OFFSET = 25;
 
+export const LANTERN_CANDY_REVEAL_TIME = 0.1;
+
 export const CandyBlink = {
     INITIAL: 0,
     STAR: 1,
@@ -170,6 +172,12 @@ export const IMG_OBJ_BUBBLE_ATTACHED_bubble = 0;
 export const IMG_OBJ_BUBBLE_ATTACHED_stain_01 = 1;
 export const IMG_OBJ_BUBBLE_ATTACHED_stain_02 = 2;
 export const IMG_OBJ_BUBBLE_ATTACHED_stain_03 = 3;
+
+export const IMG_OBJ_LANTERN_fire = 0;
+export const IMG_OBJ_LANTERN_lantern_end = 1;
+export const IMG_OBJ_LANTERN_lantern_start = 2;
+export const IMG_OBJ_LANTERN_inner_candy_start = 3;
+export const IMG_OBJ_LANTERN_CANDY_QUAD = 10;
 
 export const IMG_OBJ_GHOST_body = 0;
 export const IMG_OBJ_GHOST_face = 1;

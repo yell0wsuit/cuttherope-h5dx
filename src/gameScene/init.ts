@@ -27,6 +27,7 @@ import type CTRGameObject from "@/game/CTRGameObject";
 import type TutorialText from "@/game/TutorialText";
 import type Drawing from "@/game/Drawing";
 import type Bouncer from "@/game/Bouncer";
+import type Lantern from "@/game/Lantern";
 import type RotatedCircle from "@/game/RotatedCircle";
 import type PollenDrawer from "@/game/PollenDrawer";
 import type GravityButton from "@/game/GravityButton";
@@ -112,6 +113,7 @@ abstract class GameSceneInit extends BaseElement {
     stars: (Star | null)[];
     bubbles: Bubble[];
     pumps: Pump[];
+    lanterns: Lantern[];
     tubes: SteamTube[];
     rockets: { update(delta: number): void }[];
     socks: Sock[];
@@ -144,6 +146,7 @@ abstract class GameSceneInit extends BaseElement {
     tummyTeasers: number;
     mouthOpen: boolean;
     noCandy: boolean;
+    isCandyInLantern: boolean;
     noCandyL: boolean;
     noCandyR: boolean;
     spiderTookCandy: boolean;
@@ -258,6 +261,7 @@ abstract class GameSceneInit extends BaseElement {
         this.stars = [];
         this.bubbles = [];
         this.pumps = [];
+        this.lanterns = [];
         this.rockets = [];
         this.socks = [];
         this.ghosts = [];
@@ -367,6 +371,7 @@ abstract class GameSceneInit extends BaseElement {
         this.tummyTeasers = 0;
         this.mouthOpen = false;
         this.noCandy = false;
+        this.isCandyInLantern = false;
         this.noCandyL = false;
         this.noCandyR = false;
         this.spiderTookCandy = false;

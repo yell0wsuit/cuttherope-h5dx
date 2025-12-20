@@ -50,6 +50,7 @@ export interface ResolutionProfile {
     // Bouncer/pump
     BOUNCER_MAX_MOVEMENT: number;
     BOUNCER_RADIUS: number;
+
     PUMP_POWER_RADIUS?: number;
     PUMP_BB: Rectangle;
     PUMP_DIRT_SPEED: number;
@@ -109,6 +110,10 @@ export interface ResolutionProfile {
     // Tutorial
     TUTORIAL_HAND_TARGET_X_1: number;
     TUTORIAL_HAND_TARGET_X_2: number;
+
+    // Lantern
+    LANTERN_CAPTURE_RADIUS: number;
+    LANTERN_TOUCH_RADIUS: number;
 
     // Added by scaleResolution function
     uiScaledNumber?: (n: number) => number;

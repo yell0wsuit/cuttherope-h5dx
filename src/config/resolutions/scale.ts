@@ -41,6 +41,8 @@ const initProfile = (
     target.STAR_DEFAULT_BB = Rectangle.scaleCopy(base.STAR_DEFAULT_BB, scale);
 
     target.BOUNCER_RADIUS = base.BOUNCER_RADIUS * scale;
+    target.LANTERN_CAPTURE_RADIUS = base.LANTERN_CAPTURE_RADIUS * scale;
+    target.LANTERN_TOUCH_RADIUS = base.LANTERN_TOUCH_RADIUS * scale;
 
     if (base.PUMP_POWER_RADIUS !== undefined) {
         const scaledPumpPower = base.PUMP_POWER_RADIUS * scale;

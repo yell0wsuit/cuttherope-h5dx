@@ -21,6 +21,7 @@ import type Spikes from "@/game/Spikes";
 import type Star from "@/game/Star";
 import type Ghost from "@/game/Ghost";
 import type SteamTube from "@/game/SteamTube";
+import type Lantern from "@/game/Lantern";
 import type DelayedDispatcher from "@/utils/DelayedDispatcher";
 import type CTRGameObject from "@/game/CTRGameObject";
 import type TutorialText from "@/game/TutorialText";
@@ -67,6 +68,7 @@ export interface GameScene extends BaseElement {
     spiderWon(grab: Grab): void;
     teleport(): void;
     operatePump(pump: Pump, delta: number): void;
+    revealCandyFromLantern(): void;
     handleBounce(bouncer: Bouncer, star: SceneStar, delta: number): void;
     pointOutOfScreen(point: SceneStar): boolean;
     cut(razor: BaseElement | null, v1: Vector, v2: Vector, immediate: boolean): number;
@@ -92,6 +94,7 @@ export interface GameScene extends BaseElement {
     rotatedCircles: RotatedCircle[];
     bubbles: Bubble[];
     pumps: Pump[];
+    lanterns: Lantern[];
     tubes: SteamTube[];
     spikes: Spikes[];
     bouncers: Bouncer[];
@@ -109,6 +112,7 @@ export interface GameScene extends BaseElement {
     mouthCloseTimer: number;
     twoParts: PartsTypeValue;
     noCandy: boolean;
+    isCandyInLantern: boolean;
     noCandyL: boolean;
     noCandyR: boolean;
     targetSock: Sock | null;

@@ -13,7 +13,7 @@ export function updateTargetState(this: GameScene, delta: number): boolean {
         const mouthOpenRadius = resolution.MOUTH_OPEN_RADIUS;
         if (!this.mouthOpen) {
             targetVector = new Vector(this.target.x, this.target.y);
-            if (this.star.pos.distance(targetVector) < mouthOpenRadius) {
+            if (!this.isCandyInLantern && this.star.pos.distance(targetVector) < mouthOpenRadius) {
                 this.mouthOpen = true;
                 this.target.playTimeline(GameSceneConstants.CharAnimation.MOUTH_OPEN);
                 SoundMgr.playSound(ResourceId.SND_MONSTER_OPEN);
@@ -24,7 +24,10 @@ export function updateTargetState(this: GameScene, delta: number): boolean {
 
             if (this.mouthCloseTimer <= 0) {
                 targetVector = new Vector(this.target.x, this.target.y);
-                if (this.star.pos.distance(targetVector) > mouthOpenRadius) {
+                if (
+                    this.isCandyInLantern ||
+                    this.star.pos.distance(targetVector) > mouthOpenRadius
+                ) {
                     this.mouthOpen = false;
                     this.target.playTimeline(GameSceneConstants.CharAnimation.MOUTH_CLOSE);
                     SoundMgr.playSound(ResourceId.SND_MONSTER_CLOSE);

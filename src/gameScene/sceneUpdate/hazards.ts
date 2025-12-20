@@ -10,7 +10,12 @@ import Vector from "@/core/Vector";
 import resolution from "@/resolution";
 import * as GameSceneConstants from "@/gameScene/constants";
 import { IS_XMAS } from "@/utils/SpecialEvents";
+import Lantern from "@/game/Lantern";
+import KeyFrame from "@/visual/KeyFrame";
+import Timeline from "@/visual/Timeline";
+import RGBAColor from "@/core/RGBAColor";
 import { applyStarImpulse, isCandyHit } from "./collisionHelpers";
+import type GameObject from "@/visual/GameObject";
 import type BaseElement from "@/visual/BaseElement";
 import type Bubble from "@/game/Bubble";
 import type Bouncer from "@/game/Bouncer";
@@ -19,6 +24,7 @@ import type Pump from "@/game/Pump";
 import type RotatedCircle from "@/game/RotatedCircle";
 import type SteamTube from "@/game/SteamTube";
 import type Spikes from "@/game/Spikes";
+import type LanternType from "@/game/Lantern";
 import type { GameScene, SceneStar } from "@/types/game-scene";
 
 type SockState = (typeof Sock.StateType)[keyof typeof Sock.StateType];
@@ -39,6 +45,14 @@ type HazardScene = GameScene & {
     rockets: Rocket[];
     teleport(): void;
     operatePump(pump: Pump, delta: number): void;
+    lanterns: LanternType[];
+    releaseAllRopes(left: boolean): void;
+    popCandyBubble(isLeft: boolean): void;
+    candy: GameObject;
+    candyMain: GameObject;
+    candyTop: GameObject;
+    candyBubble: Bubble | null;
+    isCandyInLantern: boolean;
     handleBounce(bouncer: Bouncer, star: SceneStar, delta: number): void;
     cut(razor: BaseElement | null, v1: Vector, v2: Vector, immediate: boolean): number;
     candyResourceId: (typeof ResourceId)[keyof typeof ResourceId];
@@ -283,6 +297,52 @@ export function updateHazards(this: HazardScene, delta: number, numGrabs: number
         }
     }
 
+    const lanternCaptureRadius = resolution.LANTERN_CAPTURE_RADIUS ?? resolution.STAR_RADIUS;
+    for (const lantern of this.lanterns) {
+        lantern.update(delta);
+        const activeLantern =
+            lantern.lanternState === Lantern.STATE.INACTIVE &&
+            Vector.distance(this.star.pos.x, this.star.pos.y, lantern.x, lantern.y) <
+                lanternCaptureRadius;
+        if (!this.noCandy && !this.isCandyInLantern && activeLantern) {
+            this.isCandyInLantern = true;
+            this.candy.passTransformationsToChilds = true;
+            this.candyMain.scaleX = this.candyMain.scaleY = 1;
+            this.candyTop.scaleX = this.candyTop.scaleY = 1;
+            const candyTimeline = new Timeline();
+            candyTimeline.addKeyFrame(
+                KeyFrame.makePos(this.candy.x, this.candy.y, KeyFrame.TransitionType.LINEAR, 0)
+            );
+            candyTimeline.addKeyFrame(
+                KeyFrame.makePos(lantern.x, lantern.y, KeyFrame.TransitionType.LINEAR, 0.1)
+            );
+            candyTimeline.addKeyFrame(
+                KeyFrame.makeScale(0.71, 0.71, KeyFrame.TransitionType.LINEAR, 0)
+            );
+            candyTimeline.addKeyFrame(
+                KeyFrame.makeScale(0.3, 0.3, KeyFrame.TransitionType.LINEAR, 0.1)
+            );
+            candyTimeline.addKeyFrame(
+                KeyFrame.makeColor(RGBAColor.solidOpaque.copy(), KeyFrame.TransitionType.LINEAR, 0)
+            );
+            candyTimeline.addKeyFrame(
+                KeyFrame.makeColor(
+                    RGBAColor.transparent.copy(),
+                    KeyFrame.TransitionType.LINEAR,
+                    0.1
+                )
+            );
+            this.candy.removeTimeline(0);
+            this.candy.addTimelineWithID(candyTimeline, 0);
+            this.candy.playTimeline(0);
+            this.releaseAllRopes(false);
+            if (this.candyBubble) {
+                this.popCandyBubble(false);
+            }
+            this.dd.callObject(lantern, lantern.captureCandyFromDispatcher, [this.star], 0.05);
+        }
+    }
+
     // razors
     for (let i = 0, len = this.razors.length; i < len; i++) {
         const r = this.razors[i]!;
@@ -299,6 +359,10 @@ export function updateHazards(this: HazardScene, delta: number, numGrabs: number
         // only update if something happens
         if (s.mover || s.shouldUpdateRotation || s.electro) {
             s.update(delta);
+        }
+
+        if (this.isCandyInLantern) {
+            continue;
         }
 
         if (!s.electro || s.electroOn) {

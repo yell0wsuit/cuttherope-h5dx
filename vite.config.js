@@ -7,7 +7,7 @@ import process from "node:process";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const APP_VERSION = "5";
+const APP_VERSION = "6";
 
 export default defineConfig(({ mode }) => {
     const isDev = mode === "development";

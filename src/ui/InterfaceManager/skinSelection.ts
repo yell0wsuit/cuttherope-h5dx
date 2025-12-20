@@ -6,6 +6,7 @@ import PanelId from "@/ui/PanelId";
 import Text from "@/visual/Text";
 import Lang from "@/resources/Lang";
 import MenuStringId from "@/resources/MenuStringId";
+import PubSub from "@/utils/PubSub";
 
 type SkinMode = "candy" | "rope";
 
@@ -33,6 +34,7 @@ class SkinSelectionView {
     private mode: SkinMode = "candy";
     private currentPage = 0;
     private tabsBuilt = false;
+    private languageSubscribed = false;
     private tabContainer: HTMLElement | null = null;
     private grid: HTMLElement | null = null;
     private backButton: HTMLElement | null = null;
@@ -46,7 +48,13 @@ class SkinSelectionView {
         this.navBack = document.getElementById("skinNavBack");
         this.navForward = document.getElementById("skinNavForward");
 
-        if (!this.tabContainer || !this.grid || !this.backButton || !this.navBack || !this.navForward) {
+        if (
+            !this.tabContainer ||
+            !this.grid ||
+            !this.backButton ||
+            !this.navBack ||
+            !this.navForward
+        ) {
             return;
         }
 
@@ -75,6 +83,13 @@ class SkinSelectionView {
             });
 
             this.tabsBuilt = true;
+        }
+
+        if (!this.languageSubscribed) {
+            PubSub.subscribe(PubSub.ChannelId.LanguageChanged, () => {
+                this.updateTabText();
+            });
+            this.languageSubscribed = true;
         }
 
         this.renderGrid();
@@ -119,6 +134,30 @@ class SkinSelectionView {
 
         this.tabContainer.append(candyTab, ropeTab);
         this.updateTabState();
+    }
+
+    private updateTabText(): void {
+        if (!this.tabContainer) return;
+        const tabs = Array.from(this.tabContainer.querySelectorAll<HTMLDivElement>(".sBtn"));
+
+        tabs.forEach((tab) => {
+            const tabMode = tab.dataset.mode as SkinMode;
+            const menuStringId =
+                tabMode === "candy" ? MenuStringId.CANDIES_BTN : MenuStringId.ROPE_SKINS_BTN;
+
+            // Replace the text image while preserving event listeners
+            const oldTextImg = tab.firstChild;
+            const newTextImg = Text.drawBig({
+                text: Lang.menuText(menuStringId),
+                scaleToUI: true,
+            });
+
+            if (oldTextImg) {
+                tab.replaceChild(newTextImg, oldTextImg);
+            } else {
+                tab.appendChild(newTextImg);
+            }
+        });
     }
 
     private createTab(menuStringId: number, mode: SkinMode): HTMLDivElement {

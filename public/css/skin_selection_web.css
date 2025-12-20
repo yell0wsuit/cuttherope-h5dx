@@ -192,7 +192,7 @@
 .ui-1024 #skinNavForward div {
     width: 59px;
     height: 71px;
-    background-image: url(../images/1024/ui/box_nav_menu.png);
+    background-image: url(../images/1024/ui/box_nav_menu.webp);
     background-repeat: no-repeat;
 }
 
@@ -236,7 +236,7 @@
 .ui-768 #skinNavForward div {
     width: 44px;
     height: 53px;
-    background-image: url(../images/768/ui/box_nav_menu.png);
+    background-image: url(../images/768/ui/box_nav_menu.webp);
     background-repeat: no-repeat;
 }
 
@@ -280,7 +280,7 @@
 .ui-1920 #skinNavForward div {
     width: 111px;
     height: 133px;
-    background-image: url(../images/1920/ui/box_nav_menu.png);
+    background-image: url(../images/1920/ui/box_nav_menu.webp);
     background-repeat: no-repeat;
 }
 

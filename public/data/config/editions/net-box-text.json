@@ -383,7 +383,7 @@
         "boxDoor": "levelbg14.webp",
         "boxType": "NORMAL",
         "unlockStars": 700,
-        "support": 12,
+        "support": 13,
         "showEarth": false,
         "levelBackgroundId": "IMG_BGR_14_P1",
         "levelOverlayId": "IMG_BGR_14_P1",

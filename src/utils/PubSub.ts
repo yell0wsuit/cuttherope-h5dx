@@ -16,6 +16,7 @@ export enum ChannelId {
     ControllerViewHidden,
     ControllerViewShow,
     LanguageChanged,
+    LanguageFontLoaded,
     ShowOptionsPage,
     LoadIntroVideo,
     Share,

@@ -222,22 +222,42 @@ a:focus {
 
 @font-face {
     font-family: gooddogplain;
-    src: url(../fonts/gooddog-plain/GoodDog-webfont.eot);
-    src: url(../fonts/gooddog-plain/GoodDog-webfont.eot?#iefix) format("embedded-opentype"),
-        url(../fonts/gooddog-plain/GoodDog-webfont.woff) format("woff"),
-        url(../fonts/gooddog-plain/GoodDog-webfont.ttf) format("truetype"),
-        url(../fonts/gooddog-plain/GoodDog-webfont.svg#GoodDogRegular) format("svg");
+    src: url(../fonts/gooddog-plain/GoodDog-webfont.woff) format("woff");
     font-weight: 400;
     font-style: normal;
 }
 
 @font-face {
     font-family: gooddognew;
-    src: url(../fonts/gooddog-new/gooddog_new-webfont.eot);
-    src: url(../fonts/gooddog-new/gooddog_new-webfont.eot?#iefix) format("embedded-opentype"),
-        url(../fonts/gooddog-new/gooddog_new-webfont.woff) format("woff"),
-        url(../fonts/gooddog-new/gooddog_new-webfont.ttf) format("truetype"),
-        url(../fonts/gooddog-new/gooddog_new-webfont.svg#GoodDogNewRegular) format("svg");
+    src: url(../fonts/gooddog-new/gooddog_new-webfont.woff2) format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Playpen Sans";
+    src: url(../fonts/PlaypenSans-SemiBold.woff2) format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Cafe24 Dongdong";
+    src: url(../fonts/Cafe24Dongdong-v2.0.woff2) format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "MPLUSRounded1c-Medium";
+    src: url(../fonts/MPLUSRounded1c-Medium.woff2) format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Huninn-Regular";
+    src: url(../fonts/Huninn-Regular.woff2) format("woff2");
     font-weight: 400;
     font-style: normal;
 }
@@ -254,7 +274,7 @@ body {
     -o-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    -ms-touch-action: none;
+    touch-action: none;
 }
 
 #bg {
@@ -404,7 +424,7 @@ th {
 }
 
 body {
-    -ms-touch-action: pan-y;
+    touch-action: pan-y;
     overflow: hidden;
 }
 
@@ -1376,8 +1396,13 @@ body {
 
 .ui-1024 #dragText,
 .ui-1024 #cutText {
-    margin-top: 115px;
-    margin-left: -23px;
+    margin-top: 100px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    max-height: 60px;
+    overflow: hidden;
 }
 
 .ui-1024 #vid {
@@ -1829,15 +1854,11 @@ body {
 }
 
 .ui-1024 .lang-system #flag {
-    position: static;
-    top: auto;
+    top: 0px;
 }
 
 .ui-1024 #loaderWindow {
     height: 576px;
-}
-
-.ui-768 {
 }
 
 .ui-768 .useSD {
@@ -2749,8 +2770,13 @@ body {
 
 .ui-768 #dragText,
 .ui-768 #cutText {
-    margin-top: 86px;
-    margin-left: -17px;
+    margin-top: 75px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    max-height: 45px;
+    overflow: hidden;
 }
 
 .ui-768 #vid {
@@ -3170,8 +3196,7 @@ body {
 }
 
 .ui-768 .lang-system #flag {
-    position: static;
-    top: auto;
+    top: 0px;
 }
 
 .ui-768 #loaderWindow {
@@ -3717,7 +3742,7 @@ body {
     height: 848px;
     margin: 113px auto 0;
     text-align: center;
-    font-family: gooddogplain;
+    font-family: gooddognew;
     font-size: 60px;
     color: #3c2110;
     position: relative;
@@ -4074,8 +4099,14 @@ body {
 
 .ui-1920 #dragText,
 .ui-1920 #cutText {
-    margin-top: 216px;
-    margin-left: -43px;
+    margin-top: 220px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    max-height: 110px;
+    overflow: hidden;
+    z-index: 2;
 }
 
 .ui-1920 #vid {
@@ -4539,10 +4570,45 @@ body {
 }
 
 .ui-1920 .lang-system #flag {
-    position: static;
-    top: auto;
+    top: -40px;
 }
 
 .ui-1920 #loaderWindow {
     height: 1080px;
+}
+
+#processingOverlay {
+    z-index: 125;
+    background-color: rgba(0, 0, 0, 0.6);
+    pointer-events: auto;
+}
+
+#processingIcon {
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.ui-1920 #processingOverlay {
+    width: 1920px;
+    height: 1080px;
+}
+
+.ui-1920 #processingIcon {
+    width: 192px;
+    height: 192px;
+    left: 864px;
+    top: 444px;
+    background-image: url(../images/1920/ui/menu_processing.webp);
 }

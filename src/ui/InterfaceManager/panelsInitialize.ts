@@ -495,8 +495,8 @@ export default class PanelInitializer {
                     }
                     settings.setLangId(newLangId);
 
-                    // send the notification that language has changed
-                    PubSub.publish(PubSub.ChannelId.LanguageChanged);
+                    // Trigger font loading first, which will then publish LanguageChanged
+                    PubSub.publish(PubSub.ChannelId.LanguageFontLoaded);
                 });
 
                 // click or drag to cut
@@ -566,9 +566,8 @@ export default class PanelInitializer {
                             "lang-system lang-en lang-de lang-ru lang-fr lang-ca lang-br lang-es lang-it lang-nl lang-ko lang-ja lang-zh"
                         );
                         addClass(langElement, `lang-${LangId.toCountryCode(langId)}`);
-                        if (langId >= 4 && langId <= 9) {
-                            addClass(langElement, "lang-system");
-                        }
+                        // Apply lang-system to all languages since we're using webfont rendering for all
+                        addClass(langElement, "lang-system");
                     }
                 };
 

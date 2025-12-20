@@ -92,6 +92,8 @@ class Box {
     textRendered: boolean;
     renderText: () => void;
     reqImg: HTMLImageElement;
+    reqStars: number;
+    renderReqStars: () => void;
     omNomImg: HTMLImageElement;
     lockImg: HTMLImageElement;
     starImg: HTMLImageElement;
@@ -145,7 +147,19 @@ class Box {
             PubSub.subscribe(PubSub.ChannelId.LanguageChanged, this.renderText)
         );
 
-        this.reqImg = Text.drawBig({ text: String(reqstars), scaleToUI: true }) as HTMLImageElement;
+        this.reqStars = reqstars;
+        this.reqImg = new Image();
+        this.renderReqStars = () => {
+            this.reqImg = Text.drawBig({
+                text: String(this.reqStars),
+                scaleToUI: true,
+            }) as HTMLImageElement;
+        };
+        this.renderReqStars();
+
+        this.pubSubSubscriptions.push(
+            PubSub.subscribe(PubSub.ChannelId.LanguageChanged, this.renderReqStars)
+        );
 
         this.omNomImg = new Image();
         this.omNomImg.src = `${platform.uiImageBaseUrl}box_omnom.webp`;
@@ -253,18 +267,14 @@ class Box {
                 ctx.scale(1 / 1.015, 1);
 
                 if (this.purchased && !shouldHideLockDetails) {
-                    ctx.drawImage(
-                        this.reqImg,
-                        labelX,
-                        resolution.uiScaledNumber(220) + yOffset,
-                        textWidth,
-                        textHeight
-                    );
-                    ctx.drawImage(
-                        this.starImg,
-                        labelX + textWidth + starLeftMargin,
-                        resolution.uiScaledNumber(225) + yOffset
-                    );
+                    const starHeight = this.starImg.naturalHeight || this.starImg.height || 0;
+                    const baseY = resolution.uiScaledNumber(225) + yOffset;
+
+                    // Vertically center the number with the star
+                    const textY = 25 + baseY + (starHeight - textHeight) / 2;
+
+                    ctx.drawImage(this.reqImg, labelX, textY, textWidth, textHeight);
+                    ctx.drawImage(this.starImg, labelX + textWidth + starLeftMargin, baseY);
                 }
 
                 /*

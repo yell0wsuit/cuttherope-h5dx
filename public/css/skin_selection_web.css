@@ -155,10 +155,12 @@
 }
 
 #skinGrid {
-    display: grid;
-    grid-template-columns: repeat(4, 203px);
+    display: flex;
+    flex-wrap: wrap;
     gap: 15px;
     justify-content: center;
+    max-width: 892px;
+    margin: 0 auto;
 }
 
 /* Skin navigation arrows */

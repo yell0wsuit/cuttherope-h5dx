@@ -105,7 +105,7 @@ class PanelManager {
     /** Initialize when app is ready */
     appReady(onInitializePanel?: (panelId: PanelIdType) => void): void {
         this.shadowImage = new Image();
-        this.shadowImage.src = `${platform.uiImageBaseUrl}shadow.png`;
+        this.shadowImage.src = `${platform.uiImageBaseUrl}shadow.webp`;
 
         if (onInitializePanel) {
             for (const panel of this.panels) {

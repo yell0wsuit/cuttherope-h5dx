@@ -110,7 +110,7 @@ class TimeBox extends Box {
     ) {
         super(boxIndex, bgimg, reqstars, islocked, type);
         this.lockedBoxImg = new Image();
-        this.lockedBoxImg.src = this.boxImg.src.replace(".png", "_locked.png");
+        this.lockedBoxImg.src = this.boxImg.src.replace(".webp", "_locked.webp");
         this.isBkCodeLocked = isLocked(boxIndex);
         this.isTimeLocked =
             QueryStrings.unlockAllBoxes !== true && Date.now() < (BoxOpenDates[boxIndex] ?? 0);

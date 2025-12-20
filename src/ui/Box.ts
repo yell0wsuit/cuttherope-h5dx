@@ -148,16 +148,16 @@ class Box {
         this.reqImg = Text.drawBig({ text: String(reqstars), scaleToUI: true }) as HTMLImageElement;
 
         this.omNomImg = new Image();
-        this.omNomImg.src = `${platform.uiImageBaseUrl}box_omnom.png`;
+        this.omNomImg.src = `${platform.uiImageBaseUrl}box_omnom.webp`;
 
         this.lockImg = new Image();
-        this.lockImg.src = `${platform.uiImageBaseUrl}box_lock.png`;
+        this.lockImg.src = `${platform.uiImageBaseUrl}box_lock.webp`;
 
         this.starImg = new Image();
-        this.starImg.src = `${platform.uiImageBaseUrl}star_result_small.png`;
+        this.starImg.src = `${platform.uiImageBaseUrl}star_result_small.webp`;
 
         this.perfectMark = new Image();
-        this.perfectMark.src = `${platform.uiImageBaseUrl}perfect_mark.png`;
+        this.perfectMark.src = `${platform.uiImageBaseUrl}perfect_mark.webp`;
 
         this.includeBoxNumberInTitle = true;
     }

@@ -111,7 +111,7 @@ class EasterEggManager {
                     SocialHelper.postToFeed(
                         Lang.menuText(MenuStringId.SHARE_DRAWING),
                         SocialHelper.siteDescription,
-                        `${platform.getDrawingBaseUrl()}drawing${drawingNum}.jpg`,
+                        `${platform.getDrawingBaseUrl()}drawing${drawingNum}.webp`,
                         () => {
                             closeDrawing();
                             return true;

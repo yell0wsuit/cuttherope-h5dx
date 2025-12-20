@@ -63,8 +63,8 @@ class BoxDoors {
             BoxDoors.#doorImages[i] = doorImg;
         }
 
-        BoxDoors.#tapeImgL.src = `${platform.uiImageBaseUrl}leveltape_left.png`;
-        BoxDoors.#tapeImgR.src = `${platform.uiImageBaseUrl}leveltape_right.png`;
+        BoxDoors.#tapeImgL.src = `${platform.uiImageBaseUrl}leveltape_left.webp`;
+        BoxDoors.#tapeImgR.src = `${platform.uiImageBaseUrl}leveltape_right.webp`;
 
         BoxDoors.preRenderDoors();
     }

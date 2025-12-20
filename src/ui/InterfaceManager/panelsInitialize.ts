@@ -434,7 +434,7 @@ export default class PanelInitializer {
                     SocialHelper.postToFeed(
                         platform.getGameCompleteShareText(totalStars, possibleStars),
                         SocialHelper.siteDescription,
-                        `${platform.getScoreImageBaseUrl()}score${totalStars}.png`,
+                        `${platform.getScoreImageBaseUrl()}score${totalStars}.webp`,
                         () => true
                     );
                 });*/

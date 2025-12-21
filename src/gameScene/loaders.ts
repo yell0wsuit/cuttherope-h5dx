@@ -21,6 +21,7 @@ import { loadBouncer } from "./loadObjects/loadBouncer";
 import { loadSteamTube } from "./loadObjects/loadSteamTube";
 import { loadTarget } from "./loadObjects/loadTarget";
 import { loadGhost } from "./loadObjects/loadGhost";
+import { loadLantern } from "./loadObjects/loadLantern";
 
 type MapData = Record<string, MapLayerItem[]>;
 
@@ -52,6 +53,7 @@ abstract class GameSceneLoaders extends GameSceneInit {
     loadBouncer = loadBouncer;
     loadTarget = loadTarget;
     loadGhost = loadGhost;
+    loadLantern = loadLantern;
 
     protected override loadMap(map: MapData | null | undefined): void {
         if (!map) {

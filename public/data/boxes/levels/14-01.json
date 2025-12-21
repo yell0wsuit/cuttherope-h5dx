@@ -1,0 +1,321 @@
+{
+  "settings": [
+    {
+      "name": 0,
+      "height": 480,
+      "gridSize": 32,
+      "width": 320
+    },
+    {
+      "name": 1,
+      "ropePhysicsSpeed": 1,
+      "special": 3,
+      "twoParts": false
+    }
+  ],
+  "nl": [
+    {
+      "name": 4,
+      "text": "Stop een snoepje in een lampion en het verspringt naar alle andere lampionnen",
+      "x": 50,
+      "y": 250,
+      "height": 60,
+      "locale": "nl",
+      "width": 190
+    },
+    {
+      "name": 4,
+      "text": "Raak de lampion aan waaruit je het snoepje wilt laten vallen",
+      "special": 3,
+      "x": 60,
+      "y": 50,
+      "height": 60,
+      "locale": "nl",
+      "width": 200
+    }
+  ],
+  "br": [
+    {
+      "name": 4,
+      "text": "Ponha um doce em uma lanterna e ele aparece em todas as outras.",
+      "x": 50,
+      "y": 250,
+      "height": 60,
+      "locale": "br",
+      "width": 190
+    },
+    {
+      "name": 4,
+      "text": "Toque em qualquer lanterna para fazer o doce cair dela.",
+      "special": 3,
+      "x": 60,
+      "y": 50,
+      "height": 60,
+      "locale": "br",
+      "width": 200
+    }
+  ],
+  "it": [
+    {
+      "name": 4,
+      "text": "Metti le caramelle in una lanterna per farla apparire nelle altre.",
+      "x": 50,
+      "y": 250,
+      "height": 60,
+      "locale": "it",
+      "width": 190
+    },
+    {
+      "name": 4,
+      "text": "Tocca una lanterna qualsiasi per far cadere la caramella.",
+      "special": 3,
+      "x": 60,
+      "y": 50,
+      "height": 60,
+      "locale": "it",
+      "width": 200
+    }
+  ],
+  "ja": [
+    {
+      "name": 4,
+      "text": "ちょうちんに *キャンディを *入れると *他のちょうちんに *弾けだします。",
+      "x": 50,
+      "y": 250,
+      "height": 60,
+      "locale": "ja",
+      "width": 190
+    },
+    {
+      "name": 4,
+      "text": "キャンディを *落とすには *ちょうちんを *タップします。",
+      "special": 3,
+      "x": 60,
+      "y": 50,
+      "height": 60,
+      "locale": "ja",
+      "width": 200
+    }
+  ],
+  "de": [
+    {
+      "name": 4,
+      "text": "Packe eine Süßigkeit in eine Laterne und sie erscheint in allen anderen.",
+      "x": 50,
+      "y": 250,
+      "height": 60,
+      "locale": "de",
+      "width": 190
+    },
+    {
+      "name": 4,
+      "text": "Tippe auf eine Laterne, um die Süßigkeit herausfallen zu lassen.",
+      "special": 3,
+      "x": 60,
+      "y": 50,
+      "height": 60,
+      "locale": "de",
+      "width": 200
+    }
+  ],
+  "es": [
+    {
+      "name": 4,
+      "text": "Pon caramelo en un farol y aparece en todos los demás.",
+      "x": 50,
+      "y": 250,
+      "height": 60,
+      "locale": "es",
+      "width": 190
+    },
+    {
+      "name": 4,
+      "text": "Pulsa cualquier farol para hacer que el caramelo caiga desde este.",
+      "special": 3,
+      "x": 60,
+      "y": 50,
+      "height": 60,
+      "locale": "es",
+      "width": 200
+    }
+  ],
+  "en": [
+    {
+      "name": 4,
+      "text": "Put candy in one lantern and it pops into all the others.",
+      "x": 50,
+      "y": 250,
+      "height": 60,
+      "locale": "en",
+      "width": 190
+    },
+    {
+      "name": 4,
+      "text": "Tap any lantern to get the candy to drop down from it.",
+      "special": 3,
+      "x": 60,
+      "y": 50,
+      "height": 60,
+      "locale": "en",
+      "width": 200
+    }
+  ],
+  "ko": [
+    {
+      "name": 4,
+      "text": "사탕을 등에 넣으면 *모든 등에서 사탕이 *나타납니다.",
+      "x": 50,
+      "y": 250,
+      "height": 60,
+      "locale": "ko",
+      "width": 190
+    },
+    {
+      "name": 4,
+      "text": "등을 살짝 눌러서 *사탕을 떨어뜨리세요.",
+      "special": 3,
+      "x": 60,
+      "y": 50,
+      "height": 60,
+      "locale": "ko",
+      "width": 200
+    }
+  ],
+  "fr": [
+    {
+      "name": 4,
+      "text": "Pose un bonbon dans une lanterne et il apparaîtra dans toutes les autres.",
+      "x": 50,
+      "y": 250,
+      "height": 60,
+      "locale": "fr",
+      "width": 190
+    },
+    {
+      "name": 4,
+      "text": "Touche n’importe quelle lanterne pour en faire tomber le bonbon.",
+      "special": 3,
+      "x": 60,
+      "y": 50,
+      "height": 60,
+      "locale": "fr",
+      "width": 200
+    }
+  ],
+  "ru": [
+    {
+      "name": 4,
+      "text": "Положите леденец в фонарь, и он появится во всех остальных фонарях",
+      "x": 50,
+      "y": 250,
+      "height": 60,
+      "locale": "ru",
+      "width": 190
+    },
+    {
+      "name": 4,
+      "text": "Коснитесь любого фонаря, чтобы леденец выпал",
+      "special": 3,
+      "x": 60,
+      "y": 50,
+      "height": 60,
+      "locale": "ru",
+      "width": 200
+    }
+  ],
+  "objects": [
+    {
+      "name": 2,
+      "x": 53,
+      "y": 402
+    },
+    {
+      "name": 132,
+      "candyCaptured": false,
+      "x": 50,
+      "y": 170
+    },
+    {
+      "name": 132,
+      "candyCaptured": false,
+      "x": 275,
+      "y": 407
+    },
+    {
+      "name": 100,
+      "spider": false,
+      "gun": false,
+      "wheel": false,
+      "part": "L",
+      "hidePath": false,
+      "moveOffset": 0,
+      "moveVertical": false,
+      "length": 60,
+      "x": 271,
+      "y": 170,
+      "moveLength": -1,
+      "radius": -1
+    },
+    {
+      "name": 52,
+      "x": 270,
+      "y": 258
+    },
+    {
+      "name": 3,
+      "x": 274,
+      "y": 349,
+      "timeout": -1
+    },
+    {
+      "name": 3,
+      "x": 160,
+      "y": 349,
+      "timeout": -1
+    },
+    {
+      "name": 3,
+      "x": 55,
+      "y": 347,
+      "timeout": -1
+    },
+    {
+      "name": 132,
+      "candyCaptured": false,
+      "x": 160,
+      "y": 170
+    },
+    {
+      "name": 132,
+      "candyCaptured": false,
+      "x": 158,
+      "y": 404
+    },
+    {
+      "name": 300,
+      "x": 160,
+      "y": 37
+    }
+  ],
+  "zh": [
+    {
+      "name": 4,
+      "text": "把糖果放入其中一个灯笼， *其他灯笼都会蹦进糖果哦",
+      "x": 50,
+      "y": 250,
+      "height": 60,
+      "locale": "zh",
+      "width": 190
+    },
+    {
+      "name": 4,
+      "text": "轻触任一灯笼，*丢出糖果",
+      "special": 3,
+      "x": 60,
+      "y": 50,
+      "height": 60,
+      "locale": "zh",
+      "width": 200
+    }
+  ]
+}

@@ -141,6 +141,12 @@ interface PumpItem extends MapLayerItem {
     angle: number;
 }
 
+interface LanternItem extends MapLayerItem {
+    x: number;
+    y: number;
+    candyCaptured?: boolean | number | string;
+}
+
 interface SteamTubeItem extends MapLayerItem {
     x: number;
     y: number;
@@ -209,6 +215,7 @@ export type {
     HiddenItem,
     BubbleItem,
     PumpItem,
+    LanternItem,
     SteamTubeItem,
     SockItem,
     SpikeItem,

@@ -210,6 +210,7 @@ RES_DATA[ResourceId.IMG_BGR_11_P1] = new ResEntry("bgr_11_p1.webp", ResourceType
 RES_DATA[ResourceId.IMG_BGR_11_P2] = new ResEntry("bgr_11_p2.webp", ResourceType.IMAGE);
 RES_DATA[ResourceId.IMG_BGR_12_P1] = new ResEntry("bgr_12_p1.webp", ResourceType.IMAGE);
 RES_DATA[ResourceId.IMG_BGR_13_P1] = new ResEntry("bgr_13_p1.webp", ResourceType.IMAGE);
+RES_DATA[ResourceId.IMG_BGR_14_P1] = new ResEntry("bgr_14_p1.webp", ResourceType.IMAGE);
 RES_DATA[ResourceId.IMG_BGR_XMAS] = new ResEntry("bgr_xmas.webp", ResourceType.IMAGE);
 RES_DATA[ResourceId.IMG_BGR_PADDINGTON] = new ResEntry("bgr_paddington.webp", ResourceType.IMAGE);
 
@@ -693,6 +694,19 @@ RES_DATA[ResourceId.IMG_OBJ_CANDY_51] = new ResEntry(
     "candies/obj_candy_51_extracted.webp",
     ResourceType.IMAGE,
     { atlasPath: "candies/obj_candy_51_extracted.json", atlasFormat: "texture-packer" }
+);
+
+RES_DATA[ResourceId.IMG_OBJ_LANTERN] = new ResEntry("obj_lantern.webp", ResourceType.IMAGE, {
+    atlasPath: "obj_lantern.json",
+    atlasFormat: "texture-packer",
+});
+RES_DATA[ResourceId.SND_LANTERN_TELEPORT_IN] = new ResEntry(
+    "lantern_teleport_in",
+    ResourceType.SOUND
+);
+RES_DATA[ResourceId.SND_LANTERN_TELEPORT_OUT] = new ResEntry(
+    "lantern_teleport_out",
+    ResourceType.SOUND
 );
 
 export default RES_DATA;

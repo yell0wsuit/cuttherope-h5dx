@@ -124,6 +124,10 @@ const drawImpl = function drawImpl(scene: GameScene): void {
         scene.tubes[i]?.drawBack();
     }
 
+    for (let i = 0, len = scene.lanterns.length; i < len; i++) {
+        scene.lanterns[i]?.draw();
+    }
+
     const bungees = scene.bungees;
     for (let i = 0, len = bungees.length; i < len; i++) {
         const bungee = bungees[i];
@@ -140,11 +144,13 @@ const drawImpl = function drawImpl(scene: GameScene): void {
     }
 
     if (!scene.noCandy && !scene.targetSock) {
-        scene.candy.x = scene.star.pos.x;
-        scene.candy.y = scene.star.pos.y;
+        if (!scene.isCandyInLantern) {
+            scene.candy.x = scene.star.pos.x;
+            scene.candy.y = scene.star.pos.y;
+        }
         scene.candy.draw();
 
-        if (scene.candyBlink.currentTimeline != null) {
+        if (!scene.isCandyInLantern && scene.candyBlink.currentTimeline != null) {
             scene.candyBlink.draw();
         }
     }

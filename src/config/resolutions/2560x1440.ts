@@ -206,6 +206,16 @@ const res2560x1440: ResolutionProfile = {
      * @type {number}
      */
     BOUNCER_MAX_MOVEMENT: 680,
+    /**
+     * @const
+     * @type {number}
+     */
+    LANTERN_CAPTURE_RADIUS: 82,
+    /**
+     * @const
+     * @type {number}
+     */
+    LANTERN_TOUCH_RADIUS: 85,
 
     /**
      * @const

@@ -21,7 +21,7 @@ class Dispatch {
  * Manages delayed function calls with a per-update countdown system.
  * Use `update(delta)` each frame/tick to process active dispatches.
  */
-class DelayedDispatcher {
+export class DelayedDispatcher {
     private readonly dispatchers: Dispatch[] = [];
 
     /**

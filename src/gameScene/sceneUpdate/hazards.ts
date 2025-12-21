@@ -340,6 +340,40 @@ export function updateHazards(this: HazardScene, delta: number, numGrabs: number
                 this.popCandyBubble(false);
             }
             this.dd.callObject(lantern, lantern.captureCandyFromDispatcher, [this.star], 0.05);
+
+            // Tutorial special flag 3: triggers when candy is captured by lantern
+            // This shows lantern-specific tutorial elements and hides others
+            if (this.special === 3) {
+                this.special = 0;
+
+                // Handle tutorial text elements
+                for (const tutorial of this.tutorials) {
+                    if (tutorial.special === 3) {
+                        // Show tutorials marked with special 3 (lantern-related instructions)
+                        tutorial.playTimeline(0);
+                    } else {
+                        // Hide all other active tutorials by jumping to their end state
+                        const timeline = tutorial.currentTimeline;
+                        if (timeline) {
+                            timeline.jumpToTrack(3, 2);
+                        }
+                    }
+                }
+
+                // Handle tutorial image elements (arrows, hand gestures, etc.)
+                for (const tutorialImage of this.tutorialImages) {
+                    if (tutorialImage.special === 3) {
+                        // Show images marked with special 3
+                        tutorialImage.playTimeline(0);
+                    } else {
+                        // Hide all other active tutorial images
+                        const timeline = tutorialImage.currentTimeline;
+                        if (timeline) {
+                            timeline.jumpToTrack(3, 2);
+                        }
+                    }
+                }
+            }
         }
     }
 

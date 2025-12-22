@@ -15,6 +15,7 @@ import KeyFrame from "@/visual/KeyFrame";
 import Timeline from "@/visual/Timeline";
 import RGBAColor from "@/core/RGBAColor";
 import { applyStarImpulse, isCandyHit } from "./collisionHelpers";
+import { triggerSpecialTutorial } from "./special";
 import type GameObject from "@/visual/GameObject";
 import type BaseElement from "@/visual/BaseElement";
 import type Bubble from "@/game/Bubble";
@@ -343,37 +344,7 @@ export function updateHazards(this: HazardScene, delta: number, numGrabs: number
 
             // Tutorial special flag 3: triggers when candy is captured by lantern
             // This shows lantern-specific tutorial elements and hides others
-            if (this.special === 3) {
-                this.special = 0;
-
-                // Handle tutorial text elements
-                for (const tutorial of this.tutorials) {
-                    if (tutorial.special === 3) {
-                        // Show tutorials marked with special 3 (lantern-related instructions)
-                        tutorial.playTimeline(0);
-                    } else {
-                        // Hide all other active tutorials by jumping to their end state
-                        const timeline = tutorial.currentTimeline;
-                        if (timeline) {
-                            timeline.jumpToTrack(3, 2);
-                        }
-                    }
-                }
-
-                // Handle tutorial image elements (arrows, hand gestures, etc.)
-                for (const tutorialImage of this.tutorialImages) {
-                    if (tutorialImage.special === 3) {
-                        // Show images marked with special 3
-                        tutorialImage.playTimeline(0);
-                    } else {
-                        // Hide all other active tutorial images
-                        const timeline = tutorialImage.currentTimeline;
-                        if (timeline) {
-                            timeline.jumpToTrack(3, 2);
-                        }
-                    }
-                }
-            }
+            triggerSpecialTutorial(this, 3);
         }
     }
 

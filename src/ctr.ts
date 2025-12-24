@@ -42,22 +42,22 @@ const loadFontOnce = async (config: FontConfig): Promise<void> => {
 const languageFonts: Partial<Record<number, FontConfig>> = {
     [LangId.RU]: {
         family: "Playpen Sans",
-        url: "/fonts/PlaypenSans-SemiBold.woff2",
+        url: `${import.meta.env.BASE_URL}fonts/PlaypenSans-SemiBold.woff2`,
         weight: "normal",
     },
     [LangId.KO]: {
         family: "Cafe24 Dongdong",
-        url: "/fonts/Cafe24Dongdong-v2.0.woff2",
+        url: `${import.meta.env.BASE_URL}fonts/Cafe24Dongdong-v2.0.woff2`,
         weight: "normal",
     },
     [LangId.JA]: {
         family: "MPLUSRounded1c-Medium",
-        url: "/fonts/MPLUSRounded1c-Medium.woff2",
+        url: `${import.meta.env.BASE_URL}fonts/MPLUSRounded1c-Medium.woff2`,
         weight: "normal",
     },
     [LangId.ZH]: {
         family: "Huninn-Regular",
-        url: "/fonts/Huninn-Regular.woff2",
+        url: `${import.meta.env.BASE_URL}fonts/Huninn-Regular.woff2`,
         weight: "normal",
     },
 };

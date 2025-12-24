@@ -35,8 +35,6 @@ class PreLoader {
 
     private completeCallback: (() => void) | null = null;
 
-    private totalResources = 0;
-
     private loadedImages = 0;
 
     private loadedSounds = 0;
@@ -46,6 +44,12 @@ class PreLoader {
     private failedImages = 0;
 
     private failedSounds = 0;
+
+    private totalImages = 0;
+
+    private totalSounds = 0;
+
+    private totalJsonFiles = 0;
 
     private readonly MENU_TAG = "MENU" as const;
 
@@ -184,10 +188,16 @@ class PreLoader {
     }
 
     private updateProgress(): void {
-        if (this.totalResources === 0) return;
-        const progress =
-            ((this.loadedImages + this.loadedSounds + this.loadedJsonFiles) / this.totalResources) *
-            100;
+        // Weighted progress calculation:
+        // JSON files: 10%, Images: 60%, Audio: 30%
+        const jsonProgress =
+            this.totalJsonFiles > 0 ? (this.loadedJsonFiles / this.totalJsonFiles) * 10 : 0;
+        const imageProgress =
+            this.totalImages > 0 ? (this.loadedImages / this.totalImages) * 60 : 0;
+        const soundProgress =
+            this.totalSounds > 0 ? (this.loadedSounds / this.totalSounds) * 30 : 0;
+
+        const progress = jsonProgress + imageProgress + soundProgress;
         PubSub.publish(PubSub.ChannelId.PreloaderProgress, { progress });
         /*LoadAnimation?.notifyLoadProgress?.(progress);*/
     }
@@ -347,7 +357,7 @@ class PreLoader {
     }
 
     private startResourceLoading(): void {
-        this.totalResources = JsonLoader.getJsonFileCount();
+        this.totalJsonFiles = JsonLoader.getJsonFileCount();
 
         JsonLoader.onProgress((completed, _total) => {
             this.loadedJsonFiles = completed;
@@ -358,8 +368,8 @@ class PreLoader {
             this.menuJsonLoadComplete = true;
             const { trackedResourceCount } = this.loadImages();
 
-            this.totalResources =
-                trackedResourceCount + SoundLoader.getSoundCount() + JsonLoader.getJsonFileCount();
+            this.totalImages = trackedResourceCount;
+            this.totalSounds = SoundLoader.getSoundCount();
 
             SoundLoader.onProgress((completed, _total) => {
                 this.loadedSounds = completed;

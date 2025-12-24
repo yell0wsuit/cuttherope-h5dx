@@ -7,7 +7,7 @@ import process from "node:process";
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const APP_VERSION = "6";
+const APP_VERSION = "7";
 
 export default defineConfig(({ mode }) => {
     const isDev = mode === "development";
@@ -20,7 +20,7 @@ export default defineConfig(({ mode }) => {
             enablePWA &&
                 VitePWA({
                     registerType: "autoUpdate",
-                    includeAssets: ["index.html", "favicon.ico", "css/ctr.css"],
+                    includeAssets: ["favicon.ico", "css/ctr.css"],
                     devOptions: {
                         enabled: false,
                     },
@@ -56,6 +56,35 @@ export default defineConfig(({ mode }) => {
                         //navigateFallback: `/${base}/index.html`,
                         cleanupOutdatedCaches: true,
                         runtimeCaching: [
+                            {
+                                urlPattern: ({ url }) => url.pathname.endsWith(".html"),
+                                handler: "NetworkFirst",
+                                options: {
+                                    cacheName: `ctr-html-${APP_VERSION}`,
+                                    networkTimeoutSeconds: 3,
+                                    expiration: {
+                                        maxEntries: 10,
+                                        maxAgeSeconds: 60 * 60 * 24 * 7, // 7 days
+                                    },
+                                    cacheableResponse: {
+                                        statuses: [0, 200],
+                                    },
+                                },
+                            },
+                            {
+                                urlPattern: ({ request }) => request.destination === "script",
+                                handler: "StaleWhileRevalidate",
+                                options: {
+                                    cacheName: `ctr-scripts-${APP_VERSION}`,
+                                    expiration: {
+                                        maxEntries: 50,
+                                        maxAgeSeconds: 60 * 60 * 24 * 7, // 7 days
+                                    },
+                                    cacheableResponse: {
+                                        statuses: [0, 200],
+                                    },
+                                },
+                            },
                             {
                                 urlPattern: ({ request, url }) =>
                                     request.destination === "style" ||

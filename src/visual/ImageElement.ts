@@ -118,6 +118,21 @@ class ImageElement extends BaseElement {
             }
         }
 
+        // Determine source rectangle with padding BEFORE rounding
+        let srcX = rect.x;
+        let srcY = rect.y;
+        let srcWidth = quadWidth;
+        let srcHeight = quadHeight;
+
+        // If rect is NOT at origin, add 1px padding on all sides to prevent bleeding
+        if (rect.x !== 0 && rect.y !== 0) {
+            srcX -= 1;
+            srcY -= 1;
+            srcWidth += 2;
+            srcHeight += 2;
+        }
+
+        // Now round the destination size and position
         if (this.drawSizeIncrement) {
             // Quantized size rounding for sub-pixel precision
             quadWidth = Math.round(quadWidth / this.drawSizeIncrement) * this.drawSizeIncrement;
@@ -138,35 +153,30 @@ class ImageElement extends BaseElement {
             qy = Math.round(qy);
         }
 
-        // If rect is at origin (x=0 OR y=0), no padding. Otherwise add 2px padding.
-        if (rect.x === 0 || rect.y === 0) {
-            Canvas.context.drawImage(
-                this.texture.image,
-                rect.x,
-                rect.y,
-                quadWidth,
-                quadHeight,
-                qx,
-                qy,
-                quadWidth,
-                quadHeight
-            );
-        } else {
-            // Create copies to avoid mutating the rounded values
-            const paddedWidth = quadWidth + 2;
-            const paddedHeight = quadHeight + 2;
-            Canvas.context.drawImage(
-                this.texture.image,
-                rect.x - 1,
-                rect.y - 1,
-                paddedWidth,
-                paddedHeight,
-                qx - 1,
-                qy - 1,
-                paddedWidth,
-                paddedHeight
-            );
+        // Adjust destination position if padding was added
+        let destX = qx;
+        let destY = qy;
+        let destWidth = quadWidth;
+        let destHeight = quadHeight;
+
+        if (rect.x !== 0 && rect.y !== 0) {
+            destX -= 1;
+            destY -= 1;
+            destWidth += 2;
+            destHeight += 2;
         }
+
+        Canvas.context.drawImage(
+            this.texture.image,
+            srcX,
+            srcY,
+            srcWidth,
+            srcHeight,
+            destX,
+            destY,
+            destWidth,
+            destHeight
+        );
     }
 
     drawTiled(q: number, x: number, y: number, width: number, height: number) {

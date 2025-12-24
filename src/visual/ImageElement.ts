@@ -19,6 +19,8 @@ class ImageElement extends BaseElement {
     texture!: Texture2D;
     quadToDraw: number | undefined;
     override restoreCutTransparency = false;
+    drawSizeIncrement?: number;
+    drawPosIncrement?: number;
 
     initTexture(texture: Texture2D) {
         this.texture = texture;
@@ -81,8 +83,9 @@ class ImageElement extends BaseElement {
         // only draw if the image is non-transparent
         if (this.color.a !== 0 && this.texture && Canvas.context && this.texture.image) {
             if (this.quadToDraw === Constants.UNDEFINED) {
-                const qx = this.drawX;
-                const qy = this.drawY;
+                // Round coordinates
+                const qx = Math.round(this.drawX);
+                const qy = Math.round(this.drawY);
 
                 Canvas.context.drawImage(this.texture.image, qx, qy);
             } else if (this.quadToDraw !== undefined) {
@@ -110,48 +113,60 @@ class ImageElement extends BaseElement {
             if (offset) {
                 qx += offset.x;
                 qy += offset.y;
-
-                // the sprites are generated with rounded offsets, so we
-                // need to pad the width and height if there is an offset
                 quadWidth += this.texture.adjustmentMaxX;
                 quadHeight += this.texture.adjustmentMaxY;
             }
         }
 
-        // if (this.drawSizeIncrement) {
-        //     // we need sub-pixel size
-        //     quadWidth = ~~(quadWidth / this.drawSizeIncrement) * this.drawSizeIncrement;
-        //     quadHeight = ~~(quadHeight / this.drawSizeIncrement) * this.drawSizeIncrement;
-        // }
-        // else {
-        // otherwise by default we snap to pixel boundaries for perf
-        quadWidth = (1 + quadWidth) | 0;
-        quadHeight = (1 + quadHeight) | 0;
-        //}
+        if (this.drawSizeIncrement) {
+            // Quantized size rounding for sub-pixel precision
+            quadWidth = Math.round(quadWidth / this.drawSizeIncrement) * this.drawSizeIncrement;
+            quadHeight = Math.round(quadHeight / this.drawSizeIncrement) * this.drawSizeIncrement;
+        } else {
+            // Default: snap to pixel boundaries
+            quadWidth = Math.ceil(quadWidth);
+            quadHeight = Math.ceil(quadHeight);
+        }
 
-        // if (this.drawPosIncrement) {
-        //     console.log(this.drawPosIncrement, "WAT")
-        //     // we need sub-pixel alignment
-        //     qx = ~~(qx / this.drawPosIncrement) * this.drawPosIncrement;
-        //     qy = ~~(qy / this.drawPosIncrement) * this.drawPosIncrement;
-        // }
-        //else {
-        // otherwise by default we snap to pixel boundaries for perf
-        qx = qx | 0;
-        qy = qy | 0;
-        //}
+        if (this.drawPosIncrement) {
+            // Quantized position rounding for sub-pixel alignment
+            qx = Math.round(qx / this.drawPosIncrement) * this.drawPosIncrement;
+            qy = Math.round(qy / this.drawPosIncrement) * this.drawPosIncrement;
+        } else {
+            // Default: snap to pixel boundaries
+            qx = Math.round(qx);
+            qy = Math.round(qy);
+        }
 
-        Canvas.context.drawImage(
-            this.texture.image,
-            rect.x,
-            rect.y,
-            quadWidth,
-            quadHeight, // source coordinates
-            qx,
-            qy,
-            quadWidth,
-            quadHeight
-        ); // destination coordinates
+        // If rect is at origin (x=0 OR y=0), no padding. Otherwise add 2px padding.
+        if (rect.x === 0 || rect.y === 0) {
+            Canvas.context.drawImage(
+                this.texture.image,
+                rect.x,
+                rect.y,
+                quadWidth,
+                quadHeight,
+                qx,
+                qy,
+                quadWidth,
+                quadHeight
+            );
+        } else {
+            // Create copies to avoid mutating the rounded values
+            const paddedWidth = quadWidth + 2;
+            const paddedHeight = quadHeight + 2;
+            Canvas.context.drawImage(
+                this.texture.image,
+                rect.x - 1,
+                rect.y - 1,
+                paddedWidth,
+                paddedHeight,
+                qx - 1,
+                qy - 1,
+                paddedWidth,
+                paddedHeight
+            );
+        }
     }
 
     drawTiled(q: number, x: number, y: number, width: number, height: number) {

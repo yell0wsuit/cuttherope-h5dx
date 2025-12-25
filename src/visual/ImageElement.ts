@@ -166,6 +166,26 @@ class ImageElement extends BaseElement {
             destHeight += 2;
         }
 
+        // Clamp source rectangle to image bounds for Safari compatibility
+        // Safari is strict about drawImage bounds and renders transparent if source rect is invalid
+        const imageWidth = this.texture.imageWidth;
+        const imageHeight = this.texture.imageHeight;
+
+        if (srcX < 0) {
+            srcWidth += srcX;
+            srcX = 0;
+        }
+        if (srcY < 0) {
+            srcHeight += srcY;
+            srcY = 0;
+        }
+        if (srcX + srcWidth > imageWidth) {
+            srcWidth = imageWidth - srcX;
+        }
+        if (srcY + srcHeight > imageHeight) {
+            srcHeight = imageHeight - srcY;
+        }
+
         Canvas.context.drawImage(
             this.texture.image,
             srcX,

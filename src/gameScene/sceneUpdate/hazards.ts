@@ -254,9 +254,11 @@ export function updateHazards(this: HazardScene, delta: number, numGrabs: number
                         this.targetSock = n;
 
                         const { light } = s;
-                        light?.playTimeline(0);
                         if (light) {
+                            // Set to first glow quad before making visible to prevent brief hat quad flash
+                            light.setTextureQuad(Sock.Quads.IMG_OBJ_SOCKS_glow_start);
                             light.visible = true;
+                            light.playTimeline(0);
                         }
 
                         const teleportSound = IS_XMAS

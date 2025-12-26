@@ -6,7 +6,7 @@ import type { GhostItem } from "../MapLayerItem";
 export function loadGhost(this: GameSceneLoaders, item: GhostItem): void {
     const px = item.x * this.PM + this.PMX;
     const py = item.y * this.PM + this.PMY;
-    const grabRadius = item.radius * 2;
+    const grabRadius = item.radius * this.PM;
     const bouncerAngle = item.angle ?? 0;
 
     const useGrab = item.grab ?? false;

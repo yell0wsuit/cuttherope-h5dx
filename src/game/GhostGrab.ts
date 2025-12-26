@@ -58,11 +58,6 @@ class GhostGrab extends Grab {
             this.back.draw();
         }
 
-        // Draw backcloud decorations
-        for (const cloud of this.backClouds) {
-            cloud.draw();
-        }
-
         // Draw radius circle if auto-rope
         if (this.radius !== Constants.UNDEFINED || this.hideRadius) {
             const color = new RGBAColor(0.2, 0.5, 0.9, this.radiusAlpha);

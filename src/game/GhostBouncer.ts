@@ -6,6 +6,7 @@ import KeyFrame from "@/visual/KeyFrame";
 import Timeline from "@/visual/Timeline";
 import ResourceId from "@/resources/ResourceId";
 import type Ghost from "@/game/Ghost";
+import RGBAColor from "@/core/RGBAColor";
 
 const CLOUD_RADIUS = Math.sqrt(5060);
 
@@ -61,11 +62,18 @@ class GhostBouncer extends Bouncer {
     }
 
     override playTimeline(index: number): void {
-        // Only allow explicit timeline playback (e.g., morph in/out)
-        // and prevent the default bounce animation loop from triggering automatically.
-        if (index === undefined) {
+        if (this.currentTimelineIndex === 11) {
             return;
         }
+
+        if (
+            index !== 11 &&
+            this.currentTimelineIndex === 10 &&
+            this.currentTimeline?.state !== Timeline.StateType.STOPPED
+        ) {
+            this.color = RGBAColor.solidOpaque.copy();
+        }
+
         super.playTimeline(index);
     }
 

@@ -238,6 +238,10 @@ export default class GameFlow {
         fadeOut("#levelOptions", timeout).then(() => {
             if (this.manager.isBoxOpen) {
                 fadeOut("#levelResults", 800);
+                // When skipping, hide the game button tray during transition
+                if (skip) {
+                    fadeOut("#gameBtnTray");
+                }
                 window.setTimeout(() => {
                     RootController.startLevel(
                         BoxManager.currentBoxIndex + 1,

@@ -28,7 +28,7 @@ const CONTROLLER_SHIFT_PARAM1 = 22.5 * resolution.PM;
 const CONTROLLER_SHIFT_PARAM2 = 0.03 * resolution.PM;
 
 class StickerImage extends ImageElement {
-    drawPosIncrement: number;
+    override drawPosIncrement: number;
 
     constructor() {
         super();

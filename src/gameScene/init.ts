@@ -262,6 +262,7 @@ abstract class GameSceneInit extends BaseElement {
         this.bubbles = [];
         this.pumps = [];
         this.lanterns = [];
+        this.tubes = [];
         this.rockets = [];
         this.socks = [];
         this.ghosts = [];

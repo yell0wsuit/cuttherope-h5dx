@@ -51,18 +51,18 @@ class GameObject extends Animation {
         this.rbb = new Quad2D(this.bb.x, this.bb.y, this.bb.w, this.bb.h);
     }
 
-    parseMover(item: { angle: number; path: string; moveSpeed: number; rotateSpeed: number }) {
+    parseMover(item: { angle?: number; path?: string | unknown[]; moveSpeed?: number; rotateSpeed?: number }) {
         this.rotation = item.angle || 0;
 
         const path = item.path;
-        if (path) {
+        if (typeof path === "string") {
             let moverCapacity = Mover.MAX_CAPACITY;
             if (path[0] === "R") {
                 const rad = parseInt(path.slice(2), 10);
                 moverCapacity = Math.round(rad / 2 + 1);
             }
 
-            const mover = new Mover(moverCapacity, item.moveSpeed, item.rotateSpeed);
+            const mover = new Mover(moverCapacity, item.moveSpeed ?? 0, item.rotateSpeed ?? 0);
             mover.angle = this.rotation;
             mover.setPathFromString(path, new Vector(this.x, this.y));
             this.setMover(mover);

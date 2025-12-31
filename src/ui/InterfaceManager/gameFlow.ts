@@ -279,7 +279,7 @@ export default class GameFlow {
                 if (this.manager.isInLevelSelectMode) {
                     this.tapeBox();
                 } else {
-                    Doors.showGradient();
+                    //Doors.showGradient();
                     window.setTimeout(() => {
                         this._runScoreTicker();
                         startSnow();

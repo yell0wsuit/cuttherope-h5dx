@@ -256,7 +256,9 @@ class SoundManager {
     }
 
     pauseAudio() {
-        if (this.audioPaused) return; // Don't pause if already paused
+        if (this.audioPaused) {
+            return;
+        } // Don't pause if already paused
 
         this.audioPaused = true;
         this.pauseMusic();
@@ -274,7 +276,9 @@ class SoundManager {
     }
 
     resumeAudio() {
-        if (!this.audioPaused) return;
+        if (!this.audioPaused) {
+            return;
+        }
 
         this.audioPaused = false;
         this.resumeMusic();

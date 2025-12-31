@@ -24,7 +24,9 @@ const TRACK_STRATEGIES: Record<number, TrackStrategy> = {
     [TrackType.POSITION]: {
         applyEaseStep(track, _keyFrame, delta) {
             const element = track.t.element;
-            if (!element) return;
+            if (!element) {
+                return;
+            }
 
             const saPos = track.currentStepAcceleration.value.pos;
             const xPosDelta = saPos.x * delta;
@@ -42,13 +44,17 @@ const TRACK_STRATEGIES: Record<number, TrackStrategy> = {
         applyLinearStep(track, delta) {
             const spsValue = track.currentStepPerSecond.value.pos;
             const element = track.t.element;
-            if (!element) return;
+            if (!element) {
+                return;
+            }
             element.x += spsValue.x * delta;
             element.y += spsValue.y * delta;
         },
         setElementFromKeyFrame(track, keyFrame) {
             const element = track.t.element;
-            if (!element) return;
+            if (!element) {
+                return;
+            }
             const kfPos = keyFrame.value.pos;
 
             if (!track.relative) {
@@ -64,7 +70,9 @@ const TRACK_STRATEGIES: Record<number, TrackStrategy> = {
         setKeyFrameFromElement(track, keyFrame) {
             const kfValue = keyFrame.value.pos;
             const element = track.t.element;
-            if (!element) return;
+            if (!element) {
+                return;
+            }
             kfValue.x = element.x;
             kfValue.y = element.y;
         },
@@ -96,7 +104,9 @@ const TRACK_STRATEGIES: Record<number, TrackStrategy> = {
     [TrackType.SCALE]: {
         applyEaseStep(track, _keyFrame, delta) {
             const element = track.t.element;
-            if (!element) return;
+            if (!element) {
+                return;
+            }
 
             const saScale = track.currentStepAcceleration.value.scale;
             const xScaleDelta = saScale.x * delta;
@@ -114,13 +124,17 @@ const TRACK_STRATEGIES: Record<number, TrackStrategy> = {
         applyLinearStep(track, delta) {
             const spsScale = track.currentStepPerSecond.value.scale;
             const element = track.t.element;
-            if (!element) return;
+            if (!element) {
+                return;
+            }
             element.scaleX += spsScale.x * delta;
             element.scaleY += spsScale.y * delta;
         },
         setElementFromKeyFrame(track, keyFrame) {
             const element = track.t.element;
-            if (!element) return;
+            if (!element) {
+                return;
+            }
             const kfScale = keyFrame.value.scale;
             if (!track.relative) {
                 element.scaleX = kfScale.x;
@@ -135,7 +149,9 @@ const TRACK_STRATEGIES: Record<number, TrackStrategy> = {
         setKeyFrameFromElement(track, keyFrame) {
             const kfScale = keyFrame.value.scale;
             const element = track.t.element;
-            if (!element) return;
+            if (!element) {
+                return;
+            }
             kfScale.x = element.scaleX;
             kfScale.y = element.scaleY;
         },
@@ -167,7 +183,9 @@ const TRACK_STRATEGIES: Record<number, TrackStrategy> = {
     [TrackType.ROTATION]: {
         applyEaseStep(track, _keyFrame, delta) {
             const element = track.t.element;
-            if (!element) return;
+            if (!element) {
+                return;
+            }
 
             const acceleration = track.currentStepAcceleration.value.rotationAngle * delta;
             const current = track.currentStepPerSecond.value.rotationAngle;
@@ -176,14 +194,18 @@ const TRACK_STRATEGIES: Record<number, TrackStrategy> = {
         },
         applyLinearStep(track, delta) {
             const element = track.t.element;
-            if (!element) return;
+            if (!element) {
+                return;
+            }
 
             const spsRotation = track.currentStepPerSecond.value.rotationAngle;
             element.rotation += spsRotation * delta;
         },
         setElementFromKeyFrame(track, keyFrame) {
             const element = track.t.element;
-            if (!element) return;
+            if (!element) {
+                return;
+            }
 
             if (!track.relative) {
                 element.rotation = keyFrame.value.rotationAngle;
@@ -195,7 +217,9 @@ const TRACK_STRATEGIES: Record<number, TrackStrategy> = {
         },
         setKeyFrameFromElement(track, keyFrame) {
             const element = track.t.element;
-            if (!element) return;
+            if (!element) {
+                return;
+            }
 
             keyFrame.value.rotationAngle = element.rotation;
         },
@@ -222,7 +246,9 @@ const TRACK_STRATEGIES: Record<number, TrackStrategy> = {
     [TrackType.COLOR]: {
         applyEaseStep(track, _keyFrame, delta) {
             const element = track.t.element;
-            if (!element) return;
+            if (!element) {
+                return;
+            }
 
             const spsColor = track.currentStepPerSecond.value.color;
             const oldColorR = spsColor.r;
@@ -250,7 +276,9 @@ const TRACK_STRATEGIES: Record<number, TrackStrategy> = {
         },
         applyLinearStep(track, delta) {
             const element = track.t.element;
-            if (!element) return;
+            if (!element) {
+                return;
+            }
 
             const spsColor = track.currentStepPerSecond.value.color;
             const elementColor = element.color;
@@ -261,7 +289,9 @@ const TRACK_STRATEGIES: Record<number, TrackStrategy> = {
         },
         setElementFromKeyFrame(track, keyFrame) {
             const element = track.t.element;
-            if (!element) return;
+            if (!element) {
+                return;
+            }
 
             const elementColor = element.color;
             const kfColor = keyFrame.value.color;
@@ -278,7 +308,9 @@ const TRACK_STRATEGIES: Record<number, TrackStrategy> = {
         },
         setKeyFrameFromElement(track, keyFrame) {
             const element = track.t.element;
-            if (!element) return;
+            if (!element) {
+                return;
+            }
 
             keyFrame.value.color.copyFrom(element.color);
         },
@@ -382,7 +414,9 @@ class TimelineTrack {
         let total = 0;
         for (let i = 0; i <= frameIndex; i++) {
             const kf = this.keyFrames[i];
-            if (!kf) continue;
+            if (!kf) {
+                continue;
+            }
             total += kf.timeOffset;
         }
         return total;
@@ -579,7 +613,9 @@ class TimelineTrack {
             const actionSet = kf.value.actionSet;
             for (let i = 0, len = actionSet.length; i < len; i++) {
                 const action = actionSet[i];
-                if (!action) continue;
+                if (!action) {
+                    continue;
+                }
                 const target = action.actionTarget as {
                     handleAction: (data: ActionData) => boolean;
                 };

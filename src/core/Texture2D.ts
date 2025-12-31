@@ -143,7 +143,9 @@ class Texture2D {
 
     setOffset(index: number, x: number, y: number) {
         const offset = this.offsets[index];
-        if (!offset) return;
+        if (!offset) {
+            return;
+        }
         offset.x = x;
         offset.y = y;
     }

@@ -26,12 +26,16 @@ class ConstraintSystem {
         Log.debug("Constraint System Log:");
         for (let i = 0, partsLen = this.parts.length; i < partsLen; i++) {
             const cp = this.parts[i];
-            if (!cp) continue;
+            if (!cp) {
+                continue;
+            }
 
             Log.debug(`-- Point: ${cp.posString()}`);
             for (let j = 0, constraintsLen = cp.constraints.length; j < constraintsLen; j++) {
                 const c = cp.constraints[j];
-                if (!c) continue;
+                if (!c) {
+                    continue;
+                }
 
                 const cInfo = `---- Constraint: ${c.cp.posString()} len: ${c.restLength}`;
                 Log.debug(cInfo);

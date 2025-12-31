@@ -114,7 +114,9 @@ class ConfettiParticle {
 
     draw(ctx: CanvasRenderingContext2D): void {
         const frame = this.texture.rects[this.frameIndex];
-        if (!frame || !this.texture.image) return;
+        if (!frame || !this.texture.image) {
+            return;
+        }
 
         ctx.save();
         ctx.globalAlpha = this.opacity;
@@ -194,7 +196,9 @@ class ConfettiManager {
             return;
         }
 
-        if (this.particles.length >= this.totalParticles) return;
+        if (this.particles.length >= this.totalParticles) {
+            return;
+        }
 
         const typeIndex = MathHelper.randomRange(0, PARTICLE_TYPES.length - 1);
         const type = PARTICLE_TYPES[typeIndex];
@@ -216,7 +220,9 @@ class ConfettiManager {
     }
 
     private animate = (): void => {
-        if (!this.active) return;
+        if (!this.active) {
+            return;
+        }
 
         const now = performance.now();
         const delta = (now - this.lastTime) / 1000;

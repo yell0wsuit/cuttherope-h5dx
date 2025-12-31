@@ -99,18 +99,22 @@ class BaseElement {
         // align to parent
         if (parentAnchor !== 0 /*Alignment.UNDEFINED*/ && parent) {
             // calculate the x offset first
-            if (parentAnchor & 1 /*Alignment.LEFT*/) this.drawX = parent.drawX + this.x;
-            else if (parentAnchor & 2 /*Alignment.HCENTER*/)
+            if (parentAnchor & 1 /*Alignment.LEFT*/) {
+                this.drawX = parent.drawX + this.x;
+            } else if (parentAnchor & 2 /*Alignment.HCENTER*/) {
                 this.drawX = parent.drawX + this.x + parent.width / 2;
-            else if (parentAnchor & 4 /*Alignment.RIGHT*/)
+            } else if (parentAnchor & 4 /*Alignment.RIGHT*/) {
                 this.drawX = parent.drawX + this.x + parent.width;
+            }
 
             // now calculate y offset
-            if (parentAnchor & 8 /*Alignment.TOP*/) this.drawY = parent.drawY + this.y;
-            else if (parentAnchor & 16 /*Alignment.VCENTER*/)
+            if (parentAnchor & 8 /*Alignment.TOP*/) {
+                this.drawY = parent.drawY + this.y;
+            } else if (parentAnchor & 16 /*Alignment.VCENTER*/) {
                 this.drawY = parent.drawY + this.y + parent.height / 2;
-            else if (parentAnchor & 32 /*Alignment.BOTTOM*/)
+            } else if (parentAnchor & 32 /*Alignment.BOTTOM*/) {
                 this.drawY = parent.drawY + this.y + parent.height;
+            }
         } else {
             this.drawX = this.x;
             this.drawY = this.y;
@@ -118,13 +122,19 @@ class BaseElement {
 
         // align self anchor
         if (!((anchor & 8) /*Alignment.TOP*/)) {
-            if (anchor & 16 /*Alignment.VCENTER*/) this.drawY -= this.height / 2;
-            else if (anchor & 32 /*Alignment.BOTTOM*/) this.drawY -= this.height;
+            if (anchor & 16 /*Alignment.VCENTER*/) {
+                this.drawY -= this.height / 2;
+            } else if (anchor & 32 /*Alignment.BOTTOM*/) {
+                this.drawY -= this.height;
+            }
         }
 
         if (!((anchor & 1) /*Alignment.LEFT*/)) {
-            if (anchor & 2 /*Alignment.HCENTER*/) this.drawX -= this.width / 2;
-            else if (anchor & 4 /*Alignment.RIGHT*/) this.drawX -= this.width;
+            if (anchor & 2 /*Alignment.HCENTER*/) {
+                this.drawX -= this.width / 2;
+            } else if (anchor & 4 /*Alignment.RIGHT*/) {
+                this.drawX -= this.width;
+            }
         }
     }
 
@@ -240,7 +250,9 @@ class BaseElement {
         const numChildren = children.length;
         for (let i = 0; i < numChildren; i++) {
             const child = children[i];
-            if (child && child.visible) child.draw();
+            if (child && child.visible) {
+                child.draw();
+            }
         }
 
         if (this.passTransformationsToChilds) {
@@ -264,7 +276,9 @@ class BaseElement {
             numChildren = children.length;
         for (let i = 0; i < numChildren; i++) {
             const child = children[i];
-            if (child && child.updateable) child.update(delta);
+            if (child && child.updateable) {
+                child.update(delta);
+            }
         }
 
         if (this.currentTimeline) {
@@ -277,11 +291,17 @@ class BaseElement {
         const numChildren = children.length;
         for (let i = 0; i < numChildren; i++) {
             const child = children[i];
-            if (!child) continue;
-            if (child.name === name) return child;
+            if (!child) {
+                continue;
+            }
+            if (child.name === name) {
+                return child;
+            }
 
             const descendant = child.getChildWithName(name);
-            if (descendant !== null) return descendant;
+            if (descendant !== null) {
+                return descendant;
+            }
         }
 
         return null;
@@ -299,16 +319,26 @@ class BaseElement {
 
         for (let i = 0; i < numChildren; i++) {
             const child = children[i];
-            if (!child) continue;
+            if (!child) {
+                continue;
+            }
             child.calculateTopLeft();
 
-            if (child.drawX < minX) minX = child.drawX;
-            if (child.drawY < minY) minY = child.drawY;
+            if (child.drawX < minX) {
+                minX = child.drawX;
+            }
+            if (child.drawY < minY) {
+                minY = child.drawY;
+            }
 
             const childMaxX = child.drawX + child.width,
                 childMaxY = child.drawY + child.height;
-            if (childMaxX > maxX) maxX = childMaxX;
-            if (childMaxY > maxY) maxY = childMaxY;
+            if (childMaxX > maxX) {
+                maxX = childMaxX;
+            }
+            if (childMaxY > maxY) {
+                maxY = childMaxY;
+            }
         }
 
         this.width = maxX - minX;
@@ -410,7 +440,9 @@ class BaseElement {
     }
 
     removeTimeline(index: number): void {
-        if (this.currentTimelineIndex === index) this.stopCurrentTimeline();
+        if (this.currentTimelineIndex === index) {
+            this.stopCurrentTimeline();
+        }
 
         if (index < this.timelines.length) {
             this.timelines.splice(index, 1);
@@ -545,7 +577,9 @@ class BaseElement {
             numChildren = children.length;
         for (let i = 0; i < numChildren; i++) {
             const child = children[i];
-            if (child && child.visible) child.show();
+            if (child && child.visible) {
+                child.show();
+            }
         }
     }
 
@@ -554,7 +588,9 @@ class BaseElement {
             numChildren = children.length;
         for (let i = 0; i < numChildren; i++) {
             const child = children[i];
-            if (child && child.visible) child.hide();
+            if (child && child.visible) {
+                child.hide();
+            }
         }
     }
 }

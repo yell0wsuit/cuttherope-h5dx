@@ -94,7 +94,9 @@ class TileMap extends BaseElement {
             this.tileHeight = texture.imageHeight;
         } else {
             const rect = texture.rects[quadIndex];
-            if (!rect) return;
+            if (!rect) {
+                return;
+            }
             this.tileWidth = rect.w;
             this.tileHeight = rect.h;
         }
@@ -142,7 +144,9 @@ class TileMap extends BaseElement {
     fill(startRow: number, startCol: number, numRows: number, numCols: number, tileIndex: number) {
         for (let i = startCol, colEnd = startCol + numCols; i < colEnd; i++) {
             const column = this.matrix[i];
-            if (!column) continue;
+            if (!column) {
+                continue;
+            }
             for (let k = startRow, rowEnd = startRow + numRows; k < rowEnd; k++) {
                 column[k] = tileIndex;
             }
@@ -319,13 +323,19 @@ class TileMap extends BaseElement {
                 }
 
                 const column = this.matrix[ri];
-                if (!column) continue;
+                if (!column) {
+                    continue;
+                }
                 const tile = column[rj];
                 if (tile !== undefined && tile >= 0) {
                     const entry = this.tiles[tile];
-                    if (!entry) continue;
+                    if (!entry) {
+                        continue;
+                    }
                     const drawer = this.drawers[entry.drawerIndex];
-                    if (!drawer) continue;
+                    if (!drawer) {
+                        continue;
+                    }
                     const texture = drawer.texture;
 
                     if (entry.quad !== Constants.UNDEFINED) {

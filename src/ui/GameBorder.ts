@@ -21,7 +21,9 @@ class GameBorder {
 
     private applyFade = ({ fadeIn, duration = 0, delay = 0 }: GameBorderFadeOptions): void => {
         const element = this.ensureBorderElement();
-        if (!element) return;
+        if (!element) {
+            return;
+        }
 
         const totalDelay = Math.max(delay, 0);
         const effectiveDuration = Math.max(duration, 0);
@@ -48,7 +50,9 @@ class GameBorder {
         element.style.transition = "none";
 
         requestAnimationFrame(() => {
-            if (!element) return;
+            if (!element) {
+                return;
+            }
 
             element.style.transition = `opacity ${effectiveDuration}ms ease`;
 
@@ -80,7 +84,9 @@ class GameBorder {
 
     setBoxBorder = (boxIndex: number): void => {
         const element = this.ensureBorderElement();
-        if (!element) return;
+        if (!element) {
+            return;
+        }
 
         const borderFile = edition.boxBorders[boxIndex];
         const backgroundUrl = borderFile ? `${platform.uiImageBaseUrl}${borderFile}` : "";
@@ -91,7 +97,9 @@ class GameBorder {
 
     setGameCompleteBorder = (): void => {
         const element = this.ensureBorderElement();
-        if (!element) return;
+        if (!element) {
+            return;
+        }
 
         element.style.backgroundImage = "";
         element.classList.add(GAME_COMPLETE_CLASS);
@@ -99,13 +107,17 @@ class GameBorder {
 
     hide = (): void => {
         const element = this.ensureBorderElement();
-        if (!element) return;
+        if (!element) {
+            return;
+        }
         element.style.display = "none";
     };
 
     show = (): void => {
         const element = this.ensureBorderElement();
-        if (!element) return;
+        if (!element) {
+            return;
+        }
         element.style.display = "";
     };
 

@@ -9,7 +9,9 @@
 export const getElement = (
     selector: string | Element | Window | Document | null | undefined
 ): Element | Window | Document | null => {
-    if (!selector) return null;
+    if (!selector) {
+        return null;
+    }
     if (typeof selector === "string") {
         return selector[0] === "#" && selector.indexOf(" ") === -1
             ? document.getElementById(selector.slice(1))
@@ -26,7 +28,9 @@ export const getElement = (
  */
 export const addClass = (selector: string | Element | null | undefined, className: string) => {
     const el = getElement(selector);
-    if (!el || !(el instanceof Element)) return;
+    if (!el || !(el instanceof Element)) {
+        return;
+    }
     className
         .split(/\s+/)
         .filter(Boolean)
@@ -38,7 +42,9 @@ export const addClass = (selector: string | Element | null | undefined, classNam
  */
 export const removeClass = (selector: string | Element | null | undefined, className: string) => {
     const el = getElement(selector);
-    if (!el || !className || !(el instanceof Element)) return;
+    if (!el || !className || !(el instanceof Element)) {
+        return;
+    }
     className
         .split(/\s+/)
         .filter(Boolean)
@@ -54,7 +60,9 @@ export const toggleClass = (
     force: boolean
 ) => {
     const el = getElement(selector);
-    if (!el || !(el instanceof Element)) return;
+    if (!el || !(el instanceof Element)) {
+        return;
+    }
     if (force === undefined) {
         el.classList.toggle(className);
     } else {
@@ -71,7 +79,9 @@ export const setStyle = (
     value: string
 ) => {
     const el = getElement(selector);
-    if (!el || !(el instanceof HTMLElement)) return;
+    if (!el || !(el instanceof HTMLElement)) {
+        return;
+    }
     el.style.setProperty(property, value);
 };
 
@@ -99,7 +109,9 @@ const trackTimer = (element: HTMLElement, timerId: number) => {
  */
 const clearTrackedTimer = (element: HTMLElement, timerId: number) => {
     const timers = elementTimers.get(element);
-    if (!timers) return;
+    if (!timers) {
+        return;
+    }
     if (timers.has(timerId)) {
         timers.delete(timerId);
         clearTimeout(timerId);
@@ -114,7 +126,9 @@ const clearTrackedTimer = (element: HTMLElement, timerId: number) => {
  */
 const clearAllTimers = (element: HTMLElement) => {
     const timers = elementTimers.get(element);
-    if (!timers) return;
+    if (!timers) {
+        return;
+    }
     timers.forEach((timerId) => clearTimeout(timerId));
     timers.clear();
     elementTimers.delete(element);
@@ -155,7 +169,9 @@ const getDefaultDisplay = (nodeName: string): string => {
  */
 export const show = (selector: string | Element | null | undefined, displayValue?: string) => {
     const el = getElement(selector);
-    if (!el || !(el instanceof HTMLElement)) return;
+    if (!el || !(el instanceof HTMLElement)) {
+        return;
+    }
     el.style.removeProperty("display");
     const computedDisplay = window.getComputedStyle(el).display;
     if (computedDisplay === "none") {
@@ -168,7 +184,9 @@ export const show = (selector: string | Element | null | undefined, displayValue
  */
 export const hide = (selector: string | Element | null | undefined) => {
     const el = getElement(selector);
-    if (!el || !(el instanceof HTMLElement)) return;
+    if (!el || !(el instanceof HTMLElement)) {
+        return;
+    }
     el.style.display = "none";
 };
 
@@ -177,7 +195,9 @@ export const hide = (selector: string | Element | null | undefined) => {
  */
 export const empty = (selector: string | Element | null | undefined) => {
     const el = getElement(selector);
-    if (!el || !(el instanceof Element)) return;
+    if (!el || !(el instanceof Element)) {
+        return;
+    }
     while (el.firstChild) {
         el.removeChild(el.firstChild);
     }
@@ -191,7 +211,9 @@ export const append = (
     child: string | Element
 ): Element | null => {
     const el = getElement(selector);
-    if (!el || child == null || !(el instanceof Element)) return null;
+    if (!el || child == null || !(el instanceof Element)) {
+        return null;
+    }
     if (typeof child === "string") {
         el.insertAdjacentHTML("beforeend", child);
         return el.lastElementChild;
@@ -209,7 +231,9 @@ export const append = (
  */
 export const stopAnimations = (selector: string | Element | null | undefined) => {
     const el = getElement(selector);
-    if (!el || !(el instanceof HTMLElement)) return;
+    if (!el || !(el instanceof HTMLElement)) {
+        return;
+    }
     clearAllTimers(el);
     const computedOpacity = window.getComputedStyle(el).opacity;
     el.style.transition = "";
@@ -225,7 +249,9 @@ export const fadeIn = (
     displayValue?: string
 ): Promise<void> => {
     const el = getElement(selector);
-    if (!el || !(el instanceof HTMLElement)) return Promise.resolve();
+    if (!el || !(el instanceof HTMLElement)) {
+        return Promise.resolve();
+    }
 
     const ms = typeof duration === "number" ? duration : 400;
 
@@ -261,7 +287,9 @@ export const fadeOut = (
     duration?: number
 ): Promise<void> => {
     const el = getElement(selector);
-    if (!el || !(el instanceof HTMLElement)) return Promise.resolve();
+    if (!el || !(el instanceof HTMLElement)) {
+        return Promise.resolve();
+    }
 
     const ms = typeof duration === "number" ? duration : 400;
 
@@ -313,7 +341,9 @@ export const on = (
     options: AddEventListenerOptions | boolean = false
 ): (() => void) => {
     const el = getElement(selector);
-    if (!el) return () => undefined;
+    if (!el) {
+        return () => undefined;
+    }
     el.addEventListener(event, handler, options);
     return () => {
         el.removeEventListener(event, handler, options);
@@ -329,7 +359,9 @@ export const hover = (
     leave: EventListener
 ): (() => void) => {
     const el = getElement(selector);
-    if (!el) return () => undefined;
+    if (!el) {
+        return () => undefined;
+    }
     const enterHandler = typeof enter === "function" ? enter : () => undefined;
     const leaveHandler = typeof leave === "function" ? leave : () => undefined;
     el.addEventListener("mouseenter", enterHandler);
@@ -348,7 +380,9 @@ export const text = (
     value: string
 ): string | null | undefined => {
     const el = getElement(selector);
-    if (!el || !(el instanceof Element)) return undefined;
+    if (!el || !(el instanceof Element)) {
+        return undefined;
+    }
     if (value === undefined) {
         return el.textContent;
     }
@@ -361,9 +395,15 @@ export const text = (
  */
 export const width = (selector: string | Element | Window): number => {
     const el = getElement(selector);
-    if (!el) return 0;
-    if (el === window) return window.innerWidth;
-    if (el instanceof Element) return el.getBoundingClientRect().width;
+    if (!el) {
+        return 0;
+    }
+    if (el === window) {
+        return window.innerWidth;
+    }
+    if (el instanceof Element) {
+        return el.getBoundingClientRect().width;
+    }
     return 0;
 };
 

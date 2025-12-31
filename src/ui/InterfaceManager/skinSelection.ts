@@ -99,7 +99,9 @@ class SkinSelectionView {
     updateMenuCandySkin(): void {
         const selectedCandy = getSavedCandyIndex();
         const candyElement = document.getElementById("menuCandySkin");
-        if (!candyElement) return;
+        if (!candyElement) {
+            return;
+        }
 
         const candyClass = `candy_${padIndex(selectedCandy)}`;
         candyElement.className = `menu-sprite ${candyClass}`;
@@ -110,7 +112,9 @@ class SkinSelectionView {
 
     updateHandVisibility(): void {
         const handElement = document.getElementById("menuCandyHand");
-        if (!handElement) return;
+        if (!handElement) {
+            return;
+        }
 
         const candyWasChanged = SettingStorage.getIntOrDefault(SETTING_KEYS.CANDY_WAS_CHANGED, 0);
         if (candyWasChanged === 0) {
@@ -126,7 +130,9 @@ class SkinSelectionView {
     }
 
     private buildTabs(): void {
-        if (!this.tabContainer) return;
+        if (!this.tabContainer) {
+            return;
+        }
         this.tabContainer.innerHTML = "";
 
         const candyTab = this.createTab(MenuStringId.CANDIES_BTN, "candy");
@@ -137,7 +143,9 @@ class SkinSelectionView {
     }
 
     private updateTabText(): void {
-        if (!this.tabContainer) return;
+        if (!this.tabContainer) {
+            return;
+        }
         const tabs = Array.from(this.tabContainer.querySelectorAll<HTMLDivElement>(".sBtn"));
 
         tabs.forEach((tab) => {
@@ -173,7 +181,9 @@ class SkinSelectionView {
         tab.appendChild(textImg);
 
         tab.addEventListener("click", () => {
-            if (this.mode === mode) return;
+            if (this.mode === mode) {
+                return;
+            }
             SoundMgr.playSound(ResourceId.SND_TAP);
             this.mode = mode;
             this.currentPage = 0;
@@ -185,7 +195,9 @@ class SkinSelectionView {
     }
 
     private updateTabState(): void {
-        if (!this.tabContainer) return;
+        if (!this.tabContainer) {
+            return;
+        }
         const tabs = Array.from(this.tabContainer.querySelectorAll<HTMLDivElement>(".sBtn"));
         tabs.forEach((tab) => {
             const tabMode = tab.dataset.mode as SkinMode;
@@ -201,7 +213,9 @@ class SkinSelectionView {
     }
 
     private updateNavButtons(): void {
-        if (!this.navBack || !this.navForward) return;
+        if (!this.navBack || !this.navForward) {
+            return;
+        }
 
         const totalPages = this.getTotalPages();
 
@@ -219,7 +233,9 @@ class SkinSelectionView {
     }
 
     private renderGrid(): void {
-        if (!this.grid) return;
+        if (!this.grid) {
+            return;
+        }
         this.grid.innerHTML = "";
 
         const isCandyMode = this.mode === "candy";

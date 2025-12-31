@@ -28,7 +28,7 @@ const CONTROLLER_SHIFT_PARAM1 = 22.5 * resolution.PM;
 const CONTROLLER_SHIFT_PARAM2 = 0.03 * resolution.PM;
 
 class StickerImage extends ImageElement {
-    drawPosIncrement: number;
+    override drawPosIncrement: number;
 
     constructor() {
         super();
@@ -236,6 +236,7 @@ class RotatedCircle extends BaseElement {
             const radius = this.sizeInPixels + Math.trunc(lineWidth / 2);
             if (ctx) {
                 ctx.beginPath();
+                ctx.strokeStyle = "white";
                 ctx.lineWidth = lineWidth;
                 ctx.arc(this.x, this.y, radius, 0, 2 * Math.PI, false);
                 ctx.stroke();
@@ -331,6 +332,7 @@ class RotatedCircle extends BaseElement {
         const ctx = Canvas.context;
         if (ctx) {
             ctx.beginPath();
+            ctx.strokeStyle = "white";
             ctx.lineWidth = width;
             ctx.arc(cx2, cy2, radius2, startAngle, endAngle, false);
             ctx.stroke();

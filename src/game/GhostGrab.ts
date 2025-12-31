@@ -48,7 +48,9 @@ class GhostGrab extends Grab {
     }
 
     override draw(): void {
-        if (!this.visible) return;
+        if (!this.visible) {
+            return;
+        }
 
         this.preDraw();
 

@@ -7,10 +7,18 @@ interface DrawImgOptions {
     text: string;
     width?: number;
     alignment?: number;
+    canvas?: boolean;
+    img?: HTMLImageElement | HTMLCanvasElement;
 }
 
 class TextImage extends ImageElement {
-    setText(fontId: number, text: string, width?: number, alignment?: number): void {
+    setText(
+        fontId: number,
+        text: string,
+        width?: number,
+        alignment?: number,
+        renderOnCanvas = false
+    ): void {
         const options: DrawImgOptions = {
             fontId,
             text,
@@ -22,6 +30,11 @@ class TextImage extends ImageElement {
 
         if (alignment !== undefined) {
             options.alignment = alignment;
+        }
+
+        if (renderOnCanvas) {
+            options.canvas = true;
+            options.img = document.createElement("canvas");
         }
 
         const img = Text.drawImg(options);

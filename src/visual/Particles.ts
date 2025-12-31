@@ -259,7 +259,9 @@ class Particles extends BaseElement {
         this.particleIdx = 0;
         while (this.particleIdx < this.particles.length) {
             const p = this.particles[this.particleIdx];
-            if (!p) break;
+            if (!p) {
+                break;
+            }
 
             if (p.life > 0) {
                 this.updateParticleLocation(p, delta);
@@ -357,7 +359,9 @@ class Particles extends BaseElement {
 
             for (let i = 0, len = this.particleIdx; i < len; i++) {
                 const p = this.particles[i];
-                if (!p) continue;
+                if (!p) {
+                    continue;
+                }
                 ctx.drawImage(image, Math.round(p.pos.x), Math.round(p.pos.y));
             }
         }

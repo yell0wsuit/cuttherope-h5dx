@@ -43,7 +43,9 @@ class BoxManager {
      * Loads boxes only if the app is ready.
      */
     static loadBoxes(): void {
-        if (!this.appIsReady) return;
+        if (!this.appIsReady) {
+            return;
+        }
 
         this.currentBoxIndex = this.getDefaultBoxIndex();
         this.currentLevelIndex = 1;
@@ -98,10 +100,14 @@ class BoxManager {
 
         for (let i = 0; i < this.boxes.length; i++) {
             const box = this.boxes[i];
-            if (!box) continue;
+            if (!box) {
+                continue;
+            }
 
             box.index = i;
-            if (box.visible) visibleBoxes.push(box);
+            if (box.visible) {
+                visibleBoxes.push(box);
+            }
         }
 
         PubSub.publish(PubSub.ChannelId.UpdateVisibleBoxes, visibleBoxes);
@@ -150,7 +156,9 @@ class BoxManager {
     static resetLocks(): void {
         for (let i = 1; i < this.boxes.length; i++) {
             const box = this.boxes[i];
-            if (!box) continue;
+            if (!box) {
+                continue;
+            }
 
             if (box.isGameBox()) {
                 box.islocked = true;
@@ -168,7 +176,9 @@ class BoxManager {
 
         for (let i = 1; i < this.boxes.length; i++) {
             const box = this.boxes[i];
-            if (!box) continue;
+            if (!box) {
+                continue;
+            }
 
             if (!ScoreManager.isBoxLocked(i) && box.purchased && box.islocked) {
                 box.islocked = false;

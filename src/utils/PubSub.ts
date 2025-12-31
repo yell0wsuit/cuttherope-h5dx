@@ -96,7 +96,9 @@ class PubSub {
      * form `[name, callback]` are supported.
      */
     unsubscribe(subscription: Subscription | null | undefined): void {
-        if (!subscription) return;
+        if (!subscription) {
+            return;
+        }
 
         const record = Array.isArray(subscription)
             ? { name: subscription[0], callback: subscription[1] }
@@ -111,7 +113,9 @@ class PubSub {
 
         const channelId = name as ChannelId;
         const callbacks = this.subscriptions.get(channelId);
-        if (!callbacks) return;
+        if (!callbacks) {
+            return;
+        }
 
         for (let i = callbacks.length - 1; i >= 0; i--) {
             if (callbacks[i] === callback) {
@@ -132,7 +136,9 @@ class PubSub {
      */
     publish(name: ChannelId, ...args: unknown[]): void {
         const callbacks = this.subscriptions.get(name);
-        if (!callbacks || callbacks.length === 0) return;
+        if (!callbacks || callbacks.length === 0) {
+            return;
+        }
 
         // Create a shallow copy so callbacks can safely modify subscriptions.
         const listeners = callbacks.slice();

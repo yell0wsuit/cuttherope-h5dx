@@ -219,11 +219,15 @@ class Grab extends CTRGameObject {
             if (this.launcherIncreaseSpeed) {
                 moveResult = Mover.moveToTargetWithStatus(this.launcherSpeed, 200, 30, delta);
                 this.launcherSpeed = moveResult.value;
-                if (moveResult.reachedZero) this.launcherIncreaseSpeed = false;
+                if (moveResult.reachedZero) {
+                    this.launcherIncreaseSpeed = false;
+                }
             } else {
                 moveResult = Mover.moveToTargetWithStatus(this.launcherSpeed, 130, 30, delta);
                 this.launcherSpeed = moveResult.value;
-                if (moveResult.reachedZero) this.launcherIncreaseSpeed = true;
+                if (moveResult.reachedZero) {
+                    this.launcherIncreaseSpeed = true;
+                }
             }
 
             if (this.mover) {
@@ -294,7 +298,9 @@ class Grab extends CTRGameObject {
                 for (let i = 0, numPts = drawPts.length; i < numPts; i++) {
                     const c1 = drawPts[i];
                     const c2 = drawPts[i + 1];
-                    if (!c1 || !c2) continue;
+                    if (!c1 || !c2) {
+                        continue;
+                    }
                     const b = c1.distance(c2);
                     const len = a > b ? a : b;
 
@@ -330,8 +336,12 @@ class Grab extends CTRGameObject {
     }
 
     drawBack() {
-        if (this.invisible) return;
-        if (this.gun) return;
+        if (this.invisible) {
+            return;
+        }
+        if (this.gun) {
+            return;
+        }
 
         if (this.kickable && this.kicked && this.rope) {
             const pos = this.rope.bungeeAnchor.pos;
@@ -434,7 +444,9 @@ class Grab extends CTRGameObject {
     }
 
     override draw() {
-        if (this.invisible) return;
+        if (this.invisible) {
+            return;
+        }
 
         // NOTE: we do pre-draw when drawing the back so the position
         // of the back is adjusted. Otherwise the back can be offset

@@ -53,7 +53,9 @@ class Dialogs {
         { from, to, duration, display }: FadeElementOptions
     ): Promise<void> {
         Dialogs.cancelAnimation(el);
-        if (display !== undefined) el.style.display = display;
+        if (display !== undefined) {
+            el.style.display = display;
+        }
 
         const start =
             typeof from === "number" ? from : parseFloat(getComputedStyle(el).opacity || "0") || 0;
@@ -72,7 +74,9 @@ class Dialogs {
                     return resolve();
                 }
 
-                if (startTime === undefined) startTime = timestamp;
+                if (startTime === undefined) {
+                    startTime = timestamp;
+                }
                 const progress = Math.min((timestamp - startTime) / duration, 1);
                 const current = start + (target - start) * progress;
                 el.style.opacity = String(current);
@@ -96,7 +100,9 @@ class Dialogs {
         RootController.pauseLevel();
 
         const popupWindow = document.querySelector<HTMLElement>(Dialogs.SELECTORS.popupWindow);
-        if (!popupWindow) return;
+        if (!popupWindow) {
+            return;
+        }
 
         document
             .querySelectorAll<HTMLElement>(Dialogs.SELECTORS.popupOuter)
@@ -135,7 +141,9 @@ class Dialogs {
         SoundMgr.playSound(ResourceId.SND_TAP);
 
         const popupWindow = document.querySelector<HTMLElement>(Dialogs.SELECTORS.popupWindow);
-        if (!popupWindow) return;
+        if (!popupWindow) {
+            return;
+        }
 
         Dialogs.cancelAnimation(popupWindow);
         const currentOpacity = parseFloat(getComputedStyle(popupWindow).opacity || "1") || 1;
@@ -163,7 +171,9 @@ class Dialogs {
      */
     showSlowComputerPopup(): void {
         const slowComputer = document.getElementById("slowComputer");
-        if (!slowComputer) return;
+        if (!slowComputer) {
+            return;
+        }
 
         slowComputer.querySelectorAll("img").forEach((img) => img.remove());
 
@@ -205,7 +215,9 @@ class Dialogs {
 
         ids.forEach(([id, handler]) => {
             const el = document.getElementById(id);
-            if (el) el.addEventListener("click", handler);
+            if (el) {
+                el.addEventListener("click", handler);
+            }
         });
     }
 

@@ -52,7 +52,9 @@ class PumpDirt extends MultiParticles {
         const texture = this.imageGrid;
         const n = MathHelper.randomRange(IMG_OBJ_PUMP_particle_1, IMG_OBJ_PUMP_particle_3);
         const tquad = texture.rects[n];
-        if (!tquad) return;
+        if (!tquad) {
+            return;
+        }
 
         const vquad = new Rectangle(0, 0, 0, 0); // don't draw initially
 

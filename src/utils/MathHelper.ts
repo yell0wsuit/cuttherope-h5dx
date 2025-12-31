@@ -51,10 +51,18 @@ class MathHelper {
      * @return number
      */
     static maxOf4(v1: number, v2: number, v3: number, v4: number): number {
-        if (v1 >= v2 && v1 >= v3 && v1 >= v4) return v1;
-        if (v2 >= v1 && v2 >= v3 && v2 >= v4) return v2;
-        if (v3 >= v2 && v3 >= v1 && v3 >= v4) return v3;
-        if (v4 >= v2 && v4 >= v3 && v4 >= v1) return v4;
+        if (v1 >= v2 && v1 >= v3 && v1 >= v4) {
+            return v1;
+        }
+        if (v2 >= v1 && v2 >= v3 && v2 >= v4) {
+            return v2;
+        }
+        if (v3 >= v2 && v3 >= v1 && v3 >= v4) {
+            return v3;
+        }
+        if (v4 >= v2 && v4 >= v3 && v4 >= v1) {
+            return v4;
+        }
 
         return Constants.UNDEFINED;
     }
@@ -68,10 +76,18 @@ class MathHelper {
      * @return number
      */
     static minOf4(v1: number, v2: number, v3: number, v4: number): number {
-        if (v1 <= v2 && v1 <= v3 && v1 <= v4) return v1;
-        if (v2 <= v1 && v2 <= v3 && v2 <= v4) return v2;
-        if (v3 <= v2 && v3 <= v1 && v3 <= v4) return v3;
-        if (v4 <= v2 && v4 <= v3 && v4 <= v1) return v4;
+        if (v1 <= v2 && v1 <= v3 && v1 <= v4) {
+            return v1;
+        }
+        if (v2 <= v1 && v2 <= v3 && v2 <= v4) {
+            return v2;
+        }
+        if (v3 <= v2 && v3 <= v1 && v3 <= v4) {
+            return v3;
+        }
+        if (v4 <= v2 && v4 <= v3 && v4 <= v1) {
+            return v4;
+        }
 
         return Constants.UNDEFINED;
     }

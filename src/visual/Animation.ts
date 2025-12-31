@@ -117,11 +117,17 @@ class Animation extends ImageElement {
 
     setDelay(delay: number, index: number, animationId: number): void {
         const timeline = this.getTimeline(animationId);
-        if (!timeline) return;
+        if (!timeline) {
+            return;
+        }
         const track = timeline.getTrack(TrackType.ACTION);
-        if (!track) return;
+        if (!track) {
+            return;
+        }
         const kf = track.keyFrames[index];
-        if (!kf) return;
+        if (!kf) {
+            return;
+        }
         kf.timeOffset = delay;
     }
 
@@ -138,11 +144,17 @@ class Animation extends ImageElement {
         animationId: number
     ): void {
         const timeline = this.getTimeline(animationId);
-        if (!timeline) return;
+        if (!timeline) {
+            return;
+        }
         const track = timeline.getTrack(TrackType.ACTION);
-        if (!track) return;
+        if (!track) {
+            return;
+        }
         const kf = track.keyFrames[index];
-        if (!kf) return;
+        if (!kf) {
+            return;
+        }
         const action = Action.create(target, actionName, param, subParam);
 
         kf.value.actionSet.push(action);
@@ -150,7 +162,9 @@ class Animation extends ImageElement {
 
     switchToAnimation(a2: number, a1: number, delay: number): void {
         const timeline = this.getTimeline(a1);
-        if (!timeline) return;
+        if (!timeline) {
+            return;
+        }
         const as = [Action.create(this, ActionType.PLAY_TIMELINE, 0, a2)];
         const kf = KeyFrame.makeAction(as, delay);
         timeline.addKeyFrame(kf);

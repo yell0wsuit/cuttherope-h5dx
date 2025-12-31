@@ -56,7 +56,9 @@ class BoxDoors {
     static appReady(): void {
         for (let i = 0, len = edition.boxDoors.length; i < len; i++) {
             const doorPath = edition.boxDoors[i];
-            if (!doorPath) continue;
+            if (!doorPath) {
+                continue;
+            }
 
             const doorImg = new Image();
             doorImg.src = platform.uiImageBaseUrl + doorPath;
@@ -174,7 +176,9 @@ class BoxDoors {
                     levelPanel.style.display = reverse ? "block" : "none";
                 }
 
-                if (callback) callback();
+                if (callback) {
+                    callback();
+                }
             }
         };
 
@@ -316,7 +320,9 @@ const fadeOut = (
     callback?: AnimationCallback
 ): void => {
     if (!element) {
-        if (callback) callback();
+        if (callback) {
+            callback();
+        }
         return;
     }
 
@@ -326,7 +332,9 @@ const fadeOut = (
     window.setTimeout(() => {
         element.style.display = "none";
         element.style.transition = "";
-        if (callback) callback();
+        if (callback) {
+            callback();
+        }
     }, duration);
 };
 
@@ -336,7 +344,9 @@ const fadeIn = (
     callback?: AnimationCallback
 ): void => {
     if (!element) {
-        if (callback) callback();
+        if (callback) {
+            callback();
+        }
         return;
     }
 
@@ -350,7 +360,9 @@ const fadeIn = (
 
     window.setTimeout(() => {
         element.style.transition = "";
-        if (callback) callback();
+        if (callback) {
+            callback();
+        }
     }, duration);
 };
 

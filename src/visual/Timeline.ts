@@ -105,7 +105,9 @@ class Timeline implements TimelineLike {
             this.state = Timeline.StateType.PAUSED;
         }
         const track = this.tracks[trackIndex];
-        if (!track) return;
+        if (!track) {
+            return;
+        }
         const delta = track.getFrameTime(keyFrame) - this.time;
         this.update(delta);
     }
@@ -125,16 +127,24 @@ class Timeline implements TimelineLike {
     }
 
     update(delta: number): void {
-        if (this.state !== Timeline.StateType.PLAYING) return;
+        if (this.state !== Timeline.StateType.PLAYING) {
+            return;
+        }
 
-        if (!this.timelineDirReverse) this.time += delta;
-        else this.time -= delta;
+        if (!this.timelineDirReverse) {
+            this.time += delta;
+        } else {
+            this.time -= delta;
+        }
 
         for (let i = 0, len = this.tracks.length; i < len; i++) {
             const track = this.tracks[i];
             if (track != null) {
-                if (track.type === TrackType.ACTION) track.updateActionTrack(delta);
-                else track.updateNonActionTrack(delta);
+                if (track.type === TrackType.ACTION) {
+                    track.updateActionTrack(delta);
+                } else {
+                    track.updateNonActionTrack(delta);
+                }
             }
         }
 

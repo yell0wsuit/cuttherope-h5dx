@@ -30,7 +30,9 @@ class GhostMorphingParticles extends RotateableMultiParticles {
 
         const randomIndex = MathHelper.randomRange(4, 6);
         const quad = this.imageGrid.rects[randomIndex];
-        if (!quad) return;
+        if (!quad) {
+            return;
+        }
 
         this.drawer.setTextureQuad(
             this.particles.length,

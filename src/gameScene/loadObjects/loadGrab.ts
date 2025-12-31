@@ -65,7 +65,9 @@ export function loadGrab(this: GameSceneLoaders, item: GrabItem): void {
         }
     }
 
-    if (r !== Constants.UNDEFINED) r = r * this.PM;
+    if (r !== Constants.UNDEFINED) {
+        r = r * this.PM;
+    }
 
     if (r === Constants.UNDEFINED && !gun) {
         let tail = this.star;

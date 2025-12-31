@@ -7,13 +7,17 @@ function satisfyConstraintArray(arr: ConstrainedPoint[], n: number): void {
     const len = arr.length;
     let cons;
 
-    if (!len) return;
+    if (!len) {
+        return;
+    }
 
     // loop over the rest length
     while (n--) {
         for (let cIndex = 0; cIndex < len; ++cIndex) {
             cons = arr[cIndex];
-            if (!cons) continue;
+            if (!cons) {
+                continue;
+            }
 
             const constraints = cons.constraints;
             const num = constraints.length;
@@ -31,7 +35,9 @@ function satisfyConstraintArray(arr: ConstrainedPoint[], n: number): void {
 
             for (let i = 0; i < num; i++) {
                 const c = constraints[i];
-                if (!c) continue;
+                if (!c) {
+                    continue;
+                }
 
                 const cp = c.cp;
                 const cpPos = cp.pos;
@@ -50,9 +56,13 @@ function satisfyConstraintArray(arr: ConstrainedPoint[], n: number): void {
                 const cType = c.type;
 
                 if (cType === 1 /* ConstraintType.NOT_MORE_THAN */) {
-                    if (sqrDeltaLength <= sqrRestLength) continue;
+                    if (sqrDeltaLength <= sqrRestLength) {
+                        continue;
+                    }
                 } else if (cType === 2 /*ConstraintType.NOT_LESS_THAN */) {
-                    if (sqrDeltaLength >= sqrRestLength) continue;
+                    if (sqrDeltaLength >= sqrRestLength) {
+                        continue;
+                    }
                 }
 
                 const pinUndefined = cp.pin.x === -1; /* Constants.UNDEFINED */

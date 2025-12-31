@@ -43,16 +43,22 @@ class SoundManager {
         shouldInvokeCallback = false,
         predicate?: (source: AudioBufferSourceNode & SoundSource) => boolean
     ): number {
-        if (!soundData) return 0;
+        if (!soundData) {
+            return 0;
+        }
         const sources = Array.from(soundData.playingSources);
         let stoppedCount = 0;
 
         // If no predicate provided, clear all directly
-        if (!predicate) soundData.playingSources.clear();
+        if (!predicate) {
+            soundData.playingSources.clear();
+        }
 
         for (const source of sources) {
             // If predicate exists, only stop matching sources
-            if (predicate && !predicate(source)) continue;
+            if (predicate && !predicate(source)) {
+                continue;
+            }
 
             stoppedCount++;
 
@@ -88,13 +94,19 @@ class SoundManager {
     }
 
     calculateResumeOffset(soundData: SoundData): number {
-        if (!soundData || soundData.playingSources.size === 0) return soundData?.resumeOffset ?? 0;
+        if (!soundData || soundData.playingSources.size === 0) {
+            return soundData?.resumeOffset ?? 0;
+        }
 
         const context = getAudioContext();
-        if (!context) return soundData.resumeOffset ?? 0;
+        if (!context) {
+            return soundData.resumeOffset ?? 0;
+        }
 
         const source = soundData.playingSources.values().next().value;
-        if (!source || typeof source.__startedAt !== "number") return soundData.resumeOffset ?? 0;
+        if (!source || typeof source.__startedAt !== "number") {
+            return soundData.resumeOffset ?? 0;
+        }
 
         const elapsed = Math.max(0, context.currentTime - source.__startedAt);
         const baseOffset = source.__startOffset || 0;
@@ -105,7 +117,9 @@ class SoundManager {
     }
 
     onReady(callback: () => void) {
-        if (typeof callback === "function") callback();
+        if (typeof callback === "function") {
+            callback();
+        }
     }
 
     play(
@@ -114,7 +128,9 @@ class SoundManager {
         options: PlayOptions = {}
     ) {
         const soundData = this.getSoundData(soundId);
-        if (!soundData) return;
+        if (!soundData) {
+            return;
+        }
 
         const context = resumeAudioContext();
         if (!context) {
@@ -216,7 +232,9 @@ class SoundManager {
 
     pause(soundId: number | string) {
         const soundData = this.getSoundData(soundId);
-        if (!soundData) return;
+        if (!soundData) {
+            return;
+        }
 
         soundData.resumeOffset = this.calculateResumeOffset(soundData);
         this.stopSources(soundData, false);
@@ -225,7 +243,9 @@ class SoundManager {
 
     stop(soundId: number | string) {
         const soundData = this.getSoundData(soundId);
-        if (!soundData) return;
+        if (!soundData) {
+            return;
+        }
 
         this.stopSources(soundData, false);
         soundData.isPaused = false;
@@ -233,9 +253,13 @@ class SoundManager {
     }
 
     stopInstance(soundId: number | string, instanceId: string) {
-        if (!instanceId) return;
+        if (!instanceId) {
+            return;
+        }
         const soundData = this.getSoundData(soundId);
-        if (!soundData) return;
+        if (!soundData) {
+            return;
+        }
 
         const stoppedCount = this.stopSources(
             soundData,
@@ -256,7 +280,9 @@ class SoundManager {
 
     setVolume(soundId: number | string, percent: number) {
         const soundData = this.getSoundData(soundId);
-        if (!soundData) return;
+        if (!soundData) {
+            return;
+        }
 
         const clampedPercent = Math.max(0, Math.min(100, percent));
         const volume = clampedPercent / 100;

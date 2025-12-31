@@ -28,10 +28,14 @@ class SettingStorage {
      * Migration: consolidate existing localStorage keys into the single storage object
      */
     migrateOldData(): void {
-        if (!window.localStorage) return;
+        if (!window.localStorage) {
+            return;
+        }
 
         const existingData = localStorage.getItem(SettingStorage.STORAGE_KEY);
-        if (existingData) return; // Already migrated
+        if (existingData) {
+            return;
+        } // Already migrated
 
         const dataToMigrate: Record<string, string | null> = {};
         const keysToRemove: string[] = [];
@@ -57,7 +61,9 @@ class SettingStorage {
      * Get all data from consolidated storage
      */
     getAllData(): Record<string, string> {
-        if (!window.localStorage) return {};
+        if (!window.localStorage) {
+            return {};
+        }
         try {
             const data = localStorage.getItem(SettingStorage.STORAGE_KEY);
             return data ? JSON.parse(data) : {};
@@ -71,7 +77,9 @@ class SettingStorage {
      * Save data to consolidated storage
      */
     saveAllData(data: Record<string, string>): void {
-        if (!window.localStorage) return;
+        if (!window.localStorage) {
+            return;
+        }
         try {
             localStorage.setItem(SettingStorage.STORAGE_KEY, JSON.stringify(data));
         } catch (e) {
@@ -83,8 +91,12 @@ class SettingStorage {
      * Get setting by key
      */
     get(key: string): string | null {
-        if (!window.localStorage) return null;
-        if (key in this.settingCache) return this.settingCache[key] ?? null;
+        if (!window.localStorage) {
+            return null;
+        }
+        if (key in this.settingCache) {
+            return this.settingCache[key] ?? null;
+        }
         const data = this.getAllData();
         return data[this.prefix + key] ?? null;
     }
@@ -93,7 +105,9 @@ class SettingStorage {
      * Set setting value
      */
     set(key: string, value: string | number | null): void {
-        if (!window.localStorage) return;
+        if (!window.localStorage) {
+            return;
+        }
         const data = this.getAllData();
         const fullKey = this.prefix + key;
 
@@ -113,7 +127,9 @@ class SettingStorage {
      * Remove setting by key
      */
     remove(key: string): void {
-        if (!window.localStorage) return;
+        if (!window.localStorage) {
+            return;
+        }
         delete this.settingCache[key];
         const data = this.getAllData();
         delete data[this.prefix + key];

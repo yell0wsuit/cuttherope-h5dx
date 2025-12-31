@@ -141,7 +141,9 @@ class LevelPanel extends Panel {
 
     private readonly onLevelClick = (event: MouseEvent): void => {
         const target = event.currentTarget as HTMLElement | null;
-        if (!target) return;
+        if (!target) {
+            return;
+        }
 
         const levelIndex = parseInt(target.dataset.level ?? "0", 10);
         if (ScoreManager.isLevelUnlocked(BoxManager.currentBoxIndex, levelIndex)) {
@@ -170,12 +172,18 @@ class LevelPanel extends Panel {
         this.levelNavForward = getElement("#levelNavForward") as HTMLElement | null;
 
         if (!this.isLevelNavigationActive) {
-            if (this.levelNavBack) hide(this.levelNavBack);
-            if (this.levelNavForward) hide(this.levelNavForward);
+            if (this.levelNavBack) {
+                hide(this.levelNavBack);
+            }
+            if (this.levelNavForward) {
+                hide(this.levelNavForward);
+            }
         }
 
         this.levelNavBack?.addEventListener("click", () => {
-            if (this.currentPage === 0) return;
+            if (this.currentPage === 0) {
+                return;
+            }
             this.currentPage -= 1;
             SoundMgr.playSound(ResourceId.SND_TAP);
             this.updateLevelOptions();
@@ -185,7 +193,9 @@ class LevelPanel extends Panel {
             const boxIndex = BoxManager.currentBoxIndex;
             const levelCount = ScoreManager.levelCount(boxIndex) ?? 0;
             const totalPages = calculateTotalPages(levelCount);
-            if (this.currentPage >= totalPages - 1) return;
+            if (this.currentPage >= totalPages - 1) {
+                return;
+            }
             this.currentPage += 1;
             SoundMgr.playSound(ResourceId.SND_TAP);
             this.updateLevelOptions();

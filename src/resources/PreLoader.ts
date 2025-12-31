@@ -128,14 +128,18 @@ class PreLoader {
 
     private async fetchImageBlob(url: RequestInfo | URL): Promise<Blob> {
         const response = await fetch(url);
-        if (!response.ok) throw new Error(`Request failed with status ${response.status}`);
+        if (!response.ok) {
+            throw new Error(`Request failed with status ${response.status}`);
+        }
         return response.blob();
     }
 
     private async loadImageFromBlob(blob: Blob, fallbackUrl: string): Promise<HTMLImageElement> {
         const urlFacade = this.getUrlFacade();
         if (!urlFacade) {
-            if (fallbackUrl) return this.loadImageElement(fallbackUrl);
+            if (fallbackUrl) {
+                return this.loadImageElement(fallbackUrl);
+            }
             throw new Error("Object URL API not available");
         }
         const objectUrl = urlFacade.createObjectURL(blob);
@@ -147,7 +151,9 @@ class PreLoader {
     }
 
     private async loadImageAsset(url: string): Promise<ImageAsset> {
-        if (!url) throw new Error("Image URL must be provided");
+        if (!url) {
+            throw new Error("Image URL must be provided");
+        }
 
         if (!this.supportsImageBitmap && !this.getUrlFacade()) {
             const img = await this.loadImageElement(url);
@@ -182,7 +188,9 @@ class PreLoader {
 
     private async loadJson<T>(url: RequestInfo | URL): Promise<T> {
         const res = await fetch(url);
-        if (!res.ok) throw new Error(`Request failed with status ${res.status}`);
+        if (!res.ok) {
+            throw new Error(`Request failed with status ${res.status}`);
+        }
         const text = await res.text();
         return JSON.parse(text) as T;
     }
@@ -221,7 +229,9 @@ class PreLoader {
         /*LoadAnimation?.notifyLoaded?.();
         LoadAnimation?.hide?.();*/
 
-        if (this.completeCallback) setTimeout(this.completeCallback, 0);
+        if (this.completeCallback) {
+            setTimeout(this.completeCallback, 0);
+        }
 
         this.menuCompleteLocked = true;
     }
@@ -233,19 +243,27 @@ class PreLoader {
         const resources: ResourceDescriptor[] = [];
         let menuResourceCount = 0;
         const add = (url: string | null | undefined, tag: string, resId: number | null = null) => {
-            if (!url) return;
+            if (!url) {
+                return;
+            }
             resources.push({ url, tag, resId });
-            if (tag === this.MENU_TAG || tag === this.FONT_TAG) menuResourceCount++;
+            if (tag === this.MENU_TAG || tag === this.FONT_TAG) {
+                menuResourceCount++;
+            }
         };
 
         const queueMenu = (
             arr: readonly (string | null)[] | string | undefined,
             base = platform.uiImageBaseUrl
         ) => {
-            if (!arr) return;
+            if (!arr) {
+                return;
+            }
             const names = Array.isArray(arr) ? arr : [arr];
             for (const name of names) {
-                if (name) add(base + name, this.MENU_TAG);
+                if (name) {
+                    add(base + name, this.MENU_TAG);
+                }
             }
         };
 
@@ -260,10 +278,14 @@ class PreLoader {
         );
 
         const queueForResMgr = (ids: readonly number[] | undefined, tag: string) => {
-            if (!ids) return;
+            if (!ids) {
+                return;
+            }
             for (const id of ids) {
                 const res = resData[id];
-                if (!res) continue;
+                if (!res) {
+                    continue;
+                }
                 add(gameBaseUrl + res.path, tag, id);
                 if (res.atlasPath) {
                     this.loadJson<TexturePackerAtlas>(gameBaseUrl + res.atlasPath)
@@ -311,14 +333,20 @@ class PreLoader {
                     if ((tag === this.FONT_TAG || tag === this.GAME_TAG) && resId !== null) {
                         ResourceMgr.onResourceLoaded(resId, asset);
                     }
-                    if (tracked(tag)) menuLoaded++;
+                    if (tracked(tag)) {
+                        menuLoaded++;
+                    }
                 })
                 .catch((error) => {
                     window.console?.error?.("Failed to load image:", url, error);
-                    if (tracked(tag)) menuFailed++;
+                    if (tracked(tag)) {
+                        menuFailed++;
+                    }
                 })
                 .finally(() => {
-                    if (tracked(tag)) finalize();
+                    if (tracked(tag)) {
+                        finalize();
+                    }
                 });
         }
 

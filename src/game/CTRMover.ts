@@ -17,7 +17,9 @@ class CTRMover extends Mover {
             // can scale the radius to match the current resolution
             rad *= MOVER_SCALE;
 
-            if (!clockwise) k_increment = -k_increment;
+            if (!clockwise) {
+                k_increment = -k_increment;
+            }
 
             for (let i = 0; i < pointsCount; i++) {
                 const nx = startX + rad * Math.cos(theta);

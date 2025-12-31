@@ -168,7 +168,9 @@ class GameSceneTouch extends GameSceneUpdate {
                         hasCircleInside = true;
                     }
 
-                    if (d3 <= r.sizeInPixels + r2.sizeInPixels) intersectsAnotherCircle = true;
+                    if (d3 <= r.sizeInPixels + r2.sizeInPixels) {
+                        intersectsAnotherCircle = true;
+                    }
                 }
 
                 r.lastTouch.x = cameraAdjustedX;
@@ -448,7 +450,9 @@ class GameSceneTouch extends GameSceneUpdate {
                 let soundToPlay: number =
                     a > 0 ? ResourceId.SND_SCRATCH_IN : ResourceId.SND_SCRATCH_OUT;
 
-                if (Math.abs(a) < 0.07) soundToPlay = Constants.UNDEFINED;
+                if (Math.abs(a) < 0.07) {
+                    soundToPlay = Constants.UNDEFINED;
+                }
 
                 if (r.soundPlaying != soundToPlay && soundToPlay != Constants.UNDEFINED) {
                     SoundMgr.playSound(soundToPlay);

@@ -123,7 +123,9 @@ class PollenDrawer extends BaseElement {
     ) {
         const v1 = grab.mover.path[fromIndex];
         const v2 = grab.mover.path[toIndex];
-        if (!v1 || !v2) return;
+        if (!v1 || !v2) {
+            return;
+        }
 
         const MIN_DISTANCE = resolution.POLLEN_MIN_DISTANCE;
         const v = Vector.subtract(v2, v1);
@@ -151,7 +153,9 @@ class PollenDrawer extends BaseElement {
 
         for (i = 0; i < len; i++) {
             pollen = this.pollens[i];
-            if (!pollen) continue;
+            if (!pollen) {
+                continue;
+            }
 
             // increment the scale
             moveResult = Mover.moveToTargetWithStatus(pollen.scaleX, pollen.endScaleX, 1, delta);

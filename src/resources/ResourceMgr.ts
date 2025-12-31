@@ -174,7 +174,9 @@ class ResourceMgr {
         for (let i = 0, len = rects.length; i < len; i++) {
             // convert it to a Rectangle object
             const rawRect = rects[i];
-            if (!rawRect || typeof rawRect === "number") continue;
+            if (!rawRect || typeof rawRect === "number") {
+                continue;
+            }
 
             const rect = new Rectangle(rawRect.x, rawRect.y, rawRect.w, rawRect.h);
 
@@ -194,7 +196,9 @@ class ResourceMgr {
             let i;
             for (i = 0; i < oCount; i++) {
                 const offset = offsets[i];
-                if (!offset || typeof offset === "number") continue;
+                if (!offset || typeof offset === "number") {
+                    continue;
+                }
                 if ("x" in offset && "y" in offset) {
                     t.setOffset(i, offset.x, offset.y);
                 }

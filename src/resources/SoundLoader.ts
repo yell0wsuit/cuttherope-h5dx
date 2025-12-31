@@ -124,7 +124,9 @@ class SoundLoader {
 
         const loadSound = async ({ id }: { id: number }): Promise<void> => {
             const resource = resData[id];
-            if (!resource) throw new Error(`Resource not found for sound ID: ${id}`);
+            if (!resource) {
+                throw new Error(`Resource not found for sound ID: ${id}`);
+            }
 
             const soundKey = `s${id}`;
             const soundUrl = baseUrl + resource.path + extension;

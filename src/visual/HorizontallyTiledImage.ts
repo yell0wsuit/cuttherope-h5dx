@@ -27,7 +27,9 @@ class HorizontallyTiledImage extends ImageElement {
         const rect1 = this.texture.rects[left];
         const rect2 = this.texture.rects[center];
         const rect3 = this.texture.rects[right];
-        if (!rect1 || !rect2 || !rect3) return;
+        if (!rect1 || !rect2 || !rect3) {
+            return;
+        }
 
         const h1 = rect1.h;
         const h2 = rect2.h;

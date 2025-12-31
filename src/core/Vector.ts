@@ -88,7 +88,9 @@ class Vector {
 
         for (let j = 0; j < count; j++) {
             const point = points[j];
-            if (!point) continue;
+            if (!point) {
+                continue;
+            }
             xs[j] = point.x;
             ys[j] = point.y;
         }
@@ -100,12 +102,16 @@ class Vector {
             for (; i < countMinusOne; i++, iPlusOne++) {
                 const currentX = xs[i];
                 const nextX = xs[iPlusOne];
-                if (currentX === undefined || nextX === undefined) continue;
+                if (currentX === undefined || nextX === undefined) {
+                    continue;
+                }
                 xs[i] = currentX * d1 + nextX * delta;
 
                 const currentY = ys[i];
                 const nextY = ys[iPlusOne];
-                if (currentY === undefined || nextY === undefined) continue;
+                if (currentY === undefined || nextY === undefined) {
+                    continue;
+                }
                 ys[i] = currentY * d1 + nextY * delta;
             }
         }

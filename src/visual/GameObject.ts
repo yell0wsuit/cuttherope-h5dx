@@ -95,8 +95,11 @@ class GameObject extends Animation {
             this.x = this.mover.pos.x;
             this.y = this.mover.pos.y;
 
-            if (this.rotatedBB) this.rotateWithBB(this.mover.angle);
-            else this.rotation = this.mover.angle;
+            if (this.rotatedBB) {
+                this.rotateWithBB(this.mover.angle);
+            } else {
+                this.rotation = this.mover.angle;
+            }
         }
     }
 

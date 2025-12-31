@@ -73,7 +73,9 @@ interface ParseAtlasOptions {
  * @returns {FrameEntry[]}
  */
 const createFrameEntries = (frames: Record<string, FrameData> | FrameData[]): FrameEntry[] => {
-    if (!frames) return [];
+    if (!frames) {
+        return [];
+    }
 
     // If frames is an array, preserve its natural order
     if (Array.isArray(frames)) {
@@ -96,7 +98,9 @@ const createFrameEntries = (frames: Record<string, FrameData> | FrameData[]): Fr
  * Orders frame entries according to a defined sequence.
  */
 const orderFrameEntries = (entries: FrameEntry[], frameOrder: string[]): FrameEntry[] => {
-    if (!frameOrder || frameOrder.length === 0) return entries;
+    if (!frameOrder || frameOrder.length === 0) {
+        return entries;
+    }
 
     const orderMap = new Map(frameOrder.map((name, i) => [name, i]));
 
@@ -119,7 +123,9 @@ export const parseTexturePackerAtlas = (
 ): ParsedAtlasInfo => {
     const { existingInfo = {}, offsetNormalization, frameOrder } = options;
 
-    if (!atlasData || !atlasData.frames) return existingInfo as ParsedAtlasInfo;
+    if (!atlasData || !atlasData.frames) {
+        return existingInfo as ParsedAtlasInfo;
+    }
 
     // Auto-detect order directly from JSON array if available
     let autoFrameOrder = null;
@@ -132,8 +138,12 @@ export const parseTexturePackerAtlas = (
     let entries = createFrameEntries(atlasData.frames);
     // Use provided frameOrder, or fall back to auto-detected order
     const orderToUse = frameOrder || autoFrameOrder;
-    if (orderToUse) entries = orderFrameEntries(entries, orderToUse);
-    if (entries.length === 0) return existingInfo as ParsedAtlasInfo;
+    if (orderToUse) {
+        entries = orderFrameEntries(entries, orderToUse);
+    }
+    if (entries.length === 0) {
+        return existingInfo as ParsedAtlasInfo;
+    }
 
     const info: ParsedAtlasInfo = {
         ...existingInfo,
@@ -154,7 +164,9 @@ export const parseTexturePackerAtlas = (
     entries.forEach((entry, index) => {
         const frameInfo = entry.data;
         const frameRect = frameInfo.frame;
-        if (!frameRect) return;
+        if (!frameRect) {
+            return;
+        }
 
         if (frameInfo.rotated) {
             console.warn(`TexturePacker frame "${entry.name}" is rotated — not supported.`);
@@ -167,7 +179,9 @@ export const parseTexturePackerAtlas = (
         if (spriteSourceSize) {
             const offset = new Vector(spriteSourceSize.x || 0, spriteSourceSize.y || 0);
             offsets.push(offset);
-            if (offset.x !== 0 || offset.y !== 0) hasNonZeroOffset = true;
+            if (offset.x !== 0 || offset.y !== 0) {
+                hasNonZeroOffset = true;
+            }
         } else {
             offsets.push(new Vector(0, 0));
         }

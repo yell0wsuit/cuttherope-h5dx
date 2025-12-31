@@ -131,7 +131,9 @@ class Text extends BaseElement {
 
         for (let i = 0; i < linesToDraw; i++) {
             const fs = this.formattedStrings[i];
-            if (!fs) continue;
+            if (!fs) {
+                continue;
+            }
 
             const s = fs.string;
             const len = s.length;
@@ -148,14 +150,18 @@ class Text extends BaseElement {
 
             for (let c = 0; c < len; c++) {
                 const char = s[c];
-                if (!char) continue;
+                if (!char) {
+                    continue;
+                }
 
                 if (char === " ") {
                     dx += this.font.spaceWidth + this.font.getCharOffset(s, c);
                 } else {
                     const quadIndex = this.font.getCharQuad(char);
                     const rect = this.font.texture.rects[quadIndex];
-                    if (!rect) continue;
+                    if (!rect) {
+                        continue;
+                    }
 
                     const itemWidth = rect.w;
                     this.d.mapTextureQuad(quadIndex, Math.round(dx), Math.round(dy), n++);
@@ -165,7 +171,9 @@ class Text extends BaseElement {
                 if (drawEllipsis && i === linesToDraw - 1) {
                     const dotIndex = this.font.getCharQuad(".");
                     const dotRect = this.font.texture.rects[dotIndex];
-                    if (!dotRect) continue;
+                    if (!dotRect) {
+                        continue;
+                    }
                     const dotWidth = dotRect.w;
                     if (
                         c === len - 1 ||
@@ -232,7 +240,9 @@ class Text extends BaseElement {
 
         while (dx < len) {
             const c = s[dx++];
-            if (!c) continue;
+            if (!c) {
+                continue;
+            }
 
             if (c == " " || c == "\n") {
                 wp += wc;
@@ -247,7 +257,9 @@ class Text extends BaseElement {
             } else {
                 const quadIndex = this.font.getCharQuad(c);
                 const rect = this.font.texture.rects[quadIndex];
-                if (!rect) continue;
+                if (!rect) {
+                    continue;
+                }
                 const charWidth = rect.w;
                 wc += charWidth + this.font.getCharOffset(s, dx - 1);
             }
@@ -286,7 +298,9 @@ class Text extends BaseElement {
         for (let i = 0; i < strCount; i++) {
             const start = strIdx[i << 1];
             const end = strIdx[(i << 1) + 1];
-            if (start === undefined || end === undefined) continue;
+            if (start === undefined || end === undefined) {
+                continue;
+            }
 
             const str = this.string.substring(start, end);
             const wd = this.font.stringWidth(str);
@@ -352,7 +366,9 @@ class Text extends BaseElement {
         cnv.height = lineHeight + topPadding + bottomPadding;
 
         const ctx = (options.canvas ? (options.img as HTMLCanvasElement) : cnv).getContext("2d");
-        if (!ctx) return options.img;
+        if (!ctx) {
+            return options.img;
+        }
 
         // Explicitly clear the canvas to prevent corruption when reusing canvas elements
         ctx.clearRect(0, 0, cnv.width, cnv.height);
@@ -381,7 +397,9 @@ class Text extends BaseElement {
 
             for (let i = 0; i < textArray.length; ++i) {
                 const line = textArray[i];
-                if (!line) continue;
+                if (!line) {
+                    continue;
+                }
                 const yPos =
                     topPadding + (i + 1) * lineHeight - (lineHeight - Math.round(18 * scaleFactor));
                 // Only stroke for non-Font ID 5
@@ -397,7 +415,9 @@ class Text extends BaseElement {
                 // Clear again after resizing for single line text
                 ctx.clearRect(0, 0, cnv.width, cnv.height);
                 setupFont(ctx, options);
-                if (options.alignment !== 1) x = cnv.width / 2;
+                if (options.alignment !== 1) {
+                    x = cnv.width / 2;
+                }
             }
             const yPos = topPadding + lineHeight - (lineHeight - Math.round(18 * scaleFactor));
             // Only stroke for non-Font ID 5
@@ -502,7 +522,9 @@ class Text extends BaseElement {
             // set the canvas width and height
             const canvas = Canvas.element;
             const ctx = Canvas.context;
-            if (!canvas || !ctx) return img;
+            if (!canvas || !ctx) {
+                return img;
+            }
             const imgWidth = (width || Math.ceil(t.width)) + Math.ceil(t.x * 2);
             const imgHeight = Math.ceil(t.height);
             canvas.width = imgWidth;
@@ -558,7 +580,9 @@ class Text extends BaseElement {
 
         // Use webfont-based rendering for all languages
         const langElement = document.getElementById("lang");
-        if (langElement) langElement.classList.add("lang-system");
+        if (langElement) {
+            langElement.classList.add("lang-system");
+        }
 
         const systemOptions: DrawSystemOptions = {
             fontId: options.fontId,
@@ -615,7 +639,9 @@ const stringToArray = (ctx: CanvasRenderingContext2D, string: string, width: num
             let currentLine = "";
 
             for (const word of words) {
-                if (!word) continue;
+                if (!word) {
+                    continue;
+                }
 
                 const testText = currentLine ? `${currentLine} ${word}` : word;
                 const testWidth = ctx.measureText(testText).width;

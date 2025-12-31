@@ -12,7 +12,9 @@ import type { FingerCutTrail, GameScene } from "@/types/game-scene";
 const drawImpl = function drawImpl(scene: GameScene): void {
     // reset any canvas transformations and clear everything
     const ctx = Canvas.context;
-    if (!ctx) return;
+    if (!ctx) {
+        return;
+    }
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, resolution.CANVAS_WIDTH, resolution.CANVAS_HEIGHT);
 

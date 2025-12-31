@@ -119,7 +119,9 @@ class PanelManager {
     // =====================
 
     showShadow(): void {
-        if (this.shadowIsVisible) return;
+        if (this.shadowIsVisible) {
+            return;
+        }
 
         if (this.shadowCanvas) {
             const ctx = this.shadowCanvas.getContext("2d");
@@ -138,7 +140,9 @@ class PanelManager {
             this.shadowPanelElement.style.display = "block";
         }
 
-        if (!this.shadowIsRotating) this.beginRotateShadow();
+        if (!this.shadowIsRotating) {
+            this.beginRotateShadow();
+        }
     }
 
     hideShadow(): void {
@@ -150,16 +154,22 @@ class PanelManager {
     }
 
     beginRotateShadow(): void {
-        if (!this.shadowCanvas || !this.shadowImage) return;
+        if (!this.shadowCanvas || !this.shadowImage) {
+            return;
+        }
 
         const ctx = this.shadowCanvas.getContext("2d");
-        if (!ctx) return;
+        if (!ctx) {
+            return;
+        }
 
         const raf = window.requestAnimationFrame;
         let lastRotateTime = Date.now();
 
         const renderShadow = () => {
-            if (!this.shadowIsRotating || !this.shadowCanvas || !this.shadowImage || !ctx) return;
+            if (!this.shadowIsRotating || !this.shadowCanvas || !this.shadowImage || !ctx) {
+                return;
+            }
 
             const now = Date.now();
             const delta = now - lastRotateTime;
@@ -208,7 +218,9 @@ class PanelManager {
         this.fadeToBlack.style.display = "block";
 
         const loop = () => {
-            if (!this.fadeToBlack) return;
+            if (!this.fadeToBlack) {
+                return;
+            }
 
             const diff = Date.now() - startTime;
             const v = Easing.noEase(diff, 0, this.fadeTo, this.fadeInDur);
@@ -228,11 +240,15 @@ class PanelManager {
     }
 
     runBlackFadeOut(): void {
-        if (!this.isFading || !this.fadeToBlack) return;
+        if (!this.isFading || !this.fadeToBlack) {
+            return;
+        }
 
         const startTime = Date.now();
         const loop = () => {
-            if (!this.fadeToBlack) return;
+            if (!this.fadeToBlack) {
+                return;
+            }
 
             const diff = Date.now() - startTime;
             const v = this.fadeTo - Easing.noEase(diff, 0, this.fadeTo, this.fadeInDur);
@@ -259,7 +275,9 @@ class PanelManager {
     showPanel(panelId: PanelIdType, skipFade = false): void {
         this.currentPanelId = panelId;
         const panel = this.getPanelById(panelId);
-        if (!panel) return;
+        if (!panel) {
+            return;
+        }
 
         // shadow toggle
         if (panel.showShadow) {
@@ -273,32 +291,44 @@ class PanelManager {
             // show panel elements
             if (panel.bgDivId) {
                 const bg = document.getElementById(panel.bgDivId);
-                if (bg) bg.style.display = "block";
+                if (bg) {
+                    bg.style.display = "block";
+                }
             }
             if (panel.panelDivId) {
                 const el = document.getElementById(panel.panelDivId);
-                if (el) el.style.display = "block";
+                if (el) {
+                    el.style.display = "block";
+                }
             }
 
             // hide others
             for (const other of this.panels) {
                 if (other.panelDivId && other.panelDivId !== panel.panelDivId) {
                     const el = document.getElementById(other.panelDivId);
-                    if (el) el.style.display = "none";
+                    if (el) {
+                        el.style.display = "none";
+                    }
                 }
                 if (other.bgDivId && other.bgDivId !== panel.bgDivId) {
                     const bg = document.getElementById(other.bgDivId);
-                    if (bg) bg.style.display = "none";
+                    if (bg) {
+                        bg.style.display = "none";
+                    }
                 }
             }
 
             // event hook
             this.onShowPanel?.(panelId);
 
-            if (!skipFade) this.runBlackFadeOut();
+            if (!skipFade) {
+                this.runBlackFadeOut();
+            }
         }, timeout);
 
-        if (!skipFade) this.runBlackFadeIn();
+        if (!skipFade) {
+            this.runBlackFadeIn();
+        }
     }
 }
 

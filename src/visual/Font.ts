@@ -80,14 +80,18 @@ class Font extends ImageElement {
             lastOffset = this.getCharOffset(str, c);
 
             const char = str[c];
-            if (!char) continue;
+            if (!char) {
+                continue;
+            }
 
             if (char === " ") {
                 strWidth += this.spaceWidth + lastOffset;
             } else {
                 const quadIndex = this.getCharQuad(char);
                 const rect = this.texture.rects[quadIndex];
-                if (!rect) continue;
+                if (!rect) {
+                    continue;
+                }
 
                 const itemWidth = rect.w;
                 strWidth += itemWidth + lastOffset;

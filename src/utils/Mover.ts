@@ -54,7 +54,9 @@ class Mover {
             let kIncrement = (2 * Math.PI) / pointsCount;
             let theta = 0;
 
-            if (!clockwise) kIncrement = -kIncrement;
+            if (!clockwise) {
+                kIncrement = -kIncrement;
+            }
 
             for (let i = 0; i < pointsCount; ++i) {
                 const nx = start.x + rad * Math.cos(theta);
@@ -146,7 +148,9 @@ class Mover {
     }
 
     update(delta: number): void {
-        if (this.paused) return;
+        if (this.paused) {
+            return;
+        }
 
         if (this.path.length > 0) {
             const target = this.path[this.targetPoint];
@@ -242,7 +246,9 @@ class Mover {
                     v = t;
                 }
             }
-            if (t === v) reachedZero = true;
+            if (t === v) {
+                reachedZero = true;
+            }
         }
 
         return {

@@ -302,13 +302,17 @@ export default class PanelInitializer {
 
             case PanelId.GAME: {
                 on("#gameRestartBtn", "click", () => {
-                    if (manager.isTransitionActive) return;
+                    if (manager.isTransitionActive) {
+                        return;
+                    }
                     SoundMgr.playSound(ResourceId.SND_TAP);
                     gameFlow._openLevel(BoxManager.currentLevelIndex, true);
                 });
 
                 on("#gameMenuBtn", "click", () => {
-                    if (manager.isTransitionActive) return;
+                    if (manager.isTransitionActive) {
+                        return;
+                    }
                     SoundMgr.playSound(ResourceId.SND_TAP);
                     gameFlow._openLevelMenu();
                 });
@@ -380,7 +384,9 @@ export default class PanelInitializer {
 
             case PanelId.LEVELCOMPLETE: {
                 on("#nextBtn", "click", () => {
-                    if (manager.isTransitionActive) return;
+                    if (manager.isTransitionActive) {
+                        return;
+                    }
                     gameFlow._notifyBeginTransition(1000, "next level");
                     SoundMgr.playSound(ResourceId.SND_TAP);
                     if (BoxManager.isNextLevelPlayable()) {
@@ -391,14 +397,18 @@ export default class PanelInitializer {
                 });
 
                 on("#replayBtn", "click", () => {
-                    if (manager.isTransitionActive) return;
+                    if (manager.isTransitionActive) {
+                        return;
+                    }
                     gameFlow._notifyBeginTransition(1000, "replay");
                     SoundMgr.playSound(ResourceId.SND_TAP);
                     gameFlow._openLevel(BoxManager.currentLevelIndex);
                 });
 
                 on("#lrMenuBtn", "click", () => {
-                    if (manager.isTransitionActive) return;
+                    if (manager.isTransitionActive) {
+                        return;
+                    }
                     gameFlow._notifyBeginTransition(1000, "level menu");
                     SoundMgr.playSound(ResourceId.SND_TAP);
                     manager.isInLevelSelectMode = true;

@@ -108,7 +108,9 @@ class BoxPanel extends Panel {
             this.canvas = canvas;
             this.ctx = canvas ? canvas.getContext("2d") : null;
 
-            if (!this.canvas || !this.ctx) return;
+            if (!this.canvas || !this.ctx) {
+                return;
+            }
 
             this.canvas.width = resolution.uiScaledNumber(1024);
             this.canvas.height = resolution.uiScaledNumber(576);
@@ -169,14 +171,20 @@ class BoxPanel extends Panel {
     }
 
     boxClicked(visibleBoxIndex: number): void {
-        if (visibleBoxIndex !== this.currentBoxIndex) return;
+        if (visibleBoxIndex !== this.currentBoxIndex) {
+            return;
+        }
 
         const box = this.boxes[visibleBoxIndex];
-        if (!box) return;
+        if (!box) {
+            return;
+        }
 
         const editionBoxIndex = box.index;
 
-        if (!box.isClickable()) return;
+        if (!box.isClickable()) {
+            return;
+        }
 
         SoundMgr.playSound(ResourceId.SND_TAP);
 
@@ -288,7 +296,9 @@ class BoxPanel extends Panel {
     render(offset: number): void {
         const ctx = this.ctx;
         const canvas = this.canvas;
-        if (!ctx || !canvas) return;
+        if (!ctx || !canvas) {
+            return;
+        }
 
         this.currentOffset = offset;
 
@@ -329,14 +339,20 @@ class BoxPanel extends Panel {
 
     slideToBox(index: number): void {
         const ctx = this.ctx;
-        if (!ctx || this.boxes.length === 0) return;
+        if (!ctx || this.boxes.length === 0) {
+            return;
+        }
 
         const clampedIndex = Math.max(0, Math.min(index, this.boxes.length - 1));
         const targetBox = this.boxes[clampedIndex];
-        if (!targetBox) return;
+        if (!targetBox) {
+            return;
+        }
 
         // Cancel any running animation or bounce
-        if (this.rafId) cancelAnimationFrame(this.rafId);
+        if (this.rafId) {
+            cancelAnimationFrame(this.rafId);
+        }
         this.rafId = null;
         this.slideInProgress = false;
         this.bounceBox?.cancelBounce();
@@ -360,8 +376,12 @@ class BoxPanel extends Panel {
         this.isBoxCentered = duration <= 0;
 
         const startBounce = () => {
-            if (!ctx) return;
-            if (this.bounceBox !== nextBox) return;
+            if (!ctx) {
+                return;
+            }
+            if (this.bounceBox !== nextBox) {
+                return;
+            }
             nextBox.cancelBounce();
             nextBox.bounce(ctx);
             nextBox.onSelected?.();
@@ -370,7 +390,9 @@ class BoxPanel extends Panel {
         const queueBounce = () => {
             // delay bounce by 50ms after fully snapped
             window.setTimeout(() => {
-                if (!this.slideInProgress) startBounce();
+                if (!this.slideInProgress) {
+                    startBounce();
+                }
             }, 50);
         };
 
@@ -385,7 +407,9 @@ class BoxPanel extends Panel {
         }
 
         const renderSlide = () => {
-            if (!this.slideInProgress) return;
+            if (!this.slideInProgress) {
+                return;
+            }
             const elapsed = Date.now() - this.startTime;
             const t = Math.min(elapsed, duration);
 
@@ -411,12 +435,16 @@ class BoxPanel extends Panel {
     }
 
     updateNavButtons(): void {
-        if (!this.$navBack || !this.$navForward) return;
+        if (!this.$navBack || !this.$navForward) {
+            return;
+        }
 
         const backDiv = this.$navBack.querySelector<HTMLDivElement>("div");
         const forwardDiv = this.$navForward.querySelector<HTMLDivElement>("div");
 
-        if (!backDiv || !forwardDiv) return;
+        if (!backDiv || !forwardDiv) {
+            return;
+        }
 
         if (this.currentBoxIndex <= 0) {
             backDiv.classList.add("boxNavDisabled");
@@ -476,7 +504,9 @@ class BoxPanel extends Panel {
     }
 
     pointerDown(x: number, y: number): void {
-        if (this.isMouseDown) return;
+        if (this.isMouseDown) {
+            return;
+        }
         this.cancelSlideToBox(true);
         this.downX = x;
         this.downY = y;
@@ -485,9 +515,13 @@ class BoxPanel extends Panel {
     }
 
     pointerMove(x: number, y: number): void {
-        if (!this.canvas) return;
+        if (!this.canvas) {
+            return;
+        }
         if (this.isMouseDown) {
-            if (this.downX == null) return;
+            if (this.downX == null) {
+                return;
+            }
             this.cancelSlideToBox();
             this.delta = x - this.downX;
             if (Math.abs(this.delta) > 5) {
@@ -539,7 +573,9 @@ class BoxPanel extends Panel {
     }
 
     activate(): void {
-        if (!this.canvas) return;
+        if (!this.canvas) {
+            return;
+        }
 
         if (!this.pointerCapture) {
             this.pointerCapture = new PointerCapture({

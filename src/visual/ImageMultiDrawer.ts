@@ -60,13 +60,17 @@ class ImageMultiDrawer extends BaseElement {
 
     mapTextureQuad(quadIndex: number, dx: number, dy: number, index: number) {
         const textureRect = this.texture.rects[quadIndex];
-        if (!textureRect) return;
+        if (!textureRect) {
+            return;
+        }
 
         this.texCoordinates[index] = Rectangle.copy(textureRect);
 
         const offset = this.texture.offsets[quadIndex];
         const rect = this.texture.rects[quadIndex];
-        if (!offset || !rect) return;
+        if (!offset || !rect) {
+            return;
+        }
 
         this.vertices[index] = new Rectangle(dx + offset.x, dy + offset.y, rect.w, rect.h);
         this.alphas[index] = 1;
@@ -87,7 +91,9 @@ class ImageMultiDrawer extends BaseElement {
         for (let i = 0; i < n; i++) {
             const source = this.texCoordinates[i];
             const dest = this.vertices[i];
-            if (!source || !dest) continue;
+            if (!source || !dest) {
+                continue;
+            }
 
             const sourceW = Math.ceil(source.w);
             const sourceH = Math.ceil(source.h);

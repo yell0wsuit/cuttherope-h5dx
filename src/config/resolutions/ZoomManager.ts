@@ -27,7 +27,9 @@ class ZoomManager {
     }
 
     updateCss(css: StyleOverrides = {}): void {
-        if (!this.#element) return;
+        if (!this.#element) {
+            return;
+        }
 
         const scaleValue = this.#zoom === 1 ? "" : `scale(${this.#zoom})`;
         const originValue = this.#zoom === 1 ? "" : this.#transformOrigin;
@@ -53,7 +55,9 @@ class ZoomManager {
 
     resize(skipZoom = false): void {
         const element = this.#element;
-        if (!element) return;
+        if (!element) {
+            return;
+        }
 
         const vpWidth = window.innerWidth;
         const vpHeight = window.innerHeight;

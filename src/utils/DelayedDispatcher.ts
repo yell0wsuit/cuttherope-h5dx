@@ -80,7 +80,9 @@ export class DelayedDispatcher {
             const dpIndex = this.dispatchers.indexOf(dp);
 
             // Skip if already removed
-            if (dpIndex < 0) continue;
+            if (dpIndex < 0) {
+                continue;
+            }
 
             dp.delay -= delta;
             if (dp.delay <= 0) {

@@ -180,7 +180,9 @@ class Spikes extends CTRGameObject {
 
     updateRotation() {
         const texture = this.texture;
-        if (!texture) return;
+        if (!texture) {
+            return;
+        }
 
         const quadIndex = this.quadToDraw;
         const rect = quadIndex !== undefined ? texture.rects[quadIndex] : null;

@@ -316,9 +316,13 @@ class EasterEggManager {
         let omNomShowing = false;
 
         const showDevLinkOmNom = (onComplete: () => void) => {
-            if (!devCanvas) return;
+            if (!devCanvas) {
+                return;
+            }
             const ctx = devCanvas.getContext("2d");
-            if (!ctx) return;
+            if (!ctx) {
+                return;
+            }
             const begin = Date.now();
             const sx = 0.1;
             let sy = 0.1;
@@ -345,44 +349,53 @@ class EasterEggManager {
             const modflag = false;
             const modt = null;
 
+            const getPhase = (t: number) => {
+                if (t < s1) return 1;
+                if (t < s2) return 2;
+                if (t < s3) return 3;
+                if (t < s4) return 4;
+                if (t < s5) return 5;
+                if (t < s6) return 6;
+                return 7;
+            };
+
             const step = () => {
                 const now = Date.now(),
                     t = now - begin;
 
-                // zoom up OmNom
-                if (t < s1) {
-                    sy = 0 - Easing.easeOutBounce(t, 0, 100, s1, 1.5);
-                }
-
-                // move his eyes left
-                else if (t < s2) {
-                    if (t > s1 + 100) {
-                        // delay;
-                        l = -1 * Easing.easeOutExpo(t - (s1 + 100), 0, 10, s2 - (s1 + 100));
+                switch (getPhase(t)) {
+                    case 1:
+                        // zoom up OmNom
+                        sy = 0 - Easing.easeOutBounce(t, 0, 100, s1, 1.5);
+                        break;
+                    case 2:
+                        // move his eyes left
+                        if (t > s1 + 100) {
+                            // delay
+                            l = -1 * Easing.easeOutExpo(t - (s1 + 100), 0, 10, s2 - (s1 + 100));
+                            r = l;
+                        }
+                        break;
+                    case 3:
+                        // move his eyes right
+                        l = -10 + Easing.easeInOutExpo(t - s2, 0, 20, s3 - s2);
                         r = l;
-                    }
-                }
-
-                // move his eyes right
-                else if (t < s3) {
-                    l = -10 + Easing.easeInOutExpo(t - s2, 0, 20, s3 - s2);
-                    r = l;
-                }
-
-                // move his eyes back
-                else if (t < s4) {
-                    if (t > s3 + 100) {
-                        // delay;
-                        l = 10 - Easing.easeInOutExpo(t - (s3 + 100), 0, 10, s4 - (s3 + 100));
-                        r = l;
-                    }
-                }
-                //else if (t < s5) {
-                //}
-
-                // hide omnom
-                else if (t < s6) {
-                    ty = Easing.easeOutExpo(t - s5, txbegin, 50, s6 - s5);
+                        break;
+                    case 4:
+                        // move his eyes back
+                        if (t > s3 + 100) {
+                            // delay
+                            l = 10 - Easing.easeInOutExpo(t - (s3 + 100), 0, 10, s4 - (s3 + 100));
+                            r = l;
+                        }
+                        break;
+                    case 5:
+                        // pause before hiding
+                        break;
+                    case 6:
+                        // hide omnom
+                        ty = Easing.easeOutExpo(t - s5, txbegin, 50, s6 - s5);
+                        break;
                 }
 
                 if (t > s1 && t < s3) {
@@ -418,7 +431,9 @@ class EasterEggManager {
                 return;
             }
             const ctx = canvas.getContext("2d");
-            if (!ctx) return;
+            if (!ctx) {
+                return;
+            }
 
             RootController.pauseLevel();
 

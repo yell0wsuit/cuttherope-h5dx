@@ -216,19 +216,25 @@ class ScoreManager {
     }
 
     boxCount(): number | null {
-        if (this.boxes != null) return this.boxes.length;
+        if (this.boxes != null) {
+            return this.boxes.length;
+        }
         return null;
     }
 
     levelCount(boxIndex: number): number | null {
         const box = this.boxes[boxIndex];
-        if (box != null) return box.levelCount;
+        if (box != null) {
+            return box.levelCount;
+        }
         return null;
     }
 
     requiredStars(boxIndex: number): number {
         const box = this.boxes[boxIndex];
-        if (box != null) return box.requiredStars;
+        if (box != null) {
+            return box.requiredStars;
+        }
         return 0;
     }
 
@@ -262,13 +268,17 @@ class ScoreManager {
     }
 
     isBoxLocked(boxIndex: number): boolean {
-        if (QueryStrings.unlockAllBoxes) return false;
+        if (QueryStrings.unlockAllBoxes) {
+            return false;
+        }
 
         const isHolidayBox = edition.boxTypes?.[boxIndex] === BoxType.HOLIDAY;
         if (isHolidayBox && !IS_XMAS) {
             return true;
         }
-        if (boxIndex === 0 && !isHolidayBox) return false;
+        if (boxIndex === 0 && !isHolidayBox) {
+            return false;
+        }
 
         const box = this.boxes[boxIndex];
         if (box != null && this.totalStars() >= this.requiredStars(boxIndex)) {
@@ -279,7 +289,9 @@ class ScoreManager {
 
     isLevelUnlocked(boxIndex: number, levelindex: number): boolean {
         const box = this.boxes[boxIndex];
-        if (QueryStrings.unlockAllBoxes) return true;
+        if (QueryStrings.unlockAllBoxes) {
+            return true;
+        }
         if (box != null) {
             return box.stars[levelindex] != null;
         }
@@ -313,7 +325,9 @@ class ScoreManager {
 
     getScore(boxIndex: number, levelIndex: number): number | null {
         const box = this.boxes[boxIndex];
-        if (box != null) return box.scores[levelIndex] ?? null;
+        if (box != null) {
+            return box.scores[levelIndex] ?? null;
+        }
         return null;
     }
 
@@ -339,7 +353,9 @@ class ScoreManager {
 
     getStars(boxIndex: number, levelIndex: number): number | null {
         const box = this.boxes[boxIndex];
-        if (box != null) return box.stars[levelIndex] ?? null;
+        if (box != null) {
+            return box.stars[levelIndex] ?? null;
+        }
         return null;
     }
 
@@ -348,7 +364,9 @@ class ScoreManager {
 
         for (let boxIndex = 0; boxIndex < boxCount; boxIndex++) {
             const box = this.boxes[boxIndex];
-            if (!box) continue;
+            if (!box) {
+                continue;
+            }
             const levelCount = box.levelCount;
             for (let levelIndex = 0; levelIndex < levelCount; levelIndex++) {
                 resetLevel(boxIndex, levelIndex);

@@ -156,7 +156,9 @@ export function updateCollectibles(this: CollectiblesScene, delta: number): bool
     if (this.camera.type !== Camera2D.SpeedType.PIXELS || !this.ignoreTouches) {
         for (let i = 0, len = this.stars.length; i < len; i++) {
             const s = this.stars[i];
-            if (!s) continue;
+            if (!s) {
+                continue;
+            }
             s.update(delta);
 
             if (s.timeout > 0 && s.time === 0) {

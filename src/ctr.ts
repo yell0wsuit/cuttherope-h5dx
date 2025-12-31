@@ -21,10 +21,14 @@ interface FontConfig {
 const loadedFonts = new Set<string>();
 
 const loadFontOnce = async (config: FontConfig): Promise<void> => {
-    if (!document.fonts) return;
+    if (!document.fonts) {
+        return;
+    }
 
     const key = `${config.family}:${config.weight ?? "normal"}`;
-    if (loadedFonts.has(key)) return;
+    if (loadedFonts.has(key)) {
+        return;
+    }
 
     const font = new FontFace(config.family, `url(${config.url})`, {
         weight: config.weight ?? "normal",

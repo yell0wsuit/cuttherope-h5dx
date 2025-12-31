@@ -26,8 +26,11 @@ class ImageElement extends BaseElement {
         this.texture = texture;
         this.restoreCutTransparency = false;
 
-        if (this.texture.rects.length > 0) this.setTextureQuad(0);
-        else this.setDrawFullImage();
+        if (this.texture.rects.length > 0) {
+            this.setTextureQuad(0);
+        } else {
+            this.setDrawFullImage();
+        }
     }
 
     getTexture(resId: number): Texture2D {
@@ -57,7 +60,9 @@ class ImageElement extends BaseElement {
         // don't set width / height to quad size if we cut transparency from each quad
         if (!this.restoreCutTransparency) {
             const rect = this.texture.rects[n];
-            if (!rect) return;
+            if (!rect) {
+                return;
+            }
             this.width = rect.w;
             this.height = rect.h;
         }
@@ -102,7 +107,9 @@ class ImageElement extends BaseElement {
         }
 
         const rect = this.texture.rects[n];
-        if (!rect) return;
+        if (!rect) {
+            return;
+        }
         let quadWidth = rect.w;
         let quadHeight = rect.h;
         let qx = this.drawX;
@@ -201,7 +208,9 @@ class ImageElement extends BaseElement {
 
     drawTiled(q: number, x: number, y: number, width: number, height: number) {
         const ctx = Canvas.context;
-        if (!ctx || !this.texture.image) return;
+        if (!ctx || !this.texture.image) {
+            return;
+        }
 
         let qx = 0;
         let qy = 0;
@@ -217,7 +226,9 @@ class ImageElement extends BaseElement {
             qh = this.texture.imageHeight;
         } else {
             const rect = this.texture.rects[q];
-            if (!rect) return;
+            if (!rect) {
+                return;
+            }
             qx = rect.x;
             qy = rect.y;
             qw = rect.w;
@@ -275,7 +286,9 @@ class ImageElement extends BaseElement {
             );
         } else if (this.quadToDraw !== undefined) {
             const rect = this.texture.rects[this.quadToDraw];
-            if (!rect) return false;
+            if (!rect) {
+                return false;
+            }
             let qx = this.drawX;
             let qy = this.drawY;
 
@@ -309,7 +322,9 @@ class ImageElement extends BaseElement {
     setElementPositionWithOffset(resId: number, index: number) {
         const texture = this.getTexture(resId);
         const offset = texture.offsets[index];
-        if (!offset) return;
+        if (!offset) {
+            return;
+        }
         this.x = offset.x;
         this.y = offset.y;
     }
@@ -318,7 +333,9 @@ class ImageElement extends BaseElement {
         const texture = this.getTexture(resId);
         const rect = texture.rects[index];
         const offset = texture.offsets[index];
-        if (!rect || !offset) return;
+        if (!rect || !offset) {
+            return;
+        }
         this.x = offset.x + rect.w / 2;
         this.y = offset.y + rect.h / 2;
     }
@@ -327,7 +344,9 @@ class ImageElement extends BaseElement {
         const image = new ImageElement();
         image.initTextureWithId(resId);
 
-        if (drawQuad != null) image.setTextureQuad(drawQuad);
+        if (drawQuad != null) {
+            image.setTextureQuad(drawQuad);
+        }
 
         return image;
     }

@@ -1,10 +1,10 @@
 import RGBAColor from "@/core/RGBAColor";
 import SettingStorage from "@/core/SettingStorage";
 
-const ROPE_PALETTES: ReadonlyArray<{
+const ROPE_PALETTES: readonly {
     primary: RGBAColor;
     secondary: RGBAColor;
-}> = [
+}[] = [
     {
         primary: new RGBAColor(0.475, 0.305, 0.185, 1.0),
         secondary: new RGBAColor(0.6755555555555556, 0.44, 0.27555555555555555, 1.0),
@@ -48,20 +48,29 @@ const SETTING_KEY = "selectedRopeSkin";
 export const getSelectedRopePaletteIndex = (): number =>
     SettingStorage.getIntOrDefault(SETTING_KEY, 0) ?? 0;
 
-export const getRopePalette = (index = getSelectedRopePaletteIndex()): {
+export const getRopePalette = (
+    index = getSelectedRopePaletteIndex()
+): {
     primary: RGBAColor;
     secondary: RGBAColor;
 } => {
     const palette = ROPE_PALETTES[index] ?? ROPE_PALETTES[0];
-    return {
-        primary: palette.primary,
-        secondary: palette.secondary,
-    };
+    return (
+        palette ?? {
+            primary: new RGBAColor(0.475, 0.305, 0.185, 1.0),
+            secondary: new RGBAColor(0.6755555555555556, 0.44, 0.27555555555555555, 1.0),
+        }
+    );
 };
 
 export const clampRopeIndex = (index: number): number => {
-    if (index < 0) return 0;
-    if (index >= ROPE_PALETTES.length) return ROPE_PALETTES.length - 1;
+    if (index < 0) {
+        return 0;
+    }
+
+    if (index >= ROPE_PALETTES.length) {
+        return ROPE_PALETTES.length - 1;
+    }
     return index;
 };
 

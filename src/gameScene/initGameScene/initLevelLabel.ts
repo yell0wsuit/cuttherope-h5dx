@@ -13,13 +13,19 @@ import type GameSceneInit from "../init";
 export function initLevelLabel(this: GameSceneInit): void {
     const levelLabel = new TextImage();
     const levelText = `${LevelState.pack + 1} - ${LevelState.level + 1}`;
-    levelLabel.setText(ResourceId.FNT_BIG_FONT, levelText);
+    levelLabel.setText(ResourceId.FNT_BIG_FONT, levelText, undefined, undefined, true);
     levelLabel.anchor = Alignment.BOTTOM | Alignment.LEFT;
     levelLabel.x = 37 * resolution.CANVAS_SCALE;
     levelLabel.y = resolution.CANVAS_HEIGHT - 5 * resolution.CANVAS_SCALE;
 
     const levelLabelTitle = new TextImage();
-    levelLabelTitle.setText(ResourceId.FNT_BIG_FONT, Lang.menuText(MenuStringId.LEVEL));
+    levelLabelTitle.setText(
+        ResourceId.FNT_BIG_FONT,
+        Lang.menuText(MenuStringId.LEVEL),
+        undefined,
+        undefined,
+        true
+    );
     levelLabelTitle.anchor = Alignment.BOTTOM | Alignment.LEFT;
     levelLabelTitle.parentAnchor = Alignment.TOP | Alignment.LEFT;
     levelLabelTitle.y = 60 * resolution.CANVAS_SCALE;

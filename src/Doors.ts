@@ -245,7 +245,7 @@ class BoxDoors {
 
     static openBoxAnimation(callback?: AnimationCallback): void {
         BoxDoors.renderDoors(true, 0);
-        BoxDoors.hideGradient();
+        //BoxDoors.hideGradient();
 
         const boxCutter = document.getElementById("boxCutter");
         if (!(boxCutter instanceof HTMLElement)) {
@@ -280,9 +280,9 @@ class BoxDoors {
         }, 200);
     }
 
-    static showGradient(): void {}
+    //static showGradient(): void {}
 
-    static hideGradient(): void {}
+    //static hideGradient(): void {}
 
     static #getDoorCanvases(): CanvasPair | null {
         const left = document.getElementById("levelCanvasLeft");

@@ -50,7 +50,12 @@ class GameObject extends Animation {
         this.rbb = new Quad2D(this.bb.x, this.bb.y, this.bb.w, this.bb.h);
     }
 
-    parseMover(item: { angle?: number; path?: string | unknown[]; moveSpeed?: number; rotateSpeed?: number }) {
+    parseMover(item: {
+        angle?: number;
+        path?: string | unknown[];
+        moveSpeed?: number;
+        rotateSpeed?: number;
+    }) {
         this.rotation = item.angle || 0;
 
         const path = item.path;

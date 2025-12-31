@@ -350,12 +350,24 @@ class EasterEggManager {
             const modt = null;
 
             const getPhase = (t: number) => {
-                if (t < s1) return 1;
-                if (t < s2) return 2;
-                if (t < s3) return 3;
-                if (t < s4) return 4;
-                if (t < s5) return 5;
-                if (t < s6) return 6;
+                if (t < s1) {
+                    return 1;
+                }
+                if (t < s2) {
+                    return 2;
+                }
+                if (t < s3) {
+                    return 3;
+                }
+                if (t < s4) {
+                    return 4;
+                }
+                if (t < s5) {
+                    return 5;
+                }
+                if (t < s6) {
+                    return 6;
+                }
                 return 7;
             };
 
@@ -464,54 +476,93 @@ class EasterEggManager {
                 const modflag = false;
                 const modt = null;
 
+                const getPhase = (t: number) => {
+                    if (t < s1) {
+                        return 1;
+                    }
+                    if (t < s2) {
+                        return 2;
+                    }
+                    if (t < s3) {
+                        return 3;
+                    }
+                    if (t < s4) {
+                        return 4;
+                    }
+                    if (t < s5) {
+                        return 5;
+                    }
+                    if (t < s6) {
+                        return 6;
+                    }
+                    return 7;
+                };
+
                 const step = () => {
                     const now = Date.now(),
                         t = now - begin;
 
-                    if (t < s1) {
-                        sx = Easing.easeOutBounce(t, sxbegin, scaleTo, s1, 1.5);
-                        sy = Easing.easeOutBounce(t, sybegin, scaleTo, s1, 1.5);
-                    } else if (t < s2) {
-                        if (t > s1 + 100) {
+                    switch (getPhase(t)) {
+                        case 1:
+                            // zoom up OmNom
+                            sx = Easing.easeOutBounce(t, sxbegin, scaleTo, s1, 1.5);
+                            sy = Easing.easeOutBounce(t, sybegin, scaleTo, s1, 1.5);
+                            break;
+                        case 2:
+                            // move his eyes left
+                            if (t > s1 + 100) {
+                                l =
+                                    -1 *
+                                    Easing.easeOutExpo(
+                                        t - (s1 + 100),
+                                        0,
+                                        resolution.uiScaledNumber(10),
+                                        s2 - (s1 + 100)
+                                    );
+                                r = l;
+                            }
+                            break;
+                        case 3:
+                            // move his eyes right
                             l =
-                                -1 *
-                                Easing.easeOutExpo(
-                                    t - (s1 + 100),
-                                    0,
-                                    resolution.uiScaledNumber(10),
-                                    s2 - (s1 + 100)
-                                );
-                            r = l;
-                        }
-                    } else if (t < s3) {
-                        l =
-                            resolution.uiScaledNumber(-10) +
-                            Easing.easeInOutExpo(t - s2, 0, resolution.uiScaledNumber(20), s3 - s2);
-                        r = l;
-                    } else if (t < s4) {
-                        if (t > s3 + 100) {
-                            l =
-                                resolution.uiScaledNumber(10) -
+                                resolution.uiScaledNumber(-10) +
                                 Easing.easeInOutExpo(
-                                    t - (s3 + 100),
+                                    t - s2,
                                     0,
-                                    resolution.uiScaledNumber(10),
-                                    s4 - (s3 + 100)
+                                    resolution.uiScaledNumber(20),
+                                    s3 - s2
                                 );
                             r = l;
-                        }
-                    } else if (t < s5) {
-                        // intentional
-                    } else if (t < s6) {
-                        ty = Easing.easeOutExpo(
-                            t - s5,
-                            tybegin,
-                            resolution.uiScaledNumber(300),
-                            s6 - s5
-                        );
-                        const shrink = Easing.easeOutExpo(t - s5, 0, scaleTo - 0.1, s6 - s5);
-                        sx = scaleTo - shrink;
-                        sy = scaleTo - shrink;
+                            break;
+                        case 4:
+                            // move his eyes back
+                            if (t > s3 + 100) {
+                                l =
+                                    resolution.uiScaledNumber(10) -
+                                    Easing.easeInOutExpo(
+                                        t - (s3 + 100),
+                                        0,
+                                        resolution.uiScaledNumber(10),
+                                        s4 - (s3 + 100)
+                                    );
+                                r = l;
+                            }
+                            break;
+                        case 5:
+                            // pause before hiding
+                            break;
+                        case 6:
+                            // hide OmNom
+                            ty = Easing.easeOutExpo(
+                                t - s5,
+                                tybegin,
+                                resolution.uiScaledNumber(300),
+                                s6 - s5
+                            );
+                            const shrink = Easing.easeOutExpo(t - s5, 0, scaleTo - 0.1, s6 - s5);
+                            sx = scaleTo - shrink;
+                            sy = scaleTo - shrink;
+                            break;
                     }
 
                     if (t > s1 && t < s3) {

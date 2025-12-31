@@ -15,7 +15,6 @@ class GameObject extends Animation {
     mover?: Mover;
     rotatedBB: boolean;
     topLeftCalculated: boolean;
-    drawPosIncrement?: number;
 
     constructor() {
         super();

@@ -431,13 +431,32 @@ class BoxPanel extends Panel {
         }
     }
 
-    cancelSlideToBox(): void {
+    private snapToBox(index: number): void {
+        if (this.boxes.length === 0) {
+            this.currentOffset = 0;
+            this.isBoxCentered = true;
+            return;
+        }
+
+        const clampedIndex = Math.max(0, Math.min(index, this.boxes.length - 1));
+        this.currentBoxIndex = clampedIndex;
+        this.currentOffset = -1.0 * this.spacing * clampedIndex;
+        this.isBoxCentered = true;
+        this.slideInProgress = false;
+        this.render(this.currentOffset);
+        this.updateNavButtons();
+    }
+
+    cancelSlideToBox(snapToCenter = false): void {
         this.slideInProgress = false;
         this.bounceBox?.cancelBounce();
         if (this.rafId) {
             cancelAnimationFrame(this.rafId);
         }
         this.rafId = null;
+        if (snapToCenter) {
+            this.snapToBox(this.currentBoxIndex);
+        }
     }
 
     isMouseOverBox(x: number, y: number): boolean {
@@ -458,7 +477,7 @@ class BoxPanel extends Panel {
 
     pointerDown(x: number, y: number): void {
         if (this.isMouseDown) return;
-        this.cancelSlideToBox();
+        this.cancelSlideToBox(true);
         this.downX = x;
         this.downY = y;
         this.downOffset = this.currentOffset;

@@ -1,0 +1,56 @@
+name: Bug report
+description: Report a bug or incorrect behavior in Cut the Rope H5DX
+labels: ["bug"]
+body:
+    - type: checkboxes
+      attributes:
+          label: Duplicated issue check
+          description: Please make sure that this issue has not been reported before.
+          options:
+              - label: I confirm that I have searched the existing issue(s)
+                required: true
+    - type: textarea
+      id: description
+      attributes:
+          label: Description
+          description: Describe the bug.
+      validations:
+          required: true
+    - type: textarea
+      id: expected
+      attributes:
+          label: Expected behavior
+          description: A concise description of what you expected to happen.
+      validations:
+          required: true
+    - type: textarea
+      id: reproduction
+      attributes:
+          label: Reproduction steps
+          description: Steps to reproduce the behavior.
+          placeholder: |
+              1. Open this...
+              1. Do this...
+              1. See error...
+      validations:
+          required: true
+    - type: dropdown
+      id: browser
+      attributes:
+          label: Browser
+          description: Which browser are you using?
+          options:
+              - Chromium (Google Chrome, Microsoft Edge, Brave, Opera, etc.)
+              - Gecko (Firefox, Librewolf, Waterfox, etc.)
+              - WebKit (Safari on macOS, every browser on iOS)
+              - Other (please specify in additional info)
+      validations:
+          required: true
+    - type: textarea
+      attributes:
+          label: Additional info
+          description: Any extra info, logs, or stack traces go here.
+          placeholder: |
+              Paste any console error logs in DevTools or useful notes here...
+      validations:
+          required: false

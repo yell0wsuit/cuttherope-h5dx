@@ -1,0 +1,37 @@
+name: Feature request
+description: Suggest an idea for Cut the Rope H5DX
+labels: ["enhancement", "feat"]
+body:
+    - type: textarea
+      id: problem
+      attributes:
+          label: Problem
+          description: Is your feature request related to a problem? Please describe it clearly.
+          placeholder: |
+              I want to have this feature...
+              I find it difficult to...
+    - type: textarea
+      id: description
+      attributes:
+          label: Proposed idea / solution
+          description: A clear and concise description of what you’d like to see added or changed.
+          placeholder: |
+              I would like the game to...
+      validations:
+          required: true
+    - type: textarea
+      id: alternatives
+      attributes:
+          label: Alternatives considered
+          description: Describe any alternative solutions or features you’ve considered.
+          placeholder: |
+              I’ve tried...
+              I’ve also thought about...
+    - type: textarea
+      attributes:
+          label: Additional info
+          description: Add any other context, mockups, or screenshots here.
+          placeholder: |
+              Screenshots, additional messages, or links...
+      validations:
+          required: false

@@ -54,6 +54,7 @@ class Bungee extends ConstraintSystem {
     drawPts: Vector[];
     BUNGEE_BEZIER_POINTS: number;
     lightRandomSeed: number | null;
+    interpolationAlpha: number;
 
     constructor(
         headCp: ConstrainedPoint | null,
@@ -109,6 +110,7 @@ class Bungee extends ConstraintSystem {
         this.drawPts = [];
         this.BUNGEE_BEZIER_POINTS = resolution.BUNGEE_BEZIER_POINTS;
         this.lightRandomSeed = null;
+        this.interpolationAlpha = 1;
     }
 
     getLength(): number {
@@ -335,7 +337,28 @@ class Bungee extends ConstraintSystem {
         const parts = this.parts;
         const count = parts.length;
         const ctx = Canvas.context;
-        let i, part, prevPart;
+        const alpha = Math.min(Math.max(this.interpolationAlpha, 0), 1);
+        // Max reasonable distance for interpolation (scale to rope segment size)
+        const maxInterpDistance = this.BUNGEE_REST_LEN * 4;
+        const MAX_INTERP_DISTANCE_SQ = maxInterpDistance * maxInterpDistance;
+        const getInterpolatedPos = (part: ConstrainedPoint): Vector => {
+            const prev = part.prevPos;
+            const curr = part.pos;
+            // Skip interpolation if prevPos is uninitialized
+            if (prev.x === Constants.INT_MAX || prev.y === Constants.INT_MAX || alpha >= 1) {
+                return curr;
+            }
+            // Skip interpolation if distance is too large (teleport/state change)
+            const dx = curr.x - prev.x;
+            const dy = curr.y - prev.y;
+            if (dx * dx + dy * dy > MAX_INTERP_DISTANCE_SQ) {
+                return curr;
+            }
+            if (alpha <= 0) {
+                return prev;
+            }
+            return new Vector(prev.x + dx * alpha, prev.y + dy * alpha);
+        };
 
         if (ctx) {
             ctx.lineJoin = "round";
@@ -346,7 +369,7 @@ class Bungee extends ConstraintSystem {
             const pts: Vector[] = new Array(count);
             for (let i = 0; i < count; i++) {
                 const part = parts[i];
-                pts[i] = part?.pos ?? Vector.newZero();
+                pts[i] = part ? getInterpolatedPos(part) : Vector.newZero();
             }
             this.drawBungee(pts, 1);
         } else {
@@ -373,10 +396,11 @@ class Bungee extends ConstraintSystem {
                     cutIndex = i;
                 }
 
+                const interpolatedPos = getInterpolatedPos(part);
                 if (!part2) {
-                    pts1[i] = part.pos;
+                    pts1[i] = interpolatedPos;
                 } else {
-                    pts2.push(part.pos);
+                    pts2.push(interpolatedPos);
                 }
             }
 

@@ -176,6 +176,7 @@ abstract class GameSceneInit extends BaseElement {
     starBonus: number;
     gameController!: {
         avgDelta: number;
+        frameBalance: number;
         onLevelWon(): void;
         onLevelLost(): void;
     };

@@ -130,7 +130,16 @@ const drawImpl = function drawImpl(scene: GameScene): void {
         scene.lanterns[i]?.draw();
     }
 
+    // Interpolation alpha for smooth rope rendering on high refresh displays
+    const interpAlpha = Math.min(Math.max(scene.gameController.frameBalance, 0), 1);
+
     const bungees = scene.bungees;
+    for (let i = 0, len = bungees.length; i < len; i++) {
+        const grab = bungees[i];
+        if (grab?.rope) {
+            grab.rope.interpolationAlpha = interpAlpha;
+        }
+    }
     for (let i = 0, len = bungees.length; i < len; i++) {
         const bungee = bungees[i];
         bungee?.drawBack();
@@ -145,11 +154,8 @@ const drawImpl = function drawImpl(scene: GameScene): void {
         star?.draw();
     }
 
+    // Draw candy at physics position directly (no interpolation)
     if (!scene.noCandy && !scene.targetSock) {
-        if (!scene.isCandyInLantern) {
-            scene.candy.x = scene.star.pos.x;
-            scene.candy.y = scene.star.pos.y;
-        }
         scene.candy.draw();
 
         if (!scene.isCandyInLantern && scene.candyBlink.currentTimeline != null) {
@@ -159,14 +165,10 @@ const drawImpl = function drawImpl(scene: GameScene): void {
 
     if (scene.twoParts !== GameSceneConstants.PartsType.NONE) {
         if (!scene.noCandyL) {
-            scene.candyL.x = scene.starL.pos.x;
-            scene.candyL.y = scene.starL.pos.y;
             scene.candyL.draw();
         }
 
         if (!scene.noCandyR) {
-            scene.candyR.x = scene.starR.pos.x;
-            scene.candyR.y = scene.starR.pos.y;
             scene.candyR.draw();
         }
     }

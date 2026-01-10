@@ -56,9 +56,12 @@ const drawImpl = function drawImpl(scene: GameScene): void {
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.clearRect(0, 0, resolution.CANVAS_WIDTH, resolution.CANVAS_HEIGHT);
 
+    // Interpolation alpha for smooth rendering on high refresh displays
+    const interpAlpha = Math.min(Math.max(scene.gameController.frameBalance, 0), 1);
+
     scene.preDraw();
-    scene.camera.applyCameraTransformation();
-    scene.back.updateWithCameraPos(scene.camera.pos);
+    const interpCameraPos = scene.camera.applyInterpolatedTransformation(interpAlpha);
+    scene.back.updateWithCameraPos(interpCameraPos);
     scene.back.draw();
 
     // Scale overlayCut based on resolution to prevent visible seams at HD resolutions
@@ -168,9 +171,6 @@ const drawImpl = function drawImpl(scene: GameScene): void {
         scene.lanterns[i]?.draw();
     }
 
-    // Interpolation alpha for smooth rope rendering on high refresh displays
-    const interpAlpha = Math.min(Math.max(scene.gameController.frameBalance, 0), 1);
-
     const bungees = scene.bungees;
     for (let i = 0, len = bungees.length; i < len; i++) {
         const grab = bungees[i];
@@ -259,7 +259,7 @@ const drawImpl = function drawImpl(scene: GameScene): void {
 
     scene.aniPool.draw();
     drawCuts(scene);
-    scene.camera.cancelCameraTransformation();
+    scene.camera.cancelInterpolatedTransformation(interpCameraPos);
     scene.staticAniPool.draw();
 
     // draw the level1 arrow last so it's on top

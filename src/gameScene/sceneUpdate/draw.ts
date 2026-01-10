@@ -138,19 +138,35 @@ const drawImpl = function drawImpl(scene: GameScene): void {
     }
 
     for (let i = 0, len = scene.bubbles.length; i < len; i++) {
-        scene.bubbles[i]?.draw();
+        const bubble = scene.bubbles[i];
+        if (bubble) {
+            bubble.interpolationAlpha = interpAlpha;
+            bubble.draw();
+        }
     }
 
     for (let i = 0, len = scene.pumps.length; i < len; i++) {
-        scene.pumps[i]?.draw();
+        const pump = scene.pumps[i];
+        if (pump) {
+            pump.interpolationAlpha = interpAlpha;
+            pump.draw();
+        }
     }
 
     for (let i = 0, len = scene.spikes.length; i < len; i++) {
-        scene.spikes[i]?.draw();
+        const spike = scene.spikes[i];
+        if (spike) {
+            spike.interpolationAlpha = interpAlpha;
+            spike.draw();
+        }
     }
 
     for (let i = 0, len = scene.bouncers.length; i < len; i++) {
-        scene.bouncers[i]?.draw();
+        const bouncer = scene.bouncers[i];
+        if (bouncer) {
+            bouncer.interpolationAlpha = interpAlpha;
+            bouncer.draw();
+        }
     }
 
     for (let i = 0, len = scene.socks.length; i < len; i++) {
@@ -158,6 +174,7 @@ const drawImpl = function drawImpl(scene: GameScene): void {
         if (!sock) {
             continue;
         }
+        sock.interpolationAlpha = interpAlpha;
         sock.y -= GameSceneConstants.SOCK_COLLISION_Y_OFFSET;
         sock.draw();
         sock.y += GameSceneConstants.SOCK_COLLISION_Y_OFFSET;
@@ -189,7 +206,10 @@ const drawImpl = function drawImpl(scene: GameScene): void {
 
     for (let i = 0, len = scene.stars.length; i < len; i++) {
         const star = scene.stars[i];
-        star?.draw();
+        if (star) {
+            star.interpolationAlpha = interpAlpha;
+            star.draw();
+        }
     }
 
     // Draw candy with interpolation for smooth rendering on high refresh displays

@@ -4,7 +4,45 @@ import * as GameSceneConstants from "@/gameScene/constants";
 import RGBAColor from "@/core/RGBAColor";
 import Vector from "@/core/Vector";
 import resolution from "@/resolution";
+import type ConstrainedPoint from "@/physics/ConstrainedPoint";
 import type { FingerCutTrail, GameScene } from "@/types/game-scene";
+
+// Maximum reasonable distance for interpolation (prevents jumps on teleport/state changes)
+const MAX_CANDY_INTERP_DISTANCE = 100;
+const MAX_CANDY_INTERP_DISTANCE_SQ = MAX_CANDY_INTERP_DISTANCE * MAX_CANDY_INTERP_DISTANCE;
+
+/**
+ * Calculates interpolated position for smooth rendering on high refresh displays.
+ * Returns the interpolated x,y or the current position if interpolation should be skipped.
+ */
+const getInterpolatedCandyPos = (
+    star: ConstrainedPoint,
+    alpha: number
+): { x: number; y: number } => {
+    const prev = star.prevPos;
+    const curr = star.pos;
+
+    // Skip interpolation if prevPos is uninitialized
+    if (prev.x === Constants.INT_MAX || prev.y === Constants.INT_MAX || alpha >= 1) {
+        return { x: curr.x, y: curr.y };
+    }
+
+    // Skip interpolation if distance is too large (teleport/state change)
+    const dx = curr.x - prev.x;
+    const dy = curr.y - prev.y;
+    if (dx * dx + dy * dy > MAX_CANDY_INTERP_DISTANCE_SQ) {
+        return { x: curr.x, y: curr.y };
+    }
+
+    if (alpha <= 0) {
+        return { x: prev.x, y: prev.y };
+    }
+
+    return {
+        x: prev.x + dx * alpha,
+        y: prev.y + dy * alpha,
+    };
+};
 
 /**
  * Draws every animated element that belongs to the game scene.
@@ -154,22 +192,57 @@ const drawImpl = function drawImpl(scene: GameScene): void {
         star?.draw();
     }
 
-    // Draw candy at physics position directly (no interpolation)
+    // Draw candy with interpolation for smooth rendering on high refresh displays
     if (!scene.noCandy && !scene.targetSock) {
+        // Save original position
+        const originalX = scene.candy.x;
+        const originalY = scene.candy.y;
+
+        // Calculate and apply interpolated position
+        if (!scene.isCandyInLantern) {
+            const interpPos = getInterpolatedCandyPos(scene.star, interpAlpha);
+            scene.candy.x = interpPos.x;
+            scene.candy.y = interpPos.y;
+        }
+
         scene.candy.draw();
 
         if (!scene.isCandyInLantern && scene.candyBlink.currentTimeline != null) {
             scene.candyBlink.draw();
         }
+
+        // Restore original position for physics consistency
+        scene.candy.x = originalX;
+        scene.candy.y = originalY;
     }
 
     if (scene.twoParts !== GameSceneConstants.PartsType.NONE) {
         if (!scene.noCandyL) {
+            // Save and interpolate left candy
+            const originalLX = scene.candyL.x;
+            const originalLY = scene.candyL.y;
+            const interpPosL = getInterpolatedCandyPos(scene.starL, interpAlpha);
+            scene.candyL.x = interpPosL.x;
+            scene.candyL.y = interpPosL.y;
+
             scene.candyL.draw();
+
+            scene.candyL.x = originalLX;
+            scene.candyL.y = originalLY;
         }
 
         if (!scene.noCandyR) {
+            // Save and interpolate right candy
+            const originalRX = scene.candyR.x;
+            const originalRY = scene.candyR.y;
+            const interpPosR = getInterpolatedCandyPos(scene.starR, interpAlpha);
+            scene.candyR.x = interpPosR.x;
+            scene.candyR.y = interpPosR.y;
+
             scene.candyR.draw();
+
+            scene.candyR.x = originalRX;
+            scene.candyR.y = originalRY;
         }
     }
 

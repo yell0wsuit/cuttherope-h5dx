@@ -57,7 +57,10 @@ const drawImpl = function drawImpl(scene: GameScene): void {
     ctx.clearRect(0, 0, resolution.CANVAS_WIDTH, resolution.CANVAS_HEIGHT);
 
     // Interpolation alpha for smooth rendering on high refresh displays
-    const interpAlpha = Math.min(Math.max(scene.gameController.frameBalance, 0), 1);
+    // When paused (updateable=false), use alpha=1 to show current position and avoid jittering
+    const interpAlpha = !scene.updateable
+        ? 1
+        : Math.min(Math.max(scene.gameController.frameBalance, 0), 1);
 
     scene.preDraw();
     const interpCameraPos = scene.camera.applyInterpolatedTransformation(interpAlpha);

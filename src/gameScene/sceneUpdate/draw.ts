@@ -194,8 +194,11 @@ const drawImpl = function drawImpl(scene: GameScene): void {
     const bungees = scene.bungees;
     for (let i = 0, len = bungees.length; i < len; i++) {
         const grab = bungees[i];
-        if (grab?.rope) {
-            grab.rope.interpolationAlpha = interpAlpha;
+        if (grab) {
+            grab.interpolationAlpha = interpAlpha;
+            if (grab.rope) {
+                grab.rope.interpolationAlpha = interpAlpha;
+            }
         }
     }
     for (let i = 0, len = bungees.length; i < len; i++) {

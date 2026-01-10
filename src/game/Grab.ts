@@ -349,6 +349,21 @@ class Grab extends CTRGameObject {
             this.y = pos.y;
         }
 
+        // Apply mover interpolation for smooth rendering on high refresh displays
+        let originalX: number | undefined;
+        let originalY: number | undefined;
+        let originalRotation: number | undefined;
+        if (this.mover && this.interpolationAlpha < 1) {
+            originalX = this.x;
+            originalY = this.y;
+            originalRotation = this.rotation;
+
+            const interp = this.mover.getInterpolated(this.interpolationAlpha);
+            this.x = interp.x;
+            this.y = interp.y;
+            this.rotation = interp.angle;
+        }
+
         this.preDraw();
 
         if (this.moveLength > 0) {
@@ -362,6 +377,13 @@ class Grab extends CTRGameObject {
             const drawRadius =
                 this.radius !== Constants.UNDEFINED ? this.radius : this.previousRadius;
             this.drawGrabCircle(this.x, this.y, drawRadius, color);
+        }
+
+        // Restore original position for physics consistency
+        if (originalX !== undefined) {
+            this.x = originalX;
+            this.y = originalY!;
+            this.rotation = originalRotation!;
         }
     }
 
@@ -452,6 +474,21 @@ class Grab extends CTRGameObject {
         // of the back is adjusted. Otherwise the back can be offset
         // when there are large moves to position (grab is on DJ disc)
 
+        // Apply mover interpolation for smooth rendering on high refresh displays
+        let originalX: number | undefined;
+        let originalY: number | undefined;
+        let originalRotation: number | undefined;
+        if (this.mover && this.interpolationAlpha < 1) {
+            originalX = this.x;
+            originalY = this.y;
+            originalRotation = this.rotation;
+
+            const interp = this.mover.getInterpolated(this.interpolationAlpha);
+            this.x = interp.x;
+            this.y = interp.y;
+            this.rotation = interp.angle;
+        }
+
         const b = this.rope;
 
         if (this.wheel) {
@@ -488,6 +525,13 @@ class Grab extends CTRGameObject {
         }
 
         this.postDraw();
+
+        // Restore original position for physics consistency
+        if (originalX !== undefined) {
+            this.x = originalX;
+            this.y = originalY!;
+            this.rotation = originalRotation!;
+        }
     }
 
     drawSpider() {

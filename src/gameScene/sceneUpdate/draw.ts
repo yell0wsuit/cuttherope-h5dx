@@ -188,7 +188,11 @@ const drawImpl = function drawImpl(scene: GameScene): void {
     }
 
     for (let i = 0, len = scene.lanterns.length; i < len; i++) {
-        scene.lanterns[i]?.draw();
+        const lantern = scene.lanterns[i];
+        if (lantern) {
+            lantern.interpolationAlpha = interpAlpha;
+            lantern.draw();
+        }
     }
 
     const bungees = scene.bungees;

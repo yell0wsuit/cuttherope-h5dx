@@ -20,7 +20,12 @@ const getInterpolatedCandyPos = (
     star: ConstrainedPoint,
     alpha: number
 ): { x: number; y: number } => {
-    const pos = getInterpolatedPosition(star.prevPos, star.pos, alpha, MAX_CANDY_INTERP_DISTANCE_SQ);
+    const pos = getInterpolatedPosition(
+        star.prevPos,
+        star.pos,
+        alpha,
+        MAX_CANDY_INTERP_DISTANCE_SQ
+    );
     return { x: pos.x, y: pos.y };
 };
 

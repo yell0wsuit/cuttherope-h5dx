@@ -12,6 +12,7 @@ import { IS_XMAS } from "@/utils/SpecialEvents";
 import ResourceId from "@/resources/ResourceId";
 import ResourceMgr from "@/resources/ResourceMgr";
 import { getRopePalette } from "@/utils/ropePalette";
+import { clampAlpha, getInterpolatedPosition } from "@/utils/interpolation";
 
 const ROLLBACK_K = 0.5;
 const BUNGEE_RELAXION_TIMES = 25;
@@ -337,28 +338,12 @@ class Bungee extends ConstraintSystem {
         const parts = this.parts;
         const count = parts.length;
         const ctx = Canvas.context;
-        const alpha = Math.min(Math.max(this.interpolationAlpha, 0), 1);
+        const alpha = clampAlpha(this.interpolationAlpha);
         // Max reasonable distance for interpolation (scale to rope segment size)
         const maxInterpDistance = this.BUNGEE_REST_LEN * 4;
-        const MAX_INTERP_DISTANCE_SQ = maxInterpDistance * maxInterpDistance;
-        const getInterpolatedPos = (part: ConstrainedPoint): Vector => {
-            const prev = part.prevPos;
-            const curr = part.pos;
-            // Skip interpolation if prevPos is uninitialized
-            if (prev.x === Constants.INT_MAX || prev.y === Constants.INT_MAX || alpha >= 1) {
-                return curr;
-            }
-            // Skip interpolation if distance is too large (teleport/state change)
-            const dx = curr.x - prev.x;
-            const dy = curr.y - prev.y;
-            if (dx * dx + dy * dy > MAX_INTERP_DISTANCE_SQ) {
-                return curr;
-            }
-            if (alpha <= 0) {
-                return prev;
-            }
-            return new Vector(prev.x + dx * alpha, prev.y + dy * alpha);
-        };
+        const maxInterpDistanceSq = maxInterpDistance * maxInterpDistance;
+        const getInterpolatedPos = (part: ConstrainedPoint): Vector =>
+            getInterpolatedPosition(part.prevPos, part.pos, alpha, maxInterpDistanceSq);
 
         if (ctx) {
             ctx.lineJoin = "round";

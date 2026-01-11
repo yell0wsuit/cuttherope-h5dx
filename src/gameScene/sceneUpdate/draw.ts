@@ -6,6 +6,7 @@ import Vector from "@/core/Vector";
 import resolution from "@/resolution";
 import type ConstrainedPoint from "@/physics/ConstrainedPoint";
 import type { FingerCutTrail, GameScene } from "@/types/game-scene";
+import { getInterpolatedPosition } from "@/utils/interpolation";
 
 // Maximum reasonable distance for interpolation (prevents jumps on teleport/state changes)
 const MAX_CANDY_INTERP_DISTANCE = 100;
@@ -19,29 +20,8 @@ const getInterpolatedCandyPos = (
     star: ConstrainedPoint,
     alpha: number
 ): { x: number; y: number } => {
-    const prev = star.prevPos;
-    const curr = star.pos;
-
-    // Skip interpolation if prevPos is uninitialized
-    if (prev.x === Constants.INT_MAX || prev.y === Constants.INT_MAX || alpha >= 1) {
-        return { x: curr.x, y: curr.y };
-    }
-
-    // Skip interpolation if distance is too large (teleport/state change)
-    const dx = curr.x - prev.x;
-    const dy = curr.y - prev.y;
-    if (dx * dx + dy * dy > MAX_CANDY_INTERP_DISTANCE_SQ) {
-        return { x: curr.x, y: curr.y };
-    }
-
-    if (alpha <= 0) {
-        return { x: prev.x, y: prev.y };
-    }
-
-    return {
-        x: prev.x + dx * alpha,
-        y: prev.y + dy * alpha,
-    };
+    const pos = getInterpolatedPosition(star.prevPos, star.pos, alpha, MAX_CANDY_INTERP_DISTANCE_SQ);
+    return { x: pos.x, y: pos.y };
 };
 
 /**

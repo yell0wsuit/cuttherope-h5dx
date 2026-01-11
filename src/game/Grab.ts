@@ -335,6 +335,31 @@ class Grab extends CTRGameObject {
         }
     }
 
+    /**
+     * Executes a draw callback with mover interpolation applied, then restores original position.
+     * Used for smooth rendering on high refresh displays.
+     */
+    private drawWithMoverInterpolation(drawCallback: () => void): void {
+        if (this.mover && this.interpolationAlpha < 1) {
+            const originalX = this.x;
+            const originalY = this.y;
+            const originalRotation = this.rotation;
+
+            const interp = this.mover.getInterpolated(this.interpolationAlpha);
+            this.x = interp.x;
+            this.y = interp.y;
+            this.rotation = interp.angle;
+
+            drawCallback();
+
+            this.x = originalX;
+            this.y = originalY;
+            this.rotation = originalRotation;
+        } else {
+            drawCallback();
+        }
+    }
+
     drawBack() {
         if (this.invisible) {
             return;
@@ -349,20 +374,22 @@ class Grab extends CTRGameObject {
             this.y = pos.y;
         }
 
-        this.preDraw();
+        this.drawWithMoverInterpolation(() => {
+            this.preDraw();
 
-        if (this.moveLength > 0) {
-            this.moveBackground?.draw();
-        } else {
-            this.back?.draw();
-        }
+            if (this.moveLength > 0) {
+                this.moveBackground?.draw();
+            } else {
+                this.back?.draw();
+            }
 
-        if (this.radius !== Constants.UNDEFINED || this.hideRadius) {
-            const color = new RGBAColor(0.2, 0.5, 0.9, this.radiusAlpha);
-            const drawRadius =
-                this.radius !== Constants.UNDEFINED ? this.radius : this.previousRadius;
-            this.drawGrabCircle(this.x, this.y, drawRadius, color);
-        }
+            if (this.radius !== Constants.UNDEFINED || this.hideRadius) {
+                const color = new RGBAColor(0.2, 0.5, 0.9, this.radiusAlpha);
+                const drawRadius =
+                    this.radius !== Constants.UNDEFINED ? this.radius : this.previousRadius;
+                this.drawGrabCircle(this.x, this.y, drawRadius, color);
+            }
+        });
     }
 
     drawGrabCircle(x: number, y: number, radius: number | undefined, color: RGBAColor) {
@@ -452,42 +479,44 @@ class Grab extends CTRGameObject {
         // of the back is adjusted. Otherwise the back can be offset
         // when there are large moves to position (grab is on DJ disc)
 
-        const b = this.rope;
+        this.drawWithMoverInterpolation(() => {
+            const b = this.rope;
 
-        if (this.wheel) {
-            if (this.wheelHighlight && this.wheelImage3 && this.wheelImage) {
-                this.wheelHighlight.visible = this.wheelOperating !== Constants.UNDEFINED;
-                this.wheelImage3.visible = this.wheelOperating === Constants.UNDEFINED;
-                this.wheelImage.draw();
+            if (this.wheel) {
+                if (this.wheelHighlight && this.wheelImage3 && this.wheelImage) {
+                    this.wheelHighlight.visible = this.wheelOperating !== Constants.UNDEFINED;
+                    this.wheelImage3.visible = this.wheelOperating === Constants.UNDEFINED;
+                    this.wheelImage.draw();
+                }
             }
-        }
 
-        if (this.gun) {
-            this.gunBack?.draw();
-            if (!this.gunFired) {
-                this.gunArrow?.draw();
+            if (this.gun) {
+                this.gunBack?.draw();
+                if (!this.gunFired) {
+                    this.gunArrow?.draw();
+                }
             }
-        }
 
-        if (b) {
-            b.draw();
-        }
+            if (b) {
+                b.draw();
+            }
 
-        if (this.moveLength <= 0) {
-            this.front?.draw();
-        } else {
-            if (this.moverDragging != Constants.UNDEFINED) {
-                this.grabMoverHighlight?.draw();
+            if (this.moveLength <= 0) {
+                this.front?.draw();
             } else {
-                this.grabMover?.draw();
+                if (this.moverDragging != Constants.UNDEFINED) {
+                    this.grabMoverHighlight?.draw();
+                } else {
+                    this.grabMover?.draw();
+                }
             }
-        }
 
-        if (this.wheel) {
-            this.wheelImage2?.draw();
-        }
+            if (this.wheel) {
+                this.wheelImage2?.draw();
+            }
 
-        this.postDraw();
+            this.postDraw();
+        });
     }
 
     drawSpider() {

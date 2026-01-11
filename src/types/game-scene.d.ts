@@ -42,6 +42,7 @@ type ResourceIdValue = (typeof ResourceIdValues)[keyof typeof ResourceIdValues];
 
 interface GameSceneController {
     avgDelta: number;
+    frameBalance: number;
     onLevelWon(): void;
     onLevelLost(): void;
 }

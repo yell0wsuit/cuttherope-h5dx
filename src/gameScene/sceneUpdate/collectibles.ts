@@ -35,6 +35,27 @@ export function updateCollectibles(this: CollectiblesScene, delta: number): bool
         this.star.update(delta * this.ropePhysicsSpeed);
     }
 
+    const syncCandyPositions = (): void => {
+        if (!this.noCandy && !this.isCandyInLantern) {
+            this.candy.x = this.star.pos.x;
+            this.candy.y = this.star.pos.y;
+            this.candy.calculateTopLeft();
+        }
+
+        if (this.twoParts !== GameSceneConstants.PartsType.NONE) {
+            if (!this.noCandyL) {
+                this.candyL.x = this.starL.pos.x;
+                this.candyL.y = this.starL.pos.y;
+                this.candyL.calculateTopLeft();
+            }
+            if (!this.noCandyR) {
+                this.candyR.x = this.starR.pos.x;
+                this.candyR.y = this.starR.pos.y;
+                this.candyR.calculateTopLeft();
+            }
+        }
+    };
+
     if (this.twoParts !== GameSceneConstants.PartsType.NONE) {
         const ropeDelta = delta * this.ropePhysicsSpeed;
         this.candyL.update(delta);
@@ -152,6 +173,7 @@ export function updateCollectibles(this: CollectiblesScene, delta: number): bool
     }
 
     this.target.update(delta);
+    syncCandyPositions();
 
     if (this.camera.type !== Camera2D.SpeedType.PIXELS || !this.ignoreTouches) {
         for (let i = 0, len = this.stars.length; i < len; i++) {

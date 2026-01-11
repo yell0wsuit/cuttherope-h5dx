@@ -10,7 +10,11 @@ class Mover {
 
     readonly pos: Vector = new Vector(0, 0);
 
+    readonly prevPos: Vector = new Vector(0, 0);
+
     angle = 0;
+
+    prevAngle = 0;
 
     targetPoint = 0;
 
@@ -94,6 +98,7 @@ class Mover {
     start(): void {
         if (this.path.length > 0) {
             this.pos.copyFrom(this.path[0]!);
+            this.prevPos.copyFrom(this.pos);
             this.targetPoint = 1 % this.path.length;
             this.calculateOffset();
         }
@@ -118,6 +123,7 @@ class Mover {
 
         this.targetPoint = point;
         this.pos.copyFrom(this.path[point]!);
+        this.prevPos.copyFrom(this.pos);
         this.calculateOffset();
     }
 
@@ -148,6 +154,10 @@ class Mover {
     }
 
     update(delta: number): void {
+        // Store previous state for interpolation
+        this.prevPos.copyFrom(this.pos);
+        this.prevAngle = this.angle;
+
         if (this.paused) {
             return;
         }
@@ -254,6 +264,20 @@ class Mover {
         return {
             value: v,
             reachedZero,
+        };
+    }
+
+    /**
+     * Gets interpolated position and angle for smooth rendering on high refresh displays.
+     * @param alpha Interpolation factor between 0 (prevPos) and 1 (pos)
+     * @returns Interpolated x, y, and angle values
+     */
+    getInterpolated(alpha: number): { x: number; y: number; angle: number } {
+        const clampedAlpha = Math.min(Math.max(alpha, 0), 1);
+        return {
+            x: this.prevPos.x + (this.pos.x - this.prevPos.x) * clampedAlpha,
+            y: this.prevPos.y + (this.pos.y - this.prevPos.y) * clampedAlpha,
+            angle: this.prevAngle + (this.angle - this.prevAngle) * clampedAlpha,
         };
     }
 }

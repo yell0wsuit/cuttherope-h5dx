@@ -12,6 +12,7 @@ import { IS_XMAS } from "@/utils/SpecialEvents";
 import ResourceId from "@/resources/ResourceId";
 import ResourceMgr from "@/resources/ResourceMgr";
 import { getRopePalette } from "@/utils/ropePalette";
+import { clampAlpha, getInterpolatedPosition } from "@/utils/interpolation";
 
 const ROLLBACK_K = 0.5;
 const BUNGEE_RELAXION_TIMES = 25;
@@ -54,6 +55,7 @@ class Bungee extends ConstraintSystem {
     drawPts: Vector[];
     BUNGEE_BEZIER_POINTS: number;
     lightRandomSeed: number | null;
+    interpolationAlpha: number;
 
     constructor(
         headCp: ConstrainedPoint | null,
@@ -109,6 +111,7 @@ class Bungee extends ConstraintSystem {
         this.drawPts = [];
         this.BUNGEE_BEZIER_POINTS = resolution.BUNGEE_BEZIER_POINTS;
         this.lightRandomSeed = null;
+        this.interpolationAlpha = 1;
     }
 
     getLength(): number {
@@ -335,7 +338,12 @@ class Bungee extends ConstraintSystem {
         const parts = this.parts;
         const count = parts.length;
         const ctx = Canvas.context;
-        let i, part, prevPart;
+        const alpha = clampAlpha(this.interpolationAlpha);
+        // Max reasonable distance for interpolation (scale to rope segment size)
+        const maxInterpDistance = this.BUNGEE_REST_LEN * 4;
+        const maxInterpDistanceSq = maxInterpDistance * maxInterpDistance;
+        const getInterpolatedPos = (part: ConstrainedPoint): Vector =>
+            getInterpolatedPosition(part.prevPos, part.pos, alpha, maxInterpDistanceSq);
 
         if (ctx) {
             ctx.lineJoin = "round";
@@ -346,7 +354,7 @@ class Bungee extends ConstraintSystem {
             const pts: Vector[] = new Array(count);
             for (let i = 0; i < count; i++) {
                 const part = parts[i];
-                pts[i] = part?.pos ?? Vector.newZero();
+                pts[i] = part ? getInterpolatedPos(part) : Vector.newZero();
             }
             this.drawBungee(pts, 1);
         } else {
@@ -373,10 +381,11 @@ class Bungee extends ConstraintSystem {
                     cutIndex = i;
                 }
 
+                const interpolatedPos = getInterpolatedPos(part);
                 if (!part2) {
-                    pts1[i] = part.pos;
+                    pts1[i] = interpolatedPos;
                 } else {
-                    pts2.push(part.pos);
+                    pts2.push(interpolatedPos);
                 }
             }
 

@@ -157,7 +157,7 @@ class GhostBubble extends Bubble {
 
     override draw(): void {
         // When popped, temporarily hide all clouds before drawing
-        if (this.popped) {
+        if (this.popped && !this.capturedByBulb) {
             for (const cloud of this.clouds) {
                 cloud.visible = false;
             }
@@ -165,7 +165,7 @@ class GhostBubble extends Bubble {
         // Call parent Bubble draw which will call preDraw, draw texture, and postDraw
         super.draw();
         // Restore cloud visibility after drawing (will be managed by timeline/fade-out)
-        if (this.popped) {
+        if (this.popped && !this.capturedByBulb) {
             for (const cloud of this.clouds) {
                 cloud.visible = true;
             }

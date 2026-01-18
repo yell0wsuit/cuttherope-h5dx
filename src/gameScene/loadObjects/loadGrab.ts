@@ -21,6 +21,7 @@ export function loadGrab(this: GameSceneLoaders, item: GrabItem): void {
     const left = item.part === "L";
     const hidePath = item.hidePath ?? false;
     const gun = item.gun ?? false;
+    const bindBulb = item.bindBulb ?? false;
     const g = new Grab();
     let r = item.radius;
 
@@ -71,14 +72,20 @@ export function loadGrab(this: GameSceneLoaders, item: GrabItem): void {
 
     if (r === Constants.UNDEFINED && !gun) {
         let tail = this.star;
-        if (this.twoParts !== GameSceneConstants.PartsType.NONE) {
+        let attachesToCandy = true;
+        if (bindBulb && this.lightbulbs.length > 0) {
+            tail = this.lightbulbs[this.lightbulbs.length - 1]!.constraint;
+            attachesToCandy = false;
+        } else if (this.twoParts !== GameSceneConstants.PartsType.NONE) {
             tail = left ? this.starL : this.starR;
         }
 
         const b = new Bungee(null, gx, gy, tail, tail.pos.x, tail.pos.y, l);
         b.bungeeAnchor.pin.copyFrom(b.bungeeAnchor.pos);
         g.setRope(b);
-        this.attachCandy();
+        if (attachesToCandy) {
+            this.attachCandy();
+        }
     }
 
     g.setRadius(r);

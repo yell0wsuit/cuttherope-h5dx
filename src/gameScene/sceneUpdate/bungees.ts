@@ -56,40 +56,62 @@ export function updateBungees(this: GameScene, delta: number): number {
 
             if (grab.radius !== Constants.UNDEFINED && !grab.rope) {
                 const STAR_RADIUS = resolution.STAR_RADIUS;
-                const createRope = (star: SceneStar): void => {
+                const createRope = (star: SceneStar, attachCandy: boolean): boolean => {
                     const l = new Vector(grab.x, grab.y).distance(star.pos);
-                    if (l <= grab.radius + STAR_RADIUS) {
-                        const newRope = new Bungee(
-                            null,
-                            grab.x,
-                            grab.y,
-                            star,
-                            star.pos.x,
-                            star.pos.y,
-                            grab.radius + STAR_RADIUS
-                        );
-                        newRope.bungeeAnchor.pin.copyFrom(newRope.bungeeAnchor.pos);
-                        grab.hideRadius = true;
-                        grab.setRope(newRope);
+                    if (l > grab.radius + STAR_RADIUS) {
+                        return false;
+                    }
 
-                        this.attachCandy();
+                    const newRope = new Bungee(
+                        null,
+                        grab.x,
+                        grab.y,
+                        star,
+                        star.pos.x,
+                        star.pos.y,
+                        grab.radius + STAR_RADIUS
+                    );
+                    newRope.bungeeAnchor.pin.copyFrom(newRope.bungeeAnchor.pos);
+                    grab.hideRadius = true;
+                    grab.setRope(newRope);
 
-                        SoundMgr.playSound(ResourceId.SND_ROPE_GET);
-                        if (grab.mover) {
-                            SoundMgr.playSound(ResourceId.SND_BUZZ);
+                    if (attachCandy) {
+                        // If mouse already has this candy, immediately cut the rope
+                        if (this.miceManager?.activeMouseHasCandy()) {
+                            newRope.setCut(newRope.parts.length - 2);
+                            this.detachCandy();
+                        } else {
+                            this.attachCandy();
                         }
                     }
+
+                    SoundMgr.playSound(ResourceId.SND_ROPE_GET);
+                    if (grab.mover) {
+                        SoundMgr.playSound(ResourceId.SND_BUZZ);
+                    }
+                    return true;
                 };
 
                 if (this.twoParts !== GameSceneConstants.PartsType.NONE) {
                     if (!this.noCandyL) {
-                        createRope(this.starL);
+                        createRope(this.starL, true);
                     }
                     if (!this.noCandyR && grab.rope == null) {
-                        createRope(this.starR);
+                        createRope(this.starR, true);
                     }
                 } else {
-                    createRope(this.star);
+                    createRope(this.star, true);
+                }
+
+                if (grab.rope == null && this.lightbulbs.length > 0) {
+                    for (const bulb of this.lightbulbs) {
+                        if (!bulb || bulb.attachedSock != null) {
+                            continue;
+                        }
+                        if (createRope(bulb.constraint, false)) {
+                            break;
+                        }
+                    }
                 }
             }
 
@@ -133,7 +155,7 @@ export function updateBungees(this: GameScene, delta: number): number {
                             handledRotationR = true;
                         }
                         candyPart.rotation = angle + rope.initialCandleAngle;
-                    } else {
+                    } else if (!this.noCandy && tail === this.star) {
                         if (!rope.chosenOne) {
                             rope.initialCandleAngle = this.candyMain.rotation - angle;
                         }

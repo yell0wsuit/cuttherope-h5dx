@@ -87,6 +87,9 @@ const mapItemDefinitions = {
     GHOST: createMapItem({ id: 130, key: "ghost", loader: "loadGhost" }),
     STEAM_TUBE: createMapItem({ id: 131, key: "steamTube", loader: "loadSteamTube" }),
     LANTERN: createMapItem({ id: 132, key: "lantern", loader: "loadLantern", priority: 2 }),
+    MOUSE: createMapItem({ id: 133, key: "mouse", loader: "loadMouse" }),
+    LIGHT_BULB: createMapItem({ id: 134, key: "lightBulb", loader: "loadLightBulb", priority: 0 }),
+    CONVEYOR_BELT: createMapItem({ id: 135, key: "conveyorBelt", loader: "loadConveyorBelt" }),
 };
 
 const mapItems = Object.values(mapItemDefinitions);

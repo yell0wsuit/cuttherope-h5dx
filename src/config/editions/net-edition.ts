@@ -23,6 +23,7 @@ interface BoxMetadata {
     showEarth: boolean;
     levelBackgroundId: number | null;
     levelOverlayId: number | null;
+    levelLabel: number | null;
 }
 
 const normalizeBoxType = (boxType: RawBoxMetadataJson["boxType"]): BoxTypeValue => {
@@ -109,6 +110,7 @@ class NetEdition {
                 showEarth: box.showEarth ?? false,
                 levelBackgroundId: toResourceId(box.levelBackgroundId),
                 levelOverlayId: toResourceId(box.levelOverlayId),
+                levelLabel: box.levelLabel ?? null,
             };
 
             if (IS_JANUARY && isHolidayBox) {
@@ -164,6 +166,10 @@ class NetEdition {
         return this.getNormalizedBoxMetadata()
             .map(({ levelOverlayId }) => levelOverlayId)
             .filter((id): id is number => id != null);
+    }
+
+    get levelLabels(): (number | null)[] {
+        return this.getNormalizedBoxMetadata().map(({ levelLabel }) => levelLabel);
     }
 }
 

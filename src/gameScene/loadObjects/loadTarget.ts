@@ -33,6 +33,7 @@ export function loadTarget(this: GameSceneLoaders, item: TargetItem): void {
 
     const isJanuary = IS_JANUARY;
     this.pendingPaddingtonIdleTransition = false;
+    let frame;
 
     target.initTextureWithId(ResourceId.IMG_CHAR_ANIMATIONS);
     target.initTextureWithId(ResourceId.IMG_CHAR_ANIMATIONS2);
@@ -40,6 +41,10 @@ export function loadTarget(this: GameSceneLoaders, item: TargetItem): void {
 
     if (isJanuary) {
         target.initTextureWithId(ResourceId.IMG_CHAR_ANIMATION_PADDINGTON);
+    }
+
+    if (this.nightLevel) {
+        target.initTextureWithId(ResourceId.IMG_CHAR_ANIMATIONS_SLEEPING);
     }
 
     if (IS_XMAS) {
@@ -97,6 +102,65 @@ export function loadTarget(this: GameSceneLoaders, item: TargetItem): void {
         ResourceId.IMG_CHAR_ANIMATIONS
     );
 
+    if (this.nightLevel) {
+        targetWithOverride.addAnimationEndpoints(
+            GameSceneConstants.CharAnimation.SLEEPING,
+            0.05,
+            Timeline.LoopType.NO_LOOP,
+            GameSceneConstants.IMG_CHAR_ANIMATIONS_SLEEPING_sleep_start,
+            GameSceneConstants.IMG_CHAR_ANIMATIONS_SLEEPING_sleep_end,
+            undefined,
+            ResourceId.IMG_CHAR_ANIMATIONS_SLEEPING
+        );
+
+        const zzzFrames: number[] = [];
+        for (
+            frame = GameSceneConstants.IMG_CHAR_ANIMATIONS_SLEEPING_zzz_start;
+            frame <= GameSceneConstants.IMG_CHAR_ANIMATIONS_SLEEPING_zzz_end;
+            frame++
+        ) {
+            zzzFrames.push(frame);
+        }
+        const zzzHold = new Array(15).fill(
+            GameSceneConstants.IMG_CHAR_ANIMATIONS_SLEEPING_zzz_start
+        );
+        const zzzPrimarySequence = [...zzzFrames, ...zzzHold];
+        const zzzSecondarySequence = [...zzzHold, ...zzzFrames];
+
+        this.sleepAnimPrimary = new Animation();
+        this.sleepAnimPrimary.initTextureWithId(ResourceId.IMG_CHAR_ANIMATIONS_SLEEPING);
+        this.sleepAnimPrimary.anchor = this.sleepAnimPrimary.parentAnchor = Alignment.CENTER;
+        this.sleepAnimPrimary.doRestoreCutTransparency();
+        this.sleepAnimPrimary.addAnimationSequence(
+            0,
+            1 / 30,
+            Timeline.LoopType.REPLAY,
+            zzzPrimarySequence.length,
+            zzzPrimarySequence,
+            ResourceId.IMG_CHAR_ANIMATIONS_SLEEPING
+        );
+        this.sleepAnimPrimary.playTimeline(0);
+        this.sleepAnimPrimary.visible = false;
+
+        this.sleepAnimSecondary = new Animation();
+        this.sleepAnimSecondary.initTextureWithId(ResourceId.IMG_CHAR_ANIMATIONS_SLEEPING);
+        this.sleepAnimSecondary.anchor = this.sleepAnimSecondary.parentAnchor = Alignment.CENTER;
+        this.sleepAnimSecondary.doRestoreCutTransparency();
+        this.sleepAnimSecondary.addAnimationSequence(
+            0,
+            1 / 30,
+            Timeline.LoopType.REPLAY,
+            zzzSecondarySequence.length,
+            zzzSecondarySequence,
+            ResourceId.IMG_CHAR_ANIMATIONS_SLEEPING
+        );
+        this.sleepAnimSecondary.playTimeline(0);
+        this.sleepAnimSecondary.visible = false;
+    } else {
+        this.sleepAnimPrimary = null;
+        this.sleepAnimSecondary = null;
+    }
+
     targetWithOverride.addAnimationEndpoints(
         GameSceneConstants.CharAnimation.IDLE2,
         0.05,
@@ -127,7 +191,6 @@ export function loadTarget(this: GameSceneLoaders, item: TargetItem): void {
         ResourceId.IMG_CHAR_IDLE_XMAS
     );
 
-    let frame;
     const idle3Sequence = [];
     for (
         frame = GameSceneConstants.IMG_CHAR_ANIMATIONS_idle3_start;
@@ -302,7 +365,7 @@ export function loadTarget(this: GameSceneLoaders, item: TargetItem): void {
 
     // delay greeting by Om-nom when not using January Paddington intro
     if (settings.showGreeting) {
-        if (!(isJanuary && isHolidayBox)) {
+        if (!(isJanuary && isHolidayBox) && !this.nightLevel) {
             this.dd.callObject(this, this.showGreeting, null, 2);
         }
         settings.showGreeting = false;
@@ -310,6 +373,8 @@ export function loadTarget(this: GameSceneLoaders, item: TargetItem): void {
 
     if (isJanuary && isHolidayBox) {
         this.playPaddingtonIntro();
+    } else if (this.nightLevel) {
+        target.playTimeline(GameSceneConstants.CharAnimation.SLEEPING);
     } else {
         target.playTimeline(GameSceneConstants.CharAnimation.IDLE);
     }

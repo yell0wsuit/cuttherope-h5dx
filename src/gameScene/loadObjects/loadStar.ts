@@ -12,6 +12,9 @@ import type { StarItem } from "../MapLayerItem";
 export function loadStar(this: GameSceneLoaders, item: StarItem): void {
     const s = new Star();
     s.initTextureWithId(ResourceId.IMG_OBJ_STAR_IDLE);
+    if (this.nightLevel) {
+        s.enableNightMode();
+    }
     s.x = item.x * this.PM + this.PMX;
     s.y = item.y * this.PM + this.PMY;
     s.timeout = item.timeout;

@@ -11,6 +11,14 @@ export function initPostLoad(this: GameSceneInit): void {
 
     this.startCamera();
 
+    this.conveyors.attachItems(this.stars);
+    this.conveyors.attachItems(this.socks);
+    this.conveyors.attachItems(this.bubbles);
+    this.conveyors.attachItems(this.tubes);
+    this.conveyors.attachItems(this.pumps);
+    this.conveyors.attachItems(this.bouncers);
+    this.conveyors.sortBelts();
+
     this.tummyTeasers = 0;
 
     this.starsCollected = 0;

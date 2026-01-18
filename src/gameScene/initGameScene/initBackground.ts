@@ -31,7 +31,6 @@ export function initBackground(this: GameSceneInit): boolean {
         if (!canvasBackground) {
             return false;
         }
-        canvasBackground.style.background = backgroundSource ? `url('${backgroundSource}')` : "";
         canvasBackground.style.display = "block";
 
         currentPack = LevelState.pack;

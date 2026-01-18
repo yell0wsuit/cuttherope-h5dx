@@ -1,0 +1,150 @@
+{
+  "settings": [
+    {
+      "name": 0,
+      "height": 480,
+      "gridSize": 32,
+      "width": 320
+    },
+    {
+      "name": 1,
+      "ropePhysicsSpeed": 1,
+      "twoParts": false
+    }
+  ],
+  "objects": [
+    {
+      "name": 2,
+      "x": 216,
+      "y": 52
+    },
+    {
+      "name": 52,
+      "x": 63,
+      "y": 50
+    },
+    {
+      "name": 54,
+      "x": 65,
+      "y": 51
+    },
+    {
+      "name": 100,
+      "spider": false,
+      "gun": false,
+      "wheel": false,
+      "part": "L",
+      "hidePath": false,
+      "moveOffset": 0,
+      "moveVertical": false,
+      "length": 90,
+      "x": 67,
+      "y": 177,
+      "moveLength": -1,
+      "radius": -1
+    },
+    {
+      "name": 3,
+      "moveSpeed": 35,
+      "path": "RC30",
+      "x": 228,
+      "y": 414,
+      "timeout": -1
+    },
+    {
+      "name": 3,
+      "moveSpeed": 50,
+      "path": "RW30",
+      "x": 230,
+      "y": 398,
+      "timeout": -1
+    },
+    {
+      "name": 3,
+      "moveSpeed": 30,
+      "path": "RW40",
+      "x": 220,
+      "y": 410,
+      "timeout": -1
+    },
+    {
+      "name": 60,
+      "size": 4,
+      "angle": 0,
+      "x": 224,
+      "y": 468,
+      "toggled": false
+    },
+    {
+      "name": 60,
+      "size": 4,
+      "angle": 0,
+      "x": 225,
+      "y": 288,
+      "toggled": false
+    },
+    {
+      "name": 133,
+      "activeTime": 1,
+      "angle": 0,
+      "x": 66,
+      "y": 218,
+      "radius": 50,
+      "index": 1
+    },
+    {
+      "name": 133,
+      "activeTime": 1,
+      "angle": 0,
+      "x": 219,
+      "y": 217,
+      "radius": 50,
+      "index": 2
+    },
+    {
+      "name": 56,
+      "group": 0,
+      "angle": 270,
+      "x": 66,
+      "y": 369
+    },
+    {
+      "name": 56,
+      "group": 0,
+      "angle": 90,
+      "x": 222,
+      "y": 355
+    },
+    {
+      "name": 60,
+      "size": 4,
+      "angle": 90,
+      "x": 134,
+      "y": 376,
+      "toggled": false
+    },
+    {
+      "name": 60,
+      "size": 4,
+      "angle": 90,
+      "x": 311,
+      "y": 377,
+      "toggled": false
+    },
+    {
+      "name": 130,
+      "angle": 0,
+      "bouncer": false,
+      "bubble": true,
+      "x": 223,
+      "y": 403,
+      "grab": true,
+      "radius": 30
+    },
+    {
+      "name": 300,
+      "x": 144,
+      "y": 216
+    }
+  ]
+}

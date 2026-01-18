@@ -71,6 +71,8 @@ class GameSceneUpdate extends GameSceneCharacter {
             "popCandyBubble",
             "popBubble",
             "handleBubbleTouch",
+            "popLightBulbBubble",
+            "handleLightBulbBubbleTouch",
         ]);
 
         this.teleportDelegate = new GameSceneTeleportDelegate(sceneContext);

@@ -1,6 +1,7 @@
 import GameObject from "@/visual/GameObject";
 import Vector from "@/core/Vector";
 import Radians from "@/utils/Radians";
+import resolution from "@/resolution";
 
 class Pump extends GameObject {
     angle: number;
@@ -8,6 +9,7 @@ class Pump extends GameObject {
     t2: Vector;
     touchTimer: number;
     touch: number;
+    private static readonly CONVEYOR_OFFSET = new Vector(0.8, -1.2);
 
     constructor() {
         super();
@@ -33,6 +35,31 @@ class Pump extends GameObject {
 
         this.t1.rotateAround(this.angle, this.x, this.y);
         this.t2.rotateAround(this.angle, this.x, this.y);
+    }
+
+    getConveyorSize(): Vector {
+        const bb = resolution.PUMP_BB;
+        const scale = 0.48;
+        return new Vector(bb.w * scale, bb.h * scale);
+    }
+
+    getConveyorPadding(): number {
+        const size = this.getConveyorSize();
+        return (size.x + size.y) / 4;
+    }
+
+    getConveyorPosition(): Vector {
+        const offset = Pump.CONVEYOR_OFFSET.copy();
+        offset.rotate(this.angle);
+        return Vector.add(new Vector(this.x, this.y), offset);
+    }
+
+    setConveyorPosition(pos: Vector): void {
+        const offset = Pump.CONVEYOR_OFFSET.copy();
+        offset.rotate(this.angle);
+        const adjusted = Vector.subtract(pos, offset);
+        this.x = adjusted.x;
+        this.y = adjusted.y;
     }
 }
 

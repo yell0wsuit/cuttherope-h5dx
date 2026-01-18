@@ -29,9 +29,13 @@ export function resetGameState(this: GameSceneInit): void {
     this.tubes = [];
     this.pumps = [];
     this.lanterns = [];
+    this.lightbulbs = [];
     this.rockets = [];
     this.socks = [];
     this.ghosts = [];
+    this.mice = [];
+    this.miceManager = null;
+    this.conveyors.clear();
     this.tutorialImages = [];
     this.tutorials = [];
     this.drawings = [];
@@ -47,4 +51,17 @@ export function resetGameState(this: GameSceneInit): void {
     this.starR.setWeight(1);
     this.isCandyInLantern = false;
     Lantern.removeAllLanterns();
+    this.sleepAnimPrimary = null;
+    this.sleepAnimSecondary = null;
+    this.isNightTargetAwake = null;
+    this.sleepPulseActive = false;
+    this.sleepPulseTime = 0;
+    this.sleepPulseDelay = 0;
+    this.sleepPulseBaseY = 0;
+    this.sleepSoundTimer = 0;
+    if (this.sleepSoundId != null) {
+        SoundMgr.stopSound(this.sleepSoundId);
+    }
+    this.sleepSoundId = null;
+    this.gameLostTriggered = false;
 }

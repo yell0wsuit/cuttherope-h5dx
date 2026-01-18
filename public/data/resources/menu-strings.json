@@ -1183,5 +1183,20 @@
     "nl": "Touwen",
     "br": "Cordas",
     "ca": "Cordes"
+  },
+  {
+    "id": 206,
+    "nl": "de lastigste",
+    "br": "a mais dura",
+    "it": "la più difficile",
+    "ja": "難易度：最高",
+    "de": "am schwierigsten",
+    "es": "la más difícil",
+    "en": "the hardest one",
+    "zh_tw": "最硬的那個",
+    "ko": "가장 어려운 난이도",
+    "fr": "la plus complexe",
+    "ru": "сложнейшая",
+    "zh": "最厉害的一个"
   }
 ]

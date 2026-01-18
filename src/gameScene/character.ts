@@ -10,6 +10,9 @@ class GameSceneCharacter extends GameSceneLoaders {
         _trackType: number,
         keyFrameIndex: number
     ): void {
+        if (this.nightLevel && this.isNightTargetAwake === false) {
+            return;
+        }
         if (keyFrameIndex === 1) {
             // om-nom blink
             this.blinkTimer--;

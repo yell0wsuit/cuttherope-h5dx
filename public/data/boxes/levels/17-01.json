@@ -1,0 +1,421 @@
+{
+    "settings": [
+        {
+            "name": 0,
+            "height": 480,
+            "gridSize": 32,
+            "width": 320
+        },
+        {
+            "name": 1,
+            "nightLevel": false,
+            "ropePhysicsSpeed": 1,
+            "special": 5,
+            "twoParts": false
+        }
+    ],
+    "nl": [
+        {
+            "name": 4,
+            "text": "Versleep de Band om er een voorwerp op te laten bewegen",
+            "x": 20,
+            "y": 150,
+            "height": 60,
+            "locale": "nl",
+            "width": 150
+        },
+        {
+            "name": 8,
+            "moveSpeed": 100,
+            "angle": -80,
+            "rotateSpeed": 100,
+            "x": 150,
+            "y": 245,
+            "locale": "nl"
+        },
+        {
+            "name": 14,
+            "moveSpeed": 100,
+            "path": "-95,49,",
+            "rotateSpeed": 0,
+            "x": 192,
+            "y": 369,
+            "locale": "nl"
+        }
+    ],
+    "br": [
+        {
+            "name": 4,
+            "text": "Arraste a esteira para mover os objetos que estão nela",
+            "x": 20,
+            "y": 160,
+            "height": 60,
+            "locale": "br",
+            "width": 150
+        },
+        {
+            "name": 8,
+            "moveSpeed": 100,
+            "angle": -80,
+            "rotateSpeed": 100,
+            "x": 150,
+            "y": 240,
+            "locale": "br"
+        },
+        {
+            "name": 14,
+            "moveSpeed": 100,
+            "path": "-95,49,",
+            "rotateSpeed": 0,
+            "x": 192,
+            "y": 369,
+            "locale": "br"
+        }
+    ],
+    "it": [
+        {
+            "name": 4,
+            "text": "Trascina la cintura per usarla per spostare gli oggetti",
+            "x": 20,
+            "y": 150,
+            "height": 60,
+            "locale": "it",
+            "width": 150
+        },
+        {
+            "name": 8,
+            "moveSpeed": 100,
+            "angle": -80,
+            "rotateSpeed": 100,
+            "x": 150,
+            "y": 245,
+            "locale": "it"
+        },
+        {
+            "name": 14,
+            "moveSpeed": 100,
+            "path": "-95,49,",
+            "rotateSpeed": 0,
+            "x": 192,
+            "y": 369,
+            "locale": "it"
+        }
+    ],
+    "ja": [
+        {
+            "name": 4,
+            "text": "ベルトを *ドラッグして、 *目標の*下に *動かしてね。",
+            "x": 5,
+            "y": 150,
+            "height": 60,
+            "locale": "ja",
+            "width": 150
+        },
+        {
+            "name": 8,
+            "moveSpeed": 100,
+            "angle": -80,
+            "rotateSpeed": 100,
+            "x": 150,
+            "y": 245,
+            "locale": "ja"
+        },
+        {
+            "name": 14,
+            "moveSpeed": 100,
+            "path": "-95,49,",
+            "rotateSpeed": 0,
+            "x": 192,
+            "y": 369,
+            "locale": "ja"
+        }
+    ],
+    "de": [
+        {
+            "name": 4,
+            "text": "Ziehe das Band, um Objekte zu bewegen.",
+            "x": 20,
+            "y": 160,
+            "height": 60,
+            "locale": "de",
+            "width": 150
+        },
+        {
+            "name": 8,
+            "moveSpeed": 100,
+            "angle": -80,
+            "rotateSpeed": 100,
+            "x": 150,
+            "y": 240,
+            "locale": "de"
+        },
+        {
+            "name": 14,
+            "moveSpeed": 100,
+            "path": "-95,49,",
+            "rotateSpeed": 0,
+            "x": 192,
+            "y": 369,
+            "locale": "de"
+        }
+    ],
+    "es": [
+        {
+            "name": 4,
+            "text": "Arrastra la cinta para mover objetos con ella",
+            "x": 20,
+            "y": 160,
+            "height": 60,
+            "locale": "es",
+            "width": 150
+        },
+        {
+            "name": 8,
+            "moveSpeed": 100,
+            "angle": -80,
+            "rotateSpeed": 100,
+            "x": 150,
+            "y": 240,
+            "locale": "es"
+        },
+        {
+            "name": 14,
+            "moveSpeed": 100,
+            "path": "-95,49,",
+            "rotateSpeed": 0,
+            "x": 192,
+            "y": 369,
+            "locale": "es"
+        }
+    ],
+    "en": [
+        {
+            "name": 4,
+            "text": "Drag the belt to move objects with it",
+            "x": 20,
+            "y": 160,
+            "height": 60,
+            "locale": "en",
+            "width": 150
+        },
+        {
+            "name": 8,
+            "moveSpeed": 100,
+            "angle": -80,
+            "rotateSpeed": 100,
+            "x": 150,
+            "y": 240,
+            "locale": "en"
+        },
+        {
+            "name": 14,
+            "moveSpeed": 100,
+            "path": "-95,49,",
+            "rotateSpeed": 0,
+            "x": 192,
+            "y": 369,
+            "locale": "en"
+        }
+    ],
+    "ko": [
+        {
+            "name": 4,
+            "text": "컨베이어로 물건을 *옮기려면 벨트를 *드래그하세요.",
+            "x": 20,
+            "y": 150,
+            "height": 60,
+            "locale": "ko",
+            "width": 150
+        },
+        {
+            "name": 8,
+            "moveSpeed": 100,
+            "angle": -80,
+            "rotateSpeed": 100,
+            "x": 150,
+            "y": 245,
+            "locale": "ko"
+        },
+        {
+            "name": 14,
+            "moveSpeed": 100,
+            "path": "-95,49,",
+            "rotateSpeed": 0,
+            "x": 192,
+            "y": 369,
+            "locale": "ko"
+        }
+    ],
+    "fr": [
+        {
+            "name": 4,
+            "text": "Faites glisser le tapis pour déplacer des objets",
+            "x": 20,
+            "y": 160,
+            "height": 60,
+            "locale": "fr",
+            "width": 150
+        },
+        {
+            "name": 8,
+            "moveSpeed": 100,
+            "angle": -80,
+            "rotateSpeed": 100,
+            "x": 150,
+            "y": 240,
+            "locale": "fr"
+        },
+        {
+            "name": 14,
+            "moveSpeed": 100,
+            "path": "-95,49,",
+            "rotateSpeed": 0,
+            "x": 192,
+            "y": 369,
+            "locale": "fr"
+        }
+    ],
+    "ru": [
+        {
+            "name": 8,
+            "moveSpeed": 100,
+            "angle": -80,
+            "rotateSpeed": 100,
+            "x": 150,
+            "y": 240,
+            "locale": "ru"
+        },
+        {
+            "name": 4,
+            "text": "Конвейер двигает объекты на нём.",
+            "x": 20,
+            "y": 160,
+            "height": 60,
+            "locale": "ru",
+            "width": 150
+        },
+        {
+            "name": 14,
+            "moveSpeed": 100,
+            "path": "-95,49,",
+            "rotateSpeed": 0,
+            "x": 192,
+            "y": 369,
+            "locale": "ru"
+        }
+    ],
+    "objects": [
+        {
+            "name": 135,
+            "velocity": 10,
+            "direction": "forward",
+            "length": 275,
+            "angle": 25,
+            "x": 35,
+            "y": 379,
+            "type": "manual",
+            "width": 55
+        },
+        {
+            "name": 54,
+            "x": 215,
+            "y": 292
+        },
+        {
+            "name": 3,
+            "x": 88,
+            "y": 131,
+            "timeout": -1
+        },
+        {
+            "name": 2,
+            "x": 88,
+            "y": 64
+        },
+        {
+            "name": 100,
+            "bindBulb": false,
+            "spider": false,
+            "gun": false,
+            "wheel": false,
+            "part": "L",
+            "hidePath": false,
+            "moveOffset": 0,
+            "moveVertical": false,
+            "length": 100,
+            "x": 153,
+            "bulbNumber": "first",
+            "y": 62,
+            "moveLength": -1,
+            "radius": -1
+        },
+        {
+            "name": 52,
+            "x": 208,
+            "y": 175
+        },
+        {
+            "name": 3,
+            "x": 88,
+            "y": 405,
+            "timeout": -1
+        },
+        {
+            "name": 100,
+            "bindBulb": false,
+            "spider": false,
+            "gun": false,
+            "wheel": false,
+            "part": "L",
+            "hidePath": false,
+            "moveOffset": 0,
+            "moveVertical": false,
+            "length": 100,
+            "x": 275,
+            "bulbNumber": "first",
+            "y": 62,
+            "moveLength": -1,
+            "radius": -1
+        },
+        {
+            "name": 3,
+            "x": 88,
+            "y": 288,
+            "timeout": -1
+        },
+        {
+            "name": 300,
+            "x": 210,
+            "y": 63
+        }
+    ],
+    "zh": [
+        {
+            "name": 4,
+            "text": "拖动传送带，*移动它上面的物体",
+            "x": 20,
+            "y": 160,
+            "height": 60,
+            "locale": "zh",
+            "width": 150
+        },
+        {
+            "name": 8,
+            "moveSpeed": 100,
+            "angle": -80,
+            "rotateSpeed": 100,
+            "x": 150,
+            "y": 240,
+            "locale": "zh"
+        },
+        {
+            "name": 14,
+            "moveSpeed": 100,
+            "path": "-95,49,",
+            "rotateSpeed": 0,
+            "x": 192,
+            "y": 369,
+            "locale": "zh"
+        }
+    ]
+}

@@ -115,6 +115,10 @@ RES_DATA[ResourceId.IMG_OBJ_BUBBLE_ATTACHED] = new ResEntry(
 RES_DATA[ResourceId.IMG_OBJ_HOOK_01] = new ResEntry("obj_hook_01.webp", ResourceType.IMAGE);
 RES_DATA[ResourceId.IMG_OBJ_HOOK_02] = new ResEntry("obj_hook_02.webp", ResourceType.IMAGE);
 RES_DATA[ResourceId.IMG_OBJ_STAR_IDLE] = new ResEntry("obj_star_idle.webp", ResourceType.IMAGE);
+RES_DATA[ResourceId.IMG_OBJ_STAR_NIGHT] = new ResEntry("obj_star_night.webp", ResourceType.IMAGE, {
+    atlasPath: "obj_star_night.json",
+    atlasFormat: "texture-packer",
+});
 RES_DATA[ResourceId.IMG_HUD_STAR] = new ResEntry("hud_star.webp", ResourceType.IMAGE);
 RES_DATA[ResourceId.IMG_OBJ_SPIKES_03] = new ResEntry("obj_spikes_03.webp", ResourceType.IMAGE);
 RES_DATA[ResourceId.IMG_OBJ_SPIKES_02] = new ResEntry("obj_spikes_02.webp", ResourceType.IMAGE);
@@ -127,6 +131,14 @@ RES_DATA[ResourceId.IMG_CHAR_ANIMATIONS2] = new ResEntry(
 RES_DATA[ResourceId.IMG_CHAR_ANIMATIONS3] = new ResEntry(
     "char_animations3.webp",
     ResourceType.IMAGE
+);
+RES_DATA[ResourceId.IMG_CHAR_ANIMATIONS_SLEEPING] = new ResEntry(
+    "char_animations_sleeping.webp",
+    ResourceType.IMAGE,
+    {
+        atlasPath: "char_animations_sleeping.json",
+        atlasFormat: "texture-packer",
+    }
 );
 RES_DATA[ResourceId.IMG_OBJ_HOOK_REGULATED] = new ResEntry(
     "obj_hook_regulated.webp",
@@ -211,6 +223,9 @@ RES_DATA[ResourceId.IMG_BGR_11_P2] = new ResEntry("bgr_11_p2.webp", ResourceType
 RES_DATA[ResourceId.IMG_BGR_12_P1] = new ResEntry("bgr_12_p1.webp", ResourceType.IMAGE);
 RES_DATA[ResourceId.IMG_BGR_13_P1] = new ResEntry("bgr_13_p1.webp", ResourceType.IMAGE);
 RES_DATA[ResourceId.IMG_BGR_14_P1] = new ResEntry("bgr_14_p1.webp", ResourceType.IMAGE);
+RES_DATA[ResourceId.IMG_BGR_15_P1] = new ResEntry("bgr_15_p1.webp", ResourceType.IMAGE);
+RES_DATA[ResourceId.IMG_BGR_16_P1] = new ResEntry("bgr_16_p1.webp", ResourceType.IMAGE);
+RES_DATA[ResourceId.IMG_BGR_17_P1] = new ResEntry("bgr_17_p1.webp", ResourceType.IMAGE);
 RES_DATA[ResourceId.IMG_BGR_XMAS] = new ResEntry("bgr_xmas.webp", ResourceType.IMAGE);
 RES_DATA[ResourceId.IMG_BGR_PADDINGTON] = new ResEntry("bgr_paddington.webp", ResourceType.IMAGE);
 
@@ -369,6 +384,20 @@ RES_DATA[ResourceId.SND_STEAM_START] = new ResEntry("steam_start", ResourceType.
 RES_DATA[ResourceId.SND_STEAM_START2] = new ResEntry("steam_start2", ResourceType.SOUND);
 
 RES_DATA[ResourceId.SND_STEAM_END] = new ResEntry("steam_end", ResourceType.SOUND);
+
+RES_DATA[ResourceId.IMG_OBJ_TRANSPORTER] = new ResEntry("obj_transporter.png", ResourceType.IMAGE, {
+    atlasPath: "obj_transporter.json",
+    atlasFormat: "texture-packer",
+});
+
+RES_DATA[ResourceId.SND_TRANSPORTER_MOVE] = new ResEntry("transporter_move", ResourceType.SOUND);
+
+RES_DATA[ResourceId.SND_TRANSPORTER_DROP] = new ResEntry("transporter_drop", ResourceType.SOUND);
+
+RES_DATA[ResourceId.SND_CONV01] = new ResEntry("con01", ResourceType.SOUND);
+RES_DATA[ResourceId.SND_CONV02] = new ResEntry("con02", ResourceType.SOUND);
+RES_DATA[ResourceId.SND_CONV03] = new ResEntry("con03", ResourceType.SOUND);
+RES_DATA[ResourceId.SND_CONV04] = new ResEntry("con04", ResourceType.SOUND);
 
 RES_DATA[ResourceId.IMG_CHAR_SUPPORTS_XMAS] = new ResEntry(
     "char_supports_xmas.webp",
@@ -700,6 +729,10 @@ RES_DATA[ResourceId.IMG_OBJ_LANTERN] = new ResEntry("obj_lantern.webp", Resource
     atlasPath: "obj_lantern.json",
     atlasFormat: "texture-packer",
 });
+RES_DATA[ResourceId.IMG_OBJ_LIGHTER] = new ResEntry("obj_lighter.webp", ResourceType.IMAGE, {
+    atlasPath: "obj_lighter.json",
+    atlasFormat: "texture-packer",
+});
 RES_DATA[ResourceId.SND_LANTERN_TELEPORT_IN] = new ResEntry(
     "lantern_teleport_in",
     ResourceType.SOUND
@@ -708,5 +741,20 @@ RES_DATA[ResourceId.SND_LANTERN_TELEPORT_OUT] = new ResEntry(
     "lantern_teleport_out",
     ResourceType.SOUND
 );
+
+RES_DATA[ResourceId.IMG_OBJ_GAP] = new ResEntry("obj_gap.webp", ResourceType.IMAGE, {
+    atlasPath: "obj_gap.json",
+    atlasFormat: "texture-packer",
+});
+RES_DATA[ResourceId.SND_MOUSE_RUSTLE] = new ResEntry("mouse_rustle", ResourceType.SOUND);
+RES_DATA[ResourceId.SND_MOUSE_IDLE] = new ResEntry("mouse_idle", ResourceType.SOUND);
+RES_DATA[ResourceId.SND_MOUSE_TAP] = new ResEntry("mouse_tap", ResourceType.SOUND);
+
+// Night level sounds
+RES_DATA[ResourceId.SND_MONSTER_SLEEP_1] = new ResEntry("monster_sleep01", ResourceType.SOUND);
+RES_DATA[ResourceId.SND_MONSTER_SLEEP_2] = new ResEntry("monster_sleep02", ResourceType.SOUND);
+RES_DATA[ResourceId.SND_MONSTER_SLEEP_3] = new ResEntry("monster_sleep03", ResourceType.SOUND);
+RES_DATA[ResourceId.SND_STAR_LIGHT_1] = new ResEntry("star_light01", ResourceType.SOUND);
+RES_DATA[ResourceId.SND_STAR_LIGHT_2] = new ResEntry("star_light02", ResourceType.SOUND);
 
 export default RES_DATA;

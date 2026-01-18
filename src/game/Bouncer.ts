@@ -92,6 +92,16 @@ class Bouncer extends CTRGameObject {
             this.updateRotation();
         }
     }
+
+    getConveyorSize(): Vector {
+        // Use local bounds for conveyor size calculation
+        return new Vector(this.width, this.height);
+    }
+
+    getConveyorPadding(): number {
+        const size = this.getConveyorSize();
+        return (size.x + size.y) / 4;
+    }
 }
 
 export default Bouncer;

@@ -21,6 +21,7 @@ class ResourcePacks {
         ResourceId.IMG_CHAR_ANIMATIONS,
         ResourceId.IMG_CHAR_ANIMATIONS2,
         ResourceId.IMG_CHAR_ANIMATIONS3,
+        ResourceId.IMG_CHAR_ANIMATIONS_SLEEPING,
         ResourceId.IMG_CHAR_GREETINGS_XMAS,
         ResourceId.IMG_CHAR_IDLE_XMAS,
         ResourceId.IMG_XMAS_LIGHTS,
@@ -42,6 +43,7 @@ class ResourcePacks {
         ResourceId.IMG_OBJ_SPIKES_03,
         ResourceId.IMG_OBJ_SPIKES_04,
         ResourceId.IMG_OBJ_STAR_IDLE,
+        ResourceId.IMG_OBJ_STAR_NIGHT,
         ResourceId.IMG_OBJ_STAR_DISAPPEAR,
         ResourceId.IMG_HUD_STAR,
         ResourceId.IMG_TUTORIAL_SIGNS,
@@ -53,6 +55,8 @@ class ResourcePacks {
         ResourceId.IMG_CONFETTI_PARTICLES,
         ResourceId.IMG_OBJ_GHOST,
         ResourceId.IMG_OBJ_PIPE,
+        ResourceId.IMG_OBJ_TRANSPORTER,
+        ResourceId.IMG_OBJ_GAP,
 
         ResourceId.IMG_OBJ_CANDY_02,
         ResourceId.IMG_OBJ_CANDY_03,
@@ -106,6 +110,7 @@ class ResourcePacks {
         ResourceId.IMG_OBJ_CANDY_51,
 
         ResourceId.IMG_OBJ_LANTERN,
+        ResourceId.IMG_OBJ_LIGHTER,
     ];
 
     // -- Game resources for Round 5 promo --
@@ -201,6 +206,9 @@ class ResourcePacks {
         ResourceId.SND_ROPE_BLEAK_3,
         ResourceId.SND_ROPE_BLEAK_4,
         ResourceId.SND_ROPE_GET,
+        ResourceId.SND_MOUSE_RUSTLE,
+        ResourceId.SND_MOUSE_TAP,
+        ResourceId.SND_MOUSE_IDLE,
         ResourceId.SND_SPIDER_ACTIVATE,
         ResourceId.SND_SPIDER_FALL,
         ResourceId.SND_SPIDER_WIN,
@@ -231,6 +239,17 @@ class ResourcePacks {
         ResourceId.SND_STEAM_END,
         ResourceId.SND_LANTERN_TELEPORT_IN,
         ResourceId.SND_LANTERN_TELEPORT_OUT,
+        ResourceId.SND_MONSTER_SLEEP_1,
+        ResourceId.SND_MONSTER_SLEEP_2,
+        ResourceId.SND_MONSTER_SLEEP_3,
+        ResourceId.SND_STAR_LIGHT_1,
+        ResourceId.SND_STAR_LIGHT_2,
+        ResourceId.SND_TRANSPORTER_MOVE,
+        ResourceId.SND_TRANSPORTER_DROP,
+        ResourceId.SND_CONV01,
+        ResourceId.SND_CONV02,
+        ResourceId.SND_CONV03,
+        ResourceId.SND_CONV04,
     ];
 
     // --- Game UI ---

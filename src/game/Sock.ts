@@ -5,12 +5,14 @@ import Alignment from "@/core/Alignment";
 import Timeline from "@/visual/Timeline";
 import resolution from "@/resolution";
 import Vector from "@/core/Vector";
-import Mover from "@/utils/Mover";
 import Radians from "@/utils/Radians";
-import Canvas from "@/utils/Canvas";
 import { IS_XMAS } from "@/utils/SpecialEvents";
 
 const hatOrSock = IS_XMAS ? ResourceId.IMG_OBJ_SOCKS_XMAS : ResourceId.IMG_OBJ_SOCKS;
+
+const SOCK_CONVEYOR_SIZE_SCALE = 0.28;
+const SOCK_CONVEYOR_OFFSET = new Vector(-2.1, 16);
+const CONVEYOR_PM = 1.2;
 
 class Sock extends CTRGameObject {
     static readonly Quads = {
@@ -139,6 +141,40 @@ class Sock extends CTRGameObject {
         if (this.mover) {
             this.updateRotation();
         }
+    }
+
+    getConveyorSize(): Vector {
+        return new Vector(
+            this.width * SOCK_CONVEYOR_SIZE_SCALE,
+            this.height * SOCK_CONVEYOR_SIZE_SCALE
+        );
+    }
+
+    getConveyorPadding(): number {
+        const size = this.getConveyorSize();
+        return (size.x + size.y) / 4;
+    }
+
+    getConveyorPosition(): Vector {
+        const pmScale = resolution.PM / CONVEYOR_PM;
+        const offset = new Vector(
+            SOCK_CONVEYOR_OFFSET.x * pmScale,
+            SOCK_CONVEYOR_OFFSET.y * pmScale
+        );
+        offset.rotate(this.angle);
+        return Vector.add(new Vector(this.x, this.y), offset);
+    }
+
+    setConveyorPosition(pos: Vector): void {
+        const pmScale = resolution.PM / CONVEYOR_PM;
+        const offset = new Vector(
+            SOCK_CONVEYOR_OFFSET.x * pmScale,
+            SOCK_CONVEYOR_OFFSET.y * pmScale
+        );
+        offset.rotate(this.angle);
+        const adjusted = Vector.subtract(pos, offset);
+        this.x = adjusted.x;
+        this.y = adjusted.y;
     }
 }
 

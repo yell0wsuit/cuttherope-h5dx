@@ -1,0 +1,162 @@
+{
+    "settings": [
+        {
+            "name": 0,
+            "height": 480,
+            "gridSize": 32,
+            "width": 320
+        },
+        {
+            "name": 1,
+            "nightLevel": false,
+            "ropePhysicsSpeed": 1,
+            "twoParts": true
+        }
+    ],
+    "objects": [
+        {
+            "name": 135,
+            "velocity": 10,
+            "direction": "forward",
+            "length": 270,
+            "angle": 0,
+            "x": 25,
+            "y": 429,
+            "type": "manual",
+            "width": 60
+        },
+        {
+            "name": 54,
+            "x": 126,
+            "y": 431
+        },
+        {
+            "name": 2,
+            "x": 161,
+            "y": 62
+        },
+        {
+            "name": 100,
+            "bindBulb": false,
+            "spider": false,
+            "gun": false,
+            "wheel": false,
+            "part": "L",
+            "moveOffset": 0,
+            "moveVertical": false,
+            "length": 55,
+            "x": 137,
+            "bulbNumber": "first",
+            "y": 216,
+            "moveLength": -1,
+            "radius": -1
+        },
+        {
+            "name": 50,
+            "x": 137,
+            "y": 306
+        },
+        {
+            "name": 51,
+            "x": 183,
+            "y": 308
+        },
+        {
+            "name": 100,
+            "bindBulb": false,
+            "spider": false,
+            "gun": false,
+            "wheel": false,
+            "part": "R",
+            "moveOffset": 0,
+            "moveVertical": false,
+            "length": 55,
+            "x": 183,
+            "bulbNumber": "first",
+            "y": 216,
+            "moveLength": -1,
+            "radius": -1
+        },
+        {
+            "name": 54,
+            "x": 195,
+            "y": 431
+        },
+        {
+            "name": 81,
+            "size": 1,
+            "angle": 7,
+            "x": 192,
+            "y": 369
+        },
+        {
+            "name": 81,
+            "size": 1,
+            "angle": -7,
+            "x": 131,
+            "y": 369
+        },
+        {
+            "name": 135,
+            "velocity": 10,
+            "direction": "forward",
+            "length": 290,
+            "angle": 0,
+            "x": 16,
+            "y": 168,
+            "type": "manual",
+            "width": 50
+        },
+        {
+            "name": 81,
+            "size": 1,
+            "angle": 135,
+            "x": 194,
+            "y": 170
+        },
+        {
+            "name": 81,
+            "size": 1,
+            "angle": -135,
+            "x": 127,
+            "y": 170
+        },
+        {
+            "name": 81,
+            "size": 1,
+            "angle": 130,
+            "x": 94,
+            "y": 110
+        },
+        {
+            "name": 81,
+            "size": 1,
+            "angle": -130,
+            "x": 225,
+            "y": 110
+        },
+        {
+            "name": 3,
+            "x": 273,
+            "y": 231,
+            "timeout": -1
+        },
+        {
+            "name": 3,
+            "x": 48,
+            "y": 233,
+            "timeout": -1
+        },
+        {
+            "name": 3,
+            "x": 161,
+            "y": 126,
+            "timeout": -1
+        },
+        {
+            "name": 300,
+            "x": 158,
+            "y": 264
+        }
+    ]
+}

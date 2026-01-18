@@ -57,7 +57,7 @@ class BoxManager {
      * Creates all boxes according to edition configuration.
      */
     static createBoxes(): void {
-        const { boxImages: images, boxTypes } = edition;
+        const { boxImages: images, boxTypes, levelLabels } = edition;
 
         while (this.boxes.length) {
             const existingBox = this.boxes.pop();
@@ -69,6 +69,7 @@ class BoxManager {
             const image = images[i] ?? null;
             const requiredStars = ScoreManager.requiredStars(i);
             const isLocked = ScoreManager.isBoxLocked(i);
+            const levelLabel = levelLabels[i] ?? null;
 
             let box: Box;
 
@@ -80,11 +81,11 @@ class BoxManager {
                     box = new TimeBox(i, image, requiredStars, isLocked, type);
                     break;
                 case BoxType.HOLIDAY:
-                    box = new Box(i, image, requiredStars, isLocked, type);
+                    box = new Box(i, image, requiredStars, isLocked, type, levelLabel);
                     box.yOffset = -26;
                     break;
                 default:
-                    box = new Box(i, image, requiredStars, isLocked, type);
+                    box = new Box(i, image, requiredStars, isLocked, type, levelLabel);
                     break;
             }
 

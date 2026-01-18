@@ -4,6 +4,7 @@ import ResourceId from "@/resources/ResourceId";
 import SoundMgr from "@/game/CTRSoundMgr";
 import resolution from "@/resolution";
 import type Bubble from "@/game/Bubble";
+import type LightBulb from "@/game/LightBulb";
 import type AnimationPool from "@/visual/AnimationPool";
 import type GameObject from "@/game/CTRGameObject";
 import type ConstrainedPoint from "@/physics/ConstrainedPoint";
@@ -75,6 +76,7 @@ function isBubbleCapture(
 
         b.popped = true;
         b.removeChildWithID(0);
+        scene.conveyors.remove(b);
 
         // For ghost bubbles, disable the ghost's cycling when captured
         if (isGhostBubble(scene, b)) {
@@ -130,6 +132,27 @@ function popBubble(scene: GameScene, x: number, y: number): void {
     scene.aniPool.addChild(scene.bubbleDisappear);
 }
 
+function popLightBulbBubble(scene: GameScene, bulb: LightBulb): void {
+    const bubble = bulb.capturingBubble;
+    if (!bubble) {
+        return;
+    }
+
+    enableGhostCycleForBubble(scene, bubble);
+    bulb.capturingBubble = null;
+    bulb.capturingGhostBubble = false;
+    bubble.capturedByBulb = false;
+    bubble.popped = true;
+    bubble.removeChildWithID(0);
+
+    SoundMgr.playSound(ResourceId.SND_BUBBLE_BREAK);
+
+    scene.bubbleDisappear.x = bulb.x;
+    scene.bubbleDisappear.y = bulb.y;
+    scene.bubbleDisappear.playTimeline(0);
+    scene.aniPool.addChild(scene.bubbleDisappear);
+}
+
 function handleBubbleTouch(scene: GameScene, s: ConstrainedPoint, tx: number, ty: number): boolean {
     if (
         Rectangle.pointInRect(
@@ -146,6 +169,32 @@ function handleBubbleTouch(scene: GameScene, s: ConstrainedPoint, tx: number, ty
         // Achievements.increment(AchievementId.BUBBLE_POPPER);
         // Achievements.increment(AchievementId.BUBBLE_MASTER);
 
+        return true;
+    }
+    return false;
+}
+
+function handleLightBulbBubbleTouch(
+    scene: GameScene,
+    bulb: LightBulb,
+    tx: number,
+    ty: number
+): boolean {
+    if (!bulb.capturingBubble) {
+        return false;
+    }
+
+    if (
+        Rectangle.pointInRect(
+            tx + scene.camera.pos.x,
+            ty + scene.camera.pos.y,
+            bulb.constraint.pos.x - resolution.BUBBLE_TOUCH_OFFSET,
+            bulb.constraint.pos.y - resolution.BUBBLE_TOUCH_OFFSET,
+            resolution.BUBBLE_TOUCH_SIZE,
+            resolution.BUBBLE_TOUCH_SIZE
+        )
+    ) {
+        popLightBulbBubble(scene, bulb);
         return true;
     }
     return false;
@@ -175,8 +224,16 @@ class GameSceneBubblesDelegate {
         popBubble(this.scene, x, y);
     }
 
+    popLightBulbBubble(bulb: LightBulb): void {
+        popLightBulbBubble(this.scene, bulb);
+    }
+
     handleBubbleTouch(s: ConstrainedPoint, tx: number, ty: number): boolean {
         return handleBubbleTouch(this.scene, s, tx, ty);
+    }
+
+    handleLightBulbBubbleTouch(bulb: LightBulb, tx: number, ty: number): boolean {
+        return handleLightBulbBubbleTouch(this.scene, bulb, tx, ty);
     }
 }
 

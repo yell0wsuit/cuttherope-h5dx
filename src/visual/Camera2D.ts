@@ -15,6 +15,7 @@ class Camera2D {
     speed: number;
     type: CameraSpeedType;
     pos: Vector;
+    prevPos: Vector;
     target: Vector;
     offset: Vector;
 
@@ -22,6 +23,7 @@ class Camera2D {
         this.speed = speed;
         this.type = cameraSpeed;
         this.pos = Vector.newZero();
+        this.prevPos = Vector.newZero();
         this.target = Vector.newZero();
         this.offset = Vector.newZero();
     }
@@ -33,6 +35,7 @@ class Camera2D {
 
         if (immediate) {
             this.pos.copyFrom(this.target);
+            this.prevPos.copyFrom(this.target);
         } else if (this.type === Camera2D.SpeedType.DELAY) {
             this.offset = Vector.subtract(this.target, this.pos);
             this.offset.multiply(this.speed);
@@ -44,6 +47,9 @@ class Camera2D {
     }
 
     update(delta: number): void {
+        // Store previous position for interpolation
+        this.prevPos.copyFrom(this.pos);
+
         if (!this.pos.equals(this.target)) {
             // add to the current position and round
             this.pos.add(Vector.multiply(this.offset, delta));
@@ -70,6 +76,33 @@ class Camera2D {
     cancelCameraTransformation(): void {
         if ((this.pos.x !== 0 || this.pos.y !== 0) && Canvas.context) {
             Canvas.context.translate(this.pos.x, this.pos.y);
+        }
+    }
+
+    /**
+     * Applies interpolated camera transformation for smooth rendering on high refresh displays.
+     * @param alpha Interpolation factor between 0 (prevPos) and 1 (pos)
+     * @returns The interpolated position used for the transformation
+     */
+    applyInterpolatedTransformation(alpha: number): Vector {
+        const clampedAlpha = Math.min(Math.max(alpha, 0), 1);
+        const interpX = this.prevPos.x + (this.pos.x - this.prevPos.x) * clampedAlpha;
+        const interpY = this.prevPos.y + (this.pos.y - this.prevPos.y) * clampedAlpha;
+
+        if ((interpX !== 0 || interpY !== 0) && Canvas.context) {
+            Canvas.context.translate(-interpX, -interpY);
+        }
+
+        return new Vector(interpX, interpY);
+    }
+
+    /**
+     * Cancels an interpolated camera transformation.
+     * @param interpPos The interpolated position returned by applyInterpolatedTransformation
+     */
+    cancelInterpolatedTransformation(interpPos: Vector): void {
+        if ((interpPos.x !== 0 || interpPos.y !== 0) && Canvas.context) {
+            Canvas.context.translate(interpPos.x, interpPos.y);
         }
     }
 }

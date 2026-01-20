@@ -15,12 +15,14 @@ class GameObject extends Animation {
     mover?: Mover;
     rotatedBB: boolean;
     topLeftCalculated: boolean;
+    interpolationAlpha: number;
 
     constructor() {
         super();
         this.isDrawBB = false;
         this.rotatedBB = false;
         this.topLeftCalculated = false;
+        this.interpolationAlpha = 1;
     }
 
     override initTexture(texture: Texture2D) {
@@ -100,6 +102,28 @@ class GameObject extends Animation {
             } else {
                 this.rotation = this.mover.angle;
             }
+        }
+    }
+
+    override draw(): void {
+        // Apply mover interpolation for smooth rendering on high refresh displays
+        if (this.mover && this.interpolationAlpha < 1) {
+            const originalX = this.x;
+            const originalY = this.y;
+            const originalRotation = this.rotation;
+
+            const interp = this.mover.getInterpolated(this.interpolationAlpha);
+            this.x = interp.x;
+            this.y = interp.y;
+            this.rotation = interp.angle;
+
+            super.draw();
+
+            this.x = originalX;
+            this.y = originalY;
+            this.rotation = originalRotation;
+        } else {
+            super.draw();
         }
     }
 

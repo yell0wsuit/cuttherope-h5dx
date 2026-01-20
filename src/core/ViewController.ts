@@ -17,6 +17,9 @@ const StateType = {
     PAUSED: 2,
 } as const;
 
+// Physics runs at fixed 60fps for consistent behavior across all devices
+const PHYSICS_TIMESTEP = 1 / 60;
+
 type StateNumType = (typeof StateType)[keyof typeof StateType];
 
 class ViewController {
@@ -125,7 +128,7 @@ class ViewController {
         // actually rendered. This means we could run as low as 20 fps
         const maxUpdates = Math.min(3, this.frameBalance | 0);
         for (let i = 0; i < maxUpdates; i++) {
-            v.update(0.016);
+            v.update(PHYSICS_TIMESTEP);
             this.frameBalance -= 1;
         }
     }
@@ -140,20 +143,21 @@ class ViewController {
             this.lastTime = time;
         }
 
-        // if the physics engine requires 60 fps, how many frames do
-        // we need to update?
-        this.frameBalance += this.clampDelta(this.delta) / 0.016;
+        // Don't clamp minimum - on high refresh displays (120Hz+), small
+        // deltas should accumulate naturally until they equal a physics frame.
+        const maxDelta = 0.05; // cap at 20fps equivalent to prevent huge catch-ups
+        const clampedDelta = Math.min(this.delta, maxDelta);
+        this.frameBalance += clampedDelta / PHYSICS_TIMESTEP;
     }
 
-    // Make sure a delta doesn't exceed some reasonable bounds
+    // Make sure a delta doesn't exceed some reasonable bounds for FPS averaging.
     // Delta changes might be large if we are using requestAnimationFrame
     // and the user switches tabs (the browser will stop calling us to
     // preserve power).
     clampDelta(delta: number): number {
-        if (delta < 0.016) {
-            // sometimes we'll get a bunch of frames batched together
-            // but we don't want to go below the 60 fps delta
-            return 0.016;
+        if (delta < PHYSICS_TIMESTEP) {
+            // for FPS averaging, clamp to 60fps target
+            return PHYSICS_TIMESTEP;
         } else if (delta > 0.05) {
             // dont go below the delta for 20 fps
             return 0.05;

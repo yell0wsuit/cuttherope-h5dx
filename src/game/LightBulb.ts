@@ -13,6 +13,7 @@ import type Bubble from "@/game/Bubble";
 import type Sock from "@/game/Sock";
 import * as GameSceneConstants from "@/gameScene/constants";
 import CandyInGhostBubbleAnimation from "@/game/CandyInGhostBubbleAnimation";
+import { getInterpolatedPosition } from "@/utils/interpolation";
 
 const IMG_OBJ_LIGHTER_light = 0;
 const IMG_OBJ_LIGHTER_bottle = 1;
@@ -21,6 +22,10 @@ const IMG_OBJ_LIGHTER_firefly_start = 3;
 const IMG_OBJ_LIGHTER_firefly_end = 42;
 
 const LIGHTBULB_ROOT_SCALE = 1;
+
+// Maximum reasonable distance for interpolation (prevents jumps on teleport/state changes)
+const MAX_LIGHTBULB_INTERP_DISTANCE = 100;
+const MAX_LIGHTBULB_INTERP_DISTANCE_SQ = MAX_LIGHTBULB_INTERP_DISTANCE * MAX_LIGHTBULB_INTERP_DISTANCE;
 
 class LightBulbGlow extends GameObject {
     override draw(): void {
@@ -173,14 +178,43 @@ class LightBulb extends CTRGameObject {
     }
 
     /**
+     * Applies interpolation to position for smooth rendering on high refresh displays.
+     * Returns the original position so it can be restored after drawing.
+     */
+    private applyInterpolation(): { originalX: number; originalY: number } {
+        const originalX = this.x;
+        const originalY = this.y;
+
+        if (this.interpolationAlpha < 1) {
+            const interpPos = getInterpolatedPosition(
+                this.constraint.prevPos,
+                this.constraint.pos,
+                this.interpolationAlpha,
+                MAX_LIGHTBULB_INTERP_DISTANCE_SQ
+            );
+            this.x = interpPos.x;
+            this.y = interpPos.y;
+        }
+
+        return { originalX, originalY };
+    }
+
+    /**
      * Draws only the light glow effect. Call this before stars.
      */
     drawLight(): void {
         if (!this.visible) {
             return;
         }
+
+        const { originalX, originalY } = this.applyInterpolation();
+
         this.preDraw();
         this.lightGlow.draw();
+
+        // Restore original position for physics consistency
+        this.x = originalX;
+        this.y = originalY;
     }
 
     /**
@@ -190,6 +224,9 @@ class LightBulb extends CTRGameObject {
         if (!this.visible) {
             return;
         }
+
+        const { originalX, originalY } = this.applyInterpolation();
+
         this.bottle.draw();
         this.top.draw();
         this.firefly.draw();
@@ -200,6 +237,10 @@ class LightBulb extends CTRGameObject {
             this.ghostBubbleAnimation.draw();
         }
         this.postDrawNoChildren();
+
+        // Restore original position for physics consistency
+        this.x = originalX;
+        this.y = originalY;
     }
 
     private postDrawNoChildren(): void {

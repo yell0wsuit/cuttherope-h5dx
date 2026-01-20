@@ -228,7 +228,11 @@ const drawImpl = function drawImpl(scene: GameScene): void {
     }
 
     for (let i = 0, len = scene.lightbulbs.length; i < len; i++) {
-        scene.lightbulbs[i]?.drawLight();
+        const lightbulb = scene.lightbulbs[i];
+        if (lightbulb) {
+            lightbulb.interpolationAlpha = interpAlpha;
+            lightbulb.drawLight();
+        }
     }
 
     for (let i = 0, len = scene.stars.length; i < len; i++) {
@@ -294,7 +298,11 @@ const drawImpl = function drawImpl(scene: GameScene): void {
     }
 
     for (let i = 0, len = scene.lightbulbs.length; i < len; i++) {
-        scene.lightbulbs[i]?.drawBottleAndFirefly();
+        const lightbulb = scene.lightbulbs[i];
+        if (lightbulb) {
+            lightbulb.interpolationAlpha = interpAlpha;
+            lightbulb.drawBottleAndFirefly();
+        }
     }
 
     for (let i = 0, len = scene.tubes.length; i < len; i++) {

@@ -48,6 +48,8 @@ class ConveyorBeltVisual extends BaseElement {
     private readonly tileScaleY: number;
     private readonly textureId = ResourceId.IMG_OBJ_TRANSPORTER;
     offset = 0;
+    prevOffset = 0;
+    interpolationAlpha = 1;
 
     constructor(width: number, height: number, direction: number) {
         super();
@@ -90,6 +92,7 @@ class ConveyorBeltVisual extends BaseElement {
             return;
         }
 
+        this.prevOffset = this.offset;
         this.offset += delta;
         while (this.offset > this.width) {
             this.offset -= tileStep;
@@ -109,7 +112,25 @@ class ConveyorBeltVisual extends BaseElement {
             return;
         }
 
-        let offset = this.offset;
+        // Interpolate between previous and current offset for smooth animation
+        let offset: number;
+        if (this.interpolationAlpha < 1) {
+            // Handle wrap-around: if the difference is large, they wrapped
+            let prev = this.prevOffset;
+            let curr = this.offset;
+            const delta = curr - prev;
+            // If delta is larger than half the belt width, adjust for wrap
+            if (Math.abs(delta) > this.width / 2) {
+                if (delta > 0) {
+                    prev += this.width;
+                } else {
+                    curr += this.width;
+                }
+            }
+            offset = prev + (curr - prev) * this.interpolationAlpha;
+        } else {
+            offset = this.offset;
+        }
         offset = offset - Math.floor(offset / tileStep) * tileStep;
         if (offset < 0) {
             offset += tileStep;
@@ -179,10 +200,20 @@ class ConveyorBelt extends BaseElement {
     beltVisual: ConveyorBeltVisual | null = null;
     itemStates = new Map<ConveyorItem, ConveyorItemState>();
     items: ConveyorItem[] = [];
+    interpolationAlpha = 1;
 
     constructor() {
         super();
         this.anchor = Alignment.LEFT | Alignment.VCENTER;
+    }
+
+    override draw(): void {
+        // Apply interpolation to belt visual before drawing for smooth animation on high refresh displays
+        if (this.beltVisual) {
+            this.beltVisual.interpolationAlpha = this.interpolationAlpha;
+            this.beltVisual.updateLayout();
+        }
+        super.draw();
     }
 
     static create(
@@ -359,7 +390,6 @@ class ConveyorBelt extends BaseElement {
 
         if (this.beltVisual) {
             this.beltVisual.move(this.offsetDelta);
-            this.beltVisual.updateLayout();
         }
 
         if (this.isManual) {

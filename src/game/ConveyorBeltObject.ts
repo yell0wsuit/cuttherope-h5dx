@@ -7,6 +7,7 @@ class ConveyorBeltObject {
     private readonly pointerPositions = new Map<number, Vector>();
     private readonly list: ConveyorBelt[] = [];
     private needsSort = false;
+    interpolationAlpha = 1;
 
     count(): number {
         return this.list.length;
@@ -28,6 +29,7 @@ class ConveyorBeltObject {
 
     draw(): void {
         for (const belt of this.list) {
+            belt.interpolationAlpha = this.interpolationAlpha;
             belt.draw();
         }
     }

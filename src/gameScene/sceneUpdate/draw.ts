@@ -147,6 +147,7 @@ const drawImpl = function drawImpl(scene: GameScene): void {
         scene.ghosts[i]?.draw();
     }
 
+    scene.conveyors.interpolationAlpha = interpAlpha;
     scene.conveyors.draw();
 
     for (let i = 0, len = scene.bubbles.length; i < len; i++) {

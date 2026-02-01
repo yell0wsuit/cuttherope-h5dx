@@ -344,6 +344,12 @@ abstract class GameSceneInit extends BaseElement {
             GameSceneConstants.IMG_OBJ_CANDY_01_highlight_start,
             GameSceneConstants.IMG_OBJ_CANDY_01_highlight_end
         );
+        const initialTimeline = this.candyBlink.getTimeline(GameSceneConstants.CandyBlink.INITIAL);
+        if (initialTimeline) {
+            initialTimeline.onFinished = () => {
+                this.candyBlink.stopCurrentTimeline();
+            };
+        }
         this.candyBlink.addAnimationSequence(
             GameSceneConstants.CandyBlink.STAR,
             0.3,

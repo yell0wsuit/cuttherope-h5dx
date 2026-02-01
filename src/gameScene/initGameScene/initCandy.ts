@@ -58,6 +58,12 @@ export function initCandy(this: GameSceneInit): void {
         constants.highlight_start,
         constants.highlight_end
     );
+    const initialTimeline = this.candyBlink.getTimeline(GameSceneConstants.CandyBlink.INITIAL);
+    if (initialTimeline) {
+        initialTimeline.onFinished = () => {
+            this.candyBlink.stopCurrentTimeline();
+        };
+    }
     this.candyBlink.addAnimationSequence(
         GameSceneConstants.CandyBlink.STAR,
         0.3, // delay

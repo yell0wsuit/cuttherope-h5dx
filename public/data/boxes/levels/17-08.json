@@ -1,0 +1,290 @@
+{
+    "settings": [
+        {
+            "name": 0,
+            "height": 480,
+            "gridSize": 32,
+            "width": 320
+        },
+        {
+            "name": 1,
+            "nightLevel": false,
+            "ropePhysicsSpeed": 1,
+            "twoParts": false
+        }
+    ],
+    "nl": [
+        {
+            "name": 8,
+            "rotateSpeed": 100,
+            "x": 174,
+            "y": 261,
+            "locale": "nl"
+        },
+        {
+            "name": 4,
+            "text": "Je kunt een voorwerp van de ene Band naar de andere verschuiven.",
+            "x": 142,
+            "y": 93,
+            "locale": "nl",
+            "width": 100
+        }
+    ],
+    "br": [
+        {
+            "name": 8,
+            "rotateSpeed": 100,
+            "x": 174,
+            "y": 261,
+            "locale": "br"
+        },
+        {
+            "name": 4,
+            "text": "Você pode levar objetos de uma esteira para outra",
+            "x": 142,
+            "y": 115,
+            "locale": "br",
+            "width": 80
+        }
+    ],
+    "it": [
+        {
+            "name": 8,
+            "rotateSpeed": 100,
+            "x": 174,
+            "y": 261,
+            "locale": "it"
+        },
+        {
+            "name": 4,
+            "text": "Puoi spostare gli oggetti da una cintura all’altra",
+            "x": 142,
+            "y": 115,
+            "locale": "it",
+            "width": 80
+        }
+    ],
+    "ja": [
+        {
+            "name": 8,
+            "rotateSpeed": 100,
+            "x": 174,
+            "y": 261,
+            "locale": "ja"
+        },
+        {
+            "name": 4,
+            "text": "目標は、1つの *ベルトから *別の *ベルトに *移すことが *できるよ。",
+            "x": 142,
+            "y": 100,
+            "locale": "ja",
+            "width": 100
+        }
+    ],
+    "de": [
+        {
+            "name": 8,
+            "rotateSpeed": 100,
+            "x": 174,
+            "y": 261,
+            "locale": "de"
+        },
+        {
+            "name": 4,
+            "text": "Du kannst Objekte von Band zu Band befördern.",
+            "x": 142,
+            "y": 115,
+            "locale": "de",
+            "width": 80
+        }
+    ],
+    "es": [
+        {
+            "name": 8,
+            "rotateSpeed": 100,
+            "x": 174,
+            "y": 261,
+            "locale": "es"
+        },
+        {
+            "name": 4,
+            "text": "Puedes cambiar objetos de una cinta a la otra ",
+            "x": 142,
+            "y": 115,
+            "locale": "es",
+            "width": 80
+        }
+    ],
+    "en": [
+        {
+            "name": 8,
+            "rotateSpeed": 100,
+            "x": 170,
+            "y": 255,
+            "locale": "en"
+        },
+        {
+            "name": 4,
+            "text": "You can shift objects from one belt to another",
+            "x": 142,
+            "y": 93,
+            "locale": "en",
+            "width": 80
+        }
+    ],
+    "ko": [
+        {
+            "name": 8,
+            "rotateSpeed": 100,
+            "x": 174,
+            "y": 261,
+            "locale": "ko"
+        },
+        {
+            "name": 4,
+            "text": "한 벨트에서 다른 *벨트로 물건을 옮길 수 *있습니다.",
+            "x": 143,
+            "y": 100,
+            "locale": "ko",
+            "width": 80
+        }
+    ],
+    "fr": [
+        {
+            "name": 8,
+            "rotateSpeed": 100,
+            "x": 174,
+            "y": 261,
+            "locale": "fr"
+        },
+        {
+            "name": 4,
+            "text": "Vous pouvez passer des objets d’un tapis à l’autre",
+            "x": 142,
+            "y": 100,
+            "locale": "fr",
+            "width": 80
+        }
+    ],
+    "ru": [
+        {
+            "name": 8,
+            "rotateSpeed": 100,
+            "x": 172,
+            "y": 262,
+            "locale": "ru"
+        },
+        {
+            "name": 4,
+            "text": "Объекты могут переходить с одного конвейера на другой.",
+            "x": 142,
+            "y": 93,
+            "locale": "ru",
+            "width": 100
+        }
+    ],
+    "objects": [
+        {
+            "name": 52,
+            "x": 58,
+            "y": 140
+        },
+        {
+            "name": 2,
+            "x": 275,
+            "y": 418
+        },
+        {
+            "name": 135,
+            "velocity": 10,
+            "direction": "forward",
+            "length": 170,
+            "angle": 90,
+            "x": 55,
+            "y": 361,
+            "type": "manual",
+            "width": 50
+        },
+        {
+            "name": 131,
+            "angle": 0,
+            "x": 59,
+            "y": 201
+        },
+        {
+            "name": 3,
+            "x": 55,
+            "y": 401,
+            "timeout": -1
+        },
+        {
+            "name": 135,
+            "velocity": 10,
+            "direction": "backward",
+            "length": 265,
+            "angle": 0,
+            "x": 36,
+            "y": 342,
+            "type": "manual",
+            "width": 50
+        },
+        {
+            "name": 54,
+            "x": 56,
+            "y": 398
+        },
+        {
+            "name": 81,
+            "size": 1,
+            "angle": 16,
+            "x": 46,
+            "y": 448
+        },
+        {
+            "name": 3,
+            "x": 206,
+            "y": 402,
+            "timeout": -1
+        },
+        {
+            "name": 54,
+            "x": 207,
+            "y": 399
+        },
+        {
+            "name": 81,
+            "size": 1,
+            "angle": 16,
+            "x": 197,
+            "y": 449
+        },
+        {
+            "name": 3,
+            "x": 56,
+            "y": 53,
+            "timeout": -1
+        },
+        {
+            "name": 300,
+            "x": 192,
+            "y": 107
+        }
+    ],
+    "zh": [
+        {
+            "name": 8,
+            "rotateSpeed": 100,
+            "x": 174,
+            "y": 261,
+            "locale": "zh"
+        },
+        {
+            "name": 4,
+            "text": "您可以将物体 *从一条传送带 *转移到另一条。",
+            "x": 142,
+            "y": 144,
+            "locale": "zh",
+            "width": 100
+        }
+    ]
+}

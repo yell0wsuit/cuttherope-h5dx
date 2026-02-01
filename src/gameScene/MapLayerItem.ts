@@ -45,6 +45,9 @@ interface MapLayerItem {
     oneHandle?: boolean;
     nightLevel?: number;
     twoParts?: number;
+    litRadius?: number;
+    bindBulb?: boolean;
+    bulbNumber?: string;
 
     // Other
     part?: string;
@@ -86,6 +89,8 @@ interface GrabItem extends MapLayerItem {
     hidePath?: boolean;
     gun?: boolean;
     path?: string | unknown[];
+    bindBulb?: boolean;
+    bulbNumber?: string;
 }
 
 interface CandyItem extends MapLayerItem {
@@ -102,6 +107,13 @@ interface StarItem extends MapLayerItem {
     x: number;
     y: number;
     timeout: number;
+}
+
+interface LightBulbItem extends MapLayerItem {
+    x: number;
+    y: number;
+    litRadius: number;
+    bulbNumber?: string;
 }
 
 interface TutorialTextItem extends MapLayerItem {
@@ -202,6 +214,26 @@ interface TargetItem extends MapLayerItem {
     y: number;
 }
 
+interface MouseItem extends MapLayerItem {
+    x: number;
+    y: number;
+    angle: number;
+    radius: number;
+    activeTime: number;
+    index: number;
+}
+
+interface ConveyorBeltItem extends MapLayerItem {
+    x: number;
+    y: number;
+    width: number;
+    length: number;
+    angle: number;
+    velocity: number;
+    direction: string;
+    type?: string;
+}
+
 export type { MapLayerItem as default };
 export type {
     MapSettingsItem,
@@ -210,6 +242,7 @@ export type {
     CandyItem,
     GravitySwitchItem,
     StarItem,
+    LightBulbItem,
     TutorialTextItem,
     TutorialImageItem,
     HiddenItem,
@@ -223,4 +256,6 @@ export type {
     BouncerItem,
     GhostItem,
     TargetItem,
+    MouseItem,
+    ConveyorBeltItem,
 };

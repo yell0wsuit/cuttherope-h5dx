@@ -2,6 +2,7 @@ import * as GameSceneConstants from "@/gameScene/constants";
 import Constants from "@/utils/Constants";
 import Mover from "@/utils/Mover";
 import BaseElement from "@/visual/BaseElement";
+import { updateLightBulbPhysics, updateNightLevel } from "./nightLevel";
 import type { FingerCutTrail, GameScene } from "@/types/game-scene";
 
 type FadingFingerCut = FingerCutTrail[number];
@@ -60,6 +61,24 @@ export function updateBasics(this: GameScene, delta: number): void {
             //Achievements.increment(AchievementId.CANDY_JUGGLER);
             // reset the timer
             this.juggleTimer = 0;
+        }
+    }
+
+    updateLightBulbPhysics(this, delta);
+    updateNightLevel.call(this, delta);
+
+    if (delta > 0) {
+        let remaining = delta;
+        while (remaining > 0) {
+            const step = Math.min(0.01, remaining);
+            this.conveyors.update(step);
+            this.conveyors.processItems(this.bubbles);
+            this.conveyors.processItems(this.stars);
+            this.conveyors.processItems(this.bouncers);
+            this.conveyors.processItems(this.socks);
+            this.conveyors.processItems(this.tubes);
+            this.conveyors.processItems(this.pumps);
+            remaining -= step;
         }
     }
 }

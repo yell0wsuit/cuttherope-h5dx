@@ -1,0 +1,329 @@
+{
+  "settings": [
+    {
+      "name": 0,
+      "height": 480,
+      "gridSize": 32,
+      "width": 320
+    },
+    {
+      "name": 1,
+      "nightLevel": true,
+      "ropePhysicsSpeed": 1,
+      "twoParts": false
+    }
+  ],
+  "nl": [
+    {
+      "name": 8,
+      "angle": 90,
+      "rotateSpeed": 100,
+      "x": 139,
+      "y": 253,
+      "locale": "nl"
+    },
+    {
+      "name": 4,
+      "text": "Schijn op sterren om ze te activeren",
+      "x": 171,
+      "y": 230,
+      "locale": "nl",
+      "width": 120
+    }
+  ],
+  "br": [
+    {
+      "name": 8,
+      "angle": 90,
+      "rotateSpeed": 100,
+      "x": 139,
+      "y": 252,
+      "locale": "br"
+    },
+    {
+      "name": 4,
+      "text": "Ilumine as estrelas para ativá-las",
+      "x": 162,
+      "y": 235,
+      "locale": "br",
+      "width": 140
+    }
+  ],
+  "it": [
+    {
+      "name": 8,
+      "angle": 90,
+      "rotateSpeed": 100,
+      "x": 140,
+      "y": 254,
+      "locale": "it"
+    },
+    {
+      "name": 4,
+      "text": "Illumina le stelle per attivarle",
+      "x": 159,
+      "y": 235,
+      "locale": "it",
+      "width": 140
+    }
+  ],
+  "ja": [
+    {
+      "name": 8,
+      "angle": 90,
+      "rotateSpeed": 100,
+      "x": 137,
+      "y": 254,
+      "locale": "ja"
+    },
+    {
+      "name": 4,
+      "text": "スターに *光を当てて *アクティブ化する",
+      "x": 157,
+      "y": 240,
+      "locale": "ja",
+      "width": 150
+    }
+  ],
+  "de": [
+    {
+      "name": 8,
+      "angle": 90,
+      "rotateSpeed": 100,
+      "x": 130,
+      "y": 254,
+      "locale": "de"
+    },
+    {
+      "name": 4,
+      "text": "Erleuchte die Sterne, um sie zu aktivieren.",
+      "x": 159,
+      "y": 240,
+      "locale": "de",
+      "width": 140
+    }
+  ],
+  "es": [
+    {
+      "name": 8,
+      "angle": 90,
+      "rotateSpeed": 100,
+      "x": 140,
+      "y": 254,
+      "locale": "es"
+    },
+    {
+      "name": 4,
+      "text": "Ilumina las estrellas para activarlas",
+      "x": 158,
+      "y": 230,
+      "locale": "es",
+      "width": 140
+    }
+  ],
+  "en": [
+    {
+      "name": 8,
+      "angle": 90,
+      "rotateSpeed": 100,
+      "x": 139,
+      "y": 253,
+      "locale": "en"
+    },
+    {
+      "name": 4,
+      "text": "Light up the stars to activate them",
+      "x": 157,
+      "y": 230,
+      "locale": "en",
+      "width": 140
+    }
+  ],
+  "ko": [
+    {
+      "name": 8,
+      "angle": 90,
+      "rotateSpeed": 100,
+      "x": 139,
+      "y": 254,
+      "locale": "ko"
+    },
+    {
+      "name": 4,
+      "text": "별에 조명을 비춰 *움직이게 하세요.",
+      "x": 168,
+      "y": 240,
+      "locale": "ko",
+      "width": 120
+    }
+  ],
+  "fr": [
+    {
+      "name": 8,
+      "angle": 90,
+      "rotateSpeed": 100,
+      "x": 139,
+      "y": 253,
+      "locale": "fr"
+    },
+    {
+      "name": 4,
+      "text": "Éclairez les étoiles pour les activer",
+      "x": 160,
+      "y": 230,
+      "locale": "fr",
+      "width": 140
+    }
+  ],
+  "ru": [
+    {
+      "name": 8,
+      "angle": 90,
+      "rotateSpeed": 100,
+      "x": 139,
+      "y": 255,
+      "locale": "ru"
+    },
+    {
+      "name": 4,
+      "text": "Посветите на звезды, чтобы их активировать",
+      "x": 162,
+      "y": 230,
+      "locale": "ru",
+      "width": 140
+    }
+  ],
+  "objects": [
+    {
+      "name": 2,
+      "x": 160,
+      "y": 409
+    },
+    {
+      "name": 52,
+      "x": 44,
+      "y": 309
+    },
+    {
+      "name": 134,
+      "litRadius": 65,
+      "x": 261,
+      "bulbNumber": "first",
+      "y": 159
+    },
+    {
+      "name": 100,
+      "bindBulb": true,
+      "spider": false,
+      "gun": false,
+      "wheel": false,
+      "part": "L",
+      "hidePath": false,
+      "moveOffset": 130,
+      "moveVertical": false,
+      "length": 60,
+      "x": 262,
+      "bulbNumber": "first",
+      "y": 68,
+      "moveLength": 130,
+      "radius": -1
+    },
+    {
+      "name": 54,
+      "x": 97,
+      "y": 366
+    },
+    {
+      "name": 100,
+      "bindBulb": false,
+      "spider": false,
+      "gun": false,
+      "wheel": false,
+      "part": "L",
+      "hidePath": false,
+      "moveOffset": 0,
+      "moveVertical": false,
+      "length": 80,
+      "x": 46,
+      "bulbNumber": "first",
+      "y": 193,
+      "moveLength": -1,
+      "radius": -1
+    },
+    {
+      "name": 100,
+      "bindBulb": false,
+      "spider": false,
+      "gun": false,
+      "wheel": false,
+      "part": "L",
+      "hidePath": false,
+      "moveOffset": 0,
+      "moveVertical": false,
+      "length": 80,
+      "x": 156,
+      "bulbNumber": "first",
+      "y": 308,
+      "moveLength": -1,
+      "radius": -1
+    },
+    {
+      "name": 100,
+      "bindBulb": false,
+      "spider": false,
+      "gun": false,
+      "wheel": false,
+      "part": "L",
+      "hidePath": false,
+      "moveOffset": 0,
+      "moveVertical": false,
+      "length": 80,
+      "x": 50,
+      "bulbNumber": "first",
+      "y": 423,
+      "moveLength": -1,
+      "radius": -1
+    },
+    {
+      "name": 3,
+      "x": 86,
+      "y": 194,
+      "timeout": -1
+    },
+    {
+      "name": 3,
+      "x": 167,
+      "y": 196,
+      "timeout": -1
+    },
+    {
+      "name": 3,
+      "x": 126,
+      "y": 195,
+      "timeout": -1
+    },
+    {
+      "name": 300,
+      "x": 257,
+      "y": 411
+    }
+  ],
+  "zh": [
+    {
+      "name": 8,
+      "angle": 90,
+      "rotateSpeed": 100,
+      "x": 137,
+      "y": 253,
+      "locale": "zh"
+    },
+    {
+      "name": 4,
+      "text": "照亮星星*即可激活",
+      "x": 173,
+      "y": 229,
+      "locale": "zh",
+      "width": 120
+    }
+  ]
+}

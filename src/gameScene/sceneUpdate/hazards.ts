@@ -14,6 +14,7 @@ import Lantern from "@/game/Lantern";
 import KeyFrame from "@/visual/KeyFrame";
 import Timeline from "@/visual/Timeline";
 import RGBAColor from "@/core/RGBAColor";
+import Constants from "@/utils/Constants";
 import { applyStarImpulse, isCandyHit } from "./collisionHelpers";
 import { triggerSpecialTutorial } from "./special";
 import type GameObject from "@/visual/GameObject";
@@ -21,11 +22,14 @@ import type BaseElement from "@/visual/BaseElement";
 import type Bubble from "@/game/Bubble";
 import type Bouncer from "@/game/Bouncer";
 import type Grab from "@/game/Grab";
+import type LightBulb from "@/game/LightBulb";
 import type Pump from "@/game/Pump";
 import type RotatedCircle from "@/game/RotatedCircle";
 import type SteamTube from "@/game/SteamTube";
 import type Spikes from "@/game/Spikes";
 import type LanternType from "@/game/Lantern";
+import type Mouse from "@/game/Mouse";
+import type MiceObject from "@/game/MiceObject";
 import type { GameScene, SceneStar } from "@/types/game-scene";
 
 type SockState = (typeof Sock.StateType)[keyof typeof Sock.StateType];
@@ -61,7 +65,63 @@ type HazardScene = GameScene & {
     rotatedCircles: RotatedCircleWithContents[];
     spikes: Spikes[];
     tubes: SteamTube[];
+    mice: Mouse[];
+    miceManager: MiceObject | null;
 };
+
+function releaseLightBulbRopes(scene: HazardScene, bulb: LightBulb): void {
+    for (const grab of scene.bungees) {
+        const rope = grab.rope;
+        if (!rope || rope.tail !== bulb.constraint) {
+            continue;
+        }
+
+        if (rope.cut === Constants.UNDEFINED) {
+            rope.setCut(rope.parts.length - 2);
+        } else {
+            rope.hideTailParts = true;
+        }
+
+        if (grab.hasSpider && grab.spiderActive) {
+            scene.spiderBusted(grab);
+        }
+    }
+}
+
+function dropLightBulbFromSock(this: HazardScene, bulb: LightBulb): void {
+    if (!bulb.attachedSock) {
+        return;
+    }
+
+    const sock = bulb.attachedSock;
+    const light = sock.light;
+    if (light) {
+        light.playTimeline(0);
+        light.visible = true;
+    }
+
+    const offset = new Vector(0, resolution.SOCK_TELEPORT_Y);
+    offset.rotate(Radians.fromDegrees(sock.rotation));
+
+    bulb.constraint.pos.x = sock.x;
+    bulb.constraint.pos.y = sock.y;
+    bulb.constraint.pos.add(offset);
+
+    bulb.constraint.prevPos.copyFrom(bulb.constraint.pos);
+
+    bulb.constraint.v.x = 0;
+    bulb.constraint.v.y = -1;
+    bulb.constraint.v.rotate(Radians.fromDegrees(sock.rotation));
+    bulb.constraint.v.multiply(bulb.sockSpeed);
+
+    bulb.constraint.posDelta.copyFrom(bulb.constraint.v);
+    bulb.constraint.posDelta.divide(60);
+    bulb.constraint.prevPos.copyFrom(bulb.constraint.pos);
+    bulb.constraint.prevPos.subtract(bulb.constraint.posDelta);
+
+    bulb.attachedSock = null;
+    bulb.sockSpeed = 0;
+}
 
 function operateSteamTube(scene: HazardScene, tube: SteamTube, delta: number): void {
     const tubeScale = tube.getHeightScale();
@@ -71,6 +131,7 @@ function operateSteamTube(scene: HazardScene, tube: SteamTube, delta: number): v
     const currentHeight = tube.getCurrentHeightModulated();
     const verticalOffset = 1 * tubeScale;
     const collisionRadius = 17.5 * tubeScale;
+    const gravityInverted = !!scene.gravityButton && !scene.gravityNormal;
 
     const rectLeft = tube.x - tubeWidth / 2;
     const rectTop = tube.y - currentHeight - verticalOffset;
@@ -106,7 +167,10 @@ function operateSteamTube(scene: HazardScene, tube: SteamTube, delta: number): v
         }
 
         let horizontalImpulse = 0;
-        if (tube.rotation === 0) {
+        if (
+            (tube.rotation === 0 && !gravityInverted) ||
+            (tube.rotation === 180 && gravityInverted)
+        ) {
             const deltaX = tube.x - position.x;
             horizontalImpulse =
                 Math.abs(deltaX) > tubeWidth / 4
@@ -116,13 +180,15 @@ function operateSteamTube(scene: HazardScene, tube: SteamTube, delta: number): v
                       : -velocity.x / damping;
         }
 
+        const alignedWithGravity =
+            (tube.rotation === 0 && !gravityInverted) || (tube.rotation === 180 && gravityInverted);
         let gravityCompensation = (-32 / star.weight) * Math.sqrt(tubeScale);
-        if (tube.rotation !== 0) {
+        if (!alignedWithGravity) {
             damping *= 15;
-            if (tube.rotation === 180) {
-                gravityCompensation /= 2;
-            } else {
+            if (tube.rotation === 90 || tube.rotation === 270) {
                 gravityCompensation /= 4;
+            } else {
+                gravityCompensation /= 2;
             }
         }
 
@@ -145,14 +211,20 @@ function operateSteamTube(scene: HazardScene, tube: SteamTube, delta: number): v
         if (!scene.noCandy) {
             applyImpulse(scene.star);
         }
-        return;
+    } else {
+        if (!scene.noCandyL) {
+            applyImpulse(scene.starL);
+        }
+        if (!scene.noCandyR) {
+            applyImpulse(scene.starR);
+        }
     }
 
-    if (!scene.noCandyL) {
-        applyImpulse(scene.starL);
-    }
-    if (!scene.noCandyR) {
-        applyImpulse(scene.starR);
+    for (const bulb of scene.lightbulbs) {
+        if (!bulb || bulb.attachedSock != null) {
+            continue;
+        }
+        applyImpulse(bulb.constraint);
     }
 }
 
@@ -202,6 +274,38 @@ export function updateHazards(this: HazardScene, delta: number, numGrabs: number
         this.rotatedCircles.splice(removeCircleIndex, 1);
     }
 
+    if (this.miceManager) {
+        this.miceManager.update(delta);
+
+        const pickTarget = (): { star: SceneStar; candy: GameObject; isLeft: boolean } | null => {
+            if (this.twoParts !== GameSceneConstants.PartsType.NONE) {
+                if (!this.noCandyL) {
+                    return { star: this.starL, candy: this.candyL, isLeft: true };
+                }
+                if (!this.noCandyR) {
+                    return { star: this.starR, candy: this.candyR, isLeft: false };
+                }
+                return null;
+            }
+
+            if (this.noCandy) {
+                return null;
+            }
+
+            return { star: this.star, candy: this.candy, isLeft: false };
+        };
+
+        const target = pickTarget();
+        if (
+            target &&
+            !this.miceManager.activeMouseHasCandy() &&
+            this.miceManager.isActiveMouseInRange(target.star)
+        ) {
+            this.miceManager.grabWithActiveMouse(target.star, target.candy, target.isLeft);
+            triggerSpecialTutorial(this, 4);
+        }
+    }
+
     // rockets
     for (let i = 0, len = this.rockets.length; i < len; i++) {
         const r = this.rockets[i]!;
@@ -223,8 +327,9 @@ export function updateHazards(this: HazardScene, delta: number, numGrabs: number
         const savedRotation = s.rotation;
         s.rotation = 0;
         s.updateRotation();
+        const invRotation = Radians.fromDegrees(-savedRotation);
         const rs = this.star.posDelta.copy();
-        rs.rotate(Radians.fromDegrees(-savedRotation));
+        rs.rotate(invRotation);
         s.rotation = savedRotation;
         s.updateRotation();
 
@@ -233,29 +338,131 @@ export function updateHazards(this: HazardScene, delta: number, numGrabs: number
         const bbW = resolution.STAR_SOCK_RADIUS * 2;
         const bbH = bbW;
 
-        if (
+        const wasIdle = s.state === Sock.StateType.IDLE;
+        const candyHits =
             rs.y >= 0 &&
             (Rectangle.lineInRect(s.t1.x, s.t1.y, s.t2.x, s.t2.y, bbX, bbY, bbW, bbH) ||
-                Rectangle.lineInRect(s.b1.x, s.b1.y, s.b2.x, s.b2.y, bbX, bbY, bbW, bbH))
-        ) {
-            if (s.state === Sock.StateType.IDLE) {
-                // look for a receiving sock
+                Rectangle.lineInRect(s.b1.x, s.b1.y, s.b2.x, s.b2.y, bbX, bbY, bbW, bbH));
+        let bulbHits = false;
+
+        if (!wasIdle && this.lightbulbs.length > 0) {
+            for (const bulb of this.lightbulbs) {
+                if (!bulb || bulb.attachedSock != null) {
+                    continue;
+                }
+
+                const bulbDelta = bulb.constraint.posDelta.copy();
+                bulbDelta.rotate(invRotation);
+                const bulbX = bulb.constraint.pos.x - resolution.STAR_SOCK_RADIUS;
+                const bulbY = bulb.constraint.pos.y - resolution.STAR_SOCK_RADIUS;
+                const bulbHit =
+                    bulbDelta.y >= 0 &&
+                    (Rectangle.lineInRect(s.t1.x, s.t1.y, s.t2.x, s.t2.y, bulbX, bulbY, bbW, bbH) ||
+                        Rectangle.lineInRect(
+                            s.b1.x,
+                            s.b1.y,
+                            s.b2.x,
+                            s.b2.y,
+                            bulbX,
+                            bulbY,
+                            bbW,
+                            bbH
+                        ));
+
+                if (bulbHit) {
+                    bulbHits = true;
+                    break;
+                }
+            }
+        }
+
+        if (!wasIdle) {
+            if (!candyHits && !bulbHits && s.idleTimeout === 0) {
+                s.idleTimeout = Sock.IDLE_TIMEOUT;
+            }
+            continue;
+        }
+
+        if (candyHits && !this.targetSock) {
+            // look for a receiving sock
+            for (let j = 0; j < len; j++) {
+                const n = this.socks[j]!;
+                if (n !== s && n.group === s.group) {
+                    n.state = Sock.StateType.THROWING;
+                    n.idleTimeout = Sock.IDLE_TIMEOUT;
+                    this.releaseAllRopes(false);
+
+                    this.savedSockSpeed =
+                        GameSceneConstants.SOCK_SPEED_K *
+                        this.star.v.getLength() *
+                        resolution.PHYSICS_SPEED_MULTIPLIER;
+                    this.targetSock = n;
+
+                    const { light } = s;
+                    if (light) {
+                        // Set to first glow quad before making visible to prevent brief hat quad flash
+                        light.setTextureQuad(Sock.Quads.IMG_OBJ_SOCKS_glow_start);
+                        light.visible = true;
+                        light.playTimeline(0);
+                    }
+
+                    const teleportSound = IS_XMAS
+                        ? ResourceId.SND_TELEPORT_XMAS
+                        : ResourceId.SND_TELEPORT;
+                    SoundMgr.playSound(teleportSound);
+
+                    this.dd.callObject(this, this.teleport, null, 0.1);
+                    break;
+                }
+            }
+        }
+
+        if (this.lightbulbs.length > 0) {
+            let bulbTeleported = false;
+            for (const bulb of this.lightbulbs) {
+                if (!bulb || bulb.attachedSock != null) {
+                    continue;
+                }
+
+                const bulbDelta = bulb.constraint.posDelta.copy();
+                bulbDelta.rotate(invRotation);
+                const bulbX = bulb.constraint.pos.x - resolution.STAR_SOCK_RADIUS;
+                const bulbY = bulb.constraint.pos.y - resolution.STAR_SOCK_RADIUS;
+                const bulbHit =
+                    bulbDelta.y >= 0 &&
+                    (Rectangle.lineInRect(s.t1.x, s.t1.y, s.t2.x, s.t2.y, bulbX, bulbY, bbW, bbH) ||
+                        Rectangle.lineInRect(
+                            s.b1.x,
+                            s.b1.y,
+                            s.b2.x,
+                            s.b2.y,
+                            bulbX,
+                            bulbY,
+                            bbW,
+                            bbH
+                        ));
+
+                if (!bulbHit) {
+                    continue;
+                }
+
+                bulbHits = true;
+
                 for (let j = 0; j < len; j++) {
                     const n = this.socks[j]!;
                     if (n !== s && n.group === s.group) {
-                        s.state = Sock.StateType.RECEIVING;
                         n.state = Sock.StateType.THROWING;
-                        this.releaseAllRopes(false);
+                        n.idleTimeout = Sock.IDLE_TIMEOUT;
+                        releaseLightBulbRopes(this, bulb);
 
-                        this.savedSockSpeed =
+                        bulb.sockSpeed =
                             GameSceneConstants.SOCK_SPEED_K *
-                            this.star.v.getLength() *
+                            bulb.constraint.v.getLength() *
                             resolution.PHYSICS_SPEED_MULTIPLIER;
-                        this.targetSock = n;
+                        bulb.attachedSock = n;
 
                         const { light } = s;
                         if (light) {
-                            // Set to first glow quad before making visible to prevent brief hat quad flash
                             light.setTextureQuad(Sock.Quads.IMG_OBJ_SOCKS_glow_start);
                             light.visible = true;
                             light.playTimeline(0);
@@ -266,14 +473,16 @@ export function updateHazards(this: HazardScene, delta: number, numGrabs: number
                             : ResourceId.SND_TELEPORT;
                         SoundMgr.playSound(teleportSound);
 
-                        this.dd.callObject(this, this.teleport, null, 0.1);
+                        this.dd.callObject(this, dropLightBulbFromSock, [bulb], 0.1);
+                        bulbTeleported = true;
                         break;
                     }
                 }
-                break;
+
+                if (bulbTeleported) {
+                    break;
+                }
             }
-        } else if (s.state !== Sock.StateType.IDLE && s.idleTimeout === 0) {
-            s.idleTimeout = Sock.IDLE_TIMEOUT;
         }
     }
 
@@ -455,6 +664,7 @@ export function updateHazards(this: HazardScene, delta: number, numGrabs: number
     for (let i = 0, len = this.bouncers.length; i < len; i++) {
         const bouncer = this.bouncers[i]!;
         bouncer.update(delta);
+        bouncer.updateRotation();
 
         let candyHits = false;
         let left = false;
@@ -479,9 +689,24 @@ export function updateHazards(this: HazardScene, delta: number, numGrabs: number
             } else {
                 this.handleBounce(bouncer, this.star, delta);
             }
+        }
 
+        let bulbHits = false;
+        if (this.lightbulbs.length > 0) {
+            for (const bulb of this.lightbulbs) {
+                if (!bulb || bulb.attachedSock != null) {
+                    continue;
+                }
+                if (isCandyHit(bouncer, bulb.constraint, bouncerRadius)) {
+                    this.handleBounce(bouncer, bulb.constraint, delta);
+                    bulbHits = true;
+                }
+            }
+        }
+
+        if (candyHits) {
             break; // stop after hit
-        } else {
+        } else if (!bulbHits) {
             bouncer.skip = 0;
         }
     }
@@ -507,6 +732,15 @@ export function updateHazards(this: HazardScene, delta: number, numGrabs: number
         }
     } else if (this.candyBubble) {
         applyStarImpulse(this.star, rd, yImpulse, delta);
+    }
+
+    if (this.lightbulbs.length > 0) {
+        for (const bulb of this.lightbulbs) {
+            if (!bulb || bulb.attachedSock != null || !bulb.capturingBubble) {
+                continue;
+            }
+            applyStarImpulse(bulb.constraint, rd, yImpulse, delta);
+        }
     }
 
     return true;

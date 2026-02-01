@@ -9,9 +9,10 @@ import type { GameScene } from "@/types/game-scene";
 
 export function updateTargetState(this: GameScene, delta: number): boolean {
     let targetVector: Vector | undefined;
+    const canInteractWithTarget = !this.nightLevel || this.isNightTargetAwake;
     if (!this.noCandy) {
         const mouthOpenRadius = resolution.MOUTH_OPEN_RADIUS;
-        if (!this.mouthOpen) {
+        if (!this.mouthOpen && canInteractWithTarget) {
             targetVector = new Vector(this.target.x, this.target.y);
             if (!this.isCandyInLantern && this.star.pos.distance(targetVector) < mouthOpenRadius) {
                 this.mouthOpen = true;
@@ -19,7 +20,7 @@ export function updateTargetState(this: GameScene, delta: number): boolean {
                 SoundMgr.playSound(ResourceId.SND_MONSTER_OPEN);
                 this.mouthCloseTimer = GameSceneConstants.MOUTH_OPEN_TIME;
             }
-        } else if (this.mouthCloseTimer > 0) {
+        } else if (this.mouthCloseTimer > 0 && canInteractWithTarget) {
             this.mouthCloseTimer = Mover.moveToTarget(this.mouthCloseTimer, 0, 1, delta);
 
             if (this.mouthCloseTimer <= 0) {
@@ -37,7 +38,10 @@ export function updateTargetState(this: GameScene, delta: number): boolean {
             }
         }
 
-        if (this.restartState !== GameSceneConstants.RestartState.FADE_IN) {
+        if (
+            this.restartState !== GameSceneConstants.RestartState.FADE_IN &&
+            canInteractWithTarget
+        ) {
             const candyIntersectingTarget = GameObject.intersect(this.candy, this.target) ?? false;
             if (candyIntersectingTarget) {
                 this.gameWon();

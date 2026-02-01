@@ -6,13 +6,16 @@ import ConstraintType from "@/physics/ConstraintType";
 import * as GameSceneConstants from "@/gameScene/constants";
 import GameObject from "@/visual/GameObject";
 import Mover from "@/utils/Mover";
+import Rectangle from "@/core/Rectangle";
 import SoundMgr from "@/game/CTRSoundMgr";
 import Timeline from "@/visual/Timeline";
 import Vector from "@/core/Vector";
 import ResourceId from "@/resources/ResourceId";
+import resolution from "@/resolution";
 import { disableGhostCycleForBubble, enableGhostCycleForBubble, isGhostBubble } from "./bubbles";
 import type AnimationPool from "@/visual/AnimationPool";
 import type Bubble from "@/game/Bubble";
+import type Star from "@/game/Star";
 import type { GameScene } from "@/types/game-scene";
 
 type CollectiblesScene = GameScene & {
@@ -20,6 +23,7 @@ type CollectiblesScene = GameScene & {
     starDisappearPool: Animation[];
     hudStars: Animation[];
     candyResourceId: (typeof ResourceId)[keyof typeof ResourceId];
+    popLightBulbBubble(bulb: GameScene["lightbulbs"][number]): void;
     isBubbleCapture(
         bubble: Bubble,
         candy: GameObject,
@@ -188,6 +192,7 @@ export function updateCollectibles(this: CollectiblesScene, delta: number): bool
                 if (starTimeline) {
                     starTimeline.onFinished = this.aniPool.timelineFinishedDelegate();
                 }
+                this.conveyors.remove(s);
                 this.aniPool.addChild(s);
                 this.stars.splice(i, 1);
                 s.timedAnim?.playTimeline(1);
@@ -195,6 +200,11 @@ export function updateCollectibles(this: CollectiblesScene, delta: number): bool
                 break;
             } else {
                 let hits = false;
+                const canCollect =
+                    !this.nightLevel || (s as Star & { isLit?: boolean | null }).isLit === true;
+                if (!canCollect) {
+                    continue;
+                }
                 if (this.twoParts !== GameSceneConstants.PartsType.NONE) {
                     hits =
                         (!!GameObject.intersect(this.candyL, s) && !this.noCandyL) ||
@@ -215,6 +225,7 @@ export function updateCollectibles(this: CollectiblesScene, delta: number): bool
                     starDisappear.playTimeline(0);
                     this.aniPool.addChild(starDisappear);
 
+                    this.conveyors.remove(s);
                     this.stars[i] = null;
                     SoundMgr.playSound(ResourceId.SND_STAR_1 + this.starsCollected - 1);
 
@@ -289,6 +300,45 @@ export function updateCollectibles(this: CollectiblesScene, delta: number): bool
                     this.candyGhostBubbleAnimation.visible = hasGhost;
                 }
                 break;
+            }
+        }
+
+        if (!bubble.popped && this.lightbulbs.length > 0) {
+            const bubbleSize = resolution.BUBBLE_SIZE;
+            const bubbleSizeDouble = bubbleSize * 2;
+            for (const bulb of this.lightbulbs) {
+                if (!bulb || bulb.attachedSock != null) {
+                    continue;
+                }
+                if (
+                    Rectangle.pointInRect(
+                        bulb.x,
+                        bulb.y,
+                        bubble.x - bubbleSize,
+                        bubble.y - bubbleSize,
+                        bubbleSizeDouble,
+                        bubbleSizeDouble
+                    )
+                ) {
+                    if (bulb.capturingBubble && bulb.capturingBubble !== bubble) {
+                        this.popLightBulbBubble(bulb);
+                    }
+
+                    const bubbleIsGhost = isGhostBubble(this, bubble);
+                    bulb.capturingBubble = bubble;
+                    bulb.capturingGhostBubble = bubbleIsGhost;
+                    bubble.capturedByBulb = !bubbleIsGhost;
+                    bubble.popped = true;
+                    bubble.removeChildWithID(0);
+                    this.conveyors.remove(bubble);
+
+                    if (bubbleIsGhost) {
+                        disableGhostCycleForBubble(this, bubble);
+                    }
+
+                    SoundMgr.playSound(ResourceId.SND_BUBBLE);
+                    break;
+                }
             }
         }
 

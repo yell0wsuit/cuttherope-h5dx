@@ -81,6 +81,7 @@ export const CharAnimation = {
     IDLEXMAS: 12,
     IDLE2XMAS: 13,
     IDLEPADDINGTON: 14,
+    SLEEPING: 15,
 } as const;
 
 export const HUD_STARS_COUNT = 3;
@@ -196,6 +197,15 @@ export const IMG_OBJ_PIPE_particle_2_end = 23;
 export const IMG_OBJ_PIPE_particle_3_start = 24;
 export const IMG_OBJ_PIPE_particle_3_end = 34;
 
+// obj_gap atlas (mouse hazard)
+export const IMG_OBJ_GAP_cheese_hole = 0;
+export const IMG_OBJ_GAP_eyes_start = 1;
+export const IMG_OBJ_GAP_eyes_end = 9;
+export const IMG_OBJ_GAP_idle = 10;
+export const IMG_OBJ_GAP_MOUSE_start = 11;
+export const IMG_OBJ_GAP_MOUSE_0008 = 19;
+export const IMG_OBJ_GAP_MOUSE_end = 22;
+
 export const IMG_HUD_STAR_Frame_1 = 0;
 export const IMG_HUD_STAR_Frame_2 = 1;
 export const IMG_HUD_STAR_Frame_3 = 2;
@@ -242,3 +252,17 @@ export const IMG_CHAR_IDLE_XMAS_idle2_end = 61;
 export const IMG_CHAR_ANIMATION_PADDINGTON_start = 0;
 export const IMG_CHAR_ANIMATION_PADDINGTON_end = 38;
 export const IMG_CHAR_ANIMATION_PADDINGTON_hat = 39;
+
+export const IMG_CHAR_ANIMATIONS_SLEEPING_sleep_start = 0;
+export const IMG_CHAR_ANIMATIONS_SLEEPING_sleep_end = 6;
+export const IMG_CHAR_ANIMATIONS_SLEEPING_zzz_start = 7;
+export const IMG_CHAR_ANIMATIONS_SLEEPING_zzz_end = 43;
+
+export const IMG_OBJ_TRANSPORTER_END = 0;
+export const IMG_OBJ_TRANSPORTER_END_SIDE = 1;
+export const IMG_OBJ_TRANSPORTER_MIDDLE = 2;
+export const IMG_OBJ_TRANSPORTER_MIDDLE_SIDE = 3;
+export const IMG_OBJ_TRANSPORTER_PLATE = 4;
+export const IMG_OBJ_TRANSPORTER_PLATE_ARROW_RIGHT = 5;
+export const IMG_OBJ_TRANSPORTER_PLATE_ARROW_LEFT = 6;
+export const IMG_OBJ_TRANSPORTER_HIGHLIGHT = 7;

@@ -1,0 +1,512 @@
+{
+  "settings": [
+    {
+      "name": 0,
+      "height": 480,
+      "gridSize": 32,
+      "width": 320
+    },
+    {
+      "name": 1,
+      "ropePhysicsSpeed": 1,
+      "special": 4,
+      "twoParts": false
+    }
+  ],
+  "nl": [
+    {
+      "name": 8,
+      "angle": 300,
+      "rotateSpeed": 100,
+      "x": 110,
+      "y": 370,
+      "locale": "nl"
+    },
+    {
+      "name": 4,
+      "text": "Tik op de muis zodat de snoep valt",
+      "x": 30,
+      "y": 270,
+      "height": 60,
+      "locale": "nl",
+      "width": 160
+    },
+    {
+      "name": 4,
+      "text": "De muis vangt snoep op en verplaatst het naar diverse gaten",
+      "special": 4,
+      "x": 70,
+      "y": 290,
+      "height": 60,
+      "locale": "nl",
+      "width": 150
+    },
+    {
+      "name": 13,
+      "special": 4,
+      "rotateSpeed": 100,
+      "x": 40,
+      "y": 315,
+      "locale": "nl"
+    }
+  ],
+  "br": [
+    {
+      "name": 8,
+      "angle": 300,
+      "rotateSpeed": 100,
+      "x": 110,
+      "y": 370,
+      "locale": "br"
+    },
+    {
+      "name": 4,
+      "text": "O rato pega doces e os leva para diferentes buracos.",
+      "x": 30,
+      "y": 270,
+      "height": 60,
+      "locale": "br",
+      "width": 160
+    },
+    {
+      "name": 4,
+      "text": "Toque no rato para fazê-lo soltar o doce.",
+      "special": 4,
+      "x": 70,
+      "y": 290,
+      "height": 60,
+      "locale": "br",
+      "width": 150
+    },
+    {
+      "name": 13,
+      "special": 4,
+      "rotateSpeed": 100,
+      "x": 40,
+      "y": 315,
+      "locale": "br"
+    }
+  ],
+  "it": [
+    {
+      "name": 8,
+      "angle": 300,
+      "rotateSpeed": 100,
+      "x": 110,
+      "y": 370,
+      "locale": "it"
+    },
+    {
+      "name": 4,
+      "text": "Il topo prende la caramella e la sposta in un altro buco.",
+      "x": 30,
+      "y": 270,
+      "height": 60,
+      "locale": "it",
+      "width": 160
+    },
+    {
+      "name": 4,
+      "text": "Tocca il topo per far cadere la caramella.",
+      "special": 4,
+      "x": 70,
+      "y": 290,
+      "height": 60,
+      "locale": "it",
+      "width": 150
+    },
+    {
+      "name": 13,
+      "special": 4,
+      "rotateSpeed": 100,
+      "x": 40,
+      "y": 315,
+      "locale": "it"
+    }
+  ],
+  "ja": [
+    {
+      "name": 8,
+      "angle": 300,
+      "rotateSpeed": 100,
+      "x": 110,
+      "y": 370,
+      "locale": "ja"
+    },
+    {
+      "name": 4,
+      "text": "ネズミは *キャンディを *手に入れて、 *別の 穴へと * 運んでいる *ところです",
+      "x": 10,
+      "y": 270,
+      "height": 60,
+      "locale": "ja",
+      "width": 200
+    },
+    {
+      "name": 4,
+      "text": "ネズミを *タップ *すると、 *キャンディを *落とします",
+      "special": 4,
+      "x": 60,
+      "y": 290,
+      "height": 60,
+      "locale": "ja",
+      "width": 180
+    },
+    {
+      "name": 13,
+      "special": 4,
+      "rotateSpeed": 100,
+      "x": 40,
+      "y": 315,
+      "locale": "ja"
+    }
+  ],
+  "de": [
+    {
+      "name": 8,
+      "angle": 300,
+      "rotateSpeed": 100,
+      "x": 110,
+      "y": 370,
+      "locale": "de"
+    },
+    {
+      "name": 4,
+      "text": "Die Maus schnappt sich Süßigkeiten und trägt sie in andere Löcher.",
+      "x": 30,
+      "y": 270,
+      "height": 60,
+      "locale": "de",
+      "width": 160
+    },
+    {
+      "name": 4,
+      "text": "Tippe die Maus an, damit sie die Süßigkeit fallenlässt.",
+      "special": 4,
+      "x": 70,
+      "y": 290,
+      "height": 60,
+      "locale": "de",
+      "width": 150
+    },
+    {
+      "name": 13,
+      "special": 4,
+      "rotateSpeed": 100,
+      "x": 40,
+      "y": 315,
+      "locale": "de"
+    }
+  ],
+  "es": [
+    {
+      "name": 8,
+      "angle": 300,
+      "rotateSpeed": 100,
+      "x": 110,
+      "y": 370,
+      "locale": "es"
+    },
+    {
+      "name": 4,
+      "text": "El ratón coge el caramelo y lo lleva a diferentes agujeros.",
+      "x": 30,
+      "y": 270,
+      "height": 60,
+      "locale": "es",
+      "width": 160
+    },
+    {
+      "name": 4,
+      "text": "Pulsa el ratón para hacer caer el caramelo.",
+      "special": 4,
+      "x": 70,
+      "y": 290,
+      "height": 60,
+      "locale": "es",
+      "width": 150
+    },
+    {
+      "name": 13,
+      "special": 4,
+      "rotateSpeed": 100,
+      "x": 40,
+      "y": 315,
+      "locale": "es"
+    }
+  ],
+  "en": [
+    {
+      "name": 8,
+      "angle": 300,
+      "rotateSpeed": 100,
+      "x": 110,
+      "y": 370,
+      "locale": "en"
+    },
+    {
+      "name": 4,
+      "text": "The mouse takes candy and moves it to different holes.",
+      "x": 30,
+      "y": 270,
+      "height": 60,
+      "locale": "en",
+      "width": 160
+    },
+    {
+      "name": 4,
+      "text": "Tap the mouse to drop the candy.",
+      "special": 4,
+      "x": 70,
+      "y": 290,
+      "height": 60,
+      "locale": "en",
+      "width": 150
+    },
+    {
+      "name": 13,
+      "special": 4,
+      "rotateSpeed": 100,
+      "x": 40,
+      "y": 315,
+      "locale": "en"
+    }
+  ],
+  "ko": [
+    {
+      "name": 8,
+      "angle": 300,
+      "rotateSpeed": 100,
+      "x": 110,
+      "y": 370,
+      "locale": "ko"
+    },
+    {
+      "name": 4,
+      "text": "생쥐가 사탕을 잡아 *다른 구멍으로 옮깁니다",
+      "x": 30,
+      "y": 270,
+      "height": 60,
+      "locale": "ko",
+      "width": 160
+    },
+    {
+      "name": 4,
+      "text": "생쥐를 탭하여 사탕을 *떨어뜨리세요",
+      "special": 4,
+      "x": 70,
+      "y": 290,
+      "height": 60,
+      "locale": "ko",
+      "width": 150
+    },
+    {
+      "name": 13,
+      "special": 4,
+      "rotateSpeed": 100,
+      "x": 40,
+      "y": 315,
+      "locale": "ko"
+    }
+  ],
+  "fr": [
+    {
+      "name": 8,
+      "angle": 300,
+      "rotateSpeed": 100,
+      "x": 110,
+      "y": 370,
+      "locale": "fr"
+    },
+    {
+      "name": 4,
+      "text": "La souris prend le bonbon et l’emporte vers différents trous.",
+      "x": 30,
+      "y": 270,
+      "height": 60,
+      "locale": "fr",
+      "width": 160
+    },
+    {
+      "name": 4,
+      "text": "Appuie sur la souris pour faire tomber le bonbon.",
+      "special": 4,
+      "x": 70,
+      "y": 290,
+      "height": 60,
+      "locale": "fr",
+      "width": 150
+    },
+    {
+      "name": 13,
+      "special": 4,
+      "rotateSpeed": 100,
+      "x": 40,
+      "y": 315,
+      "locale": "fr"
+    }
+  ],
+  "ru": [
+    {
+      "name": 8,
+      "angle": 300,
+      "rotateSpeed": 100,
+      "x": 110,
+      "y": 370,
+      "locale": "ru"
+    },
+    {
+      "name": 4,
+      "text": "Мышка хватает конфету и перетаскивает ее от норки к норке",
+      "x": 30,
+      "y": 250,
+      "height": 60,
+      "locale": "ru",
+      "width": 160
+    },
+    {
+      "name": 4,
+      "text": "Коснитесь мышки, чтоб отобрать конфету",
+      "special": 4,
+      "x": 70,
+      "y": 290,
+      "height": 60,
+      "locale": "ru",
+      "width": 150
+    },
+    {
+      "name": 13,
+      "special": 4,
+      "rotateSpeed": 100,
+      "x": 40,
+      "y": 315,
+      "locale": "ru"
+    }
+  ],
+  "objects": [
+    {
+      "name": 100,
+      "spider": false,
+      "gun": false,
+      "wheel": false,
+      "part": "L",
+      "hidePath": false,
+      "moveOffset": 0,
+      "moveVertical": false,
+      "length": 200,
+      "x": 178,
+      "y": 205,
+      "moveLength": -1,
+      "radius": -1
+    },
+    {
+      "name": 52,
+      "x": 291,
+      "y": 316
+    },
+    {
+      "name": 2,
+      "x": 177,
+      "y": 143
+    },
+    {
+      "name": 3,
+      "moveSpeed": 40,
+      "path": "RW30",
+      "x": 169,
+      "y": 412,
+      "timeout": -1
+    },
+    {
+      "name": 3,
+      "moveSpeed": 30,
+      "path": "RC40",
+      "x": 177,
+      "y": 435,
+      "timeout": -1
+    },
+    {
+      "name": 3,
+      "moveSpeed": 20,
+      "path": "RW20",
+      "x": 198,
+      "y": 421,
+      "timeout": -1
+    },
+    {
+      "name": 100,
+      "spider": false,
+      "gun": false,
+      "wheel": false,
+      "part": "L",
+      "hidePath": false,
+      "moveOffset": 0,
+      "moveVertical": false,
+      "length": 100,
+      "x": 300,
+      "y": 203,
+      "moveLength": -1,
+      "radius": -1
+    },
+    {
+      "name": 133,
+      "activeTime": 2,
+      "angle": 0,
+      "x": 175,
+      "y": 56,
+      "radius": 50,
+      "index": 2
+    },
+    {
+      "name": 133,
+      "activeTime": 2,
+      "angle": 0,
+      "x": 81,
+      "y": 430,
+      "radius": 50,
+      "index": 1
+    },
+    {
+      "name": 300,
+      "x": 80,
+      "y": 64
+    }
+  ],
+  "zh": [
+    {
+      "name": 8,
+      "angle": 300,
+      "rotateSpeed": 100,
+      "x": 110,
+      "y": 370,
+      "locale": "zh"
+    },
+    {
+      "name": 4,
+      "text": "老鼠 *正在 *抓 *糖果，  *并 *把 *糖果 *转移 *到 *不同 *的 *洞穴*里",
+      "x": 30,
+      "y": 270,
+      "height": 60,
+      "locale": "zh",
+      "width": 160
+    },
+    {
+      "name": 4,
+      "text": "点击老鼠图标 *丢下糖果",
+      "special": 4,
+      "x": 70,
+      "y": 290,
+      "height": 60,
+      "locale": "zh",
+      "width": 150
+    },
+    {
+      "name": 13,
+      "special": 4,
+      "rotateSpeed": 100,
+      "x": 40,
+      "y": 315,
+      "locale": "zh"
+    }
+  ]
+}

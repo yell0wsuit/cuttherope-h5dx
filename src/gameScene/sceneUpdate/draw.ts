@@ -49,8 +49,24 @@ const drawImpl = function drawImpl(scene: GameScene): void {
 
     scene.preDraw();
     const interpCameraPos = scene.camera.applyInterpolatedTransformation(interpAlpha);
+
+    // Draw background image directly on canvas (TileMap not rendering, needed for composite blending)
+    if (scene.bgTexture?.image) {
+        ctx.drawImage(
+            scene.bgTexture.image,
+            0,
+            0,
+            resolution.CANVAS_WIDTH,
+            resolution.CANVAS_HEIGHT
+        );
+    }
+
     scene.back.updateWithCameraPos(interpCameraPos);
     scene.back.draw();
+
+    if (scene.miceManager) {
+        scene.miceManager.drawHoles();
+    }
 
     // Scale overlayCut based on resolution to prevent visible seams at HD resolutions
     const overlayCut = Math.ceil((2 * resolution.CANVAS_SCALE) / 0.1875);
@@ -94,6 +110,12 @@ const drawImpl = function drawImpl(scene: GameScene): void {
 
     scene.support.draw();
     scene.target.draw();
+    if (scene.sleepAnimPrimary?.visible) {
+        scene.sleepAnimPrimary.draw();
+    }
+    if (scene.sleepAnimSecondary?.visible) {
+        scene.sleepAnimSecondary.draw();
+    }
 
     // tutorial text
     for (let i = 0, len = scene.tutorials.length; i < len; i++) {
@@ -125,6 +147,9 @@ const drawImpl = function drawImpl(scene: GameScene): void {
         scene.ghosts[i]?.draw();
     }
 
+    scene.conveyors.interpolationAlpha = interpAlpha;
+    scene.conveyors.draw();
+
     for (let i = 0, len = scene.bubbles.length; i < len; i++) {
         const bubble = scene.bubbles[i];
         if (bubble) {
@@ -155,6 +180,10 @@ const drawImpl = function drawImpl(scene: GameScene): void {
             bouncer.interpolationAlpha = interpAlpha;
             bouncer.draw();
         }
+    }
+
+    if (scene.miceManager) {
+        scene.miceManager.drawMice();
     }
 
     for (let i = 0, len = scene.socks.length; i < len; i++) {
@@ -197,6 +226,14 @@ const drawImpl = function drawImpl(scene: GameScene): void {
     for (let i = 0, len = bungees.length; i < len; i++) {
         const bungee = bungees[i];
         bungee?.draw();
+    }
+
+    for (let i = 0, len = scene.lightbulbs.length; i < len; i++) {
+        const lightbulb = scene.lightbulbs[i];
+        if (lightbulb) {
+            lightbulb.interpolationAlpha = interpAlpha;
+            lightbulb.drawLight();
+        }
     }
 
     for (let i = 0, len = scene.stars.length; i < len; i++) {
@@ -258,6 +295,14 @@ const drawImpl = function drawImpl(scene: GameScene): void {
 
             scene.candyR.x = originalRX;
             scene.candyR.y = originalRY;
+        }
+    }
+
+    for (let i = 0, len = scene.lightbulbs.length; i < len; i++) {
+        const lightbulb = scene.lightbulbs[i];
+        if (lightbulb) {
+            lightbulb.interpolationAlpha = interpAlpha;
+            lightbulb.drawBottleAndFirefly();
         }
     }
 

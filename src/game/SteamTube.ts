@@ -22,6 +22,7 @@ class SteamTube extends BaseElement {
     private valve: ImageElement;
     private steamBack: BaseElement;
     private steamFront: BaseElement;
+    private onConveyor = false;
 
     constructor(position: Vector, angle: number, heightScale = resolution.PM) {
         super();
@@ -98,9 +99,15 @@ class SteamTube extends BaseElement {
     }
 
     override onTouchDown(x: number, y: number): boolean {
-        const offset = new Vector(0, 28 * this.heightScale);
-        offset.rotate(Radians.fromDegrees(this.rotation));
-        const valvePos = Vector.add(new Vector(this.x, this.y), offset);
+        // When on conveyor, use base position; otherwise add valve offset
+        let valvePos: Vector;
+        if (this.onConveyor) {
+            valvePos = new Vector(this.x, this.y);
+        } else {
+            const offset = new Vector(0, 27 * this.heightScale);
+            offset.rotate(Radians.fromDegrees(this.rotation));
+            valvePos = Vector.add(new Vector(this.x, this.y), offset);
+        }
         const distance = Vector.distance(x, y, valvePos.x, valvePos.y);
 
         if (distance >= 30) {
@@ -292,6 +299,30 @@ class SteamTube extends BaseElement {
         if (parent && element) {
             parent.removeChild(element);
         }
+    }
+
+    getConveyorSize(): Vector {
+        // Returns fixed (40, 56) without scaling
+        return new Vector(40, 56);
+    }
+
+    getConveyorPadding(): number {
+        // 0.3 × pipe width
+        return 40 * 0.3;
+    }
+
+    setConveyorPosition(pos: Vector): void {
+        // Original positions (3, 3, -27, -27) need to be scaled by heightScale
+        // since normal mode uses scaled positions (e.g., valve.y = 27 * heightScale)
+        // tube has TOP anchor; in normal mode offset from valve is 27*heightScale,
+        // so for conveyor: tube.y = 3*heightScale - 27*heightScale = -24*heightScale
+        this.onConveyor = true;
+        this.tube.y = -24 * this.heightScale;
+        this.valve.y = 3 * this.heightScale;
+        this.steamBack.y = -27 * this.heightScale;
+        this.steamFront.y = -27 * this.heightScale;
+        this.x = pos.x;
+        this.y = pos.y;
     }
 }
 

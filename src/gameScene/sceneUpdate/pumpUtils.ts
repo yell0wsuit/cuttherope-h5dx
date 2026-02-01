@@ -9,6 +9,7 @@ import Vector from "@/core/Vector";
 import resolution from "@/resolution";
 import * as GameSceneConstants from "@/gameScene/constants";
 import type { GameScene } from "@/types/game-scene";
+import type LightBulb from "@/game/LightBulb";
 import type Pump from "@/game/Pump";
 import type ConstrainedPoint from "@/physics/ConstrainedPoint";
 import type GameObject from "@/visual/GameObject";
@@ -24,9 +25,8 @@ function handlePumpFlow(
         return;
     }
     const pumpBB = pump.bb;
-    const candyBB = candy.bb;
 
-    if (!pumpBB || !candyBB) {
+    if (!pumpBB) {
         return;
     }
 
@@ -54,13 +54,14 @@ function handlePumpFlow(
         h.rotateAround(-pump.angle, pump.x, pump.y);
     }
 
+    // Use pump's bbox dimensions for all objects
     const candyWithinPump =
         h.y < tn1.y &&
         Rectangle.rectInRect(
-            h.x - candyBB.w / 2,
-            h.y - candyBB.h / 2,
-            h.x + candyBB.w / 2,
-            h.y + candyBB.h / 2,
+            h.x - pumpBB.w / 2,
+            h.y - pumpBB.h / 2,
+            h.x + pumpBB.w / 2,
+            h.y + pumpBB.h / 2,
             tn1.x,
             tn1.y - powerRadius,
             tn2.x,
@@ -77,6 +78,76 @@ function handlePumpFlow(
 
     pumpForce.rotate(pump.angle);
     star.applyImpulse(pumpForce, delta);
+}
+
+function handlePumpFlowForBulb(pump: Pump, bulb: LightBulb, delta: number): void {
+    if (bulb.attachedSock != null) {
+        return;
+    }
+
+    const powerRadius = resolution.PUMP_POWER_RADIUS;
+    if (powerRadius === undefined) {
+        return;
+    }
+    const pumpBB = pump.bb;
+
+    if (!pumpBB) {
+        return;
+    }
+
+    // Use worldBounds for intersection (LightBulb has no texture so bb is null)
+    const wb = bulb.worldBounds;
+    const intersects = Rectangle.rectInRect(
+        pump.x - powerRadius,
+        pump.y - powerRadius,
+        pump.x + powerRadius,
+        pump.y + powerRadius,
+        wb.x,
+        wb.y,
+        wb.x + wb.w,
+        wb.y + wb.h
+    );
+
+    if (!intersects) {
+        return;
+    }
+
+    const tn1 = new Vector(0, 0);
+    const tn2 = new Vector(0, 0);
+    const h = new Vector(bulb.x, bulb.y);
+
+    tn1.x = pump.x - pumpBB.w / 2;
+    tn2.x = pump.x + pumpBB.w / 2;
+    tn1.y = tn2.y = pump.y;
+
+    if (pump.angle !== 0) {
+        h.rotateAround(-pump.angle, pump.x, pump.y);
+    }
+
+    // Use bulb's worldBounds dimensions for collision
+    const bulbWithinPump =
+        h.y < tn1.y &&
+        Rectangle.rectInRect(
+            h.x - wb.w / 2,
+            h.y - wb.h / 2,
+            h.x + wb.w / 2,
+            h.y + wb.h / 2,
+            tn1.x,
+            tn1.y - powerRadius,
+            tn2.x,
+            tn2.y
+        );
+
+    if (!bulbWithinPump) {
+        return;
+    }
+
+    const maxPower = powerRadius * 2;
+    const power = (maxPower * (powerRadius - (tn1.y - h.y))) / powerRadius;
+    const pumpForce = new Vector(0, -power);
+
+    pumpForce.rotate(pump.angle);
+    bulb.constraint.applyImpulse(pumpForce, delta);
 }
 
 function operatePump(scene: GameScene, pump: Pump, delta: number): void {
@@ -109,6 +180,14 @@ function operatePump(scene: GameScene, pump: Pump, delta: number): void {
 
         if (!scene.noCandyR) {
             scene.handlePumpFlow(pump, scene.starR, scene.candyR, delta);
+        }
+    }
+
+    if (scene.lightbulbs.length > 0) {
+        for (const bulb of scene.lightbulbs) {
+            if (bulb) {
+                handlePumpFlowForBulb(pump, bulb, delta);
+            }
         }
     }
 }

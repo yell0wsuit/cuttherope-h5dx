@@ -1,0 +1,325 @@
+{
+  "settings": [
+    {
+      "name": 0,
+      "height": 480,
+      "gridSize": 32,
+      "width": 320
+    },
+    {
+      "name": 1,
+      "nightLevel": true,
+      "ropePhysicsSpeed": 1,
+      "twoParts": false
+    }
+  ],
+  "nl": [
+    {
+      "name": 4,
+      "text": "Schijn op Om Nom om hem wakker te maken",
+      "x": 170,
+      "y": 320,
+      "height": 60,
+      "locale": "nl",
+      "width": 120
+    },
+    {
+      "name": 8,
+      "rotateSpeed": 100,
+      "x": 160,
+      "y": 400,
+      "locale": "nl"
+    }
+  ],
+  "br": [
+    {
+      "name": 8,
+      "rotateSpeed": 100,
+      "x": 160,
+      "y": 400,
+      "locale": "br"
+    },
+    {
+      "name": 4,
+      "text": "Ilumine o Om Nom para acordá-lo",
+      "x": 170,
+      "y": 320,
+      "height": 60,
+      "locale": "br",
+      "width": 120
+    }
+  ],
+  "it": [
+    {
+      "name": 8,
+      "rotateSpeed": 100,
+      "x": 160,
+      "y": 400,
+      "locale": "it"
+    },
+    {
+      "name": 4,
+      "text": "Illumina Om Nom per svegliarlo",
+      "x": 170,
+      "y": 320,
+      "height": 60,
+      "locale": "it",
+      "width": 120
+    }
+  ],
+  "ja": [
+    {
+      "name": 8,
+      "rotateSpeed": 100,
+      "x": 160,
+      "y": 400,
+      "locale": "ja"
+    },
+    {
+      "name": 4,
+      "text": "Om Nom に *光を当てて *彼を起こす",
+      "x": 170,
+      "y": 320,
+      "height": 60,
+      "locale": "ja",
+      "width": 120
+    }
+  ],
+  "de": [
+    {
+      "name": 4,
+      "text": "Erleuchte Om Nom, um ihn aufzuwecken.",
+      "x": 170,
+      "y": 320,
+      "height": 60,
+      "locale": "de",
+      "width": 120
+    },
+    {
+      "name": 8,
+      "rotateSpeed": 100,
+      "x": 160,
+      "y": 400,
+      "locale": "de"
+    }
+  ],
+  "es": [
+    {
+      "name": 4,
+      "text": "Ilumina a Om Nom para despertarlo",
+      "x": 170,
+      "y": 320,
+      "height": 60,
+      "locale": "es",
+      "width": 120
+    },
+    {
+      "name": 8,
+      "rotateSpeed": 100,
+      "x": 160,
+      "y": 400,
+      "locale": "es"
+    }
+  ],
+  "en": [
+    {
+      "name": 4,
+      "text": "Light up Om Nom to wake him up",
+      "x": 170,
+      "y": 320,
+      "height": 60,
+      "locale": "en",
+      "width": 120
+    },
+    {
+      "name": 8,
+      "angle": 0,
+      "rotateSpeed": 100,
+      "x": 160,
+      "y": 400,
+      "locale": "en"
+    }
+  ],
+  "ko": [
+    {
+      "name": 8,
+      "rotateSpeed": 100,
+      "x": 160,
+      "y": 400,
+      "locale": "ko"
+    },
+    {
+      "name": 4,
+      "text": "Om Nom 에게 조명을 *비춰 잠을 깨우세요.",
+      "x": 170,
+      "y": 320,
+      "height": 60,
+      "locale": "ko",
+      "width": 120
+    }
+  ],
+  "fr": [
+    {
+      "name": 8,
+      "rotateSpeed": 100,
+      "x": 160,
+      "y": 400,
+      "locale": "fr"
+    },
+    {
+      "name": 4,
+      "text": "Éclairez Om Nom pour le réveiller",
+      "x": 170,
+      "y": 320,
+      "height": 60,
+      "locale": "fr",
+      "width": 120
+    }
+  ],
+  "ru": [
+    {
+      "name": 8,
+      "rotateSpeed": 100,
+      "x": 160,
+      "y": 400,
+      "locale": "ru"
+    },
+    {
+      "name": 4,
+      "text": "Посветите на Ам Няма, чтобы его разбудить",
+      "x": 170,
+      "y": 320,
+      "height": 60,
+      "locale": "ru",
+      "width": 120
+    }
+  ],
+  "objects": [
+    {
+      "name": 100,
+      "bindBulb": false,
+      "spider": false,
+      "gun": false,
+      "wheel": false,
+      "part": "L",
+      "hidePath": false,
+      "moveOffset": 0,
+      "moveVertical": false,
+      "length": 55,
+      "x": 94,
+      "bulbNumber": "first",
+      "y": 47,
+      "moveLength": -1,
+      "radius": -1
+    },
+    {
+      "name": 52,
+      "x": 91,
+      "y": 147
+    },
+    {
+      "name": 100,
+      "bindBulb": true,
+      "spider": false,
+      "gun": false,
+      "wheel": false,
+      "part": "L",
+      "hidePath": false,
+      "moveOffset": 0,
+      "moveVertical": false,
+      "length": 110,
+      "x": 100,
+      "bulbNumber": "first",
+      "y": 253,
+      "moveLength": -1,
+      "radius": -1
+    },
+    {
+      "name": 100,
+      "bindBulb": true,
+      "spider": false,
+      "gun": false,
+      "wheel": false,
+      "part": "L",
+      "hidePath": false,
+      "moveOffset": 0,
+      "moveVertical": false,
+      "length": 110,
+      "x": 220,
+      "bulbNumber": "first",
+      "y": 253,
+      "moveLength": -1,
+      "radius": -1
+    },
+    {
+      "name": 134,
+      "litRadius": 97,
+      "x": 160,
+      "bulbNumber": "first",
+      "y": 214
+    },
+    {
+      "name": 2,
+      "x": 96,
+      "y": 401
+    },
+    {
+      "name": 100,
+      "bindBulb": true,
+      "spider": false,
+      "gun": false,
+      "wheel": false,
+      "part": "L",
+      "hidePath": false,
+      "moveOffset": 0,
+      "moveVertical": false,
+      "length": 70,
+      "x": 160,
+      "bulbNumber": "first",
+      "y": 118,
+      "moveLength": -1,
+      "radius": -1
+    },
+    {
+      "name": 3,
+      "x": 95,
+      "y": 330,
+      "timeout": -1
+    },
+    {
+      "name": 3,
+      "x": 78,
+      "y": 356,
+      "timeout": -1
+    },
+    {
+      "name": 3,
+      "x": 111,
+      "y": 356,
+      "timeout": -1
+    },
+    {
+      "name": 300,
+      "x": 227,
+      "y": 156
+    }
+  ],
+  "zh": [
+    {
+      "name": 8,
+      "rotateSpeed": 100,
+      "x": 160,
+      "y": 400,
+      "locale": "zh"
+    },
+    {
+      "name": 4,
+      "text": "照亮 Om Nom *让他醒来",
+      "x": 170,
+      "y": 320,
+      "height": 60,
+      "locale": "zh",
+      "width": 120
+    }
+  ]
+}

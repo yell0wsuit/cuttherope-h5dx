@@ -38,6 +38,14 @@ function gameWon(scene: GameScene): void {
 
     scene.noCandy = true;
 
+    // Make mouse retreat after winning
+    if (scene.miceManager) {
+        if (scene.miceManager.activeMouse) {
+            scene.miceManager.activeMouse.beginRetreat();
+        }
+        scene.miceManager.lockActiveMouse();
+    }
+
     scene.candy.passTransformationsToChilds = true;
     scene.candyMain.scaleX = 1;
     scene.candyMain.scaleY = 1;
@@ -101,7 +109,20 @@ function gameWon(scene: GameScene): void {
 }
 
 function gameLost(scene: GameScene): void {
+    if (scene.gameLostTriggered) {
+        return;
+    }
+    scene.gameLostTriggered = true;
+
     scene.dd.cancelAllDispatches();
+    if (scene.sleepAnimPrimary) {
+        scene.sleepAnimPrimary.visible = false;
+        scene.sleepAnimPrimary.getTimeline(0)?.stop();
+    }
+    if (scene.sleepAnimSecondary) {
+        scene.sleepAnimSecondary.visible = false;
+        scene.sleepAnimSecondary.getTimeline(0)?.stop();
+    }
     scene.target.playTimeline(GameSceneConstants.CharAnimation.FAIL);
     SoundMgr.playSound(ResourceId.SND_MONSTER_SAD);
 
@@ -111,6 +132,14 @@ function gameLost(scene: GameScene): void {
         PubSub.publish(PubSub.ChannelId.LevelLost, { time: scene.time });
     };
     scene.dd.callObject(scene, onLevelLost, null, 1);
+
+    // Make mouse retreat
+    if (scene.miceManager) {
+        if (scene.miceManager.activeMouse) {
+            scene.miceManager.activeMouse.beginRetreat();
+        }
+        scene.miceManager.lockActiveMouse();
+    }
 }
 
 class GameSceneLifecycleDelegate {

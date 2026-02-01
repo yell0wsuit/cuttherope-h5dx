@@ -20,6 +20,7 @@ import type RotatedCircle from "@/game/RotatedCircle";
 import type Grab from "@/game/Grab";
 import type ConstrainedPoint from "@/physics/ConstrainedPoint";
 import type GenericButton from "@/visual/GenericButton";
+import type LightBulb from "@/game/LightBulb";
 import GameSceneUpdate from "./update";
 
 class GameSceneTouch extends GameSceneUpdate {
@@ -36,6 +37,7 @@ class GameSceneTouch extends GameSceneUpdate {
     overOmNom = false;
 
     declare handleBubbleTouch: (star: ConstrainedPoint, x: number, y: number) => boolean;
+    declare handleLightBulbBubbleTouch: (bulb: LightBulb, x: number, y: number) => boolean;
     declare getNearestBungeeGrabByBezierPoints: (out: Vector, x: number, y: number) => Grab | null;
     declare getNearestBungeeSegmentByConstraints: (cutPos: Vector, grab: Grab) => boolean;
     declare cut: (target: unknown, start: Vector, end: Vector, shouldPlaySound: boolean) => number;
@@ -64,6 +66,15 @@ class GameSceneTouch extends GameSceneUpdate {
             }
         }
 
+        const cameraPos = this.camera.pos;
+        const cameraAdjustedX = x + cameraPos.x;
+        const cameraAdjustedY = y + cameraPos.y;
+
+        // mouse tap should take priority over bubble touches when carrying candy
+        if (this.miceManager?.handleClick(cameraAdjustedX, cameraAdjustedY)) {
+            return true;
+        }
+
         if (this.candyBubble) {
             if (this.handleBubbleTouch(this.star, x, y)) {
                 return true;
@@ -83,6 +94,17 @@ class GameSceneTouch extends GameSceneUpdate {
             }
         }
 
+        if (this.lightbulbs.length > 0) {
+            for (const bulb of this.lightbulbs) {
+                if (!bulb?.capturingBubble) {
+                    continue;
+                }
+                if (this.handleLightBulbBubbleTouch(bulb, x, y)) {
+                    return true;
+                }
+            }
+        }
+
         const touch = new Vector(x, y);
         if (!this.dragging[touchIndex]) {
             this.dragging[touchIndex] = true;
@@ -93,10 +115,6 @@ class GameSceneTouch extends GameSceneUpdate {
             startPos.copyFrom(touch);
             prevStartPos.copyFrom(touch);
         }
-
-        const cameraPos = this.camera.pos;
-        const cameraAdjustedX = x + cameraPos.x;
-        const cameraAdjustedY = y + cameraPos.y;
 
         // handle rotating spikes
         for (const spike of this.spikes) {
@@ -283,6 +301,11 @@ class GameSceneTouch extends GameSceneUpdate {
             }
         }
 
+        if (this.conveyors.onPointerDown(cameraAdjustedX, cameraAdjustedY, touchIndex)) {
+            this.dragging[touchIndex] = false;
+            return true;
+        }
+
         if (this.clickToCut) {
             const cutPos = Vector.newZero();
             const grab = this.getNearestBungeeGrabByBezierPoints(
@@ -392,6 +415,8 @@ class GameSceneTouch extends GameSceneUpdate {
                 grab.moverDragging = Constants.UNDEFINED;
             }
         }
+
+        this.conveyors.onPointerUp(cameraAdjustedX, cameraAdjustedY, touchIndex);
 
         return true;
     }
@@ -561,6 +586,12 @@ class GameSceneTouch extends GameSceneUpdate {
 
                 return true;
             }
+        }
+
+        if (
+            this.conveyors.onPointerMove(cameraAdjustedTouch.x, cameraAdjustedTouch.y, touchIndex)
+        ) {
+            return true;
         }
 
         if (this.dragging[touchIndex]) {

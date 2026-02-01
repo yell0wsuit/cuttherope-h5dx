@@ -1,0 +1,157 @@
+{
+  "settings": [
+    {
+      "name": 0,
+      "height": 480,
+      "gridSize": 32,
+      "width": 320
+    },
+    {
+      "name": 1,
+      "nightLevel": true,
+      "ropePhysicsSpeed": 1,
+      "twoParts": false
+    }
+  ],
+  "objects": [
+    {
+      "name": 52,
+      "x": 226,
+      "y": 317
+    },
+    {
+      "name": 2,
+      "x": 126,
+      "y": 169
+    },
+    {
+      "name": 134,
+      "litRadius": 50,
+      "x": 228,
+      "bulbNumber": "first",
+      "y": 136
+    },
+    {
+      "name": 100,
+      "bindBulb": false,
+      "spider": false,
+      "gun": false,
+      "wheel": false,
+      "part": "L",
+      "hidePath": false,
+      "moveOffset": 0,
+      "moveVertical": true,
+      "length": 70,
+      "x": 176,
+      "bulbNumber": "first",
+      "y": 224,
+      "moveLength": -1,
+      "radius": -1
+    },
+    {
+      "name": 100,
+      "bindBulb": false,
+      "spider": false,
+      "gun": false,
+      "wheel": false,
+      "part": "L",
+      "hidePath": false,
+      "moveOffset": 0,
+      "moveVertical": true,
+      "length": 70,
+      "x": 277,
+      "bulbNumber": "first",
+      "y": 225,
+      "moveLength": -1,
+      "radius": -1
+    },
+    {
+      "name": 3,
+      "x": 119,
+      "y": 308,
+      "timeout": -1
+    },
+    {
+      "name": 3,
+      "x": 227,
+      "y": 180,
+      "timeout": -1
+    },
+    {
+      "name": 3,
+      "x": 124,
+      "y": 104,
+      "timeout": -1
+    },
+    {
+      "name": 100,
+      "bindBulb": true,
+      "spider": false,
+      "gun": false,
+      "wheel": false,
+      "part": "L",
+      "hidePath": false,
+      "moveOffset": 0,
+      "moveVertical": true,
+      "length": 70,
+      "x": 177,
+      "bulbNumber": "first",
+      "y": 224,
+      "moveLength": -1,
+      "radius": -1
+    },
+    {
+      "name": 55,
+      "angle": 270,
+      "x": 227,
+      "y": 401
+    },
+    {
+      "name": 100,
+      "bindBulb": true,
+      "spider": false,
+      "gun": false,
+      "wheel": false,
+      "part": "L",
+      "hidePath": false,
+      "moveOffset": 0,
+      "moveVertical": true,
+      "length": 70,
+      "x": 278,
+      "bulbNumber": "first",
+      "y": 224,
+      "moveLength": -1,
+      "radius": -1
+    },
+    {
+      "name": 130,
+      "angle": 0,
+      "bouncer": true,
+      "bubble": true,
+      "x": 151,
+      "y": 427,
+      "grab": false,
+      "radius": 100
+    },
+    {
+      "name": 130,
+      "angle": 0,
+      "bouncer": true,
+      "bubble": true,
+      "x": 92,
+      "y": 427,
+      "grab": false,
+      "radius": 100
+    },
+    {
+      "name": 54,
+      "x": 226,
+      "y": 131
+    },
+    {
+      "name": 300,
+      "x": 227,
+      "y": 69
+    }
+  ]
+}

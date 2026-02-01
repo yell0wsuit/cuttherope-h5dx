@@ -98,6 +98,9 @@ class Box {
     lockImg: HTMLImageElement;
     starImg: HTMLImageElement;
     perfectMark: HTMLImageElement;
+    boxLabelImg: HTMLImageElement;
+    boxLabelText: HTMLImageElement;
+    levelLabel: number | null;
     includeBoxNumberInTitle: boolean;
 
     constructor(
@@ -105,7 +108,8 @@ class Box {
         bgimg: string | null,
         reqstars: number,
         islocked: boolean,
-        type: string
+        type: string,
+        levelLabel: number | null = null
     ) {
         this.index = boxIndex;
         this.islocked = islocked;
@@ -172,6 +176,25 @@ class Box {
 
         this.perfectMark = new Image();
         this.perfectMark.src = `${platform.uiImageBaseUrl}perfect_mark.webp`;
+
+        this.levelLabel = levelLabel;
+        this.boxLabelImg = new Image();
+        this.boxLabelText = new Image();
+        if (levelLabel !== null) {
+            this.boxLabelImg.src = `${platform.uiImageBaseUrl}box_label.webp`;
+            const renderLabelText = () => {
+                Text.drawBig({
+                    text: Lang.menuText(levelLabel),
+                    img: this.boxLabelText,
+                    alignment: Alignment.HCENTER,
+                    scaleToUI: true,
+                });
+            };
+            renderLabelText();
+            this.pubSubSubscriptions.push(
+                PubSub.subscribe(PubSub.ChannelId.LanguageChanged, renderLabelText)
+            );
+        }
 
         this.includeBoxNumberInTitle = true;
     }
@@ -297,9 +320,50 @@ class Box {
             ) {
                 ctx.drawImage(
                     this.perfectMark,
-                    resolution.uiScaledNumber(260),
+                    resolution.uiScaledNumber(50),
                     resolution.uiScaledNumber(250)
                 );
+            }
+
+            // draw the box label with rotated text if this box has a levelLabel
+            if (this.levelLabel !== null && this.boxLabelImg.complete) {
+                const labelX = resolution.uiScaledNumber(240);
+                const labelY = resolution.uiScaledNumber(280);
+                ctx.drawImage(this.boxLabelImg, labelX, labelY);
+
+                // draw rotated text centered on the label
+                if (this.boxLabelText.complete) {
+                    const labelWidth = this.boxLabelImg.naturalWidth || this.boxLabelImg.width || 0;
+                    const labelHeight =
+                        this.boxLabelImg.naturalHeight || this.boxLabelImg.height || 0;
+                    const textWidth =
+                        this.boxLabelText.naturalWidth || this.boxLabelText.width || 0;
+                    const textHeight =
+                        this.boxLabelText.naturalHeight || this.boxLabelText.height || 0;
+
+                    // center point of the label
+                    const centerX = labelX + labelWidth / 2;
+                    const centerY = labelY + labelHeight / 2;
+
+                    const textScale = 0.5;
+                    const scaledWidth = textWidth * textScale;
+                    const scaledHeight = textHeight * textScale;
+
+                    // adjust for text image padding (Text.drawBig adds top/bottom padding)
+                    const yOffset = resolution.uiScaledNumber(4);
+
+                    ctx.save();
+                    ctx.translate(centerX, centerY);
+                    ctx.rotate((-16 * Math.PI) / 180); // 16 degrees
+                    ctx.drawImage(
+                        this.boxLabelText,
+                        -scaledWidth / 2,
+                        -scaledHeight / 2 + yOffset,
+                        scaledWidth,
+                        scaledHeight
+                    );
+                    ctx.restore();
+                }
             }
         }
 

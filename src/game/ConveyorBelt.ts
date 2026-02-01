@@ -115,16 +115,19 @@ class ConveyorBeltVisual extends BaseElement {
         // Interpolate between previous and current offset for smooth animation
         let offset: number;
         if (this.interpolationAlpha < 1) {
-            // Handle wrap-around: if the difference is large, they wrapped
-            let prev = this.prevOffset;
+            // Handle wrap-around: move() wraps by tileStep, so detect wraps
+            // when delta exceeds half a tile step (indicating a wrap occurred)
+            const prev = this.prevOffset;
             let curr = this.offset;
             const delta = curr - prev;
-            // If delta is larger than half the belt width, adjust for wrap
-            if (Math.abs(delta) > this.width / 2) {
+            if (Math.abs(delta) > tileStep / 2) {
+                // Wrap detected: adjust curr to its unwrapped value
                 if (delta > 0) {
-                    prev += this.width;
+                    // Backward motion wrapped (curr jumped up), treat as lower
+                    curr -= tileStep;
                 } else {
-                    curr += this.width;
+                    // Forward motion wrapped (curr jumped down), treat as higher
+                    curr += tileStep;
                 }
             }
             offset = prev + (curr - prev) * this.interpolationAlpha;

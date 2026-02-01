@@ -461,12 +461,8 @@ abstract class GameSceneInit extends BaseElement {
     }
 
     getCandyFxResourceId(): number {
-        const boxType = edition.boxTypes?.[LevelState.pack];
-        const isHolidayBox = boxType === BoxType.HOLIDAY;
-        // Paddington uses combined asset, regular candy uses separate FX asset
-        return IS_JANUARY && isHolidayBox
-            ? ResourceId.IMG_OBJ_CANDY_PADDINGTON
-            : ResourceId.IMG_OBJ_CANDY_FX;
+        // All candy types use unified FX asset for highlights/glow effects
+        return ResourceId.IMG_OBJ_CANDY_FX;
     }
 
     getCandyConstants() {
@@ -475,18 +471,18 @@ abstract class GameSceneInit extends BaseElement {
         const isPaddington = IS_JANUARY && isHolidayBox;
 
         if (isPaddington) {
-            // Paddington uses combined constants
+            // Paddington uses its own candy frames but unified FX constants
             return {
                 candy_bottom: GameSceneConstants.IMG_OBJ_CANDY_01_candy_bottom,
                 candy_main: GameSceneConstants.IMG_OBJ_CANDY_01_candy_main,
                 candy_top: GameSceneConstants.IMG_OBJ_CANDY_01_candy_top,
                 part_1: GameSceneConstants.IMG_OBJ_CANDY_01_part_1,
                 part_2: GameSceneConstants.IMG_OBJ_CANDY_01_part_2,
-                highlight_start: GameSceneConstants.IMG_OBJ_CANDY_01_highlight_start,
-                highlight_end: GameSceneConstants.IMG_OBJ_CANDY_01_highlight_end,
-                glow: GameSceneConstants.IMG_OBJ_CANDY_01_glow,
-                part_fx_start: GameSceneConstants.IMG_OBJ_CANDY_01_part_fx_start,
-                part_fx_end: GameSceneConstants.IMG_OBJ_CANDY_01_part_fx_end,
+                highlight_start: GameSceneConstants.IMG_OBJ_CANDY_FX_highlight_start,
+                highlight_end: GameSceneConstants.IMG_OBJ_CANDY_FX_highlight_end,
+                glow: GameSceneConstants.IMG_OBJ_CANDY_FX_glow,
+                part_fx_start: GameSceneConstants.IMG_OBJ_CANDY_FX_part_fx_start,
+                part_fx_end: GameSceneConstants.IMG_OBJ_CANDY_FX_part_fx_end,
             };
         } else {
             // Regular candy uses separate constants

@@ -355,8 +355,6 @@ export function updateNightLevel(this: GameScene, delta: number): void {
         (star as Star).setLitState(lit);
     }
 
-    updateLightBulbCollisions(this);
-
     // Night level loses if all lightbulbs are gone
     if (
         this.lightbulbs.length === 0 &&

@@ -2,7 +2,7 @@ import * as GameSceneConstants from "@/gameScene/constants";
 import Constants from "@/utils/Constants";
 import Mover from "@/utils/Mover";
 import BaseElement from "@/visual/BaseElement";
-import { updateLightBulbPhysics, updateNightLevel } from "./nightLevel";
+import { updateLightBulbCollisions, updateLightBulbPhysics, updateNightLevel } from "./nightLevel";
 import type { FingerCutTrail, GameScene } from "@/types/game-scene";
 
 type FadingFingerCut = FingerCutTrail[number];
@@ -65,6 +65,7 @@ export function updateBasics(this: GameScene, delta: number): void {
     }
 
     updateLightBulbPhysics(this, delta);
+    updateLightBulbCollisions(this);
     updateNightLevel.call(this, delta);
 
     if (delta > 0) {

@@ -39,8 +39,15 @@ export function updateBungees(this: GameScene, delta: number): number {
             if (rope && grab.stickTimer !== Constants.UNDEFINED) {
                 grab.stickTimer += delta;
                 if (grab.stickTimer > Grab.STICK_DELAY) {
+                    const mapOriginX = this.PMX + this.mapOffsetX;
+                    const mapOriginY = this.PMY + this.mapOffsetY;
                     const inBounds =
-                        grab.rectInObject(0, 0, this.mapWidth, this.mapHeight) ?? false;
+                        grab.rectInObject(
+                            mapOriginX,
+                            mapOriginY,
+                            mapOriginX + this.mapWidth,
+                            mapOriginY + this.mapHeight
+                        ) ?? false;
                     if (inBounds) {
                         rope.bungeeAnchor.pin.copyFrom(rope.bungeeAnchor.pos);
                         grab.kicked = false;

@@ -92,6 +92,8 @@ abstract class GameSceneInit extends BaseElement {
     PM: number;
     PMY: number;
     PMX: number;
+    mapOffsetX: number;
+    mapOffsetY: number;
     earthAnims: EarthImage[];
     paddingtonFinalFrame: ImageElement | null;
     pendingPaddingtonIdleTransition: boolean;
@@ -257,6 +259,8 @@ abstract class GameSceneInit extends BaseElement {
         this.PM = resolution.PM;
         this.PMY = resolution.PMY;
         this.PMX = 0;
+        this.mapOffsetX = 0;
+        this.mapOffsetY = 0;
 
         this.earthAnims = [];
         this.paddingtonFinalFrame = null;

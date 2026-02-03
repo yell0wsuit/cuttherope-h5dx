@@ -179,6 +179,8 @@ export interface GameScene extends BaseElement {
     PM: number;
     PMX: number;
     PMY: number;
+    mapOffsetX: number;
+    mapOffsetY: number;
     rockets: Rocket[];
     candyResourceId: ResourceIdValue;
     getCandyResourceId(): number;

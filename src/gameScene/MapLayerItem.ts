@@ -72,6 +72,8 @@ interface GameDesignItem extends MapLayerItem {
     ropePhysicsSpeed: number;
     nightLevel: number;
     twoParts: number;
+    mapOffsetX?: number;
+    mapOffsetY?: number;
 }
 
 interface GrabItem extends MapLayerItem {

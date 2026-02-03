@@ -163,8 +163,7 @@ class GameSceneTouch extends GameSceneUpdate {
                 ) {
                     const gunToCandy = Vector.subtract(new Vector(grab.x, grab.y), this.star.pos);
                     grab.gunFired = true;
-                    grab.gunInitialRotation =
-                        Radians.toDegrees(gunToCandy.normalizedAngle()) + 90;
+                    grab.gunInitialRotation = Radians.toDegrees(gunToCandy.normalizedAngle()) + 90;
                     grab.gunCandyInitialRotation = this.candyMain.rotation;
                     if (grab.gunCup) {
                         grab.gunCup.rotation = grab.gunInitialRotation;
@@ -173,8 +172,8 @@ class GameSceneTouch extends GameSceneUpdate {
                     grab.gunFront?.setTextureQuad(Grab.GunQuads.FRONT_FIRED);
 
                     const gunToCandyDistance =
-                        Vector.distance(grab.x, grab.y, this.star.pos.x, this.star.pos.y) - 105;
-                    const ropeLength = Math.max(gunToCandyDistance, 105);
+                        Vector.distance(grab.x, grab.y, this.star.pos.x, this.star.pos.y) - 81; // 105 (bungee_rest_len) * 0.77 ≈ 81
+                    const ropeLength = Math.max(gunToCandyDistance, 81);
                     const bungee = new Bungee(
                         null,
                         grab.x,

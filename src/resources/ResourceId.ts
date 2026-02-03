@@ -296,8 +296,15 @@ const ResourceId = {
     SND_CONV03: 283,
     SND_CONV04: 284,
 
+    // CTR Experiments assets
+    IMG_OBJ_GUN: 285,
+    IMG_OBJ_STICKER: 286,
+    SND_EXP_GUN: 287,
+    SND_EXP_SUCKER_DROP: 288,
+    SND_EXP_SUCKER_LAND: 289,
+
     // Total number of resources
-    RESOURCES_COUNT: 285,
+    RESOURCES_COUNT: 290,
 } as const;
 
 export default ResourceId;

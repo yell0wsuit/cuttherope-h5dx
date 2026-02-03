@@ -15,6 +15,7 @@ type SceneGrab = GameScene["bungees"][number];
 export function updateBungees(this: GameScene, delta: number): number {
     const numGrabs = this.bungees.length;
     if (numGrabs > 0) {
+        this.prevCandyRotation = this.candyMain.rotation;
         let handledRotation = false;
         let handledRotationL = false;
         let handledRotationR = false;

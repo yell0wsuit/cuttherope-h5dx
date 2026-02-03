@@ -20,6 +20,7 @@ import HorizontallyTiledImage from "@/visual/HorizontallyTiledImage";
 import GrabMoveBackground from "@/game/GrabMoveBackground";
 import KeyFrame from "@/visual/KeyFrame";
 import TrackType from "@/visual/TrackType";
+import { getInterpolatedPosition } from "@/utils/interpolation";
 
 const SpiderState = {
     START: 0,
@@ -76,6 +77,7 @@ const IMG_OBJ_BEE_HD_wings_start = 2;
 const IMG_OBJ_BEE_HD_wings_end = 4;
 
 const grabCircleCache: Record<string, HTMLCanvasElement> = {};
+const GRAB_INTERP_DISTANCE_SQ = Math.pow(resolution.BUNGEE_REST_LEN * 4, 2);
 
 class Grab extends CTRGameObject {
     static readonly GunCup = {
@@ -423,9 +425,15 @@ class Grab extends CTRGameObject {
         }
 
         if (this.kickable && this.kicked && this.rope) {
-            const pos = this.rope.bungeeAnchor.pos;
-            this.x = pos.x * 0.8 + this.x * 0.2;
-            this.y = pos.y * 0.8 + this.y * 0.2;
+            const anchor = this.rope.bungeeAnchor;
+            const interpPos = getInterpolatedPosition(
+                anchor.prevPos,
+                anchor.pos,
+                this.interpolationAlpha,
+                GRAB_INTERP_DISTANCE_SQ
+            );
+            this.x = interpPos.x * 0.8 + this.x * 0.2;
+            this.y = interpPos.y * 0.8 + this.y * 0.2;
         }
 
         if (this.gun) {
@@ -534,9 +542,15 @@ class Grab extends CTRGameObject {
         }
 
         if (this.kickable && this.kicked && this.rope) {
-            const pos = this.rope.bungeeAnchor.pos;
-            this.x = pos.x;
-            this.y = pos.y;
+            const anchor = this.rope.bungeeAnchor;
+            const interpPos = getInterpolatedPosition(
+                anchor.prevPos,
+                anchor.pos,
+                this.interpolationAlpha,
+                GRAB_INTERP_DISTANCE_SQ
+            );
+            this.x = interpPos.x;
+            this.y = interpPos.y;
         }
 
         // NOTE: we do pre-draw when drawing the back so the position

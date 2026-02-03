@@ -98,6 +98,7 @@ abstract class GameSceneInit extends BaseElement {
     lastCandyRotateDelta: number;
     lastCandyRotateDeltaL: number;
     lastCandyRotateDeltaR: number;
+    prevCandyRotation: number;
     attachCount: number;
     juggleTimer: number;
     dragging: boolean[];
@@ -264,6 +265,7 @@ abstract class GameSceneInit extends BaseElement {
         this.lastCandyRotateDelta = 0;
         this.lastCandyRotateDeltaL = 0;
         this.lastCandyRotateDeltaR = 0;
+        this.prevCandyRotation = 0;
 
         this.attachCount = 0;
         this.juggleTimer = 0;

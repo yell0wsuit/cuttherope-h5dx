@@ -31,6 +31,11 @@ const getInterpolatedCandyPos = (
     return { x: pos.x, y: pos.y };
 };
 
+const lerpAngle = (from: number, to: number, alpha: number): number => {
+    const delta = ((to - from + 540) % 360) - 180;
+    return from + delta * alpha;
+};
+
 /**
  * Draws every animated element that belongs to the game scene.
  */
@@ -232,20 +237,30 @@ const drawImpl = function drawImpl(scene: GameScene): void {
         bungee?.draw();
     }
 
+    const gunTargetPos =
+        !scene.noCandy && !scene.isCandyInLantern
+            ? getInterpolatedCandyPos(scene.star, interpAlpha)
+            : { x: scene.star.pos.x, y: scene.star.pos.y };
+    const gunCandyRotation = lerpAngle(
+        scene.prevCandyRotation,
+        scene.candyMain.rotation,
+        interpAlpha
+    );
+
     for (let i = 0, len = bungees.length; i < len; i++) {
         const grab = bungees[i];
         if (!grab?.gun) {
             continue;
         }
         if (!grab.gunFired && grab.gunArrow) {
-            const v = Vector.subtract(new Vector(grab.x, grab.y), scene.star.pos);
+            const v = Vector.subtract(new Vector(grab.x, grab.y), gunTargetPos);
             grab.gunArrow.rotation = Radians.toDegrees(v.normalizedAngle());
         } else if (grab.gunCup) {
             if (grab.gunCup.currentTimelineIndex !== Grab.GunCup.DROP_AND_HIDE) {
-                grab.gunCup.x = scene.star.pos.x;
-                grab.gunCup.y = scene.star.pos.y;
+                grab.gunCup.x = gunTargetPos.x;
+                grab.gunCup.y = gunTargetPos.y;
                 grab.gunCup.rotation =
-                    grab.gunInitialRotation + scene.candyMain.rotation - grab.gunCandyInitialRotation;
+                    grab.gunInitialRotation + gunCandyRotation - grab.gunCandyInitialRotation;
             }
             grab.drawGunCup();
         }

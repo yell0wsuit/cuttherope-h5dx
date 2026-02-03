@@ -159,6 +159,7 @@ export interface GameScene extends BaseElement {
     lastCandyRotateDelta: number;
     lastCandyRotateDeltaL: number;
     lastCandyRotateDeltaR: number;
+    prevCandyRotation: number;
     dd: DelayedDispatcher;
     gameController: GameSceneController;
     restartState: RestartStateValue;

@@ -1,4 +1,6 @@
 import Constants from "@/utils/Constants";
+import RGBAColor from "@/core/RGBAColor";
+import Grab from "@/game/Grab";
 import type { GameScene } from "@/types/game-scene";
 
 function releaseAllRopes(scene: GameScene, left: boolean): void {
@@ -20,6 +22,10 @@ function releaseAllRopes(scene: GameScene, left: boolean): void {
 
             if (grab.hasSpider && grab.spiderActive) {
                 scene.spiderBusted(grab);
+            }
+
+            if (grab.gun && grab.gunCup?.color.equals(RGBAColor.solidOpaque)) {
+                grab.gunCup.playTimeline(Grab.GunCup.DROP_AND_HIDE);
             }
         }
     }

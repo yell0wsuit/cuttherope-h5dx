@@ -37,6 +37,7 @@ interface MapLayerItem {
     // Flags
     wheel?: boolean;
     kickable?: boolean;
+    kicked?: boolean;
     invisible?: boolean;
     spider?: boolean;
     hidePath?: boolean;
@@ -85,6 +86,7 @@ interface GrabItem extends MapLayerItem {
     radius: number;
     // Optional properties with defaults
     kickable?: boolean;
+    kicked?: boolean;
     invisible?: boolean;
     hidePath?: boolean;
     gun?: boolean;

@@ -141,6 +141,7 @@ export interface GameScene extends BaseElement {
     savedSockSpeed: number;
     fingerCuts: FingerCut[][];
     aniPool: AnimationPool;
+    kickStainsPool: AnimationPool;
     staticAniPool: AnimationPool;
     candyBlink: Animation;
     candyBubble: Bubble | null;

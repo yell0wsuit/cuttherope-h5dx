@@ -400,8 +400,14 @@ RES_DATA[ResourceId.SND_CONV03] = new ResEntry("con03", ResourceType.SOUND);
 RES_DATA[ResourceId.SND_CONV04] = new ResEntry("con04", ResourceType.SOUND);
 
 // CTR Experiments asset data
-RES_DATA[ResourceId.IMG_OBJ_GUN] = new ResEntry("obj_gun.webp", ResourceType.IMAGE);
-RES_DATA[ResourceId.IMG_OBJ_STICKER] = new ResEntry("obj_sticker.webp", ResourceType.IMAGE);
+RES_DATA[ResourceId.IMG_OBJ_GUN] = new ResEntry("obj_gun.webp", ResourceType.IMAGE, {
+    atlasPath: "obj_gun.json",
+    atlasFormat: "texture-packer",
+});
+RES_DATA[ResourceId.IMG_OBJ_STICKER] = new ResEntry("obj_sticker.webp", ResourceType.IMAGE, {
+    atlasPath: "obj_sticker.json",
+    atlasFormat: "texture-packer",
+});
 RES_DATA[ResourceId.SND_EXP_GUN] = new ResEntry("gun", ResourceType.SOUND);
 RES_DATA[ResourceId.SND_EXP_SUCKER_DROP] = new ResEntry("sucker_drop", ResourceType.SOUND);
 RES_DATA[ResourceId.SND_EXP_SUCKER_LAND] = new ResEntry("sucker_land", ResourceType.SOUND);

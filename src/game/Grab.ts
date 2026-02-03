@@ -13,10 +13,13 @@ import Alignment from "@/core/Alignment";
 import ImageElement from "@/visual/ImageElement";
 import Canvas from "@/utils/Canvas";
 import RGBAColor from "@/core/RGBAColor";
+import Rectangle from "@/core/Rectangle";
 import Timeline from "@/visual/Timeline";
 import MathHelper from "@/utils/MathHelper";
 import HorizontallyTiledImage from "@/visual/HorizontallyTiledImage";
 import GrabMoveBackground from "@/game/GrabMoveBackground";
+import KeyFrame from "@/visual/KeyFrame";
+import TrackType from "@/visual/TrackType";
 
 const SpiderState = {
     START: 0,
@@ -53,6 +56,19 @@ const IMG_OBJ_HOOK_REGULATED_top = 3;
 const IMG_OBJ_HOOK_MOVABLE_active = 3;
 const IMG_OBJ_HOOK_MOVABLE_top = 4;
 
+const IMG_OBJ_GUN_back = 0;
+const IMG_OBJ_GUN_arrow = 1;
+const IMG_OBJ_GUN_front = 2;
+const IMG_OBJ_GUN_front_fired = 3;
+const IMG_OBJ_GUN_cup_start = 4;
+const IMG_OBJ_GUN_cup_end = 10;
+
+const IMG_OBJ_STICKER_stain = 0;
+const IMG_OBJ_STICKER_kicked_back = 1;
+const IMG_OBJ_STICKER_kicked_front = 2;
+const IMG_OBJ_STICKER_idle_back = 3;
+const IMG_OBJ_STICKER_idle_front = 4;
+
 // bees
 const IMG_OBJ_BEE_HD__rotation_center = 0;
 const IMG_OBJ_BEE_HD_obj_bee = 1;
@@ -62,11 +78,41 @@ const IMG_OBJ_BEE_HD_wings_end = 4;
 const grabCircleCache: Record<string, HTMLCanvasElement> = {};
 
 class Grab extends CTRGameObject {
+    static readonly GunCup = {
+        SHOW: 0,
+        HIDE: 1,
+        DROP_AND_HIDE: 2,
+    } as const;
+
+    static readonly GunQuads = {
+        BACK: IMG_OBJ_GUN_back,
+        ARROW: IMG_OBJ_GUN_arrow,
+        FRONT: IMG_OBJ_GUN_front,
+        FRONT_FIRED: IMG_OBJ_GUN_front_fired,
+    } as const;
+
+    static readonly StickerQuads = {
+        STAIN: IMG_OBJ_STICKER_stain,
+        KICKED_BACK: IMG_OBJ_STICKER_kicked_back,
+        KICKED_FRONT: IMG_OBJ_STICKER_kicked_front,
+        IDLE_BACK: IMG_OBJ_STICKER_idle_back,
+        IDLE_FRONT: IMG_OBJ_STICKER_idle_front,
+    } as const;
+
+    static readonly KICK_MOVE_LENGTH = 10;
+    static readonly KICK_CUT_RADIUS = 15;
+    static readonly GUN_CUT_RADIUS = 15;
+    static readonly KICK_TAP_RADIUS = 70;
+    static readonly GUN_TAP_RADIUS = 75;
+    static readonly STICK_DELAY = 0.05;
+    static readonly MAX_STAINS = 10;
+
     rope: Bungee | null;
     gun: boolean;
     gunFired: boolean;
     invisible: boolean;
     kicked: boolean;
+    kickActive: boolean;
     wheel: boolean;
     wheelOperating: number;
     lastWheelTouch: Vector;
@@ -102,7 +148,12 @@ class Grab extends CTRGameObject {
     front: ImageElement | null;
     gunBack: ImageElement | null;
     gunArrow: ImageElement | null;
-    gunCup: ImageElement | null;
+    gunFront: ImageElement | null;
+    gunCup: Animation | null;
+    gunInitialRotation: number;
+    gunCandyInitialRotation: number;
+    stickTimer: number;
+    stainCounter: number;
     kickable?: boolean;
 
     constructor() {
@@ -113,6 +164,7 @@ class Grab extends CTRGameObject {
         this.gunFired = false;
         this.invisible = false;
         this.kicked = false;
+        this.kickActive = false;
 
         this.wheel = false;
         this.wheelOperating = Constants.UNDEFINED;
@@ -151,7 +203,12 @@ class Grab extends CTRGameObject {
         this.front = null;
         this.gunBack = null;
         this.gunArrow = null;
+        this.gunFront = null;
         this.gunCup = null;
+        this.gunInitialRotation = 0;
+        this.gunCandyInitialRotation = 0;
+        this.stickTimer = Constants.UNDEFINED;
+        this.stainCounter = 0;
     }
 
     getRotateAngle(v1: Vector, v2: Vector, c: Vector) {
@@ -364,14 +421,15 @@ class Grab extends CTRGameObject {
         if (this.invisible) {
             return;
         }
-        if (this.gun) {
-            return;
-        }
 
         if (this.kickable && this.kicked && this.rope) {
             const pos = this.rope.bungeeAnchor.pos;
-            this.x = pos.x;
-            this.y = pos.y;
+            this.x = pos.x * 0.8 + this.x * 0.2;
+            this.y = pos.y * 0.8 + this.y * 0.2;
+        }
+
+        if (this.gun) {
+            return;
         }
 
         this.drawWithMoverInterpolation(() => {
@@ -475,6 +533,12 @@ class Grab extends CTRGameObject {
             return;
         }
 
+        if (this.kickable && this.kicked && this.rope) {
+            const pos = this.rope.bungeeAnchor.pos;
+            this.x = pos.x;
+            this.y = pos.y;
+        }
+
         // NOTE: we do pre-draw when drawing the back so the position
         // of the back is adjusted. Otherwise the back can be offset
         // when there are large moves to position (grab is on DJ disc)
@@ -501,6 +565,8 @@ class Grab extends CTRGameObject {
                 b.draw();
             }
 
+            this.gunFront?.draw();
+
             if (this.moveLength <= 0) {
                 this.front?.draw();
             } else {
@@ -524,6 +590,9 @@ class Grab extends CTRGameObject {
     }
 
     drawGunCup() {
+        if (!this.gunFired) {
+            return;
+        }
         this.gunCup?.draw();
     }
 
@@ -553,9 +622,96 @@ class Grab extends CTRGameObject {
         this.previousRadius = this.radius;
         this.radius = radius;
 
-        // TODO: handle gun
+        if (this.gun) {
+            this.gunBack = ImageElement.create(ResourceId.IMG_OBJ_GUN, Grab.GunQuads.BACK);
+            this.gunBack.doRestoreCutTransparency();
+            this.gunBack.anchor = this.gunBack.parentAnchor = Alignment.CENTER;
+            this.addChild(this.gunBack);
+            this.gunBack.visible = false;
 
-        if (radius === Constants.UNDEFINED || radius === Constants.CANDY2_FLAG) {
+            this.gunArrow = ImageElement.create(ResourceId.IMG_OBJ_GUN, Grab.GunQuads.ARROW);
+            this.gunArrow.doRestoreCutTransparency();
+            this.gunArrow.anchor = this.gunArrow.parentAnchor = Alignment.CENTER;
+            this.addChild(this.gunArrow);
+            this.gunArrow.visible = false;
+
+            this.gunFront = ImageElement.create(ResourceId.IMG_OBJ_GUN, Grab.GunQuads.FRONT);
+            this.gunFront.doRestoreCutTransparency();
+            this.gunFront.anchor = this.gunFront.parentAnchor = Alignment.CENTER;
+            this.addChild(this.gunFront);
+            this.gunFront.visible = false;
+
+            this.gunCup = new Animation();
+            this.gunCup.initTextureWithId(ResourceId.IMG_OBJ_GUN);
+            this.gunCup.doRestoreCutTransparency();
+            this.gunCup.addAnimationEndpoints(
+                Grab.GunCup.SHOW,
+                0.1,
+                Timeline.LoopType.NO_LOOP,
+                IMG_OBJ_GUN_cup_start,
+                IMG_OBJ_GUN_cup_end
+            );
+            this.gunCup.anchor = Alignment.CENTER;
+            this.addChild(this.gunCup);
+            this.gunCup.visible = false;
+
+            const hide = new Timeline();
+            hide.addKeyFrame(
+                KeyFrame.makeColor(RGBAColor.solidOpaque.copy(), KeyFrame.TransitionType.LINEAR, 0)
+            );
+            hide.addKeyFrame(
+                KeyFrame.makeColor(RGBAColor.transparent.copy(), KeyFrame.TransitionType.LINEAR, 1)
+            );
+            this.gunCup.addTimelineWithID(hide, Grab.GunCup.HIDE);
+
+            const drop = new Timeline();
+            drop.addKeyFrame(
+                KeyFrame.makeColor(RGBAColor.solidOpaque.copy(), KeyFrame.TransitionType.LINEAR, 0)
+            );
+            drop.addKeyFrame(
+                KeyFrame.makeColor(RGBAColor.transparent.copy(), KeyFrame.TransitionType.LINEAR, 1)
+            );
+            drop.addKeyFrame(
+                KeyFrame.makePos(0, 0, KeyFrame.TransitionType.LINEAR, 0)
+            );
+            drop.addKeyFrame(
+                KeyFrame.makePos(0, 50, KeyFrame.TransitionType.EASE_IN, 1)
+            );
+            this.gunCup.addTimelineWithID(drop, Grab.GunCup.DROP_AND_HIDE);
+            const dropTrack = drop.getTrack(TrackType.POSITION);
+            if (dropTrack) {
+                dropTrack.relative = true;
+            }
+            return;
+        }
+
+        if (this.kickable) {
+            this.stainCounter = Grab.MAX_STAINS;
+            this.back = ImageElement.create(
+                ResourceId.IMG_OBJ_STICKER,
+                Grab.StickerQuads.IDLE_BACK
+            );
+            this.back.doRestoreCutTransparency();
+            this.back.anchor = this.back.parentAnchor = Alignment.CENTER;
+            this.front = ImageElement.create(
+                ResourceId.IMG_OBJ_STICKER,
+                Grab.StickerQuads.IDLE_FRONT
+            );
+            this.front.doRestoreCutTransparency();
+            this.front.anchor = this.front.parentAnchor = Alignment.CENTER;
+            this.addChild(this.back);
+            this.addChild(this.front);
+            this.back.visible = false;
+            this.front.visible = false;
+            this.bb = new Rectangle(
+                -this.back.width / 2,
+                -this.back.height / 2,
+                this.back.width,
+                this.back.height
+            );
+            this.updateKickState();
+        } else if (radius === Constants.UNDEFINED || radius === Constants.CANDY2_FLAG) {
+
             const imageId = MathHelper.randomRange(
                 ResourceId.IMG_OBJ_HOOK_01,
                 ResourceId.IMG_OBJ_HOOK_02
@@ -670,6 +826,10 @@ class Grab extends CTRGameObject {
         }
 
         this.moverDragging = Constants.UNDEFINED;
+
+        if (this.moveLength >= 0) {
+            this.kickable = false;
+        }
     }
 
     setBee() {
@@ -739,6 +899,25 @@ class Grab extends CTRGameObject {
         this.spider.switchToAnimation(SpiderState.WALK, SpiderState.START, 0.05);
 
         this.addChild(this.spider);
+    }
+
+    updateKickState() {
+        if (!this.kickable) {
+            return;
+        }
+
+        if (this.kicked) {
+            this.back?.setTextureQuad(Grab.StickerQuads.KICKED_BACK);
+            this.front?.setTextureQuad(Grab.StickerQuads.KICKED_FRONT);
+        } else {
+            this.back?.setTextureQuad(Grab.StickerQuads.IDLE_BACK);
+            this.front?.setTextureQuad(Grab.StickerQuads.IDLE_FRONT);
+        }
+
+        if (this.rope) {
+            this.x = this.rope.bungeeAnchor.pos.x;
+            this.y = this.rope.bungeeAnchor.pos.y;
+        }
     }
 
     destroyRope() {

@@ -80,6 +80,7 @@ abstract class GameSceneInit extends BaseElement {
     initialCameraToStarDistance: number;
     restartState: RestartStateValue | number;
     aniPool: AnimationPool;
+    kickStainsPool: AnimationPool;
     staticAniPool: AnimationPool;
     camera: Camera2D;
     starsCollected: number;
@@ -212,6 +213,10 @@ abstract class GameSceneInit extends BaseElement {
         this.aniPool = new AnimationPool();
         this.aniPool.visible = false;
         this.addChild(this.aniPool);
+
+        this.kickStainsPool = new AnimationPool();
+        this.kickStainsPool.visible = false;
+        this.addChild(this.kickStainsPool);
 
         this.staticAniPool = new AnimationPool();
         this.staticAniPool.visible = false;

@@ -4,6 +4,8 @@ import * as GameSceneConstants from "@/gameScene/constants";
 import RGBAColor from "@/core/RGBAColor";
 import Vector from "@/core/Vector";
 import resolution from "@/resolution";
+import Grab from "@/game/Grab";
+import Radians from "@/utils/Radians";
 import type ConstrainedPoint from "@/physics/ConstrainedPoint";
 import type { FingerCutTrail, GameScene } from "@/types/game-scene";
 import { getInterpolatedPosition } from "@/utils/interpolation";
@@ -209,6 +211,8 @@ const drawImpl = function drawImpl(scene: GameScene): void {
         }
     }
 
+    scene.kickStainsPool.draw();
+
     const bungees = scene.bungees;
     for (let i = 0, len = bungees.length; i < len; i++) {
         const grab = bungees[i];
@@ -226,6 +230,25 @@ const drawImpl = function drawImpl(scene: GameScene): void {
     for (let i = 0, len = bungees.length; i < len; i++) {
         const bungee = bungees[i];
         bungee?.draw();
+    }
+
+    for (let i = 0, len = bungees.length; i < len; i++) {
+        const grab = bungees[i];
+        if (!grab?.gun) {
+            continue;
+        }
+        if (!grab.gunFired && grab.gunArrow) {
+            const v = Vector.subtract(new Vector(grab.x, grab.y), scene.star.pos);
+            grab.gunArrow.rotation = Radians.toDegrees(v.normalizedAngle());
+        } else if (grab.gunCup) {
+            if (grab.gunCup.currentTimelineIndex !== Grab.GunCup.DROP_AND_HIDE) {
+                grab.gunCup.x = scene.star.pos.x;
+                grab.gunCup.y = scene.star.pos.y;
+                grab.gunCup.rotation =
+                    grab.gunInitialRotation + scene.candyMain.rotation - grab.gunCandyInitialRotation;
+            }
+            grab.drawGunCup();
+        }
     }
 
     for (let i = 0, len = scene.lightbulbs.length; i < len; i++) {

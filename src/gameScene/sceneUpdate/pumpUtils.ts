@@ -190,6 +190,12 @@ function operatePump(scene: GameScene, pump: Pump, delta: number): void {
             }
         }
     }
+
+    for (const grab of scene.bungees) {
+        if (grab?.rope && grab.kickable && grab.kicked) {
+            handlePumpFlow(pump, grab.rope.bungeeAnchor, grab, delta);
+        }
+    }
 }
 
 class GameScenePumpUtilsDelegate {

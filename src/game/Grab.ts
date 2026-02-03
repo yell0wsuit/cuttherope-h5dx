@@ -685,12 +685,8 @@ class Grab extends CTRGameObject {
             drop.addKeyFrame(
                 KeyFrame.makeColor(RGBAColor.transparent.copy(), KeyFrame.TransitionType.LINEAR, 1)
             );
-            drop.addKeyFrame(
-                KeyFrame.makePos(0, 0, KeyFrame.TransitionType.LINEAR, 0)
-            );
-            drop.addKeyFrame(
-                KeyFrame.makePos(0, 50, KeyFrame.TransitionType.EASE_IN, 1)
-            );
+            drop.addKeyFrame(KeyFrame.makePos(0, 0, KeyFrame.TransitionType.LINEAR, 0));
+            drop.addKeyFrame(KeyFrame.makePos(0, 50, KeyFrame.TransitionType.EASE_IN, 1));
             this.gunCup.addTimelineWithID(drop, Grab.GunCup.DROP_AND_HIDE);
             const dropTrack = drop.getTrack(TrackType.POSITION);
             if (dropTrack) {
@@ -725,7 +721,6 @@ class Grab extends CTRGameObject {
             );
             this.updateKickState();
         } else if (radius === Constants.UNDEFINED || radius === Constants.CANDY2_FLAG) {
-
             const imageId = MathHelper.randomRange(
                 ResourceId.IMG_OBJ_HOOK_01,
                 ResourceId.IMG_OBJ_HOOK_02

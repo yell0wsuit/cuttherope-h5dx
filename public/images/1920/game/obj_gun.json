@@ -24,8 +24,8 @@
         {
             "filename": "frame_01_GunArrowQuad.png",
             "frame": {
-                "x": 173,
-                "y": 320,
+                "x": 128,
+                "y": 318,
                 "w": 64,
                 "h": 54
             },
@@ -71,7 +71,7 @@
                 "w": 122,
                 "h": 120
             },
-            "rotated": true,
+            "rotated": false,
             "trimmed": true,
             "spriteSourceSize": {
                 "x": 142,
@@ -87,8 +87,8 @@
         {
             "filename": "frame_0004.png",
             "frame": {
-                "x": 173,
-                "y": 376,
+                "x": 115,
+                "y": 374,
                 "w": 54,
                 "h": 50
             },
@@ -108,8 +108,8 @@
         {
             "filename": "frame_0005.png",
             "frame": {
-                "x": 1,
-                "y": 320,
+                "x": 194,
+                "y": 318,
                 "w": 56,
                 "h": 70
             },
@@ -150,8 +150,8 @@
         {
             "filename": "frame_0007.png",
             "frame": {
-                "x": 193,
-                "y": 1,
+                "x": 1,
+                "y": 320,
                 "w": 55,
                 "h": 64
             },
@@ -171,7 +171,7 @@
         {
             "filename": "frame_0008.png",
             "frame": {
-                "x": 59,
+                "x": 58,
                 "y": 320,
                 "w": 55,
                 "h": 64
@@ -193,7 +193,7 @@
             "filename": "frame_0009.png",
             "frame": {
                 "x": 193,
-                "y": 67,
+                "y": 1,
                 "w": 55,
                 "h": 64
             },
@@ -213,8 +213,8 @@
         {
             "filename": "frame_0010.png",
             "frame": {
-                "x": 116,
-                "y": 320,
+                "x": 193,
+                "y": 67,
                 "w": 55,
                 "h": 64
             },
@@ -238,10 +238,10 @@
         "image": "obj_gun.webp",
         "format": "RGBA8888",
         "size": {
-            "w": 249,
-            "h": 427
+            "w": 251,
+            "h": 425
         },
-        "scale": "1",
-        "smartupdate": "$TexturePacker:SmartUpdate:3f47a2e9a80b8c3d92bf0e12385faa39:af57cd6423d6ea3de5292555a2d9f640:f0cb28ebfa6ddc561181f8ae33bf7164$"
+        "scale": "0.75",
+        "smartupdate": "$TexturePacker:SmartUpdate:807b2831ed748b4ffe5434adb402ffb9:af57cd6423d6ea3de5292555a2d9f640:f0cb28ebfa6ddc561181f8ae33bf7164$"
     }
 }

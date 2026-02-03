@@ -437,6 +437,9 @@ class Grab extends CTRGameObject {
         }
 
         if (this.gun) {
+            this.drawWithMoverInterpolation(() => {
+                this.preDraw();
+            });
             return;
         }
 

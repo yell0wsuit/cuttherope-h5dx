@@ -235,7 +235,10 @@ export function updateHazards(this: HazardScene, delta: number, numGrabs: number
         const containedObjects = rc.containedObjects;
 
         for (let j = 0; j < numGrabs; j++) {
-            const g = this.bungees[j]!;
+            const g = this.bungees[j];
+            if (!g) {
+                continue;
+            }
             const gIndex = containedObjects.indexOf(g);
             const distance = Vector.distance(g.x, g.y, rc.x, rc.y);
 

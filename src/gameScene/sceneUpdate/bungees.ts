@@ -7,6 +7,7 @@ import SoundMgr from "@/game/CTRSoundMgr";
 import Vector from "@/core/Vector";
 import Constants from "@/utils/Constants";
 import resolution from "@/resolution";
+import Grab from "@/game/Grab";
 import type { GameScene, SceneStar } from "@/types/game-scene";
 
 type SceneGrab = GameScene["bungees"][number];
@@ -14,6 +15,7 @@ type SceneGrab = GameScene["bungees"][number];
 export function updateBungees(this: GameScene, delta: number): number {
     const numGrabs = this.bungees.length;
     if (numGrabs > 0) {
+        this.prevCandyRotation = this.candyMain.rotation;
         let handledRotation = false;
         let handledRotationL = false;
         let handledRotationR = false;
@@ -32,6 +34,29 @@ export function updateBungees(this: GameScene, delta: number): number {
                 rope.bungeeAnchor.pos.x = grab.x;
                 rope.bungeeAnchor.pos.y = grab.y;
                 rope.bungeeAnchor.pin.copyFrom(rope.bungeeAnchor.pos);
+            }
+
+            if (rope && grab.stickTimer !== Constants.UNDEFINED) {
+                grab.stickTimer += delta;
+                if (grab.stickTimer > Grab.STICK_DELAY) {
+                    const mapOriginX = this.PMX + this.mapOffsetX;
+                    const mapOriginY = this.PMY + this.mapOffsetY;
+                    const inBounds =
+                        grab.rectInObject(
+                            mapOriginX,
+                            mapOriginY,
+                            mapOriginX + this.mapWidth,
+                            mapOriginY + this.mapHeight
+                        ) ?? false;
+                    if (inBounds) {
+                        rope.bungeeAnchor.pin.copyFrom(rope.bungeeAnchor.pos);
+                        grab.kicked = false;
+                        rope.bungeeAnchor.setWeight(0.02);
+                        grab.updateKickState();
+                        SoundMgr.playSound(ResourceId.SND_EXP_SUCKER_LAND);
+                    }
+                    grab.stickTimer = Constants.UNDEFINED;
+                }
             }
 
             if (rope) {

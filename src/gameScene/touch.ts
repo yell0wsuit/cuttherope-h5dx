@@ -16,8 +16,11 @@ import EarthImage from "@/game/EarthImage";
 import Timeline from "@/visual/Timeline";
 import KeyFrame from "@/visual/KeyFrame";
 import Radians from "@/utils/Radians";
+import Bungee from "@/game/Bungee";
+import Alignment from "@/core/Alignment";
+import ImageElement from "@/visual/ImageElement";
+import Grab from "@/game/Grab";
 import type RotatedCircle from "@/game/RotatedCircle";
-import type Grab from "@/game/Grab";
 import type ConstrainedPoint from "@/physics/ConstrainedPoint";
 import type GenericButton from "@/visual/GenericButton";
 import type LightBulb from "@/game/LightBulb";
@@ -142,6 +145,52 @@ class GameSceneTouch extends GameSceneUpdate {
             }
         }
 
+        if (!this.noCandy) {
+            for (const grab of this.bungees) {
+                if (!grab || !grab.gun || grab.gunFired || grab.rope != null) {
+                    continue;
+                }
+                const tapRadius = Grab.GUN_TAP_RADIUS;
+                if (
+                    Rectangle.pointInRect(
+                        cameraAdjustedX,
+                        cameraAdjustedY,
+                        grab.x - tapRadius,
+                        grab.y - tapRadius,
+                        tapRadius * 2,
+                        tapRadius * 2
+                    )
+                ) {
+                    const gunToCandy = Vector.subtract(new Vector(grab.x, grab.y), this.star.pos);
+                    grab.gunFired = true;
+                    grab.gunInitialRotation = Radians.toDegrees(gunToCandy.normalizedAngle()) + 90;
+                    grab.gunCandyInitialRotation = this.candyMain.rotation;
+                    if (grab.gunCup) {
+                        grab.gunCup.rotation = grab.gunInitialRotation;
+                        grab.gunCup.playTimeline(Grab.GunCup.SHOW);
+                    }
+                    grab.gunFront?.setTextureQuad(Grab.GunQuads.FRONT_FIRED);
+
+                    const gunToCandyDistance =
+                        Vector.distance(grab.x, grab.y, this.star.pos.x, this.star.pos.y) - 81; // 105 (bungee_rest_len) * 0.77 ≈ 81
+                    const ropeLength = Math.max(gunToCandyDistance, 81);
+                    const bungee = new Bungee(
+                        null,
+                        grab.x,
+                        grab.y,
+                        this.star,
+                        this.star.pos.x,
+                        this.star.pos.y,
+                        ropeLength
+                    );
+                    bungee.bungeeAnchor.pin.copyFrom(bungee.bungeeAnchor.pos);
+                    grab.setRope(bungee);
+                    SoundMgr.playSound(ResourceId.SND_EXP_GUN);
+                    return true;
+                }
+            }
+        }
+
         for (const tube of this.tubes) {
             if (tube?.onTouchDown(cameraAdjustedX, cameraAdjustedY)) {
                 return true;
@@ -257,6 +306,34 @@ class GameSceneTouch extends GameSceneUpdate {
         for (const ghost of this.ghosts) {
             if (ghost?.onTouchDown(cameraAdjustedX, cameraAdjustedY)) {
                 return true;
+            }
+        }
+
+        let touchedNonKickedKickable = false;
+        for (const grab of this.bungees) {
+            const tapRadius = Grab.KICK_TAP_RADIUS;
+            if (
+                grab?.kickable &&
+                Rectangle.pointInRect(
+                    cameraAdjustedX,
+                    cameraAdjustedY,
+                    grab.x - tapRadius,
+                    grab.y - tapRadius,
+                    tapRadius * 2,
+                    tapRadius * 2
+                )
+            ) {
+                if (!grab.kicked) {
+                    touchedNonKickedKickable = true;
+                    break;
+                }
+                grab.kickActive = true;
+            }
+        }
+
+        for (const grab of this.bungees) {
+            if (grab?.kickable && grab.rope && !touchedNonKickedKickable && grab.kicked) {
+                grab.stickTimer = 0;
             }
         }
 
@@ -413,6 +490,46 @@ class GameSceneTouch extends GameSceneUpdate {
 
             if (grab.moveLength > 0 && grab.moverDragging === touchIndex) {
                 grab.moverDragging = Constants.UNDEFINED;
+            }
+
+            if (grab.kickable && grab.rope) {
+                const tapRadius = Grab.KICK_TAP_RADIUS;
+                if (
+                    !grab.kickActive &&
+                    !grab.kicked &&
+                    grab.rope.cut === Constants.UNDEFINED &&
+                    Rectangle.pointInRect(
+                        cameraAdjustedX,
+                        cameraAdjustedY,
+                        grab.x - tapRadius,
+                        grab.y - tapRadius,
+                        tapRadius * 2,
+                        tapRadius * 2
+                    )
+                ) {
+                    if (grab.stainCounter > 0) {
+                        const stain = ImageElement.create(
+                            ResourceId.IMG_OBJ_STICKER,
+                            Grab.StickerQuads.STAIN
+                        );
+                        stain.doRestoreCutTransparency();
+                        stain.x = grab.rope.bungeeAnchor.pos.x;
+                        stain.y = grab.rope.bungeeAnchor.pos.y;
+                        stain.anchor = Alignment.CENTER;
+                        stain.color.a = grab.stainCounter / Grab.MAX_STAINS;
+                        this.kickStainsPool.addChild(stain);
+                        grab.stainCounter--;
+                    }
+
+                    grab.rope.bungeeAnchor.pin.x = Constants.UNDEFINED;
+                    grab.rope.bungeeAnchor.pin.y = Constants.UNDEFINED;
+                    grab.rope.bungeeAnchor.setWeight(0.1);
+                    grab.kicked = true;
+                    grab.stickTimer = Constants.UNDEFINED;
+                    grab.updateKickState();
+                    SoundMgr.playSound(ResourceId.SND_EXP_SUCKER_DROP);
+                }
+                grab.kickActive = false;
             }
         }
 
@@ -585,6 +702,16 @@ class GameSceneTouch extends GameSceneUpdate {
                 }
 
                 return true;
+            }
+
+            if (
+                grab.kickable &&
+                grab.kicked &&
+                grab.rope &&
+                startPos &&
+                startPos.distance(touch) > Grab.KICK_MOVE_LENGTH
+            ) {
+                grab.stickTimer = Constants.UNDEFINED;
             }
         }
 

@@ -141,6 +141,7 @@ export interface GameScene extends BaseElement {
     savedSockSpeed: number;
     fingerCuts: FingerCut[][];
     aniPool: AnimationPool;
+    kickStainsPool: AnimationPool;
     staticAniPool: AnimationPool;
     candyBlink: Animation;
     candyBubble: Bubble | null;
@@ -158,6 +159,7 @@ export interface GameScene extends BaseElement {
     lastCandyRotateDelta: number;
     lastCandyRotateDeltaL: number;
     lastCandyRotateDeltaR: number;
+    prevCandyRotation: number;
     dd: DelayedDispatcher;
     gameController: GameSceneController;
     restartState: RestartStateValue;
@@ -177,6 +179,8 @@ export interface GameScene extends BaseElement {
     PM: number;
     PMX: number;
     PMY: number;
+    mapOffsetX: number;
+    mapOffsetY: number;
     rockets: Rocket[];
     candyResourceId: ResourceIdValue;
     getCandyResourceId(): number;

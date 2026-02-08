@@ -162,6 +162,10 @@ class ResourcePacks {
         ResourceId.IMG_OBJ_VINIL,
         ResourceId.IMG_OBJ_SOCKS_XMAS,
         ResourceId.IMG_CHAR_ANIMATION_PADDINGTON,
+
+        // CTR Experiments assets
+        ResourceId.IMG_OBJ_GUN,
+        ResourceId.IMG_OBJ_STICKER,
     ];
 
     // --- Game images for Chrome extension ---
@@ -250,6 +254,11 @@ class ResourcePacks {
         ResourceId.SND_CONV02,
         ResourceId.SND_CONV03,
         ResourceId.SND_CONV04,
+
+        // CTR Experiments sounds
+        ResourceId.SND_EXP_GUN,
+        ResourceId.SND_EXP_SUCKER_DROP,
+        ResourceId.SND_EXP_SUCKER_LAND,
     ];
 
     // --- Game UI ---

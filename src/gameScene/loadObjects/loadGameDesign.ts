@@ -10,5 +10,7 @@ export function loadGameDesign(this: GameSceneLoaders, item: GameDesignItem): vo
     this.twoParts = item.twoParts
         ? GameSceneConstants.PartsType.SEPARATE
         : GameSceneConstants.PartsType.NONE;
+    this.mapOffsetX = Number(item.mapOffsetX ?? 0);
+    this.mapOffsetY = Number(item.mapOffsetY ?? 0);
     this.ropePhysicsSpeed *= resolution.PHYSICS_SPEED_MULTIPLIER;
 }

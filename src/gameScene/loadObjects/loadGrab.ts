@@ -4,6 +4,7 @@ import Constants from "@/utils/Constants";
 import PollenDrawer from "@/game/PollenDrawer";
 import Vector from "@/core/Vector";
 import * as GameSceneConstants from "@/gameScene/constants";
+import Radians from "@/utils/Radians";
 import type GameSceneLoaders from "../loaders";
 import type { GrabItem } from "../MapLayerItem";
 
@@ -13,6 +14,7 @@ export function loadGrab(this: GameSceneLoaders, item: GrabItem): void {
     const l = item.length * this.PM;
     const wheel = item.wheel;
     const kickable = item.kickable ?? false;
+    const kicked = item.kicked ?? false;
     const invisible = item.invisible ?? false;
     const ml = item.moveLength * this.PM || -1;
     const v = item.moveVertical;
@@ -30,6 +32,7 @@ export function loadGrab(this: GameSceneLoaders, item: GrabItem): void {
     g.wheel = wheel;
     g.gun = gun;
     g.kickable = kickable;
+    g.kicked = kicked;
     g.invisible = invisible;
     g.setSpider(spider);
     g.parseMover(item as Parameters<typeof g.parseMover>[0]);
@@ -86,10 +89,24 @@ export function loadGrab(this: GameSceneLoaders, item: GrabItem): void {
         if (attachesToCandy) {
             this.attachCandy();
         }
+        if (g.kicked) {
+            b.bungeeAnchor.pin.x = Constants.UNDEFINED;
+            b.bungeeAnchor.pin.y = Constants.UNDEFINED;
+            b.bungeeAnchor.setWeight(0.1);
+        }
     }
 
     g.setRadius(r);
     g.setMoveLength(ml, v, o);
+
+    if (g.gun && g.gunArrow) {
+        let target = this.star;
+        if (this.twoParts !== GameSceneConstants.PartsType.NONE) {
+            target = left ? this.starL : this.starR;
+        }
+        const v1 = Vector.subtract(new Vector(g.x, g.y), target.pos);
+        g.gunArrow.rotation = Radians.toDegrees(v1.normalizedAngle());
+    }
 
     this.bungees.push(g);
 }

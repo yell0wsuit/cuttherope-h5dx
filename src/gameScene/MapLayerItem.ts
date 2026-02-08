@@ -37,6 +37,7 @@ interface MapLayerItem {
     // Flags
     wheel?: boolean;
     kickable?: boolean;
+    kicked?: boolean;
     invisible?: boolean;
     spider?: boolean;
     hidePath?: boolean;
@@ -71,6 +72,8 @@ interface GameDesignItem extends MapLayerItem {
     ropePhysicsSpeed: number;
     nightLevel: number;
     twoParts: number;
+    mapOffsetX?: number;
+    mapOffsetY?: number;
 }
 
 interface GrabItem extends MapLayerItem {
@@ -85,6 +88,7 @@ interface GrabItem extends MapLayerItem {
     radius: number;
     // Optional properties with defaults
     kickable?: boolean;
+    kicked?: boolean;
     invisible?: boolean;
     hidePath?: boolean;
     gun?: boolean;

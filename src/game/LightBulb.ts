@@ -25,7 +25,8 @@ const LIGHTBULB_ROOT_SCALE = 1;
 
 // Maximum reasonable distance for interpolation (prevents jumps on teleport/state changes)
 const MAX_LIGHTBULB_INTERP_DISTANCE = 100;
-const MAX_LIGHTBULB_INTERP_DISTANCE_SQ = MAX_LIGHTBULB_INTERP_DISTANCE * MAX_LIGHTBULB_INTERP_DISTANCE;
+const MAX_LIGHTBULB_INTERP_DISTANCE_SQ =
+    MAX_LIGHTBULB_INTERP_DISTANCE * MAX_LIGHTBULB_INTERP_DISTANCE;
 
 class LightBulbGlow extends GameObject {
     override draw(): void {

@@ -8,8 +8,9 @@ import Timeline from "@/visual/Timeline";
 import * as GameSceneConstants from "@/gameScene/constants";
 import resolution from "@/resolution";
 import Constants from "@/utils/Constants";
+import RGBAColor from "@/core/RGBAColor";
+import Grab from "@/game/Grab";
 import type { GameScene } from "@/types/game-scene";
-import type Grab from "@/game/Grab";
 import type Animation from "@/visual/Animation";
 
 function spiderBusted(scene: GameScene, grab: Grab): void {
@@ -91,6 +92,10 @@ function detachCandyFromRope(scene: GameScene, grab: Grab, ropeSpider: Animation
 
     if (grab.hasSpider && grab.spiderActive && ropeSpider !== grab.spider) {
         scene.spiderBusted(grab);
+    }
+
+    if (grab.gun && grab.gunCup?.color.equals(RGBAColor.solidOpaque)) {
+        grab.gunCup.playTimeline(Grab.GunCup.DROP_AND_HIDE);
     }
 }
 

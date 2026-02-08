@@ -80,6 +80,7 @@ abstract class GameSceneInit extends BaseElement {
     initialCameraToStarDistance: number;
     restartState: RestartStateValue | number;
     aniPool: AnimationPool;
+    kickStainsPool: AnimationPool;
     staticAniPool: AnimationPool;
     camera: Camera2D;
     starsCollected: number;
@@ -91,12 +92,15 @@ abstract class GameSceneInit extends BaseElement {
     PM: number;
     PMY: number;
     PMX: number;
+    mapOffsetX: number;
+    mapOffsetY: number;
     earthAnims: EarthImage[];
     paddingtonFinalFrame: ImageElement | null;
     pendingPaddingtonIdleTransition: boolean;
     lastCandyRotateDelta: number;
     lastCandyRotateDeltaL: number;
     lastCandyRotateDeltaR: number;
+    prevCandyRotation: number;
     attachCount: number;
     juggleTimer: number;
     dragging: boolean[];
@@ -213,6 +217,10 @@ abstract class GameSceneInit extends BaseElement {
         this.aniPool.visible = false;
         this.addChild(this.aniPool);
 
+        this.kickStainsPool = new AnimationPool();
+        this.kickStainsPool.visible = false;
+        this.addChild(this.kickStainsPool);
+
         this.staticAniPool = new AnimationPool();
         this.staticAniPool.visible = false;
         this.addChild(this.staticAniPool);
@@ -251,6 +259,8 @@ abstract class GameSceneInit extends BaseElement {
         this.PM = resolution.PM;
         this.PMY = resolution.PMY;
         this.PMX = 0;
+        this.mapOffsetX = 0;
+        this.mapOffsetY = 0;
 
         this.earthAnims = [];
         this.paddingtonFinalFrame = null;
@@ -259,6 +269,7 @@ abstract class GameSceneInit extends BaseElement {
         this.lastCandyRotateDelta = 0;
         this.lastCandyRotateDeltaL = 0;
         this.lastCandyRotateDeltaR = 0;
+        this.prevCandyRotation = 0;
 
         this.attachCount = 0;
         this.juggleTimer = 0;

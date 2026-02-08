@@ -354,6 +354,7 @@ const drawImpl = function drawImpl(scene: GameScene): void {
         }
     }
 
+    scene.aniPool.interpolationAlpha = interpAlpha;
     scene.aniPool.draw();
     drawCuts(scene);
     scene.camera.cancelInterpolatedTransformation(interpCameraPos);

@@ -1,5 +1,4 @@
 import MultiParticles from "@/visual/MultiParticles";
-import resolution from "@/resolution";
 import Vector from "@/core/Vector";
 import Rectangle from "@/core/Rectangle";
 import MathHelper from "@/utils/MathHelper";
@@ -12,25 +11,35 @@ const IMG_OBJ_PUMP_particle_1 = 6;
 const IMG_OBJ_PUMP_particle_2 = 7;
 const IMG_OBJ_PUMP_particle_3 = 8;
 
+/** Per-frame drag applied to particle velocity (at 60 FPS). */
+const FLOW_DRAG_PER_FRAME = 0.9;
+
+/** Target frame rate used to normalize drag and travel distance. */
+const TARGET_FPS = 60;
+
 class PumpDirt extends MultiParticles {
     additive: boolean;
 
     constructor(numParticles: number, texture: Texture2D, angle: number) {
         super(numParticles, texture);
 
+        this.duration = 0.6;
+
         this.angle = angle;
         this.angleVar = 10;
 
-        this.speed = resolution.PUMP_DIRT_SPEED;
+        this.speed = 1000;
+        this.speedVar = 100;
 
         // life of particles
         this.life = 0.6;
 
         // size in pixels
-        this.size = 0.002;
+        this.size = 2;
+        this.sizeVar = 0.5;
 
         // emissions per second
-        this.emissionRate = 50;
+        this.emissionRate = 100;
 
         // color of particles
         this.startColor.r = 1.0;
@@ -44,6 +53,30 @@ class PumpDirt extends MultiParticles {
         this.endColor.a = 0.0;
 
         this.additive = true;
+    }
+
+    /**
+     * Adjusts speed so particles travel approximately the requested flow length,
+     * accounting for drag deceleration over the particle lifetime.
+     */
+    configureForFlowLength(flowLength: number): void {
+        if (this.life <= 0) {
+            return;
+        }
+        const travel = Math.max(0, flowLength);
+        const frames = this.life * TARGET_FPS;
+        if (frames <= 0) {
+            return;
+        }
+        const denom = 1 - FLOW_DRAG_PER_FRAME;
+        const sum =
+            Math.abs(denom) < 0.0001
+                ? frames
+                : (FLOW_DRAG_PER_FRAME * (1 - Math.pow(FLOW_DRAG_PER_FRAME, frames))) / denom;
+        if (sum <= 0) {
+            return;
+        }
+        this.speed = (travel * TARGET_FPS) / sum;
     }
 
     override initParticle(particle: Particle) {
@@ -60,16 +93,16 @@ class PumpDirt extends MultiParticles {
 
         this.drawer.setTextureQuad(this.particles.length, tquad, vquad, 1);
 
-        const particleSize = resolution.PUMP_DIRT_PARTICLE_SIZE;
-        particle.width = particleSize;
-        particle.height = particleSize;
+        particle.width = tquad.w * particle.size;
+        particle.height = tquad.h * particle.size;
     }
 
     override updateParticleLocation(
         p: { dir: Vector; pos: { add: (arg0: Vector) => void } },
         delta: number
     ) {
-        p.dir.multiply(0.9);
+        const frameDrag = Math.pow(FLOW_DRAG_PER_FRAME, delta * TARGET_FPS);
+        p.dir.multiply(frameDrag);
         const tmp = Vector.multiply(p.dir, delta);
         tmp.add(this.gravity);
         p.pos.add(tmp);

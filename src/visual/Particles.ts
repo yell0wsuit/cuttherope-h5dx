@@ -22,6 +22,7 @@ class PointSprite {
 export class Particle {
     startPos: Vector;
     pos: Vector;
+    prevPos: Vector;
     dir: Vector;
     radialAccel: number;
     tangentialAccel: number;
@@ -31,12 +32,14 @@ export class Particle {
     life: number;
     deltaAngle: number;
     angle: number;
+    prevAngle: number;
     width: number;
     height: number;
 
     constructor() {
         this.startPos = new Vector(0, 0);
         this.pos = new Vector(0, 0);
+        this.prevPos = new Vector(0, 0);
         this.dir = new Vector(0, 0);
         this.radialAccel = 0;
         this.tangentialAccel = 0;
@@ -46,6 +49,7 @@ export class Particle {
         this.life = 0;
         this.deltaAngle = 0;
         this.angle = 0;
+        this.prevAngle = 0;
 
         // used in multi-image particles
         this.width = 0;
@@ -85,6 +89,7 @@ class Particles extends BaseElement {
     vertices: PointSprite[];
     colors: RGBAColor[];
     particleIdx: number;
+    interpolationAlpha = 1;
     onFinished: ((system: Particles) => void) | null;
 
     constructor(numParticles: number) {
@@ -188,6 +193,7 @@ class Particles extends BaseElement {
         particle.pos.x = this.x + this.posVar.x * MathHelper.randomMinus1to1();
         particle.pos.y = this.y + this.posVar.y * MathHelper.randomMinus1to1();
         particle.startPos.copyFrom(particle.pos);
+        particle.prevPos.copyFrom(particle.pos);
 
         const a = Radians.fromDegrees(this.angle + this.angleVar * MathHelper.randomMinus1to1());
         const v = new Vector(Math.cos(a), Math.sin(a));
@@ -264,6 +270,8 @@ class Particles extends BaseElement {
             }
 
             if (p.life > 0) {
+                p.prevPos.copyFrom(p.pos);
+                p.prevAngle = p.angle;
                 this.updateParticleLocation(p, delta);
 
                 p.color.r += p.deltaColor.r * delta;

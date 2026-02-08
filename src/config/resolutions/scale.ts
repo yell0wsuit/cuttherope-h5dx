@@ -49,8 +49,6 @@ const initProfile = (
         target.PUMP_POWER_RADIUS = target.PUMP_POWER_RADIUS ?? scaledPumpPower;
     }
     target.PUMP_BB = Rectangle.scaleCopy(base.PUMP_BB, scale);
-    target.PUMP_DIRT_SPEED = base.PUMP_DIRT_SPEED * scale;
-    target.PUMP_DIRT_PARTICLE_SIZE = base.PUMP_DIRT_PARTICLE_SIZE * scale;
     target.PUMP_DIRT_OFFSET = base.PUMP_DIRT_OFFSET * scale;
 
     target.CANDY_BB = Rectangle.scaleCopy(base.CANDY_BB, scale);

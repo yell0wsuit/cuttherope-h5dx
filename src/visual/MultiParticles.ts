@@ -3,6 +3,7 @@ import Rectangle from "@/core/Rectangle";
 import MathHelper from "@/utils/MathHelper";
 import ImageMultiDrawer from "@/visual/ImageMultiDrawer";
 import resolution from "@/resolution";
+import { lerp } from "@/utils/interpolation";
 import type Texture2D from "@/core/Texture2D";
 
 class MultiParticles extends Particles {
@@ -60,19 +61,17 @@ class MultiParticles extends Particles {
     override draw() {
         this.preDraw();
 
-        /* for debugging rotation: draw a line from origin at 0 degrees
-             let ctx = Canvas.context;
-             if (!ctx) return;
-             ctx.save();
-             ctx.lineWidth = 5;
-             ctx.strokeStyle = "blue";
-             ctx.beginPath();
-             ctx.moveTo(this.drawX, this.drawY);
-             ctx.lineTo(this.drawX, this.drawY - 100);
-             ctx.closePath();
-             ctx.stroke();
-             ctx.restore();
-         */
+        if (this.interpolationAlpha < 1) {
+            const alpha = this.interpolationAlpha;
+            for (let i = 0; i < this.particleIdx; i++) {
+                const p = this.particles[i];
+                const vert = this.drawer.vertices[i];
+                if (!p || !vert) continue;
+
+                vert.x = lerp(p.prevPos.x, p.pos.x, alpha) - p.width / 2;
+                vert.y = lerp(p.prevPos.y, p.pos.y, alpha) - p.height / 2;
+            }
+        }
 
         this.drawer.draw();
         this.postDraw();

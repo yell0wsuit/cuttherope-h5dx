@@ -1,5 +1,5 @@
 import BaseElement from "@/visual/BaseElement";
-import type Particles from "./Particles";
+import ParticlesClass from "./Particles";
 import type Timeline from "./Timeline";
 
 /**
@@ -8,6 +8,7 @@ import type Timeline from "./Timeline";
  */
 class AnimationPool extends BaseElement {
     removeList: BaseElement[];
+    interpolationAlpha = 1;
 
     constructor() {
         super();
@@ -31,6 +32,15 @@ class AnimationPool extends BaseElement {
         super.update(delta);
     }
 
+    override draw() {
+        for (const child of this.children) {
+            if (child instanceof ParticlesClass) {
+                child.interpolationAlpha = this.interpolationAlpha;
+            }
+        }
+        super.draw();
+    }
+
     timelineFinished(timeline: Timeline) {
         if (timeline.element && timeline.element instanceof BaseElement) {
             this.removeList.push(timeline.element);
@@ -48,7 +58,7 @@ class AnimationPool extends BaseElement {
         };
     }
 
-    particlesFinished(particles: Particles) {
+    particlesFinished(particles: ParticlesClass) {
         this.removeList.push(particles);
     }
 
@@ -58,7 +68,7 @@ class AnimationPool extends BaseElement {
     particlesFinishedDelegate() {
         // save a reference to ourselves since we may be called in a
         // different context (typically by another class)
-        return (particles: Particles) => {
+        return (particles: ParticlesClass) => {
             this.particlesFinished(particles);
         };
     }

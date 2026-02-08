@@ -2,6 +2,7 @@ import MultiParticles from "@/visual/MultiParticles";
 import Radians from "@/utils/Radians";
 import MathHelper from "@/utils/MathHelper";
 import Vector from "@/core/Vector";
+import { lerp } from "@/utils/interpolation";
 import type Texture2D from "@/core/Texture2D";
 import { Particle } from "@/visual/Particles";
 
@@ -50,6 +51,25 @@ class RotateableMultiParticles extends MultiParticles {
         if (rotPos) {
             rotPos.copyFrom(particle.pos);
         }
+    }
+
+    override draw() {
+        if (this.interpolationAlpha < 1) {
+            const alpha = this.interpolationAlpha;
+            for (let i = 0; i < this.particleIdx; i++) {
+                const p = this.particles[i];
+                if (!p) continue;
+
+                this.drawer.rotationAngles[i] = lerp(p.prevAngle, p.angle, alpha);
+
+                const rotPos = this.drawer.rotationPositions[i];
+                if (rotPos) {
+                    rotPos.x = lerp(p.prevPos.x, p.pos.x, alpha);
+                    rotPos.y = lerp(p.prevPos.y, p.pos.y, alpha);
+                }
+            }
+        }
+        super.draw();
     }
 
     override removeParticle(index: number) {

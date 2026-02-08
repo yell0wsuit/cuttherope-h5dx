@@ -231,11 +231,6 @@ const res2560x1440: ResolutionProfile = {
      * @const
      * @type {number}
      */
-    PUMP_DIRT_PARTICLE_SIZE: 15,
-    /**
-     * @const
-     * @type {number}
-     */
     PUMP_DIRT_OFFSET: 100,
 
     /**

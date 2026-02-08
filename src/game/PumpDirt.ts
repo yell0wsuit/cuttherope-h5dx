@@ -20,7 +20,7 @@ const TARGET_FPS = 60;
 class PumpDirt extends MultiParticles {
     additive: boolean;
 
-    constructor(numParticles: number, texture: Texture2D, angle: number, particleSize: number) {
+    constructor(numParticles: number, texture: Texture2D, angle: number) {
         super(numParticles, texture);
 
         this.duration = 0.6;
@@ -36,7 +36,7 @@ class PumpDirt extends MultiParticles {
 
         // size in pixels
         this.size = 2;
-        this.sizeVar = 1;
+        this.sizeVar = 0.5;
 
         // emissions per second
         this.emissionRate = 100;
@@ -53,11 +53,7 @@ class PumpDirt extends MultiParticles {
         this.endColor.a = 0.0;
 
         this.additive = true;
-
-        this._particleSize = particleSize;
     }
-
-    private _particleSize: number;
 
     /**
      * Adjusts speed so particles travel approximately the requested flow length,
@@ -97,8 +93,8 @@ class PumpDirt extends MultiParticles {
 
         this.drawer.setTextureQuad(this.particles.length, tquad, vquad, 1);
 
-        particle.width = this._particleSize;
-        particle.height = this._particleSize;
+        particle.width = tquad.w * particle.size;
+        particle.height = tquad.h * particle.size;
     }
 
     override updateParticleLocation(

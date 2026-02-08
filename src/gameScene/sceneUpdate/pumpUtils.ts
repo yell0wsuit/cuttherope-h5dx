@@ -158,12 +158,7 @@ function operatePump(scene: GameScene, pump: Pump, delta: number): void {
     const dirtTexture = ResourceMgr.getTexture(ResourceId.IMG_OBJ_PUMP);
     if (dirtTexture) {
         const flowLength = Math.max(0, (resolution.PUMP_POWER_RADIUS ?? 0) - resolution.PUMP_DIRT_OFFSET);
-        const dirt = new PumpDirt(
-            5,
-            dirtTexture,
-            Radians.toDegrees(pump.angle) - 90,
-            resolution.PUMP_DIRT_PARTICLE_SIZE
-        );
+        const dirt = new PumpDirt(5, dirtTexture, Radians.toDegrees(pump.angle) - 90);
         dirt.configureForFlowLength(flowLength);
         dirt.onFinished = scene.aniPool.particlesFinishedDelegate();
 

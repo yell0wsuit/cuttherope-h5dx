@@ -53,7 +53,6 @@ export interface ResolutionProfile {
 
     PUMP_POWER_RADIUS?: number;
     PUMP_BB: Rectangle;
-    PUMP_DIRT_SPEED: number;
     PUMP_DIRT_PARTICLE_SIZE: number;
     PUMP_DIRT_OFFSET: number;
 

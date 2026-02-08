@@ -229,12 +229,11 @@ const drawImpl = function drawImpl(scene: GameScene): void {
         }
     }
     for (let i = 0, len = bungees.length; i < len; i++) {
-        const bungee = bungees[i];
-        bungee?.drawBack();
-    }
-    for (let i = 0, len = bungees.length; i < len; i++) {
-        const bungee = bungees[i];
-        bungee?.draw();
+        const grab = bungees[i];
+        if (grab) {
+            grab.drawBack();
+            grab.draw();
+        }
     }
 
     const gunTargetPos =

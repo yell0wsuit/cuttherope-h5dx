@@ -150,9 +150,7 @@ class PreLoader {
         };
 
         queueForResMgr(ResourcePacks.StandardFonts, this.FONT_TAG);
-        queueForResMgr(edition.gameImageIds, this.GAME_TAG);
-        queueForResMgr(edition.levelBackgroundIds, this.GAME_TAG);
-        queueForResMgr(edition.levelOverlayIds, this.GAME_TAG);
+        queueForResMgr(ResourcePacks.MenuUsedGameImages, this.GAME_TAG);
 
         return { resources, menuResourceCount };
     }

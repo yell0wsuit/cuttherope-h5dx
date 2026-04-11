@@ -10,6 +10,8 @@ import SoundMgr from "@/game/CTRSoundMgr";
 import VideoManager from "@/ui/VideoManager";
 import RootController from "@/game/CTRRootController";
 import Doors from "@/Doors";
+import DeferredLoader from "@/resources/DeferredLoader";
+import { showProcessingOverlay, hideProcessingOverlay } from "@/ui/processingOverlay";
 import PubSub from "@/utils/PubSub";
 import EasterEggManager from "@/ui/EasterEggManager";
 import settings from "@/game/CTRSettings";
@@ -228,12 +230,32 @@ export default class GameFlow {
         stopSnow();
         const timeout = panelManager.currentPanelId === PanelId.LEVELS ? 400 : 0;
 
+        // Kick off the deferred resource load in parallel with the fade-outs
+        // and box-cutter animation. Typically finishes before the animation
+        // does; if not, the #processingOverlay gates the hand-off to startLevel.
+        const loadPromise = DeferredLoader.loadForBox(BoxManager.currentBoxIndex);
+
         //fade out options elements
         fadeOut("#levelScore");
         fadeOut("#levelBack");
         LevelPanel.setNavigationActive(false);
         fadeOut("#levelNavBack");
         fadeOut("#levelNavForward");
+
+        const awaitLoadAndStart = async (): Promise<void> => {
+            if (!loadPromise.alreadyResolved) {
+                showProcessingOverlay();
+                try {
+                    await loadPromise;
+                } finally {
+                    hideProcessingOverlay();
+                }
+            }
+            RootController.startLevel(
+                BoxManager.currentBoxIndex + 1,
+                BoxManager.currentLevelIndex
+            );
+        };
 
         fadeOut("#levelOptions", timeout).then(() => {
             if (this.manager.isBoxOpen) {
@@ -243,23 +265,19 @@ export default class GameFlow {
                     fadeOut("#gameBtnTray");
                 }
                 window.setTimeout(() => {
-                    RootController.startLevel(
-                        BoxManager.currentBoxIndex + 1,
-                        BoxManager.currentLevelIndex
-                    );
-                    Doors.openDoors(false, () => {
-                        this.showGameUI();
+                    void awaitLoadAndStart().then(() => {
+                        Doors.openDoors(false, () => {
+                            this.showGameUI();
+                        });
                     });
                 }, 400);
             } else {
                 Doors.openBoxAnimation(() => {
                     this.manager.isBoxOpen = true;
-                    RootController.startLevel(
-                        BoxManager.currentBoxIndex + 1,
-                        BoxManager.currentLevelIndex
-                    );
-                    Doors.openDoors(true, () => {
-                        this.showGameUI();
+                    void awaitLoadAndStart().then(() => {
+                        Doors.openDoors(true, () => {
+                            this.showGameUI();
+                        });
                     });
                 });
             }

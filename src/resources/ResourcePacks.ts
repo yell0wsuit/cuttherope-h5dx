@@ -113,6 +113,9 @@ class ResourcePacks {
         ResourceId.IMG_OBJ_LIGHTER,
     ];
 
+    // --- Game images that the menu also uses, so they must ship in the initial pack ---
+    static MenuUsedGameImages = [ResourceId.IMG_SNOWFLAKES];
+
     // -- Game resources for Round 5 promo --
     static Round5AdditionalGameImages = [ResourceId.IMG_OBJ_BEE_HD, ResourceId.IMG_OBJ_POLLEN_HD];
 

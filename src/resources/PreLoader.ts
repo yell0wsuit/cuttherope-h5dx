@@ -7,16 +7,8 @@ import JsonLoader from "@/resources/JsonLoader";
 import ResourceMgr, { initializeResources } from "@/resources/ResourceMgr";
 import ResourcePacks from "@/resources/ResourcePacks";
 import PubSub from "@/utils/PubSub";
+import { loadImageAsset, loadJson } from "@/resources/ImageAssetLoader";
 import type { TexturePackerAtlas } from "@/resources/TextureAtlasParser";
-
-type UrlFacade = Pick<typeof URL, "createObjectURL" | "revokeObjectURL">;
-
-interface ImageAsset {
-    drawable: ImageBitmap | HTMLImageElement;
-    width: number;
-    height: number;
-    sourceUrl: string;
-}
 
 interface ResourceDescriptor {
     url: string;
@@ -56,144 +48,6 @@ class PreLoader {
     private readonly FONT_TAG = "FONT" as const;
 
     private readonly GAME_TAG = "GAME" as const;
-
-    private readonly supportsImageBitmap = typeof createImageBitmap === "function";
-
-    private getUrlFacade(): UrlFacade | null {
-        if (typeof URL !== "undefined" && typeof URL.createObjectURL === "function") {
-            return URL;
-        }
-        if (typeof window !== "undefined") {
-            const legacyWindow = window as typeof window & { webkitURL?: UrlFacade };
-            const legacy = legacyWindow.webkitURL;
-            if (legacy && typeof legacy.createObjectURL === "function") {
-                return legacy;
-            }
-        }
-        return null;
-    }
-
-    private async loadImageElement(url: string): Promise<HTMLImageElement> {
-        return new Promise((resolve, reject) => {
-            const img = new Image();
-            img.decoding = "async";
-
-            const cleanup = () => {
-                img.removeEventListener("load", onLoad);
-                img.removeEventListener("error", onError);
-            };
-
-            const onLoad = () => {
-                cleanup();
-                resolve(img);
-            };
-
-            const onError = () => {
-                cleanup();
-                reject(new Error(`Failed to load image: ${url}`));
-            };
-
-            img.addEventListener("load", onLoad);
-            img.addEventListener("error", onError);
-            img.src = url;
-        });
-    }
-
-    private async loadBitmapFromElement(url: string): Promise<ImageBitmap> {
-        const img = await this.loadImageElement(url);
-        if (typeof img.decode === "function") {
-            try {
-                await img.decode();
-            } catch (error) {
-                window.console?.warn?.(
-                    "Image decode failed, continuing with bitmap creation",
-                    error
-                );
-            }
-        }
-        return createImageBitmap(img);
-    }
-
-    private createImageAsset(
-        drawable: ImageBitmap | HTMLImageElement,
-        sourceUrl: string
-    ): ImageAsset {
-        const naturalWidth =
-            ("naturalWidth" in drawable ? drawable.naturalWidth : drawable.width) ?? 0;
-        const naturalHeight =
-            ("naturalHeight" in drawable ? drawable.naturalHeight : drawable.height) ?? 0;
-
-        return { drawable, width: naturalWidth, height: naturalHeight, sourceUrl };
-    }
-
-    private async fetchImageBlob(url: RequestInfo | URL): Promise<Blob> {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`Request failed with status ${response.status}`);
-        }
-        return response.blob();
-    }
-
-    private async loadImageFromBlob(blob: Blob, fallbackUrl: string): Promise<HTMLImageElement> {
-        const urlFacade = this.getUrlFacade();
-        if (!urlFacade) {
-            if (fallbackUrl) {
-                return this.loadImageElement(fallbackUrl);
-            }
-            throw new Error("Object URL API not available");
-        }
-        const objectUrl = urlFacade.createObjectURL(blob);
-        try {
-            return await this.loadImageElement(objectUrl);
-        } finally {
-            urlFacade.revokeObjectURL(objectUrl);
-        }
-    }
-
-    private async loadImageAsset(url: string): Promise<ImageAsset> {
-        if (!url) {
-            throw new Error("Image URL must be provided");
-        }
-
-        if (!this.supportsImageBitmap && !this.getUrlFacade()) {
-            const img = await this.loadImageElement(url);
-            return this.createImageAsset(img, url);
-        }
-
-        if (this.supportsImageBitmap) {
-            try {
-                const bitmap = await this.loadBitmapFromElement(url);
-                return this.createImageAsset(bitmap, url);
-            } catch (error) {
-                window.console?.warn?.(
-                    "ImageBitmap from HTMLImageElement failed, falling back to blob",
-                    url,
-                    error
-                );
-            }
-
-            try {
-                const blob = await this.fetchImageBlob(url);
-                const bitmap = await createImageBitmap(blob);
-                return this.createImageAsset(bitmap, url);
-            } catch (error) {
-                window.console?.warn?.("Falling back to HTMLImageElement for", url, error);
-            }
-        }
-
-        const blob = await this.fetchImageBlob(url);
-        const img = await this.loadImageFromBlob(blob, url);
-        return this.createImageAsset(img, url);
-    }
-
-    private async loadJson<T>(url: RequestInfo | URL): Promise<T> {
-        const res = await fetch(url);
-        if (!res.ok) {
-            throw new Error(`Request failed with status ${res.status}`);
-        }
-        const text = await res.text();
-        return JSON.parse(text) as T;
-    }
 
     private updateProgress(): void {
         // Weighted progress calculation:
@@ -288,7 +142,7 @@ class PreLoader {
                 }
                 add(gameBaseUrl + res.path, tag, id);
                 if (res.atlasPath) {
-                    this.loadJson<TexturePackerAtlas>(gameBaseUrl + res.atlasPath)
+                    loadJson<TexturePackerAtlas>(gameBaseUrl + res.atlasPath)
                         .then((atlas) => ResourceMgr.onAtlasLoaded(id, atlas))
                         .catch((error) => ResourceMgr.onAtlasError(id, error as Error));
                 }
@@ -328,7 +182,7 @@ class PreLoader {
         }
 
         for (const { url, tag, resId } of resources) {
-            this.loadImageAsset(url)
+            loadImageAsset(url)
                 .then((asset) => {
                     if ((tag === this.FONT_TAG || tag === this.GAME_TAG) && resId !== null) {
                         ResourceMgr.onResourceLoaded(resId, asset);

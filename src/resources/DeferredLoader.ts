@@ -6,6 +6,7 @@ import ResourceMgr from "@/resources/ResourceMgr";
 import ResourcePacks from "@/resources/ResourcePacks";
 import { loadImageAsset, loadJson } from "@/resources/ImageAssetLoader";
 import PubSub from "@/utils/PubSub";
+import { getCandyResourceIdForBox } from "@/ui/InterfaceManager/skinSelection";
 import type { TexturePackerAtlas } from "@/resources/TextureAtlasParser";
 
 /**
@@ -82,11 +83,12 @@ class DeferredLoader {
 
         if (!this.gameObjectsStarted) {
             this.gameObjectsStarted = true;
-            const menuUsed: ReadonlySet<number> = new Set<number>(
-                ResourcePacks.MenuUsedGameImages
-            );
+            const excluded: ReadonlySet<number> = new Set<number>([
+                ...ResourcePacks.MenuUsedGameImages,
+                ...ResourcePacks.AllCandySkinImages,
+            ]);
             for (const id of edition.gameImageIds) {
-                if (menuUsed.has(id)) {
+                if (excluded.has(id)) {
                     continue;
                 }
                 if (this.loadedIds.has(id) || this.inFlight.has(id)) {
@@ -96,21 +98,24 @@ class DeferredLoader {
             }
         }
 
+        const perBoxIds: (number | null)[] = [getCandyResourceIdForBox(boxIndex)];
+
         const metadata = edition.getNormalizedBoxMetadata()[boxIndex];
         if (metadata) {
-            const { levelBackgroundId, levelOverlayId } = metadata;
-            for (const id of [levelBackgroundId, levelOverlayId]) {
-                if (id == null) {
-                    continue;
-                }
-                if (this.loadedIds.has(id) || this.inFlight.has(id)) {
-                    continue;
-                }
-                if (ids.includes(id)) {
-                    continue;
-                }
-                ids.push(id);
+            perBoxIds.push(metadata.levelBackgroundId, metadata.levelOverlayId);
+        }
+
+        for (const id of perBoxIds) {
+            if (id == null) {
+                continue;
             }
+            if (this.loadedIds.has(id) || this.inFlight.has(id)) {
+                continue;
+            }
+            if (ids.includes(id)) {
+                continue;
+            }
+            ids.push(id);
         }
 
         return ids;

@@ -7,6 +7,9 @@ import Text from "@/visual/Text";
 import Lang from "@/resources/Lang";
 import MenuStringId from "@/resources/MenuStringId";
 import PubSub from "@/utils/PubSub";
+import edition from "@/config/editions/net-edition";
+import BoxType from "@/ui/BoxType";
+import { IS_JANUARY } from "@/utils/SpecialEvents";
 
 type SkinMode = "candy" | "rope";
 
@@ -28,6 +31,29 @@ const getSavedCandyIndex = (): number => {
 
 const getSavedRopeIndex = (): number => {
     return SettingStorage.getIntOrDefault(SETTING_KEYS.ROPE, 0) ?? 0;
+};
+
+/**
+ * Resolves which IMG_OBJ_CANDY_* texture the given box needs based on the
+ * player's current candy preference and box-specific overrides (January
+ * holiday boxes use the Paddington skin regardless of preference).
+ *
+ * Keep this in sync with the lookup table in
+ * `src/gameScene/init.ts#getCandyResourceId`.
+ */
+const getCandyResourceIdForBox = (boxIndex: number): number => {
+    const boxType = edition.boxTypes?.[boxIndex];
+    const isHolidayBox = boxType === BoxType.HOLIDAY;
+
+    if (IS_JANUARY && isHolidayBox) {
+        return ResourceId.IMG_OBJ_CANDY_PADDINGTON;
+    }
+
+    const selectedSkin = getSavedCandyIndex();
+    if (selectedSkin === 0) {
+        return ResourceId.IMG_OBJ_CANDY_01_NEW;
+    }
+    return ResourceId.IMG_OBJ_CANDY_02 + (selectedSkin - 1);
 };
 
 class SkinSelectionView {
@@ -286,5 +312,5 @@ class SkinSelectionView {
 
 const skinSelectionView = new SkinSelectionView();
 
-export { getSavedRopeIndex, getSavedCandyIndex };
+export { getSavedRopeIndex, getSavedCandyIndex, getCandyResourceIdForBox };
 export default skinSelectionView;

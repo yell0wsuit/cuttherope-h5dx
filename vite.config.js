@@ -177,9 +177,9 @@ export default defineConfig(({ mode }) => {
             },
         },
         build: {
-            rollupOptions: {
+            rolldownOptions: {
                 output: {
-                    advancedChunks: {
+                    codeSplitting: {
                         groups: [
                             {
                                 name(moduleId) {

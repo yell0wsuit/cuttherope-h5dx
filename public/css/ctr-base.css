@@ -1,0 +1,429 @@
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+    -ms-content-zooming: none;
+}
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: "";
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+a:active,
+a:focus {
+    outline: 0;
+}
+
+#loaderWindow {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-family: gooddognum;
+    font-size: 88px;
+    color: #fff;
+}
+#loaderLogo {
+    display: none;
+    position: relative;
+    top: 200px;
+    left: 190px;
+}
+
+#loaderBubbles {
+    width: 800px;
+    height: 100%;
+    margin: 0 auto;
+    position: relative;
+}
+
+#loaderProgress {
+    position: absolute;
+    top: 50%;
+    left: 400px;
+}
+
+#loaderProgressBubble {
+    position: absolute;
+    left: -100px;
+    width: 218px;
+    height: 159px;
+    background-image: url(../images/page/loader-bubble.png);
+    background-repeat: no-repeat;
+    text-align: center;
+    padding-top: 70px;
+    padding-left: 10px;
+}
+
+#loaderCanvasHost {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#loaderCanvas {
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: 0;
+}
+
+@font-face {
+    font-family: gooddogplain;
+    src: url(../fonts/gooddog-plain/GoodDog-webfont.woff) format("woff");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: gooddognew;
+    src: url(../fonts/gooddog-new/gooddog_new-webfont.woff2) format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Playpen Sans";
+    src: url(../fonts/PlaypenSans-SemiBold.woff2) format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Cafe24 Dongdong";
+    src: url(../fonts/Cafe24Dongdong-v2.0.woff2) format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "MPLUSRounded1c-Medium";
+    src: url(../fonts/MPLUSRounded1c-Medium.woff2) format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "Huninn-Regular";
+    src: url(../fonts/Huninn-Regular.woff2) format("woff2");
+    font-weight: 400;
+    font-style: normal;
+}
+
+body {
+    background-image: url(../images/page/tilebg.jpg);
+    background-repeat: repeat;
+    font-family: gooddognew;
+    font-size: 15px;
+    color: #19130c;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -o-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    touch-action: none;
+}
+
+#bg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+}
+
+.ctrCursor {
+    cursor: url(../cursors/cursor.cur), url(../cursors/cursor.png), auto;
+}
+
+.ctrCursor a,
+.ctrPointer {
+    cursor: url(../cursors/handcursor.cur), url(../cursors/handcursor.png), auto;
+}
+
+.ctrCursorActive {
+    cursor: url(../cursors/cursorActive.cur), url(../cursors/cursorActive.png), auto;
+}
+
+footer .dot {
+    margin: -2px 8px 2px 8px;
+}
+
+footer .zeptoLogo {
+    position: relative;
+    top: 20px;
+    left: -4px;
+}
+
+#e {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+#d {
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+#snowOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: 80;
+}
+
+#fadeToBlack {
+    z-index: 120;
+}
+
+#content {
+    width: 840px;
+    margin: 80px auto 10px;
+    font-family: sans-serif, Helvetica, Arial;
+    font-size: 0.8em;
+    line-height: 1.6em;
+    color: #3c2110;
+}
+
+#content h1 {
+    font-family: gooddogplain;
+    font-size: 6em;
+    line-height: 1em;
+    margin-bottom: 20px;
+}
+
+#content h2 {
+    font-family: gooddogplain;
+    font-size: 3em;
+    line-height: 1em;
+    margin-bottom: 15px;
+    margin-top: 30px;
+}
+
+#content h3 {
+    font-family: gooddognew;
+    font-size: 2em;
+    line-height: 1em;
+    margin-bottom: 15px;
+    margin-top: 50px;
+}
+
+#content h4 {
+    font-family: gooddognew;
+    font-size: 1.5em;
+    line-height: 1em;
+    margin-bottom: 5px;
+    margin-top: 15px;
+}
+
+#content p {
+    margin-bottom: 15px;
+}
+
+#content a {
+    color: #c92817;
+    font-weight: 700;
+}
+
+#content a:hover {
+    color: #c92817;
+    text-decoration: underline;
+}
+
+table {
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+td,
+th {
+    padding: 4px;
+}
+
+th {
+    text-align: left;
+    font-weight: 700;
+}
+
+#pagefooter {
+    margin: 100px auto 10px;
+    width: 840px;
+}
+
+#pagefooter div {
+    margin: 0 auto 10px;
+}
+
+.panel {
+    display: none;
+    position: absolute;
+    top: 0;
+    overflow: hidden;
+}
+
+body {
+    touch-action: pan-y;
+    overflow: hidden;
+}
+
+#loaderWindow {
+    background-image: url(../images/page/loader-bg.jpg);
+    background-repeat: no-repeat;
+}
+
+#gameContainer {
+    overflow: hidden;
+    margin: 0 !important;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+#popupWindow {
+    z-index: 100 !important;
+}
+
+#levelCanvasLeft,
+#levelCanvasRight {
+    position: absolute;
+    top: 0;
+}

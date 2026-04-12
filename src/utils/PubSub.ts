@@ -41,6 +41,7 @@ export enum ChannelId {
     RoamingDataChanged,
     BoxesUnlocked,
     PreloaderProgress,
+    DeferredLoaderProgress,
 }
 
 type SubscriptionCallback = (this: PubSub, ...args: unknown[]) => void;

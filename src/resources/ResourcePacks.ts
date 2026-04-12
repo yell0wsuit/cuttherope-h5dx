@@ -113,6 +113,71 @@ class ResourcePacks {
         ResourceId.IMG_OBJ_LIGHTER,
     ];
 
+    // --- Game images that the menu also uses, so they must ship in the initial pack ---
+    static MenuUsedGameImages = [ResourceId.IMG_SNOWFLAKES];
+
+    // --- Candy skin textures. Only the one matching the player's current
+    //     preference (and IMG_OBJ_CANDY_PADDINGTON for January holiday boxes)
+    //     is actually drawn in-game, so DeferredLoader excludes this whole set
+    //     from its bulk first-load and fetches just the required one per box.
+    //     IMG_OBJ_CANDY_01 (legacy, referenced by CandyBreak) and
+    //     IMG_OBJ_CANDY_FX (shared highlights/glow FX) are NOT in this list —
+    //     they load eagerly with the rest of the game pack. ---
+    static AllCandySkinImages = [
+        ResourceId.IMG_OBJ_CANDY_01_NEW,
+        ResourceId.IMG_OBJ_CANDY_PADDINGTON,
+        ResourceId.IMG_OBJ_CANDY_02,
+        ResourceId.IMG_OBJ_CANDY_03,
+        ResourceId.IMG_OBJ_CANDY_04,
+        ResourceId.IMG_OBJ_CANDY_05,
+        ResourceId.IMG_OBJ_CANDY_06,
+        ResourceId.IMG_OBJ_CANDY_07,
+        ResourceId.IMG_OBJ_CANDY_08,
+        ResourceId.IMG_OBJ_CANDY_09,
+        ResourceId.IMG_OBJ_CANDY_10,
+        ResourceId.IMG_OBJ_CANDY_11,
+        ResourceId.IMG_OBJ_CANDY_12,
+        ResourceId.IMG_OBJ_CANDY_13,
+        ResourceId.IMG_OBJ_CANDY_14,
+        ResourceId.IMG_OBJ_CANDY_15,
+        ResourceId.IMG_OBJ_CANDY_16,
+        ResourceId.IMG_OBJ_CANDY_17,
+        ResourceId.IMG_OBJ_CANDY_18,
+        ResourceId.IMG_OBJ_CANDY_19,
+        ResourceId.IMG_OBJ_CANDY_20,
+        ResourceId.IMG_OBJ_CANDY_21,
+        ResourceId.IMG_OBJ_CANDY_22,
+        ResourceId.IMG_OBJ_CANDY_23,
+        ResourceId.IMG_OBJ_CANDY_24,
+        ResourceId.IMG_OBJ_CANDY_25,
+        ResourceId.IMG_OBJ_CANDY_26,
+        ResourceId.IMG_OBJ_CANDY_27,
+        ResourceId.IMG_OBJ_CANDY_28,
+        ResourceId.IMG_OBJ_CANDY_29,
+        ResourceId.IMG_OBJ_CANDY_30,
+        ResourceId.IMG_OBJ_CANDY_31,
+        ResourceId.IMG_OBJ_CANDY_32,
+        ResourceId.IMG_OBJ_CANDY_33,
+        ResourceId.IMG_OBJ_CANDY_34,
+        ResourceId.IMG_OBJ_CANDY_35,
+        ResourceId.IMG_OBJ_CANDY_36,
+        ResourceId.IMG_OBJ_CANDY_37,
+        ResourceId.IMG_OBJ_CANDY_38,
+        ResourceId.IMG_OBJ_CANDY_39,
+        ResourceId.IMG_OBJ_CANDY_40,
+        ResourceId.IMG_OBJ_CANDY_41,
+        ResourceId.IMG_OBJ_CANDY_42,
+        ResourceId.IMG_OBJ_CANDY_43,
+        ResourceId.IMG_OBJ_CANDY_44,
+        ResourceId.IMG_OBJ_CANDY_45,
+        ResourceId.IMG_OBJ_CANDY_46,
+        ResourceId.IMG_OBJ_CANDY_47,
+        ResourceId.IMG_OBJ_CANDY_48,
+        ResourceId.IMG_OBJ_CANDY_49,
+        ResourceId.IMG_OBJ_CANDY_50,
+        ResourceId.IMG_OBJ_CANDY_51,
+    ];
+
     // -- Game resources for Round 5 promo --
     static Round5AdditionalGameImages = [ResourceId.IMG_OBJ_BEE_HD, ResourceId.IMG_OBJ_POLLEN_HD];
 

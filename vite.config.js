@@ -20,7 +20,11 @@ export default defineConfig(({ mode }) => {
             enablePWA &&
                 VitePWA({
                     registerType: "autoUpdate",
-                    includeAssets: ["favicon.ico", "css/ctr.css"],
+                    includeAssets: [
+                        "favicon.ico",
+                        "css/ctr-base.css",
+                        "css/ctr-1920.css",
+                    ],
                     devOptions: {
                         enabled: false,
                     },

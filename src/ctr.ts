@@ -3,6 +3,7 @@ import platform from "@/config/platforms/platform-web";
 import settings from "@/game/CTRSettings";
 import LangId from "@/resources/LangId";
 import PubSub from "@/utils/PubSub";
+import { showProcessingOverlay, hideProcessingOverlay } from "@/ui/processingOverlay";
 import "@/game/CTRRootController";
 import "@/game/CTRSoundMgr";
 
@@ -70,20 +71,6 @@ const loadLanguageFont = async (langId: number): Promise<void> => {
     const font = languageFonts[langId];
     if (font) {
         await loadFontOnce(font);
-    }
-};
-
-const showProcessingOverlay = (): void => {
-    const overlay = document.getElementById("processingOverlay");
-    if (overlay) {
-        overlay.style.display = "block";
-    }
-};
-
-const hideProcessingOverlay = (): void => {
-    const overlay = document.getElementById("processingOverlay");
-    if (overlay) {
-        overlay.style.display = "none";
     }
 };
 

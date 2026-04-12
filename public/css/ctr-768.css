@@ -1,0 +1,1341 @@
+.ui-768 .useSD {
+    display: block;
+}
+
+.ui-768 .useHD {
+    display: none;
+}
+
+.ui-768 #optionSd {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    left: 70px;
+    top: 6px;
+}
+
+.ui-768 #optionHd {
+    width: 32px;
+    height: 32px;
+    position: absolute;
+    left: 38px;
+    top: 6px;
+}
+
+.ui-768 #c {
+    position: relative;
+    width: 768;
+    height: 432;
+    background-color: #000;
+}
+
+.ui-768 #e {
+    width: 768;
+    height: 432;
+}
+
+.ui-768 #gameContainer {
+    position: relative;
+    margin: 40px auto 0;
+    width: 768px;
+    height: 548px;
+    padding: 0;
+}
+
+.ui-768 #gameBorder {
+    top: -7px;
+    left: -9px;
+    position: absolute;
+    background-repeat: no-repeat;
+    width: 785px;
+    height: 449px;
+    display: none;
+}
+
+.ui-768 #gameArea {
+    margin: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 768px;
+    height: 432px;
+}
+
+.ui-768 .panel {
+    width: 768px;
+    height: 432px;
+}
+
+.ui-768 #startBackground {
+    display: none;
+    background: url(../images/768/ui/startbg.webp);
+}
+
+.ui-768 #menuBackground {
+    display: none;
+    background: url(../images/768/ui/menubg.webp);
+}
+
+.ui-768 .seethrough {
+    background: transparent;
+}
+
+.ui-768 .panelContent {
+    position: absolute;
+    top: 0;
+}
+
+.ui-768 #shadowCanvas {
+    position: absolute;
+    top: 0;
+    width: 768px;
+    height: 432px;
+}
+
+.ui-768 .panelShadow img {
+    position: relative;
+    left: -225px;
+    position: relative;
+    top: -375px;
+}
+
+.ui-768 .fBtnVBox {
+    width: 227px;
+    margin: 0 auto;
+}
+
+.ui-768 .fBtn {
+    width: 227px;
+    height: 53px;
+    background-image: url(../images/768/ui/fBtn_bgd.webp);
+    background-repeat: no-repeat;
+    text-align: center;
+    margin-bottom: 8px;
+    cursor: url(../cursors/handcursor.cur), url(../cursors/handcursor.png), auto;
+}
+
+.ui-768 .fBtn:hover {
+    background-position: left -53px;
+}
+
+.ui-768 .fBtn.disabled {
+    background-position: 0 0;
+    cursor: inherit;
+}
+
+.ui-768 .fBtn.disabled img,
+.ui-768 .fBtn.disabled div {
+    opacity: 0.6;
+}
+
+.ui-768 .fBtn img {
+    margin-top: 2px;
+}
+
+.ui-768 .mBtn {
+    width: 176px;
+    height: 53px;
+    background-image: url(../images/768/ui/mBtn_bgd.webp);
+    background-repeat: no-repeat;
+    text-align: center;
+    margin-bottom: 8px;
+    cursor: url(../cursors/handcursor.cur), url(../cursors/handcursor.png), auto;
+}
+
+.ui-768 .mBtn img {
+    margin-top: 2px;
+}
+
+.ui-768 .mBtn:hover {
+    background-position: left -53px;
+}
+
+.ui-768 .lBtn {
+    width: 317px;
+    height: 53px;
+    background-image: url(../images/768/ui/lBtn_bgd.webp);
+    background-repeat: no-repeat;
+    text-align: center;
+    margin-bottom: 8px;
+    cursor: url(../cursors/handcursor.cur), url(../cursors/handcursor.png), auto;
+}
+
+.ui-768 .lBtn img {
+    margin-top: 2px;
+}
+
+.ui-768 .lBtn:hover {
+    background-position: left -53px;
+}
+
+.ui-768 .sBtn {
+    width: 128px;
+    height: 49px;
+    background-image: url(../images/768/ui/sBtn_bgd.webp);
+    background-repeat: no-repeat;
+    text-align: center;
+    margin-bottom: 8px;
+    cursor: url(../cursors/handcursor.cur), url(../cursors/handcursor.png), auto;
+}
+
+.ui-768 .sBtn img {
+    margin-top: 2px;
+}
+
+.ui-768 .sBtn:hover {
+    background-position: left -50px;
+}
+
+.ui-768 .bBtn {
+    position: absolute;
+    top: 369px;
+    left: 11px;
+    width: 59px;
+    height: 56px;
+    background-image: url(../images/768/ui/bBtn_bgd.webp);
+    background-repeat: no-repeat;
+    cursor: url(../cursors/handcursor.cur), url(../cursors/handcursor.png), auto;
+}
+
+.ui-768 .bBtn:hover {
+    background-position: left -56px;
+}
+
+.ui-768 .iconBtn {
+    position: absolute;
+}
+
+.ui-768 #loadingPanel {
+    display: none;
+}
+
+.ui-768 #loadingPanel img {
+    margin-top: 75px;
+    margin-left: 315px;
+}
+
+.ui-768 #boxScore,
+.ui-768 #levelScore {
+    position: absolute;
+    top: 17px;
+    right: 28px;
+    height: 35px;
+    padding-right: 38px;
+    background-image: url(../images/768/ui/star_result_small.webp);
+    background-position: right top;
+    background-repeat: no-repeat;
+}
+
+.ui-768 #boxes {
+    position: absolute;
+    top: 90px;
+    left: 233px;
+}
+
+.ui-768 .boxOption {
+    width: 300px;
+    height: 300px;
+}
+
+.ui-768 .boxCanvas {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    left: 0;
+    top: 0;
+}
+
+.ui-768 .boxOption .boxTitle {
+    position: absolute;
+    top: 20px;
+    left: 28px;
+}
+
+.ui-768 .boxOmNom {
+    background-color: #2d2d35;
+    background-image: url(../images/768/ui/box_omnom.webp);
+    width: 225px;
+    height: 105px;
+    position: absolute;
+    top: 137px;
+    left: 12px;
+    background-position: 69px 30px;
+    background-repeat: no-repeat;
+}
+
+.ui-768 #boxNavBack,
+.ui-768 #boxNavForward {
+    position: absolute;
+    top: 192px;
+    left: 154px;
+    cursor: url(../cursors/handcursor.cur), url(../cursors/handcursor.png), auto;
+}
+
+.ui-768 #boxNavBack div,
+.ui-768 #boxNavForward div {
+    width: 44px;
+    height: 53px;
+    background-image: url(../images/768/ui/box_nav_menu.webp);
+    background-repeat: no-repeat;
+}
+
+.ui-768 #boxNavBack .boxNavDisabled {
+    cursor: url(../cursors/cursor.cur), url(../cursors/cursor.png), auto;
+    background-position: left -53px;
+    opacity: 0.25;
+}
+
+.ui-768 #boxNavForward {
+    left: 580px;
+}
+
+.ui-768 #boxNavForward div {
+    background-position: -44px top;
+}
+
+.ui-768 #boxNavForward .boxNavDisabled {
+    cursor: url(../cursors/cursor.cur), url(../cursors/cursor.png), auto;
+    background-position: -44px -53px;
+    opacity: 0.25;
+}
+
+.ui-768 #levelNavBack,
+.ui-768 #levelNavForward {
+    position: absolute;
+    top: 192px;
+    left: 165px;
+    cursor: url(../cursors/handcursor.cur), url(../cursors/handcursor.png), auto;
+    display: none;
+}
+
+.ui-768 #levelNavForward {
+    left: 590px;
+}
+
+.ui-768 #levelNavBack div,
+.ui-768 #levelNavForward div {
+    width: 44px;
+    height: 53px;
+    background-image: url(../images/768/ui/box_nav_menu.webp);
+    background-repeat: no-repeat;
+}
+
+.ui-768 #levelNavBack .boxNavDisabled {
+    cursor: url(../cursors/cursor.cur), url(../cursors/cursor.png), auto;
+    background-position: left -53px;
+    opacity: 0.25;
+}
+
+.ui-768 #levelNavForward div {
+    background-position: -44px top;
+}
+
+.ui-768 #levelNavForward .boxNavDisabled {
+    cursor: url(../cursors/cursor.cur), url(../cursors/cursor.png), auto;
+    background-position: -44px -53px;
+    opacity: 0.25;
+}
+
+.ui-768 .hideFromMouse {
+    pointer-events: none;
+}
+
+.ui-768 #levelBackground {
+    display: none;
+}
+
+.ui-768 .levelTape {
+    width: 39px;
+    height: 415px;
+    position: absolute;
+    left: 365px;
+    top: 8px;
+    background-image: url(../images/768/ui/leveltape.webp);
+    background-repeat: no-repeat;
+    display: none;
+}
+
+.ui-768 #levelOptions {
+    position: absolute;
+    top: 47px;
+    left: 225px;
+    width: 10px;
+    height: 10px;
+}
+
+.ui-768 #levelPanel .option {
+    position: absolute;
+    width: 91px;
+    height: 106px;
+}
+
+.ui-768 #levelPanel .option .txt {
+    margin-top: 17px;
+    width: 91px;
+    text-align: center;
+}
+
+.ui-768 #levelPanel .stars0,
+.ui-768 #levelPanel .stars1,
+.ui-768 #levelPanel .stars2,
+.ui-768 #levelPanel .stars3 {
+    position: absolute;
+    top: 61px;
+    left: 26px;
+    width: 66px;
+    height: 36px;
+    background-image: url(../images/768/ui/options_stars_bgd.webp);
+    background-repeat: no-repeat;
+}
+
+.ui-768 #levelPanel .stars1 {
+    background-position: left -36px;
+}
+
+.ui-768 #levelPanel .stars2 {
+    background-position: left -72px;
+}
+
+.ui-768 #levelPanel .stars3 {
+    background-position: left -108px;
+}
+
+.ui-768 #levelPanel .open {
+    background-image: url(../images/768/ui/level_bgd.webp);
+    background-repeat: no-repeat;
+}
+
+.ui-768 #levelPanel .locked {
+    background-image: url(../images/768/ui/level_bgd.webp);
+    background-position: left -106px;
+    background-repeat: no-repeat;
+}
+
+.ui-768 #levelPanel .purchase {
+    opacity: 0.4;
+}
+
+.ui-768 #levelPanel .option-small .stars0,
+.ui-768 #levelPanel .option-small .stars1,
+.ui-768 #levelPanel .option-small .stars2,
+.ui-768 #levelPanel .option-small .stars3 {
+    position: absolute;
+    top: 40px;
+    left: 17px;
+    width: 44px;
+    height: 23px;
+    background-image: url(../images/768/ui/options_stars_bgd_small.webp);
+    background-repeat: no-repeat;
+}
+
+.ui-768 #levelPanel .option-small .stars1 {
+    background-position: left -24px;
+}
+
+.ui-768 #levelPanel .option-small .stars2 {
+    background-position: left -48px;
+}
+
+.ui-768 #levelPanel .option-small .stars3 {
+    background-position: left -72px;
+}
+
+.ui-768 #levelPanel .option.option-small {
+    position: absolute;
+    width: 60px;
+    height: 64px;
+    margin-top: 11px;
+    text-align: center;
+}
+
+.ui-768 #levelPanel .open.option-small {
+    background-image: url(../images/768/ui/level_bgd_small.webp);
+    background-repeat: no-repeat;
+}
+
+.ui-768 #levelPanel .locked.option-small {
+    background-image: url(../images/768/ui/level_bgd_small.webp);
+    background-position: left -70px;
+    background-repeat: no-repeat;
+}
+
+.ui-768 #levelPanel .option.option-small .txt {
+    margin-top: 5px;
+    width: 62px;
+    text-align: center;
+}
+
+.ui-768 #gameBtnTray {
+    display: none;
+    position: absolute;
+    width: 135px;
+    height: 32px;
+    right: 0;
+    top: 3px;
+}
+
+.ui-768 #gameBtnTray > div {
+    opacity: 0.7;
+}
+
+.ui-768 #gameBtnTray > div:hover {
+    opacity: 1;
+}
+
+.ui-768 #gameRestartBtn {
+    width: 32px;
+    height: 32px;
+    background: url(../images/768/ui/buttonsprite.webp);
+    background-repeat: no-repeat;
+    background-position: -75px 0;
+    position: absolute;
+    top: 0;
+    left: 33px;
+}
+
+.ui-768 #gameMenuBtn {
+    position: absolute;
+    width: 66px;
+    height: 32px;
+    background: url(../images/768/ui/buttonsprite.webp);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    top: 0;
+    left: 66px;
+}
+
+.ui-768 #gameSound {
+    width: 32px;
+    height: 32px;
+    background: url(../images/768/ui/buttonsprite.webp);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.ui-768 #gameSound.allSound {
+    background-position: -450px 0;
+}
+
+.ui-768 #gameSound.effectsOnly {
+    background-position: -525px 0;
+}
+
+.ui-768 #gameSound.noSound {
+    background-position: -600px 0;
+}
+
+.ui-768 #gameMsg {
+    width: 300px;
+    height: 21px;
+    position: absolute;
+    right: 143px;
+    top: -9px;
+    display: none;
+    text-align: right;
+}
+
+.ui-768 #levelMenu {
+    position: absolute;
+    top: 0;
+    width: 768px;
+    height: 335px;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: none;
+    text-align: center;
+    padding-top: 98px;
+}
+
+.ui-768 #levelResults {
+    display: none;
+    width: 428px;
+    height: 339px;
+    margin: 45px auto 0;
+    text-align: center;
+    font-family: gooddogplain;
+    font-size: 24px;
+    color: #3c2110;
+    position: relative;
+}
+
+.ui-768 #resultStatus {
+    position: absolute;
+    width: 428px;
+    top: 23px;
+    left: 0;
+    text-align: center;
+}
+
+.ui-768 #levelResults .starCase {
+    width: 211px;
+    height: 70px;
+    margin: 0 auto;
+    position: relative;
+    top: 71px;
+}
+
+.ui-768 #resultTicker {
+    position: absolute;
+    top: 150px;
+    left: 0;
+    width: 428px;
+    text-align: center;
+}
+
+.ui-768 #resultTickerLabel {
+    display: none;
+}
+
+.ui-768 #resultTickerValue {
+    padding-left: 20px;
+    display: none;
+}
+
+.ui-768 #resultTickerMessage {
+    display: none;
+}
+
+.ui-768 #levelResults .star,
+.ui-768 #levelResults .starEmpty {
+    float: left;
+    width: 70px;
+    height: 70px;
+    background-image: url(../images/768/ui/star_result.webp);
+    background-repeat: no-repeat;
+}
+
+.ui-768 #levelResults .starEmpty {
+    background-position: left -70px;
+}
+
+.ui-768 #levelResults .line {
+    position: absolute;
+    top: 188px;
+    left: 75px;
+    width: 277px;
+    height: 5px;
+    background-image: url(../images/768/ui/result_line.webp);
+    background-repeat: no-repeat;
+}
+
+.ui-768 #resultScore {
+    font-size: 45px;
+    position: absolute;
+    top: 188px;
+    width: 428px;
+    display: none;
+}
+
+.ui-768 #levelResults .btnCase {
+    width: 413px;
+    height: 56px;
+    position: absolute;
+    top: 263px;
+    left: 8px;
+}
+
+.ui-768 #resultImproved {
+    width: 88px;
+    height: 88px;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 143px;
+    left: 308px;
+    display: none;
+}
+
+.ui-768 #levelResults .btnCase .sBtn {
+    float: left;
+}
+
+.ui-768 #lrMenuBtn {
+    margin: 0 11px;
+}
+
+.ui-768 #boxCutter {
+    background-image: url(../images/768/ui/boxcutter.webp);
+    background-repeat: no-repeat;
+    display: none;
+    position: absolute;
+    top: 211px;
+    left: 134px;
+    width: 254px;
+    height: 241px;
+}
+
+.ui-768 #tapeRoll {
+    background-image: url(../images/768/ui/taperoll.webp);
+    background-repeat: no-repeat;
+    display: none;
+    position: absolute;
+    top: -11px;
+    left: 327px;
+    width: 98px;
+    height: 131px;
+}
+
+.ui-768 #gameCompletePanel {
+    background-image: url(../images/768/ui/gamecomplete.webp);
+    background-repeat: no-repeat;
+}
+
+.ui-768 #finalShareBtn {
+    position: absolute;
+    top: 323px;
+    left: 120px;
+}
+
+.ui-768 #finalShareBtn img {
+    position: relative;
+    left: 8px;
+    top: 5px;
+}
+
+.ui-768 #ffb {
+    position: absolute;
+    top: -6px;
+    left: -19px;
+    width: 62px;
+    height: 62px;
+    background: url(../images/768/ui/fb.webp);
+    background-repeat: no-repeat;
+}
+
+.ui-768 #gameBorder.gameComplete {
+    top: -21px;
+    left: -25px;
+    position: absolute;
+    background-repeat: no-repeat;
+    width: 818px;
+    height: 476px;
+    display: none;
+    background-image: url(../images/768/ui/gamecomplete_border.webp);
+    background-repeat: no-repeat;
+}
+
+.ui-768 #finalScore {
+    position: absolute;
+    top: 255px;
+    height: 35px;
+    width: 768px;
+}
+
+.ui-768 #finalScore img {
+    margin: 0 auto;
+    display: block;
+}
+
+.ui-768 #finalFunBtn {
+    position: absolute;
+    top: 323px;
+    left: 345px;
+    display: block;
+}
+
+.ui-768 #finalFunBtn img {
+    position: relative;
+    left: 11px;
+    top: 5px;
+}
+
+.ui-768 #funOmNom {
+    width: 77px;
+    height: 76px;
+    background-image: url(../images/768/ui/fun-omnom.webp);
+    background-repeat: no-repeat;
+    position: absolute;
+    top: -17px;
+    left: -23px;
+}
+
+.ui-768 #congrats {
+    position: absolute;
+    top: 75px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+}
+
+.ui-768 #optionsPanel {
+    padding-top: 15px;
+}
+
+.ui-768 #optionsTitle {
+    position: relative;
+    width: 377px;
+    left: -75px;
+    height: 53px;
+}
+
+.ui-768 #optionsTitle img {
+    margin: 0 auto;
+    display: block;
+}
+
+.ui-768 #creditsBtn {
+    display: none;
+}
+
+.ui-768 .mini-button {
+    background-image: url(../images/768/ui/menu-options.webp);
+    background-repeat: no-repeat;
+    width: 107px;
+    height: 51px;
+    display: inline-block;
+    margin-bottom: 6px;
+    margin-right: 4px;
+    text-align: center;
+    position: relative;
+}
+
+.ui-768 .mini-button:hover {
+    background-position: 0 -53px;
+}
+
+.ui-768 .options-x {
+    background-image: url(../images/768/ui/menu-options.webp);
+    background-repeat: no-repeat;
+    background-position: -113px -53px;
+    width: 23px;
+    height: 23px;
+}
+
+.ui-768 .options-check {
+    background-image: url(../images/768/ui/menu-options.webp);
+    background-repeat: no-repeat;
+    background-position: -59px -113px;
+    width: 26px;
+    height: 26px;
+}
+
+.ui-768 .options-check-disabled {
+    background-image: url(../images/768/ui/menu-options.webp);
+    background-repeat: no-repeat;
+    background-position: -113px -77px;
+    width: 26px;
+    height: 26px;
+}
+
+.ui-768 #options-speaker {
+    background-image: url(../images/768/ui/menu-options.webp);
+    background-repeat: no-repeat;
+    background-position: 0 -105px;
+    width: 49px;
+    height: 43px;
+    position: absolute;
+    left: 30px;
+    top: 5px;
+}
+
+.ui-768 #soundBtn .options-x {
+    position: absolute;
+    bottom: 4px;
+    left: 53px;
+    display: none;
+}
+
+.ui-768 #soundBtn.disabled #options-speaker {
+    opacity: 0.6;
+}
+
+.ui-768 #soundBtn.disabled .options-x {
+    display: block;
+}
+
+.ui-768 #options-note {
+    background-image: url(../images/768/ui/menu-options.webp);
+    background-repeat: no-repeat;
+    background-position: -113px 0;
+    width: 41px;
+    height: 47px;
+    position: absolute;
+    left: 34px;
+    top: 2px;
+}
+
+.ui-768 #musicBtn .options-x {
+    position: absolute;
+    bottom: 3px;
+    left: 54px;
+    display: none;
+}
+
+.ui-768 #musicBtn.disabled #options-note {
+    opacity: 0.6;
+}
+
+.ui-768 #musicBtn.disabled .options-x {
+    display: block;
+}
+
+.ui-768 #dragBtn,
+.ui-768 #cutBtn {
+    background-image: url(../images/768/ui/menu-options.webp);
+    background-repeat: no-repeat;
+    width: 68px;
+    height: 150px;
+    display: inline-block;
+    position: relative;
+    margin-left: 29px;
+}
+
+.ui-768 #dragBtn {
+    background-position: 0 -149px;
+    background-repeat: no-repeat;
+}
+
+.ui-768 #dragBtn .options-check-disabled {
+    position: absolute;
+    bottom: 13px;
+    left: 21px;
+}
+
+.ui-768 #cutBtn {
+    background-position: -79px -149px;
+}
+
+.ui-768 #cutBtn .options-check {
+    position: absolute;
+    bottom: 11px;
+    left: 23px;
+}
+
+.ui-768 #cutBtn.disabled .options-check {
+    display: none;
+}
+
+.ui-768 #dragText,
+.ui-768 #cutText {
+    margin-top: 75px;
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    max-height: 45px;
+    overflow: hidden;
+}
+
+.ui-768 #vid {
+    display: none;
+    width: 768px;
+    height: 432px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: transparent;
+}
+
+.ui-768 #fadeToBlack {
+    display: none;
+    width: 768px;
+    height: 432px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: #000;
+}
+
+.ui-768 #menuLogo {
+    position: absolute;
+    left: 242px;
+    top: 30px;
+    width: 261px;
+    height: 187px;
+    background-image: url(../images/1920/ui/menu_logo_web.webp);
+    background-position: -1px -1px;
+    background-size: 261px 187px;
+    background-repeat: no-repeat;
+}
+
+.ui-768 #menuCandySkin {
+    position: absolute;
+    left: 50%;
+    top: 217px;
+    transform: translateX(-50%);
+    background-size: 566px 406px;
+    cursor: url(../cursors/handcursor.cur), url(../cursors/handcursor.png), auto;
+}
+
+.ui-768 #menuBtnVbox {
+    position: absolute;
+    left: 269px;
+    top: 320px;
+}
+
+.ui-768 #dmsg {
+    display: block;
+    position: relative;
+    margin: 23px auto 0;
+}
+
+.ui-768 #dframe {
+    position: relative;
+    width: 225px;
+    height: 293px;
+    background-image: url(../images/768/ui/drawing-bg.webp);
+    background-repeat: no-repeat;
+    margin: -8px auto 0 auto;
+}
+
+.ui-768 #dpic {
+    position: absolute;
+    width: 179px;
+    height: 252px;
+    top: 18px;
+    left: 21px;
+}
+
+.ui-768 .drawing1 {
+    background: url(../images/768/ui/drawing1.webp) no-repeat;
+}
+
+.ui-768 .drawing2 {
+    background: url(../images/768/ui/drawing2.webp) no-repeat;
+}
+
+.ui-768 .drawing3 {
+    background: url(../images/768/ui/drawing3.webp) no-repeat;
+}
+
+.drawing4 {
+    background: url(../images/768/ui/drawing4.webp) no-repeat;
+}
+
+.drawing5 {
+    background: url(../images/768/ui/drawing5.webp) no-repeat;
+}
+
+.drawing6 {
+    background: url(../images/768/ui/drawing6.webp) no-repeat;
+}
+
+.drawing7 {
+    background: url(../images/768/ui/drawing7.webp) no-repeat;
+}
+
+.drawing8 {
+    background: url(../images/768/ui/drawing8.webp) no-repeat;
+}
+
+.drawing9 {
+    background: url(../images/768/ui/drawing9.webp) no-repeat;
+}
+
+.drawing10 {
+    background: url(../images/768/ui/drawing10.webp) no-repeat;
+}
+
+.drawing11 {
+    background: url(../images/768/ui/drawing11.webp) no-repeat;
+}
+
+.drawing12 {
+    background: url(../images/768/ui/drawing12.webp) no-repeat;
+}
+
+.drawing13 {
+    background: url(../images/768/ui/drawing13.webp) no-repeat;
+}
+
+.drawing14 {
+    background: url(../images/768/ui/drawing14.webp) no-repeat;
+}
+
+.drawing15 {
+    background: url(../images/768/ui/drawing15.webp) no-repeat;
+}
+
+.drawing16 {
+    background: url(../images/768/ui/drawing16.webp) no-repeat;
+}
+
+.ui-768 #dshareBtn {
+    position: relative;
+    margin: 5px auto 0;
+}
+
+.ui-768 #dfb {
+    position: absolute;
+    top: -6px;
+    left: -4px;
+    width: 62px;
+    height: 62px;
+    /*background-image:url(../images/768/ui/fb.webp);*/
+    background-repeat: no-repeat;
+}
+
+.ui-768 #gameFooterContainer {
+    width: 768px;
+}
+
+.ui-768 #miniOptionsMenu {
+    width: 300px;
+    height: 38px;
+    position: absolute;
+    left: 11px;
+    top: 390px;
+}
+
+.ui-768 #optionHd.activeResolution {
+    background: url(../images/768/ui/buttonsprite.webp);
+    background-repeat: no-repeat;
+    background-position: -225px -38px;
+    opacity: 0.8;
+}
+
+.ui-768 #optionHd.inActiveResolution {
+    background: url(../images/768/ui/buttonsprite.webp);
+    background-repeat: no-repeat;
+    background-position: -225px 0;
+    opacity: 0.6;
+    cursor: url(../cursors/handcursor.cur), url(../cursors/handcursor.png), auto;
+}
+
+.ui-768 #optionHd.inActiveResolution:hover {
+    opacity: 0.8;
+}
+
+.ui-768 #optionSd.activeResolution {
+    background: url(../images/768/ui/buttonsprite.webp);
+    background-repeat: no-repeat;
+    background-position: -150px -38px;
+    opacity: 0.8;
+}
+
+.ui-768 #optionSd.inActiveResolution {
+    background: url(../images/768/ui/buttonsprite.webp);
+    background-repeat: no-repeat;
+    background-position: -150px 0;
+    opacity: 0.6;
+    cursor: url(../cursors/handcursor.cur), url(../cursors/handcursor.png), auto;
+}
+
+.ui-768 #optionSd.inActiveResolution:hover {
+    opacity: 0.8;
+}
+
+.ui-768 #optionSound {
+    width: 32px;
+    height: 32px;
+    background-image: url(../images/768/ui/buttonsprite.webp);
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 0;
+    opacity: 0.6;
+}
+
+.ui-768 #optionSound.allSound {
+    background-position: -450px 0;
+}
+
+.ui-768 #optionSound.effectsOnly {
+    background-position: -525px 0;
+}
+
+.ui-768 #optionSound.noSound {
+    background-position: -600px 0;
+}
+
+.ui-768 #optionSound:hover {
+    opacity: 0.7;
+}
+
+.ui-768 #optionMsg {
+    width: 158px;
+    height: 21px;
+    position: absolute;
+    left: 101px;
+    top: -9px;
+    display: none;
+}
+
+.ui-768 #popupWindow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    background-color: rgba(0, 0, 0, 0.4);
+    z-index: 2;
+}
+
+.ui-768 #popupWindow .popupOuterFrame {
+    margin: 98px auto 0;
+    background-image: url(../images/768/ui/popupouter.webp);
+    background-repeat: no-repeat;
+    width: 478px;
+    height: 347px;
+    position: relative;
+}
+
+.ui-768 #popupWindow .popupInnerFrame {
+    position: absolute;
+    background-image: url(../images/768/ui/popupinner.webp);
+    background-repeat: no-repeat;
+    width: 433px;
+    height: 273px;
+    left: 14px;
+    top: 17px;
+    display: none;
+}
+
+.ui-768 #popupWindow .bottomright {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+}
+
+.ui-768 #popupWindow #slowComputer {
+    background-image: url(../images/768/ui/popupinner-slow.webp);
+    background-repeat: no-repeat;
+}
+
+.ui-768 #slowComputerBtn {
+    position: absolute;
+    bottom: 8px;
+    left: 38px;
+}
+
+.ui-768 #slowComputerBtn img {
+    margin-top: 6px;
+}
+
+.ui-768 #resetGame {
+    text-align: center;
+}
+
+.ui-768 #resetText {
+    margin-top: 19px;
+}
+
+.ui-768 #resetYesBtn {
+    position: absolute;
+    bottom: 71px;
+    left: 38px;
+}
+
+.ui-768 #resetNoBtn {
+    position: absolute;
+    bottom: 71px;
+    left: 218px;
+}
+
+.ui-768 #resetHoldYes {
+    position: absolute;
+    bottom: 15px;
+    width: 435px;
+    text-align: center;
+}
+
+.ui-768 #missingStars {
+    text-align: center;
+}
+
+.ui-768 #missingLine1 {
+    margin-top: 15px;
+}
+
+.ui-768 #missingStar {
+    background-image: url(../images/768/ui/star_result_small.webp);
+    background-repeat: no-repeat;
+    width: 38px;
+    height: 35px;
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 2px;
+}
+
+.ui-768 #missingOkBtn {
+    display: inline-block;
+}
+
+.ui-768 #flag {
+    background-image: url(../images/768/ui/flags.webp);
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    display: inline-block;
+    width: 38px;
+    height: 29px;
+    position: relative;
+    top: -9px;
+    margin-left: 8px;
+}
+
+.ui-768 #resultImproved {
+    background-image: url(../images/768/ui/menu_result_en.webp);
+    background-repeat: no-repeat;
+}
+
+.ui-768 .lang-fr #resultImproved {
+    background-image: url(../images/768/ui/menu_result_fr.webp);
+}
+
+.ui-768 .lang-fr #flag {
+    background-position: 0 -30px;
+}
+
+.ui-768 .lang-de #resultImproved {
+    background-image: url(../images/768/ui/menu_result_gr.webp);
+}
+
+.ui-768 .lang-de #flag {
+    background-position: 0 -60px;
+}
+
+.ui-768 .lang-de #gameMenuBtn {
+    background-position: -641px 0;
+}
+
+.ui-768 .lang-ru #resultImproved {
+    background-image: url(../images/768/ui/menu_result_ru.webp);
+}
+
+.ui-768 .lang-ru #flag {
+    background-position: 0 -90px;
+}
+
+.ui-768 .lang-ru #gameMenuBtn {
+    background-position: -750px 0;
+}
+
+.ui-768 .lang-ko #flag {
+    background-position: 0 -120px;
+}
+
+.ui-768 .lang-zh #flag {
+    background-position: 0 -150px;
+}
+
+.ui-768 .lang-ja #flag {
+    background-position: 0 -180px;
+}
+
+.ui-768 .lang-es #flag {
+    background-position: 0 -210px;
+}
+
+.ui-768 .lang-ca #flag {
+    background-position: 0 -240px;
+}
+
+.ui-768 .lang-br #flag {
+    background-position: 0 -270px;
+}
+
+.ui-768 .lang-it #flag {
+    background-position: 0 -300px;
+}
+
+.ui-768 .lang-nl #flag {
+    background-position: 0 -330px;
+}
+
+.ui-768 .lang-system #flag {
+    top: 0px;
+}
+
+.ui-768 #loaderWindow {
+    height: 432px;
+}
